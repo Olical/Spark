@@ -5,10 +5,9 @@
  * @author Oliver Caldwell
  * @version 0.1
  */
-$header = 'function spark() {';
+$header = 'function spark() {' . "\n";
 $content = '';
-$footer = '} var spark = new spark();';
-
+$footer = '} ' . "\n" . 'var spark = new spark();';
 if($handle = opendir('modules'))
 {
 	while(false !== ($module = readdir($handle)))
@@ -16,4 +15,8 @@ if($handle = opendir('modules'))
 		
 	}
 	closedir($handle);
+}
+else
+{
+	echo 'Can not open modules folder';
 }

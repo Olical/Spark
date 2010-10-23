@@ -130,7 +130,6 @@ var SimpleSelector = {
 	}
 
 };
-window.selector = SimpleSelector.find;
 function Spark() {
 _END;
 $content = '';

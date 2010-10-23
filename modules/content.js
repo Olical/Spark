@@ -2,6 +2,12 @@ function(element, content, append) {
 	if(content === undefined)
 	{
 		// Return content
+		var elements = SimpleSelector.find(element);
+		
+		for(var i in elements)
+		{
+			document.write(elements[i]);
+		}
 	}
 	else
 	{

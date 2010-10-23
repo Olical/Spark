@@ -1,2 +1,8 @@
-### Introduction ###
+### About ###
 Spark is a project of mine inspired by the work of jQuery. I plan to make it even simpler to use and even more light weight. With help from other developers who knows, maybe it will become more useful than jQuery one day.
+
+### Functions and examples ###
+content(element, content, append)
+	Return content of element - s.content('p.someClass');
+	Replace content of element - s.content('p.someClass', 'New content');
+	Append to content of element - s.content('p.someClass', 'Appended content', true);

@@ -8,12 +8,13 @@
 	
 	<body>
 		<h1>Spark test file</h1>
+		<p class='read'>This content will be read</p>
 		<p class='delete'>Some content, that will disappear</p>
 		<p class='create'></p>
 		<p class='append'>This content will be appended</p>
 		<script type='text/javascript' src='spark.js'></script>
 		<script type='text/javascript'>
-			s.content('h1');
+			alert(s.content('p.read'));
 			s.content('p.delete', '');
 			s.content('p.create', 'This content was created');
 			s.content('p.append', ' [with this!]', true);

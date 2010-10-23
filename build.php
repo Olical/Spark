@@ -26,9 +26,23 @@ if(file_exists('modules.conf'))
 	
 	if(count($modules) > 0)
 	{
+		$actual = 0;
 		foreach($modules as $module)
 		{
+			// Check if the modules exist
+			if(file_exists('modules/' . $module . '.js'))
+				$actual += 1;
+		}
+		// Let the user know
+		print($actual . ' actually exist.' . "\n");
+		
+		if($actual > 0)
+		{
 			
+		}
+		else
+		{
+			print('No modules actually exist, stopping.' . "\n"); 
 		}
 	}
 	else

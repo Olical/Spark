@@ -51,6 +51,7 @@ if(file_exists('modules.conf'))
 			$packer = new JavaScriptPacker($content);
 			$spark = $header . $packer->pack() . $footer;
 			file_put_contents('spark.js', $spark);
+			print('Done' . "\n");
 		}
 		else
 		{

@@ -1,7 +1,3 @@
-function spark() {
-this.content = function() {
-	
-};
 
-} 
-var spark = new spark();
+function spark(){this.content=function(){};}
+var spark=new spark();

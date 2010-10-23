@@ -44,7 +44,7 @@ if(file_exists('modules.conf'))
 				// Check file exists, again
 				if(file_exists('modules/' . $module . '.js'))
 				{
-					print('Reading ' . $module . "\n");
+					print('Reading ' . $module . '.' . "\n");
 					$content .= 'this.' . $module . ' = ' . file_get_contents('modules/' . $module . '.js') . "\n";
 				}
 			}

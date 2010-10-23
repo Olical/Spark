@@ -48,9 +48,9 @@ if(file_exists('modules.conf'))
 					$content .= 'this.' . $module . ' = ' . file_get_contents('modules/' . $module . '.js') . "\n";
 				}
 			}
-			$packer = new JavaScriptPacker($content);
-			$spark = $header . $packer->pack() . $footer;
-			file_put_contents('spark.js', $spark);
+			$spark = $header . $content . $footer;
+			$packer = new JavaScriptPacker($spark);
+			file_put_contents('spark.js', $packer->pack());
 			print('Done' . "\n");
 		}
 		else

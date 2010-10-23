@@ -1,13 +1,9 @@
 function(element, content, append) {
 	if(content === undefined)
 	{
-		// Return content
-		var elements = SimpleSelector.find(element);
-		
-		for(var i in elements)
-		{
-			document.write(elements[i]);
-		}
+		// Return content of the selected element
+		var element = document.querySelectorAll(element);
+		return element[0].textContent;
 	}
 	else
 	{

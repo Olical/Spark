@@ -1,3 +1,2 @@
-
-function spark(){this.content=function(){};}
+function spark(){this.prototype.content=function(){};}
 var spark=new spark();

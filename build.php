@@ -38,7 +38,11 @@ if(file_exists('modules.conf'))
 		{
 			foreach($modules as $module)
 			{
-				
+				// Check file exists, again
+				if(file_exists('modules/' . $module . '.js'))
+				{
+					$content .= file_get_contents('modules/' . $module . '.js') . "\n";
+				}
 			}
 		}
 		else

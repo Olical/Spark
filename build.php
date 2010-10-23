@@ -7,7 +7,7 @@
  */
 
 // Set up the variables
-print('Preparing document' . "\n");
+print('Preparing document.' . "\n");
 $header = 'function spark() {' . "\n";
 $content = '';
 $footer = '} ' . "\n" . 'var spark = new spark();';
@@ -15,7 +15,7 @@ $footer = '} ' . "\n" . 'var spark = new spark();';
 if(file_exists('modules.conf'))
 {
 	// Read the config file and split into an array
-	print('Reading and parsing file' . "\n");
+	print('Reading and parsing file.' . "\n");
 	$modules = explode(';', file_get_contents('modules.conf'));
 	
 	// Remove last one
@@ -23,9 +23,13 @@ if(file_exists('modules.conf'))
 	
 	print(count($modules) . ' modules specified.' . "\n");
 	
-	foreach($modules as $module)
+	if(count($modules) > 0)
 	{
 		
+	}
+	else
+	{
+		print('No modules specified, stopping.' . "\n");
 	}
 }
 else

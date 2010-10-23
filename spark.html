@@ -12,5 +12,10 @@
 		<p class='create'></p>
 		<p class='append'>This content will be appended</p>
 		<script type='text/javascript' src='spark.js'></script>
+		<script type='text/javascript'>
+			s.content('p.delete', '');
+			s.content('p.create', 'This content was created');
+			s.content('p.append', ' [with this!]', true);
+		</script>
 	</body>
 </html>

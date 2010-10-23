@@ -1,9 +1,2 @@
-### Introduction
-Spark is a project of mine inspired by the work of jQuery. I plan to make it even simpler to use and even more light weight than jQuery. With help from other developers who knows, maybe it will become more useful than jQuery one day.
-
-### Current functions
-_none_
-
-### Planned functions
-content / _Change or get the content of an element_
-time / _Get the time stamp with or without formatting_
+### Introduction ###
+Spark is a project of mine inspired by the work of jQuery. I plan to make it even simpler to use and even more light weight. With help from other developers who knows, maybe it will become more useful than jQuery one day.

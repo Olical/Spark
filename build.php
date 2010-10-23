@@ -6,8 +6,9 @@
  * @version 0.1
  */
 
-// Include packer
-include('JavaScriptPacker.php');
+// Include jsmin.php
+define('JSMIN_AS_LIB', true); // prevents auto-run on include
+include('jsmin.php');
 
 // Set up the variables
 print('Preparing document.' . "\n");
@@ -52,7 +53,9 @@ if(file_exists('modules.conf'))
 				}
 			}
 			$spark = $header . $content . $footer;
-			$packer = new JavaScriptPacker($spark);
+			$jsMin = new JSMin($spark, false);
+// in that case, the modifies string is returned by minify():
+			$spark = $jsMin->minify();
 			file_put_contents('spark.js', $spark);
 			print('Done' . "\n");
 		}

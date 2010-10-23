@@ -18,9 +18,6 @@ if(file_exists('modules.conf'))
 	print('Reading and parsing file.' . "\n");
 	$modules = explode("\n", file_get_contents('modules.conf'));
 	
-	// Remove last one
-	array_pop($modules);
-	
 	// Count modules
 	print(count($modules) . ' modules specified.' . "\n");
 	
@@ -33,12 +30,16 @@ if(file_exists('modules.conf'))
 			if(file_exists('modules/' . $module . '.js'))
 				$actual += 1;
 		}
+		
 		// Let the user know
 		print($actual . ' actually exist.' . "\n");
 		
 		if($actual > 0)
 		{
-			
+			foreach($modules as $module)
+			{
+				
+			}
 		}
 		else
 		{

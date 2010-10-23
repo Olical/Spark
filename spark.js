@@ -4,8 +4,9 @@ elements.push(els[0]);}else if(operator=='.'){els=SimpleSelector.getByClass(key,
 elements.push(els[i]);}}}
 return(elements.length==1)?elements[0]:elements;},isDescendant:function(descendant,ancestor){return((descendant.parentNode==ancestor)||(descendant.parentNode!=document)&&arguments.callee(descendant.parentNode,ancestor));},getByClass:function(className,context){var elements=[],expr=new RegExp('\b'+className+'\b'),wrapper=context||document,allElements=wrapper.getElementsByTagName('*');for(var x=0,y=allElements.length;x<y;x++){if(expr.test(allElements[x].className))
 elements.push(allElements[x]);}
-return elements;}};window.selector=SimpleSelector.find;function Spark(){this.content=function(element,content,append){if(content===undefined)
-{}
+return elements;}};function Spark(){this.content=function(element,content,append){if(content===undefined)
+{var elements=SimpleSelector.find(element);for(var i in elements)
+{document.write(elements[i]);}}
 else
 {if(append===undefined||append===false)
 {}

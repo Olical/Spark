@@ -57,7 +57,7 @@ if(file_exists('modules.conf'))
 // in that case, the modifies string is returned by minify():
 			$spark = $jsMin->minify();
 			file_put_contents('spark.js', trim($spark));
-			print('Done' . "\n");
+			print('Done.' . "\n");
 		}
 		else
 		{

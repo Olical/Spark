@@ -6,6 +6,9 @@
  * @version 0.1
  */
 
+// Include packer
+include('JavaScriptPacker.php');
+
 // Set up the variables
 print('Preparing document.' . "\n");
 $header = 'function spark() {' . "\n";
@@ -42,9 +45,12 @@ if(file_exists('modules.conf'))
 				if(file_exists('modules/' . $module . '.js'))
 				{
 					print('Reading ' . $module . "\n");
-					$content .= file_get_contents('modules/' . $module . '.js') . "\n";
+					$content .= 'this.' . $module . ' = ' . file_get_contents('modules/' . $module . '.js') . "\n";
 				}
 			}
+			$packer = new JavaScriptPacker($content);
+			$spark = $header . $packer->pack() . $footer;
+			file_put_contents('spark.js', $spark);
 		}
 		else
 		{

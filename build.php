@@ -48,7 +48,7 @@ if(file_exists('modules.conf'))
 				if(file_exists('modules/' . $module . '.js'))
 				{
 					print('Reading ' . $module . '.' . "\n");
-					$content .= 'this.' . $module . ' = ' . file_get_contents('modules/' . $module . '.js') . "\n";
+					$content .= 'this.' . $module . ' = ' . file_get_contents('modules/' . $module . '.js');
 				}
 			}
 			$spark = $header . $content . $footer;

@@ -27,7 +27,10 @@ if(file_exists('modules.conf'))
 	{
 		foreach($modules as $module)
 		{
-			
+			if($module[0] != '#')
+			{
+				
+			}
 		}
 	}
 	else

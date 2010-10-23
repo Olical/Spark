@@ -21,6 +21,7 @@ if(file_exists('modules.conf'))
 	// Remove last one
 	array_pop($modules);
 	
+	// Count modules
 	print(count($modules) . ' modules specified.' . "\n");
 	
 	if(count($modules) > 0)

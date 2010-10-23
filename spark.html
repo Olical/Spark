@@ -12,12 +12,24 @@
 		<p class='delete'>Some content, that will disappear</p>
 		<p class='create'></p>
 		<p class='append'>This content will be appended</p>
+		<p class='cookie'>This page has been viewed by you this many times: </p>
 		<script type='text/javascript' src='spark.js'></script>
 		<script type='text/javascript'>
-			alert(s.content('p.read'));
+			s.content('p.read');
 			s.content('p.delete', '');
 			s.content('p.create', 'This content was created');
 			s.content('p.append', ' [with this!]', true);
+			
+			if(s.cookie('testCookie') !== false)
+			{
+				s.cookie('testCookie', parseInt(s.cookie('testCookie')) + 1);
+				s.content('p.cookie', s.cookie('testCookie'), true);
+			}
+			else
+			{
+				s.cookie('testCookie', 1);
+				s.content('p.cookie', s.cookie('testCookie'), true);
+			}
 		</script>
 	</body>
 </html>

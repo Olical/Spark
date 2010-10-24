@@ -35,4 +35,4 @@ function(name, content, duration) {
 			document.cookie = name + '=' + content + expires + '; path=/';
 		}
 	}
-}
+};

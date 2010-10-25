@@ -21,10 +21,15 @@ function(element, width, height, timeframe) {
 			var oldwidth = element.offsetWidth;
 			var oldheight = element.offsetHeight;
 			
+			var iteration;
+			
 			// Loop through until done
 			while(date.getTime() <= endtime)
 			{
-				
+				iteration = endtime - date.getTime();
+				iteration = timeframe - iteration;
+				element.style.width = oldwidth + (widthppm * iteration);
+				element.style.height = oldheight + (heightppm * iteration);
 			}
 		}
 		else

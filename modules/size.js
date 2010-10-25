@@ -10,8 +10,9 @@ function(element, width, height, timeframe) {
 			heightDiff = height - element.offsetHeight;
 			
 			// Work out pixels per milisecond
-			widthppm = timeframe / width;
-			heightppm = timeframe / height;
+			widthppm = timeframe / widthDiff;
+			heightppm = timeframe / heightDiff;
+			
 		}
 		else
 		{

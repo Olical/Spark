@@ -58,10 +58,10 @@
 			});
 			
 			// Size module
-			s.value('div.size p.width input', s.size('div.size').width + 'px');
-			s.value('div.size p.height input', s.size('div.size').height + 'px');
+			s.value('div.size p.width input', s.size('div.size').width);
+			s.value('div.size p.height input', s.size('div.size').height);
 			s.click('div.size p a.setsize', function() {
-				s.size('div.size', s.value('div.size p.width input'), s.value('div.size p.height input'));
+				s.size('div.size', parseInt(s.value('div.size p.width input')), parseInt(s.value('div.size p.height input')), 1000);
 			});
 		</script>
 	</body>

@@ -15,6 +15,10 @@
 		<a href='#' class='button'>Click here to append content to the element below.</a>
 		<p class='button-target'>No clicks D: </p>
 		<p class='mouseover'>Mouse over me to make me disappear! Click the header to make me come back!</p>
+		<div class='size' style='background-color: #CCCCCC;width: 300px; height: 300px;'>
+			<p class='width'></p>
+			<p class='height'></p>
+		</div>
 		<script type='text/javascript' src='spark.js'></script>
 		<script type='text/javascript'>
 			// Content module
@@ -50,6 +54,10 @@
 				// Hide module
 				s.hide('p.mouseover');
 			});
+			
+			// Size module
+			s.content('div.size p.width', 'Width: ' + s.size('div.size').width + 'px');
+			s.content('div.size p.height', 'Height: ' + s.size('div.size').height + 'px');
 		</script>
 	</body>
 </html>

@@ -16,8 +16,9 @@
 		<p class='button-target'>No clicks D: </p>
 		<p class='mouseover'>Mouse over me to make me disappear! Click the header to make me come back!</p>
 		<div class='size' style='background-color: #CCCCCC;width: 300px; height: 300px;'>
-			<p class='width'></p>
-			<p class='height'></p>
+			<p class='width'>Width: <input type='text' value='' /></p>
+			<p class='height'>Height: <input type='text' value='' /></p>
+			<p><a href='#' class='setsize'>Set size</a></p>
 		</div>
 		<script type='text/javascript' src='spark.js'></script>
 		<script type='text/javascript'>
@@ -57,8 +58,11 @@
 			});
 			
 			// Size module
-			s.content('div.size p.width', 'Width: ' + s.size('div.size').width + 'px');
-			s.content('div.size p.height', 'Height: ' + s.size('div.size').height + 'px');
+			s.value('div.size p.width input', s.size('div.size').width);
+			s.value('div.size p.height input', s.size('div.size').height);
+			s.click('div.size p a.setsize', function() {
+				s.size('div.size', s.value('div.size p.width input'), s.value('div.size p.height input'));
+			});
 		</script>
 	</body>
 </html>

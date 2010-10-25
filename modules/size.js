@@ -6,12 +6,12 @@ function(element, width, height, timeframe) {
 		{
 			// Resize in timeframe
 			// Work out distance
-			widthDiff = width - element.offsetWidth;
-			heightDiff = height - element.offsetHeight;
+			var widthDiff = width - element.offsetWidth;
+			var heightDiff = height - element.offsetHeight;
 			
 			// Work out pixels per milisecond
-			widthppm = timeframe / widthDiff;
-			heightppm = timeframe / heightDiff;
+			var widthppm = timeframe / widthDiff;
+			var heightppm = timeframe / heightDiff;
 			
 		}
 		else

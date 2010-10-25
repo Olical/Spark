@@ -1,5 +1,5 @@
 function(element, content, append) {
-	var element = document.querySelectorAll(element)[0];
+	element = document.querySelectorAll(element)[0];
 	
 	if(content === undefined)
 	{

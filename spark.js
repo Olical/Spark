@@ -17,7 +17,8 @@ else
 else
 {var date=new Date();date.setTime(date.getTime()+duration);var expires='; expires='+date.toGMTString();document.cookie=name+'='+content+expires+'; path=/';}}};this.click=function(element,callback){element=document.querySelectorAll(element)[0];element.addEventListener('click',callback,false);};this.mouse=function(element,action,callback){element=document.querySelectorAll(element)[0];element.addEventListener('mouse'+action,callback,false);};this.hide=function(element){element=document.querySelectorAll(element)[0];element.style.display='none';};this.show=function(element){element=document.querySelectorAll(element)[0];element.style.display='block';};this.size=function(element,width,height,timeframe){element=document.querySelectorAll(element)[0];if(width!==undefined&&height!==undefined)
 {if(timeframe!==undefined)
-{}
+{var widthDiff=width-element.offsetWidth;var heightDiff=height-element.offsetHeight;var widthppm=widthDiff/timeframe;var heightppm=heightDiff/timeframe;var d=new Date();var endtime=d.getTime()+timeframe;var oldwidth=element.offsetWidth;var oldheight=element.offsetHeight;var iteration;while(d.getTime()<=endtime)
+{iteration=timeframe-(endtime-d.getTime());element.style.width=oldwidth+(iteration*widthppm)+'px';element.style.height=oldheight+(iteration*heightppm)+'px';d=new Date();}}
 else
 {element.style.width=width;element.style.height=height;}}
 else

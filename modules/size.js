@@ -10,26 +10,26 @@ function(element, width, height, timeframe) {
 			var heightDiff = height - element.offsetHeight;
 			
 			// Work out pixels per milisecond
-			var widthppm = timeframe / widthDiff;
-			var heightppm = timeframe / heightDiff;
+			var widthppm = widthDiff / timeframe;
+			var heightppm = heightDiff / timeframe;
 			
 			// Set up times
-			var date = new Date();
-			var endtime = date.getTime();
+			var d = new Date();
+			var endtime = d.getTime() + timeframe;
 			
-			// Get the old width and height
+			// Get the original width and height
 			var oldwidth = element.offsetWidth;
 			var oldheight = element.offsetHeight;
 			
 			var iteration;
 			
 			// Loop through until done
-			while(date.getTime() <= endtime)
+			while(d.getTime() <= endtime)
 			{
-				iteration = endtime - date.getTime();
-				iteration = timeframe - iteration;
-				element.style.width = oldwidth + (widthppm * iteration);
-				element.style.height = oldheight + (heightppm * iteration);
+				iteration = timeframe - (endtime - d.getTime());
+				element.style.width = oldwidth + (iteration * widthppm) + 'px';
+				element.style.height = oldheight + (iteration * heightppm) + 'px';
+				d = new Date();
 			}
 		}
 		else

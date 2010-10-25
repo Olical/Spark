@@ -3,7 +3,7 @@ Spark is a project of mine inspired by the work of jQuery. I plan to make it eve
 
 ## Licences
 
-### Mit
+### MIT
 Copyright (c) 2010 Oliver Caldwell
 
 Permission is hereby granted, free of charge, to any person obtaining a copy

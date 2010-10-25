@@ -6,7 +6,7 @@
 	</head>
 	
 	<body>
-		<h1>Spark test file</h1>
+		<h1 class='header'>Spark test file</h1>
 		<p class='read'>This content will be read</p>
 		<p class='delete'>Some content, that will disappear</p>
 		<p class='create'></p>
@@ -14,7 +14,7 @@
 		<p class='cookie'>This page has been viewed by you this many times: </p>
 		<a href='#' class='button'>Click here to append content to the element below.</a>
 		<p class='button-target'>No clicks D: </p>
-		<p class='mouseover'>Mouse over me to make me disappear!</p>
+		<p class='mouseover'>Mouse over me to make me disappear! Click the header to make me come back!</p>
 		<script type='text/javascript' src='spark.js'></script>
 		<script type='text/javascript'>
 			// Content module
@@ -38,6 +38,11 @@
 			// Click module
 			s.click('a.button', function() {
 				s.content('p.button-target', 'You clicked! :D ', true);
+			});
+			
+			s.click('h1.header', function() {
+				// Show module
+				s.show('p.mouseover');
 			});
 			
 			// Mouse module

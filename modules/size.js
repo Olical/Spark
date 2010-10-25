@@ -8,7 +8,7 @@ function(element, width, height, timeframe) {
 		}
 		else
 		{
-			// Resize
+			// Resize instantly
 		}
 	}
 	else

@@ -14,7 +14,10 @@ function(element, width, height, timeframe) {
 	else
 	{
 		// Give size as an object.
-		var size;
+		function size() {
+			var width;
+			var height;
+		};
 		size.width = element.offsetWidth;
 		size.height = element.offsetHeight;
 		return size;

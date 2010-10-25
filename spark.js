@@ -19,7 +19,7 @@ else
 {if(timeframe!==undefined)
 {}
 else
-{}}
+{element.style.width=width;element.style.height=height;}}
 else
 {function size(){var width;var height;};size.width=element.offsetWidth;size.height=element.offsetHeight;return size;}};this.value=function(element,content,append){element=document.querySelectorAll(element)[0];if(content===undefined)
 {return element.value;}

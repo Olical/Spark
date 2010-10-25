@@ -11,7 +11,7 @@
 		<p class='delete'>Some content, that will disappear</p>
 		<p class='create'></p>
 		<p class='append'>This content will be appended</p>
-		<p class='cookie'>This page has been viewed by you this many times: </p>
+		<p class='cookie'>This page has been viewed by you this many times: <input type='text' value='' /></p>
 		<a href='#' class='button'>Click here to append content to the element below.</a>
 		<p class='button-target'>No clicks D: </p>
 		<p class='mouseover'>Mouse over me to make me disappear! Click the header to make me come back!</p>
@@ -31,7 +31,8 @@
 			if(s.cookie('testCookie') !== false)
 			{
 				s.cookie('testCookie', parseInt(s.cookie('testCookie')) + 1);
-				s.content('p.cookie', s.cookie('testCookie'), true);
+				// Value module
+				s.value('p.cookie input', s.cookie('testCookie'));
 			}
 			else
 			{

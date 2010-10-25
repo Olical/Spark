@@ -1,3 +1,5 @@
+**Spark - A lightweight yet powerful JavaScript library.**
+
 ## About
 Spark is a project of mine inspired by the work of jQuery. I plan to make it even simpler to use and even more light weight. With help from other developers who knows, maybe it will become more useful than jQuery one day.
 
@@ -25,7 +27,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 ### GPL
-Spark - A lightweight yet powerful JavaScript library.
 Copyright (C) 2010 Oliver Caldwell
 
 This program is free software: you can redistribute it and/or modify

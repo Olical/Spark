@@ -17,11 +17,13 @@
 		<p class='button-target'>No clicks D: </p>
 		<script type='text/javascript' src='spark.js'></script>
 		<script type='text/javascript'>
+			// Content module
 			s.content('p.read');
 			s.content('p.delete', '');
 			s.content('p.create', 'This content was created');
 			s.content('p.append', ' [with this!]', true);
 			
+			// Cookie module
 			if(s.cookie('testCookie') !== false)
 			{
 				s.cookie('testCookie', parseInt(s.cookie('testCookie')) + 1);
@@ -33,6 +35,7 @@
 				s.content('p.cookie', s.cookie('testCookie'), true);
 			}
 			
+			// Click module
 			s.click('a.button', function() {
 				s.content('p.button-target', 'You clicked! :D ', true);
 			});

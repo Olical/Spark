@@ -5,6 +5,8 @@ function(element, width, height, timeframe) {
 		if(timeframe !== undefined)
 		{
 			// Resize in timeframe
+			widthDiff = width - element.offsetWidth;
+			heightDiff = height - element.offsetHeight;
 		}
 		else
 		{

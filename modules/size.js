@@ -5,8 +5,13 @@ function(element, width, height, timeframe) {
 		if(timeframe !== undefined)
 		{
 			// Resize in timeframe
+			// Work out distance
 			widthDiff = width - element.offsetWidth;
 			heightDiff = height - element.offsetHeight;
+			
+			// Work out pixels per milisecond
+			widthppm = timeframe / width;
+			heightppm = timeframe / height;
 		}
 		else
 		{

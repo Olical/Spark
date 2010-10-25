@@ -13,6 +13,15 @@ function(element, width, height, timeframe) {
 			var widthppm = timeframe / widthDiff;
 			var heightppm = timeframe / heightDiff;
 			
+			// Set up times
+			var date = new Date();
+			var endtime = date.getTime();
+			
+			// Loop through until done
+			while(date.getTime() <= endtime)
+			{
+				
+			}
 		}
 		else
 		{

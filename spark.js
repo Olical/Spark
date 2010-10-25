@@ -15,5 +15,5 @@ else
 {if(duration===undefined)
 {var date=new Date();date.setTime(date.getTime()+31536000000);var expires='; expires='+date.toGMTString();document.cookie=name+'='+content+expires+'; path=/';}
 else
-{var date=new Date();date.setTime(date.getTime()+duration);var expires='; expires='+date.toGMTString();document.cookie=name+'='+content+expires+'; path=/';}}};this.onClick=function(element){var element=document.querySelectorAll(element)[0];};}
+{var date=new Date();date.setTime(date.getTime()+duration);var expires='; expires='+date.toGMTString();document.cookie=name+'='+content+expires+'; path=/';}}};this.click=function(element){var element=document.querySelectorAll(element)[0];};}
 var s=new Spark()

@@ -17,6 +17,10 @@ function(element, width, height, timeframe) {
 			var date = new Date();
 			var endtime = date.getTime();
 			
+			// Get the old width and height
+			var oldwidth = element.offsetWidth;
+			var oldheight = element.offsetHeight;
+			
 			// Loop through until done
 			while(date.getTime() <= endtime)
 			{

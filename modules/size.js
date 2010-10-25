@@ -9,6 +9,8 @@ function(element, width, height, timeframe) {
 		else
 		{
 			// Resize instantly
+			element.style.width = width;
+			element.style.height = height;
 		}
 	}
 	else

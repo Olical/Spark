@@ -1,10 +1,10 @@
 function Spark(){this.content=function(element,content,append){element=document.querySelectorAll(element)[0];if(content===undefined)
-{return element.textContent;}
+{return element.innerHTML;}
 else
 {if(append===undefined||append===false)
-{element.textContent=content;}
+{element.innerHTML=content;}
 else if(append===true)
-{element.textContent+=content;}}};this.cookie=function(name,content,duration){if(content===undefined)
+{element.innerHTML+=content;}}};this.cookie=function(name,content,duration){if(content===undefined)
 {var nameEQ=name+'=';var ca=document.cookie.split(';');for(var i=0;i<ca.length;i++)
 {var c=ca[i];while(c.charAt(0)==' ')
 {c=c.substring(1,c.length);}

@@ -4,19 +4,19 @@ function(element, content, append) {
 	if(content === undefined)
 	{
 		// Return content of the selected element
-		return element.textContent;
+		return element.innerHTML;
 	}
 	else
 	{
 		if(append === undefined || append === false)
 		{
 			// Replace content
-			element.textContent = content;
+			element.innerHTML = content;
 		}
 		else if(append === true)
 		{
 			// Append content
-			element.textContent += content;
+			element.innerHTML += content;
 		}
 	}
 };

@@ -13,6 +13,8 @@
 		<p class='create'></p>
 		<p class='append'>This content will be appended</p>
 		<p class='cookie'>This page has been viewed by you this many times: </p>
+		<a href='#' class='button'>Click here to append content to the element below.</a>
+		<p class='button-target'>No clicks D: </p>
 		<script type='text/javascript' src='spark.js'></script>
 		<script type='text/javascript'>
 			s.content('p.read');
@@ -30,6 +32,10 @@
 				s.cookie('testCookie', 1);
 				s.content('p.cookie', s.cookie('testCookie'), true);
 			}
+			
+			s.click('a.button', function() {
+				s.content('p.button-target', 'You clicked! :D ', true);
+			});
 		</script>
 	</body>
 </html>

@@ -14,5 +14,9 @@ function(element, width, height, timeframe) {
 	else
 	{
 		// Give size as an object.
+		var size;
+		size.width = element.offsetWidth;
+		size.height = element.offsetHeight;
+		return size;
 	}
 };

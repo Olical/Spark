@@ -21,5 +21,11 @@ else
 else
 {}}
 else
-{function size(){var width;var height;};size.width=element.offsetWidth;size.height=element.offsetHeight;return size;}};}
+{function size(){var width;var height;};size.width=element.offsetWidth;size.height=element.offsetHeight;return size;}};this.value=function(element,content,append){element=document.querySelectorAll(element)[0];if(content===undefined)
+{return element.value;}
+else
+{if(append===undefined||append===false)
+{element.value=content;}
+else if(append===true)
+{element.value+=content;}}};}
 var s=new Spark()

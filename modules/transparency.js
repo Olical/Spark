@@ -4,6 +4,7 @@ function(element, transparency, timeframe) {
 	if(transparency === undefined)
 	{
 		// Return the transparency of the element
+		return element.style.opacity;
 	}
 	else
 	{

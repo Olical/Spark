@@ -1,4 +1,5 @@
 function(element, width, height, timeframe) {
+	var rawelement = element;
 	element = document.querySelectorAll(element)[0];
 	if(width !== undefined && height !== undefined)
 	{
@@ -6,30 +7,29 @@ function(element, width, height, timeframe) {
 		{
 			// Resize in timeframe
 			// Work out distance
-			var widthDiff = width - element.offsetWidth;
-			var heightDiff = height - element.offsetHeight;
+			var widthdiff = width - parseInt(element.style.width);
+			var heightdiff = height - parseInt(element.style.height);
 			
-			// Work out pixels per milisecond
-			var widthppm = widthDiff / timeframe;
-			var heightppm = heightDiff / timeframe;
+			// Work out how miliseconds per step (100 in total)
+			var steptime = timeframe / 100;
 			
-			// Set up times
-			var d = new Date();
-			var endtime = d.getTime() + timeframe;
+			// Work out how many pixels it needs to move each step
+			var widthpps = widthdiff / 100;
+			var heightpps = heightdiff / 100;
 			
-			// Get the original width and height
-			var oldwidth = element.offsetWidth;
-			var oldheight = element.offsetHeight;
+			// Set up original sizes
+			var origwidth = parseInt(element.style.width);
+			var origheight = parseInt(element.style.height);
 			
-			var iteration;
-			
-			// Loop through until done
-			while(d.getTime() <= endtime)
+			// Loop through all 100 steps setting a time out resize each time
+			var timers = [];
+			for(var i = 0; i < 100; i++)
 			{
-				iteration = timeframe - (endtime - d.getTime());
-				element.style.width = oldwidth + (iteration * widthppm) + 'px';
-				element.style.height = oldheight + (iteration * heightppm) + 'px';
-				d = new Date();
+				timers[i] = setTimeout((function(privateEye) {
+				return function() { 
+					element.style.width = origwidth + (widthpps * privateEye) + 'px';
+					element.style.height = origheight + (heightpps * privateEye) + 'px';
+				}})(i), i * steptime);
 			}
 		}
 		else

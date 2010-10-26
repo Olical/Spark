@@ -1,14 +1,14 @@
-function(element, transparency, timeframe) {
+function(element, opacity, timeframe) {
 	element = document.querySelectorAll(element)[0];
 	
-	if(transparency === undefined)
+	if(opacity === undefined)
 	{
 		// Return the transparency of the element
 		return element.style.opacity;
 	}
 	else
 	{
-		if(timeframe === undefined)
+		if(opacity === undefined)
 		{
 			// Change transparency instantly
 		}

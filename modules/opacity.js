@@ -4,13 +4,14 @@ function(element, opacity, timeframe) {
 	if(opacity === undefined)
 	{
 		// Return the transparency of the element
-		return element.style.opacity;
+		return element.style.opacity * 100;
 	}
 	else
 	{
 		if(opacity === undefined)
 		{
 			// Change transparency instantly
+			element.style.opacity = opacity / 100;
 		}
 		else
 		{

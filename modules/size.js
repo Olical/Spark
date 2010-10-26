@@ -1,4 +1,4 @@
-function(element, width, height, timeframe) {
+function(element, width, height, timeframe, callback) {
 	var rawelement = element;
 	element = document.querySelectorAll(element)[0];
 	if(width !== undefined && height !== undefined)
@@ -26,7 +26,7 @@ function(element, width, height, timeframe) {
 			for(var i = 0; i < 100; i++)
 			{
 				timers[i] = setTimeout((function(privateEye) {
-				return function() { 
+				return function() {
 					element.style.width = origwidth + (widthpps * privateEye) + 'px';
 					element.style.height = origheight + (heightpps * privateEye) + 'px';
 				}})(i), i * steptime);

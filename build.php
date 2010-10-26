@@ -22,6 +22,9 @@ if(file_exists('modules.conf'))
 	print('Reading and parsing file.' . "\n");
 	$modules = explode("\n", file_get_contents('modules.conf'));
 	
+	// Remove last
+	array_pop($modules);
+	
 	// Count modules
 	print(count($modules) . ' modules specified.' . "\n");
 	

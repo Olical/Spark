@@ -47,14 +47,14 @@
 			});
 			
 			s.click('h1.header', function() {
-				// Show module
-				s.show('p.mouseover');
+				// Visible module
+				s.visible('p.mouseover', true);
 			});
 			
 			// Mouse module
 			s.mouse('p.mouseover', 'over', function() {
-				// Hide module
-				s.hide('p.mouseover');
+				// Visible module
+				s.visible('p.mouseover', false);
 			});
 			
 			// Size module

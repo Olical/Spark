@@ -20,7 +20,7 @@ else
 {var widthdiff=width-parseInt(element.style.width);var heightdiff=height-parseInt(element.style.height);var steptime=timeframe/100;var widthpps=widthdiff/100;var heightpps=heightdiff/100;var origwidth=parseInt(element.style.width);var origheight=parseInt(element.style.height);var timers=[];for(var i=0;i<=100;i++)
 {timers[i]=setTimeout((function(privateEye){return function(){element.style.width=origwidth+(widthpps*privateEye)+'px';element.style.height=origheight+(heightpps*privateEye)+'px';}})(i),i*steptime);}
 if(callback!==undefined)
-{var callbackTimer=setTimeout((function(element,callback){return function(){callback(element);}})(element,callback),100*steptime);}}
+{var callbackTimer=setTimeout(callback,100*steptime);}}
 else
 {element.style.width=width;element.style.height=height;}}
 else

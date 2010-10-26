@@ -20,6 +20,8 @@
 			<p class='height'>Height: <input type='text' value='' /></p>
 			<p><a href='#' class='setsize'>Set size</a></p>
 		</div>
+		<p class='opacity'>This is a little see through</p>
+		<p class='opacity2'>Mouse over this to fade it out</p>
 		<script type='text/javascript' src='spark.js'></script>
 		<script type='text/javascript'>
 			// Content module
@@ -64,6 +66,15 @@
 				s.size('div.size', parseInt(s.value('div.size p.width input')), parseInt(s.value('div.size p.height input')), 1000, function() {
 					alert('Callback fired');
 				});
+			});
+			
+			// Opacity module
+			s.opacity('p.opacity', 50);
+			
+			// Mouse module
+			s.mouse('p.opacity2', 'over', function() {
+				// Opacity module
+				s.opacity('p.opacity2', 0, 1000);
 			});
 		</script>
 	</body>

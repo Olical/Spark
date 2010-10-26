@@ -23,7 +23,7 @@ function(element, width, height, timeframe, callback) {
 			
 			// Loop through all 100 steps setting a time out resize each time
 			var timers = [];
-			for(var i = 0; i < 100; i++)
+			for(var i = 0; i <= 100; i++)
 			{
 				timers[i] = setTimeout((function(privateEye) {
 				return function() {

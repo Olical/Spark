@@ -35,7 +35,9 @@ function(element, width, height, timeframe, callback) {
 			if(callback !== undefined)
 			{
 				// Set callback timer
-				var callbackTimer = setTimeout(callback(element), 100 * steptime);
+				var callbackTimer = setTimeout(function(element, callback) {
+					callback(element);
+				}, 100 * steptime);
 			}
 		}
 		else

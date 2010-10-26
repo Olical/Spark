@@ -31,6 +31,12 @@ function(element, width, height, timeframe, callback) {
 					element.style.height = origheight + (heightpps * privateEye) + 'px';
 				}})(i), i * steptime);
 			}
+			
+			if(callback !== undefined)
+			{
+				// Set callback timer
+				var callbackTimer = setTimeout(callback(element), 100 * steptime);
+			}
 		}
 		else
 		{

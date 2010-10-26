@@ -38,5 +38,14 @@ else if(visible===undefined)
 {if(element.style!='none')
 {element.style.display='none';}
 else
-{element.style.display='block';}}};}
+{element.style.display='block';}}};this.opacity=function(element,opacity,timeframe,callback){element=document.querySelectorAll(element)[0];if(opacity===undefined)
+{return element.style.opacity*100;}
+else
+{if(timeframe===undefined)
+{element.style.opacity=opacity/100;element.style.filter='alpha(opacity='+opacity+')';}
+else
+{var opacitydiff=opacity-(element.style.opacity*100);var steptime=timeframe/100;var opacitypps=opacitydiff/100;var origopacity=element.style.opacity*100;var timers=[];for(var i=0;i<=100;i++)
+{timers[i]=setTimeout((function(privateEye){return function(){var newopacity=(origopacity+(opacitypps*privateEye))/100;element.style.opacity=newopacity;element.style.filter='alpha(opacity='+newopacity+')';}})(i),i*steptime);}
+if(callback!==undefined)
+{var callbackTimer=setTimeout(callback,100*steptime);}}}};}
 var s=new Spark()

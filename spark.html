@@ -61,7 +61,9 @@
 			s.value('div.size p.width input', s.size('div.size').width);
 			s.value('div.size p.height input', s.size('div.size').height);
 			s.click('div.size p a.setsize', function() {
-				s.size('div.size', parseInt(s.value('div.size p.width input')), parseInt(s.value('div.size p.height input')), 1000);
+				s.size('div.size', parseInt(s.value('div.size p.width input')), parseInt(s.value('div.size p.height input')), 1000, function() {
+					alert('Callback fired');
+				});
 			});
 		</script>
 	</body>

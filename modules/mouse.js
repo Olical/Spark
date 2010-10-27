@@ -1,4 +1,7 @@
 function(element, action, callback) {
-	element = document.querySelectorAll(element)[0];
+	if(isNaN(element))
+	{
+		element = document.querySelectorAll(element)[0];
+	}
 	element.addEventListener('mouse' + action, callback, false);
 };

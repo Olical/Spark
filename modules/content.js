@@ -1,5 +1,8 @@
 function(element, content, append) {
-	element = document.querySelectorAll(element)[0];
+	if(isNaN(element))
+	{
+		element = document.querySelectorAll(element)[0];
+	}
 	
 	if(content === undefined)
 	{

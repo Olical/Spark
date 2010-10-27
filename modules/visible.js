@@ -1,6 +1,8 @@
 function(element, visible) {
-	element = document.querySelectorAll(element)[0];
-	
+	if(isNaN(element))
+	{
+		element = document.querySelectorAll(element)[0];
+	}
 	if(visible === true)
 	{
 		// Show it

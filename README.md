@@ -7,7 +7,7 @@ It has modular development with a PHP script I wrote which minifys and combines 
 
 All functions are explained in the wiki as well as how to make plugins. Here is an example of making an element fade out to 0% opacity over the cource of 1000 miliseconds, one second.
 
-```s.opacity('p.myParagraph', 0, 1000);
+`s.opacity('p.myParagraph', 0, 1000);`
 
 ## Licences
 

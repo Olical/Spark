@@ -19,6 +19,17 @@ function(element, opacity, timeframe, callback) {
 		else
 		{
 			// Change transparency over the timeframe
+			// If not already, set the opacity to full
+			var styleProp = 'opacity';
+			if (element.currentStyle)
+				var isSet = element.currentStyle[styleProp];
+			else if (window.getComputedStyle)
+				var isSet = document.defaultView.getComputedStyle(element,null).getPropertyValue(styleProp);
+			if(isSet == 1)
+			{
+				element.style.opacity = 1;
+			}
+			
 			// Work out difference
 			var opacitydiff = opacity - (element.style.opacity * 100);
 			

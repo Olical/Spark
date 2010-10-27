@@ -58,7 +58,11 @@ else
 {if(timeframe===undefined)
 {element.style.opacity=opacity/100;element.style.filter='alpha(opacity='+opacity+')';}
 else
-{var opacitydiff=opacity-(element.style.opacity*100);var steptime=timeframe/100;var opacitypps=opacitydiff/100;var origopacity=element.style.opacity*100;var timers=[];for(var i=0;i<=100;i++)
+{var styleProp='opacity';if(element.currentStyle)
+var isSet=element.currentStyle[styleProp];else if(window.getComputedStyle)
+var isSet=document.defaultView.getComputedStyle(element,null).getPropertyValue(styleProp);if(isSet==1)
+{element.style.opacity=1;}
+var opacitydiff=opacity-(element.style.opacity*100);var steptime=timeframe/100;var opacitypps=opacitydiff/100;var origopacity=element.style.opacity*100;var timers=[];for(var i=0;i<=100;i++)
 {timers[i]=setTimeout((function(privateEye){return function(){var newopacity=(origopacity+(opacitypps*privateEye))/100;element.style.opacity=newopacity;element.style.filter='alpha(opacity='+newopacity+')';}})(i),i*steptime);}
 if(callback!==undefined)
 {var callbackTimer=setTimeout(callback,100*steptime);}}}};this.object=function(element){return document.querySelectorAll(element)[0];};}

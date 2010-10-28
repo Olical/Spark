@@ -20,10 +20,7 @@ if(file_exists('modules.conf'))
 {
 	// Read the config file and split into an array
 	print('Reading and parsing file.' . "\n");
-	$modules = explode("\n", file_get_contents('modules.conf'));
-	
-	// Remove last
-	array_pop($modules);
+	$modules = explode("\n", trim(file_get_contents('modules.conf')));
 	
 	// Count modules
 	print(count($modules) . ' modules specified.' . "\n");

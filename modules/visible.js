@@ -16,7 +16,7 @@ function(element, visible) {
 	else if(visible === undefined)
 	{
 		// Toggle
-		if(element.style != 'none')
+		if(element.style.display != 'none')
 		{
 			// Hide it
 			element.style.display = 'none';

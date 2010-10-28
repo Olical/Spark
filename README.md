@@ -9,7 +9,7 @@ All functions are explained in the wiki as well as how to make plugins. Here is 
 
 `s.opacity('p.myParagraph', 0, 1000);`
 
-If you are unsure of anything then the wiki will sort you out. http://github.com/Wolfy87/Spark/wiki
+If you are unsure of anything then the wiki will sort you out. <http://github.com/Wolfy87/Spark/wiki>
 
 ## Licences
 

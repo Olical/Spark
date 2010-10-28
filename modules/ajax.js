@@ -9,7 +9,7 @@ function(method, file, data) {
 	method = method.toUppercase();
 	
 	// If the method is get then append the data to the file string
-	if(method == 'GET')
+	if(method == 'GET' && data !== undefined)
 		file += '?' + data;
 	
 	xmlhttp.open(method, file, false);
@@ -18,7 +18,10 @@ function(method, file, data) {
 	if(method == 'POST')
 	{
 		xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-		xmlhttp.send(data);
+		if(data !== undefined)
+			xmlhttp.send(data);
+		else
+			xmlhttp.send();
 	}
 	else
 		xmlhttp.send(); // Otherwise just send the data

@@ -52,9 +52,11 @@ if(callback!==undefined)
 var callbackTimer=setTimeout(callback,100*steptime);}}};this.object=function(element){return document.querySelectorAll(element)[0];};this.link=function(element,find,link){if(isNaN(element))
 element=document.querySelectorAll(element)[0];element.innerHTML=element.innerHTML.replace(new RegExp('('+find+')','gi'),"<a href='"+link+"'>$1</a>");};this.ajax=function(method,file,data){if(window.XMLHttpRequest)
 xmlhttp=new XMLHttpRequest();else
-xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");method=method.toUppercase();if(method=='GET')
+xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");method=method.toUppercase();if(method=='GET'&&data!==undefined)
 file+='?'+data;xmlhttp.open(method,file,false);if(method=='POST')
-{xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');xmlhttp.send(data);}
+{xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');if(data!==undefined)
+xmlhttp.send(data);else
+xmlhttp.send();}
 else
 xmlhttp.send();return xmlhttp.responseText;};}
 var s=new Spark()

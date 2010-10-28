@@ -1,13 +1,8 @@
 function(element, opacity, timeframe, callback) {
 	if(isNaN(element))
-	{
 		element = document.querySelectorAll(element)[0];
-	}
 	if(opacity === undefined)
-	{
-		// Return the transparency of the element
-		return element.style.opacity * 100;
-	}
+		return element.style.opacity * 100; // Return the transparency of the element
 	else
 	{
 		if(timeframe === undefined)
@@ -26,9 +21,7 @@ function(element, opacity, timeframe, callback) {
 			else if (window.getComputedStyle)
 				var isSet = document.defaultView.getComputedStyle(element,null).getPropertyValue(styleProp);
 			if(isSet == 1)
-			{
 				element.style.opacity = 1;
-			}
 			
 			// Work out difference
 			var opacitydiff = opacity - (element.style.opacity * 100);
@@ -55,10 +48,7 @@ function(element, opacity, timeframe, callback) {
 			}
 			
 			if(callback !== undefined)
-			{
-				// Set callback timer
-				var callbackTimer = setTimeout(callback, 100 * steptime);
-			}
+				var callbackTimer = setTimeout(callback, 100 * steptime); // Set callback timer
 		}
 	}
 };

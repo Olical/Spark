@@ -1,9 +1,7 @@
 function(element, width, height, timeframe, callback) {
 	var rawelement = element;
 	if(isNaN(element))
-	{
 		element = document.querySelectorAll(element)[0];
-	}
 	if(width !== undefined && height !== undefined)
 	{
 		if(timeframe !== undefined)
@@ -36,10 +34,7 @@ function(element, width, height, timeframe, callback) {
 			}
 			
 			if(callback !== undefined)
-			{
-				// Set callback timer
-				var callbackTimer = setTimeout(callback, 100 * steptime);
-			}
+				var callbackTimer = setTimeout(callback, 100 * steptime); // Set callback timer
 		}
 		else
 		{

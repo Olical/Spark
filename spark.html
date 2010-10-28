@@ -22,6 +22,7 @@
 		</div>
 		<p class='opacity'>This is a little see through</p>
 		<p class='opacity2'>Click this to fade it out</p>
+		<p class='readme'>Loading README.md from github.com...</p>
 		<script type='text/javascript' src='spark.js'></script>
 		<script type='text/javascript'>
 			// Content module
@@ -79,6 +80,9 @@
 			
 			// Link module
 			s.link('h1.header', 'spark', 'http://github.com/Wolfy87/Spark');
+			
+			// AJAX module
+			s.ajax('GET', 'http://github.com/Wolfy87/Spark/raw/master/README.md');
 		</script>
 	</body>
 </html>

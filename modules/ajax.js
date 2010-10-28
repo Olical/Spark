@@ -1,12 +1,12 @@
 function(method, file, data) {
 	// Set up the request, allow for cross browser.
 	if(window.XMLHttpRequest)
-		xmlhttp=new XMLHttpRequest(); // For IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp = new XMLHttpRequest(); // For IE7+, Firefox, Chrome, Opera, Safari
 	else
-		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP"); // For IE6, IE5
+		xmlhttp = new ActiveXObject('Microsoft.XMLHTT'); // For IE6, IE5
 	
 	// Convert to upper case.
-	method = method.toUppercase();
+	method = method.toUpperCase();
 	
 	// If the method is get then append the data to the file string
 	if(method == 'GET' && data !== undefined)
@@ -21,10 +21,10 @@ function(method, file, data) {
 		if(data !== undefined)
 			xmlhttp.send(data);
 		else
-			xmlhttp.send();
+			xmlhttp.send(null);
 	}
 	else
-		xmlhttp.send(); // Otherwise just send the data
+		xmlhttp.send(null); // Otherwise just send the data
 	
 	return xmlhttp.responseText;
 };

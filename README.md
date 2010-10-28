@@ -3,11 +3,13 @@
 ## About
 Spark is a project of mine inspired by the work of jQuery. I plan to make it even simpler to use and even more light weight.
 
-It has modular development with a PHP script I wrote which minifys and combines all of the modules into one file. This means that if you need to test certain modules all you have to do is add / remove modules from modules.conf and rebuild.
+It has modular development with a PHP script I wrote which minifys and combines all of the modules into one file. This means that if you need to test certain modules all you have to do is add / remove modules from `modules.conf` and rebuild.
 
-All functions are explained in the wiki as well as how to make plugins. Here is an example of making an element fade out to 0% opacity over the cource of 1000 miliseconds, one second.
+All functions are explained in the wiki as well as how to make plugins. Here is an example of making an element fade out to 0% opacity over the course of 1000 milliseconds, one second.
 
 `s.opacity('p.myParagraph', 0, 1000);`
+
+If you are unsure of anything then the wiki will sort you out. http://github.com/Wolfy87/Spark/wiki
 
 ## Licences
 

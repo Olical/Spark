@@ -1,24 +1,13 @@
 function(element, content, append) {
 	if(isNaN(element))
-	{
 		element = document.querySelectorAll(element)[0];
-	}
 	if(content === undefined)
-	{
-		// Return value of the selected element
-		return element.value;
-	}
+		return element.value; // Return value of the selected element
 	else
 	{
 		if(append === undefined || append === false)
-		{
-			// Replace value
-			element.value = content;
-		}
+			element.value = content; // Replace value
 		else if(append === true)
-		{
-			// Append value
-			element.value += content;
-		}
+			element.value += content; // Append value
 	}
 };

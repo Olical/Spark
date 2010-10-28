@@ -47,7 +47,7 @@ if(visible===true)
 else if(visible===false)
 {element.style.display='none';}
 else if(visible===undefined)
-{if(element.style!='none')
+{if(element.style.display!='none')
 {element.style.display='none';}
 else
 {element.style.display='block';}}};this.opacity=function(element,opacity,timeframe,callback){if(isNaN(element))

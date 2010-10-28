@@ -65,5 +65,5 @@ var isSet=document.defaultView.getComputedStyle(element,null).getPropertyValue(s
 var opacitydiff=opacity-(element.style.opacity*100);var steptime=timeframe/100;var opacitypps=opacitydiff/100;var origopacity=element.style.opacity*100;var timers=[];for(var i=0;i<=100;i++)
 {timers[i]=setTimeout((function(privateEye){return function(){var newopacity=(origopacity+(opacitypps*privateEye))/100;element.style.opacity=newopacity;element.style.filter='alpha(opacity='+newopacity+')';}})(i),i*steptime);}
 if(callback!==undefined)
-{var callbackTimer=setTimeout(callback,100*steptime);}}}};this.object=function(element){return document.querySelectorAll(element)[0];};}
+{var callbackTimer=setTimeout(callback,100*steptime);}}}};this.object=function(element){return document.querySelectorAll(element)[0];};this.transition=function(element,transition){};}
 var s=new Spark()

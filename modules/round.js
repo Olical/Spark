@@ -27,15 +27,17 @@ function(element) {
 	bottomBox.style.position = 'absolute';
 	bottomBox.style.bottom = '-5px';
 	
-	// Loop through all lines of the corner applying basic formatting
+	// Loop through all lines of the corner applying formatting
 	for(var i = 0; i < 5; i++)
 	{
 		top[i].style.height = '1px';
-		top[i].style.width = (element.offsetWidth - 5) + (i + 1) + 'px';
+		top[i].style.width = ((element.offsetWidth - (5 - i)) + i) - 5 + 'px';
 		top[i].style.backgroundColor = element.style.backgroundColor;
+		top[i].style.marginLeft = (5 - i) + 'px';
 		
 		bottom[i].style.height = '1px';
-		bottom[i].style.width = element.offsetWidth - (i + 1) + 'px';
+		bottom[i].style.width = (element.offsetWidth - i) - (i + 2) + 'px';
 		bottom[i].style.backgroundColor = element.style.backgroundColor;
+		bottom[i].style.marginLeft = i + 1 + 'px';
 	}
 };

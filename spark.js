@@ -15,8 +15,8 @@ else
 {var date=new Date();date.setTime(date.getTime()+31536000000);var expires='; expires='+date.toGMTString();document.cookie=name+'='+content+expires+'; path=/';}
 else
 {var date=new Date();date.setTime(date.getTime()+duration);var expires='; expires='+date.toGMTString();document.cookie=name+'='+content+expires+'; path=/';}}};this.click=function(element,callback){if(isNaN(element))
-element=document.querySelectorAll(element)[0];element.addEventListener('click',callback,false);};this.mouse=function(element,action,callback){if(isNaN(element))
-element=document.querySelectorAll(element)[0];element.addEventListener('mouse'+action,callback,false);};this.size=function(element,width,height,timeframe,callback){var rawelement=element;if(isNaN(element))
+element=document.querySelectorAll(element)[0];element.addEventListener('click',function(event){callback(event);},false);};this.mouse=function(element,action,callback){if(isNaN(element))
+element=document.querySelectorAll(element)[0];element.addEventListener('mouse'+action,function(event){callback(event);},false);};this.size=function(element,width,height,timeframe,callback){var rawelement=element;if(isNaN(element))
 element=document.querySelectorAll(element)[0];if(width!==undefined&&height!==undefined)
 {if(timeframe!==undefined)
 {var widthdiff=width-parseInt(element.style.width);var heightdiff=height-parseInt(element.style.height);var steptime=timeframe/100;var widthpps=widthdiff/100;var heightpps=heightdiff/100;var origwidth=parseInt(element.style.width);var origheight=parseInt(element.style.height);var timers=[];for(var i=0;i<=100;i++)

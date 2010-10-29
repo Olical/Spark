@@ -13,7 +13,7 @@
 		<p class='append'>This content will be appended</p>
 		<p class='cookie'>This page has been viewed by you this many times: <input type='text' value='' /></p>
 		<a href='#' class='button'>Click here to append content to the element below.</a>
-		<p class='button-target'>No clicks D: </p>
+		<p class='button-target'>No clicks D:<br /></p>
 		<p class='mouseover'>Mouse over me to make me disappear! Click the header to make me come back!</p>
 		<div class='size' style='background-color: #CCCCCC; width: 300px; height: 300px;'>
 			<p class='width'>Width: <input type='text' value='' /></p>
@@ -45,8 +45,8 @@
 			}
 			
 			// Click module
-			s.click('a.button', function() {
-				s.content('p.button-target', 'You clicked! :D ', true);
+			s.click('a.button', function(e) {
+				s.content('p.button-target', 'You clicked! :D at the X position of ' + e.pageX + '<br />', true);
 			});
 			
 			s.click('h1.header', function() {

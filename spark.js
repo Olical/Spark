@@ -14,15 +14,11 @@ else
 {if(duration===undefined)
 {var date=new Date();date.setTime(date.getTime()+31536000000);var expires='; expires='+date.toGMTString();document.cookie=name+'='+content+expires+'; path=/';}
 else
-{var date=new Date();date.setTime(date.getTime()+duration);var expires='; expires='+date.toGMTString();document.cookie=name+'='+content+expires+'; path=/';}}};this.click=function(element,callback){if(isNaN(element))
+{var date=new Date();date.setTime(date.getTime()+duration);var expires='; expires='+date.toGMTString();document.cookie=name+'='+content+expires+'; path=/';}}};this.event=function(element,type,callback){if(isNaN(element))
 element=document.querySelector(element);if(element.addEventListener)
-element.addEventListener('click',function(event){callback(event);},false);else if(element.attachEvent)
-{element['e'+'click'+callback]=callback;element['click'+callback]=function(){element['e'+'click'+callback](window.event);}
-element.attachEvent('onclick',element['click'+callback]);}};this.mouse=function(element,action,callback){if(isNaN(element))
-element=document.querySelector(element);if(element.addEventListener)
-element.addEventListener('mouse'+action,function(event){callback(event);},false);else if(element.attachEvent)
-{element['emouse'+action+callback]=callback;element['mouse'+action+callback]=function(){element['emouse'+action+callback](window.event);}
-element.attachEvent('onmouse'+action,element['mouse'+action+callback]);}};this.size=function(element,width,height,timeframe,callback){var rawelement=element;if(isNaN(element))
+element.addEventListener(type,function(event){callback(event);},false);else if(element.attachEvent)
+{element['e'+type+callback]=callback;element[type+callback]=function(){element['e'+type+callback](window.event);}
+element.attachEvent('on'+type,element[type+callback]);}};this.size=function(element,width,height,timeframe,callback){var rawelement=element;if(isNaN(element))
 element=document.querySelector(element);if(width!==undefined&&height!==undefined)
 {if(timeframe!==undefined)
 {var widthdiff=width-parseInt(element.style.width);var heightdiff=height-parseInt(element.style.height);var steptime=timeframe/100;var widthpps=widthdiff/100;var heightpps=heightdiff/100;var origwidth=parseInt(element.style.width);var origheight=parseInt(element.style.height);var timers=[];for(var i=0;i<=100;i++)

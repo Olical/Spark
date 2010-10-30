@@ -6,26 +6,32 @@ function(element) {
 	// Set the elements position to relative
 	element.style.position = 'relative';
 	
-	// Add the two containing divs
-	element.innerHTML = '<div class=\'spark-corner-top\' style=\'width: 100%; height: 5px;\'><div class=\'corner1\'></div><div class=\'corner2\'></div><div class=\'corner3\'></div><div class=\'corner4\'></div><div class=\'corner5\'></div></div>' + element.innerHTML;
-	element.innerHTML += '<div class=\'spark-corner-bottom\' style=\'width: 100%; height: 5px;\'><div class=\'corner1\'></div><div class=\'corner2\'></div><div class=\'corner3\'></div><div class=\'corner4\'></div><div class=\'corner5\'></div></div>';
-	
 	// Set up the element objects
-	var topBox = document.querySelectorAll(raw + ' div.spark-corner-top')[0];
-	var bottomBox = document.querySelectorAll(raw + ' div.spark-corner-bottom')[0];
-	var top = document.querySelectorAll(raw + ' div.spark-corner-top div');
-	var bottom = document.querySelectorAll(raw + ' div.spark-corner-bottom div');
+	var topBox = document.createElement('div');
+	var bottomBox = document.createElement('div');
 	
 	// Apply formatting to boxes
 	topBox.style.width = '100%';
 	topBox.style.height = '5px';
 	topBox.style.position = 'absolute';
 	topBox.style.top = '-5px';
+	topBox.innerHTML = '<div class=\'corner1\'></div><div class=\'corner2\'></div><div class=\'corner3\'></div><div class=\'corner4\'></div><div class=\'corner5\'></div>';
+	topBox.setAttribute('class', 'spark-corner-top');
 	
 	bottomBox.style.width = '100%';
 	bottomBox.style.height = '5px';
 	bottomBox.style.position = 'absolute';
 	bottomBox.style.bottom = '-5px';
+	bottomBox.innerHTML = '<div class=\'corner1\'></div><div class=\'corner2\'></div><div class=\'corner3\'></div><div class=\'corner4\'></div><div class=\'corner5\'></div>';
+	bottomBox.setAttribute('class', 'spark-corner-bottom');
+	
+	// Add them to the parent
+	element.appendChild(topBox);
+	element.appendChild(bottomBox);
+	
+	// Set up the individual element objects
+	var top = document.querySelectorAll(raw + ' div.spark-corner-top div');
+	var bottom = document.querySelectorAll(raw + ' div.spark-corner-bottom div');
 	
 	// Loop through all lines of the corner applying formatting
 	for(var i = 0; i < 5; i++)

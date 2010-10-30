@@ -37,13 +37,26 @@ function(element) {
 	for(var i = 0; i < 5; i++)
 	{
 		top[i].style.height = '1px';
-		top[i].style.width = ((element.offsetWidth - (5 - i)) + i) - 5 + 'px';
 		top[i].style.backgroundColor = element.style.backgroundColor;
-		top[i].style.marginLeft = (5 - i) + 'px';
 		
 		bottom[i].style.height = '1px';
-		bottom[i].style.width = (element.offsetWidth - i) - (i + 2) + 'px';
 		bottom[i].style.backgroundColor = element.style.backgroundColor;
-		bottom[i].style.marginLeft = i + 1 + 'px';
+		
+		if(i == 1 || i == 3)
+		{
+			top[i].style.width = (((element.offsetWidth - (5 - i)) + i) - 5) + 2 + 'px';
+			top[i].style.marginLeft = (4 - i) + 'px';
+			
+			bottom[i].style.width = ((element.offsetWidth - i) - (i + 2)) + 2 + 'px';
+			bottom[i].style.marginLeft = i + 'px';
+		}
+		else
+		{
+			top[i].style.width = ((element.offsetWidth - (5 - i)) + i) - 5 + 'px';
+			top[i].style.marginLeft = (5 - i) + 'px';
+			
+			bottom[i].style.width = (element.offsetWidth - i) - (i + 2) + 'px';
+			bottom[i].style.marginLeft = i + 1 + 'px';
+		}
 	}
 };

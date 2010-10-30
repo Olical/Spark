@@ -1,5 +1,5 @@
 function(element, visible) {
-	if(isNaN(element))
+	if(typeof element == 'string')
 		element = document.querySelector(element);
 	if(visible === true)
 		element.style.display = 'block'; // Show it

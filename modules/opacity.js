@@ -1,5 +1,5 @@
 function(element, opacity, timeframe, callback) {
-	if(isNaN(element))
+	if(typeof element == 'string')
 		element = document.querySelector(element);
 	if(opacity === undefined)
 		return element.style.opacity * 100; // Return the transparency of the element

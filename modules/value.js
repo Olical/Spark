@@ -1,5 +1,5 @@
 function(element, content, append) {
-	if(isNaN(element))
+	if(typeof element == 'string')
 		element = document.querySelector(element);
 	if(content === undefined)
 		return element.value; // Return value of the selected element

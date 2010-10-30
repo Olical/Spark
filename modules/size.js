@@ -1,6 +1,6 @@
 function(element, width, height, timeframe, callback) {
 	var rawelement = element;
-	if(isNaN(element))
+	if(typeof element == 'string')
 		element = document.querySelector(element);
 	if(width !== undefined && height !== undefined)
 	{

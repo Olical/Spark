@@ -1,6 +1,6 @@
 function(element) {
 	var raw = element;
-	if(isNaN(element))
+	if(typeof element == 'string')
 		element = document.querySelector(element);
 	
 	// Set the elements position to relative

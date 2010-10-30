@@ -1,5 +1,5 @@
 function(element, type, callback) {
-	if(isNaN(element))
+	if(typeof element == 'string')
 		element = document.querySelector(element);
 	
 	if(element.addEventListener)

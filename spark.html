@@ -87,6 +87,11 @@
 			
 			// Round module
 			s.round('div.size');
+			
+			// Event module
+			s.transition('h1.header', 'fadein', 1000, function() {
+				s.transition('h1.header', 'fadeout', 1000);
+			});
 		</script>
 	</body>
 </html>

@@ -50,8 +50,8 @@ if(file_exists('modules.conf'))
 				}
 			}
 			$spark = $header . $content . $footer;
+			print('Compressing.' . "\n");
 			$jsMin = new JSMin($spark, false);
-// in that case, the modifies string is returned by minify():
 			$spark = $jsMin->minify();
 			file_put_contents('spark.js', trim($spark));
 			print('Done.' . "\n");

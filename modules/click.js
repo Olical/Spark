@@ -1,6 +1,6 @@
 function(element, callback) {
 	if(isNaN(element))
-		element = document.querySelectorAll(element)[0];
+		element = document.querySelector(element);
 		
 	if(element.addEventListener)
 		element.addEventListener('click', function(event) { callback(event); }, false);

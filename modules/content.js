@@ -1,6 +1,6 @@
 function(element, content, append) {
 	if(isNaN(element))
-		element = document.querySelectorAll(element)[0];
+		element = document.querySelector(element);
 	
 	if(content === undefined)
 		return element.innerHTML; // Return content of the selected element

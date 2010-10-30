@@ -1,3 +1,3 @@
 function(element) {
-	return document.querySelectorAll(element)[0];
+	return document.querySelector(element);
 };

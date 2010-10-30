@@ -1,7 +1,7 @@
 function(element) {
 	var raw = element;
 	if(isNaN(element))
-		element = document.querySelectorAll(element)[0];
+		element = document.querySelector(element);
 	
 	// Set the elements position to relative
 	element.style.position = 'relative';

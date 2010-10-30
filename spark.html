@@ -44,18 +44,19 @@
 				s.content('p.cookie', s.cookie('testCookie'), true);
 			}
 			
-			// Click module
-			s.click('a.button', function(e) {
-				s.content('p.button-target', 'You clicked! :D at the X position of ' + e.pageX + '<br />', true);
+			// Event module
+			s.event('a.button', 'click', function(e) {
+				s.content('p.button-target', 'You clicked! :D at the X position of ' + e.pageX + '<br >', true);
 			});
 			
-			s.click('h1.header', function() {
+			// Event module
+			s.event('h1.header', 'click', function() {
 				// Visible module
 				s.visible('p.mouseover', true);
 			});
 			
-			// Mouse module
-			s.mouse('p.mouseover', 'over', function() {
+			// Event module
+			s.event('p.mouseover', 'mouseover', function() {
 				// Visible module
 				s.visible('p.mouseover', false);
 			});
@@ -63,7 +64,7 @@
 			// Size module
 			s.value('div.size p.width input', s.size('div.size').width);
 			s.value('div.size p.height input', s.size('div.size').height);
-			s.click('div.size p a.setsize', function() {
+			s.event('div.size p a.setsize', 'click', function() {
 				s.size('div.size', parseInt(s.value('div.size p.width input')), parseInt(s.value('div.size p.height input')), 1000, function() {
 					alert('Callback fired');
 				});
@@ -72,8 +73,8 @@
 			// Opacity module
 			s.opacity('p.opacity', 80);
 			
-			// Mouse module
-			s.click('p.opacity2', function() {
+			// Event module
+			s.event('p.opacity2', 'click', function() {
 				// Opacity module
 				s.opacity('p.opacity2', 0, 1000);
 			});

@@ -49,7 +49,7 @@ else
 var isSet=element.currentStyle[styleProp];else if(window.getComputedStyle)
 var isSet=document.defaultView.getComputedStyle(element,null).getPropertyValue(styleProp);if(isSet==1)
 element.style.opacity=1;var opacitydiff=opacity-(element.style.opacity*100);var steptime=timeframe/100;var opacitypps=opacitydiff/100;var origopacity=element.style.opacity*100;var timers=[];for(var i=0;i<=100;i++)
-{timers[i]=setTimeout((function(privateEye){return function(){var newopacity=(origopacity+(opacitypps*privateEye))/100;element.style.opacity=newopacity;element.style.filter='alpha(opacity='+newopacity+')';}})(i),i*steptime);}
+{timers[i]=setTimeout((function(privateEye){return function(){var newopacity=(origopacity+(opacitypps*privateEye));element.style.opacity=newopacity/100;element.style.filter='alpha(opacity='+newopacity+')';}})(i),i*steptime);}
 if(callback!==undefined)
 var callbackTimer=setTimeout(callback,100*steptime);}}};this.object=function(element){return document.querySelector(element);};this.link=function(element,find,link){if(typeof element=='string')
 element=document.querySelector(element);element.innerHTML=element.innerHTML.replace(new RegExp('('+find+')','gi'),"<a href='"+link+"'>$1</a>");};this.ajax=function(method,file,data){if(window.XMLHttpRequest)

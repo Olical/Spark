@@ -16,9 +16,9 @@ function(element, opacity, timeframe, callback) {
 			// Change transparency over the timeframe
 			// If not already, set the opacity to full
 			var styleProp = 'opacity';
-			if (element.currentStyle)
+			if(element.currentStyle)
 				var isSet = element.currentStyle[styleProp];
-			else if (window.getComputedStyle)
+			else if(window.getComputedStyle)
 				var isSet = document.defaultView.getComputedStyle(element,null).getPropertyValue(styleProp);
 			if(isSet == 1)
 				element.style.opacity = 1;
@@ -41,12 +41,11 @@ function(element, opacity, timeframe, callback) {
 			{
 				timers[i] = setTimeout((function(privateEye) {
 				return function() {
-					var newopacity = (origopacity + (opacitypps * privateEye)) / 100;
-					element.style.opacity = newopacity;
+					var newopacity = (origopacity + (opacitypps * privateEye));
+					element.style.opacity = newopacity / 100;
 					element.style.filter = 'alpha(opacity=' + newopacity + ')';
 				}})(i), i * steptime);
 			}
-			
 			if(callback !== undefined)
 				var callbackTimer = setTimeout(callback, 100 * steptime); // Set callback timer
 		}

@@ -1,3 +1,3 @@
 function(element) {
-	return document.querySelector(element);
+	return Sizzle(element);
 };

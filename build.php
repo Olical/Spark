@@ -5,11 +5,6 @@
  * @author Oliver Caldwell
  * @version 0.1
  */
-
-// Include jsmin.php
-define('JSMIN_AS_LIB', true); // prevents auto-run on include
-include('jsmin.php');
-
 // Set up the variables
 print('Preparing document.' . "\n");
 $header = 'function Spark() {' . "\n";
@@ -50,10 +45,10 @@ if(file_exists('modules.conf'))
 				}
 			}
 			$spark = $header . $content . $footer;
-			print('Compressing.' . "\n");
-			$jsMin = new JSMin($spark, false);
-			$spark = $jsMin->minify();
+			print('Writing.' . "\n");
 			file_put_contents('spark.js', trim($spark));
+			print('Compressing.' . "\n");
+			exec('java -jar yuicompressor.jar -o spark.js spark.js');
 			print('Done.' . "\n");
 		}
 		else

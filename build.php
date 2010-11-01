@@ -44,7 +44,9 @@ if(file_exists('modules.conf'))
 					$content .= 'this.' . $module . ' = ' . file_get_contents('modules/' . $module . '.js');
 				}
 			}
-			$spark = $header . $content . $footer;
+			print('Reading sizzle.' . "\n");
+			$sizzle = file_get_contents('sizzle.js') . "\n";
+			$spark = $sizzle . $header . $content . $footer;
 			print('Writing.' . "\n");
 			file_put_contents('spark.js', trim($spark));
 			print('Compressing.' . "\n");

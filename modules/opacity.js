@@ -3,6 +3,7 @@ function(element, opacity, timeframe, callback) {
 		element = Sizzle(element);
 	for(var e in element)
 	{
+		element[e].style.zoom = 1;
 		if(opacity === undefined)
 			return element[e].style.opacity * 100; // Return the transparency of the element
 		else

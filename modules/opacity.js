@@ -4,7 +4,7 @@ function(element, opacity, timeframe, callback) {
 	for(var e in element)
 	{
 		if(opacity === undefined)
-			return element[e].style.opacity * 100; // Return the transparency of the element[e]
+			return element[e].style.opacity * 100; // Return the transparency of the element
 		else
 		{
 			if(timeframe === undefined)
@@ -21,7 +21,7 @@ function(element, opacity, timeframe, callback) {
 				if(element[e].currentStyle)
 					var isSet = element[e].currentStyle[styleProp];
 				else if(window.getComputedStyle)
-					var isSet = document.defaultView.getComputedStyle(element[e],null).getPropertyValue(styleProp);
+					var isSet = document.defaultView.getComputedStyle(element[e], null).getPropertyValue(styleProp);
 				if(isSet == 1)
 					element[e].style.opacity = 1;
 			

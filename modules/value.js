@@ -1,13 +1,16 @@
 function(element, content, append) {
 	if(typeof element == 'string')
-		element = document.querySelector(element);
-	if(content === undefined)
-		return element.value; // Return value of the selected element
-	else
+		element = Sizzle(element);
+	for(var e in element)
 	{
-		if(append === undefined || append === false)
-			element.value = content; // Replace value
-		else if(append === true)
-			element.value += content; // Append value
+		if(content === undefined)
+			return element[e].value; // Return value of the selected element
+		else
+		{
+			if(append === undefined || append === false)
+				element[e].value = content; // Replace value
+			else if(append === true)
+				element[e].value += content; // Append value
+		}
 	}
 };

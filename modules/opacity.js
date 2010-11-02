@@ -23,7 +23,10 @@ function(element, opacity, timeframe, callback) {
 				else if(window.getComputedStyle)
 					var isSet = document.defaultView.getComputedStyle(element[e], null).getPropertyValue(styleProp);
 				if(isSet == 1)
+				{
 					element[e].style.opacity = 1;
+					element[e].style.filter = 'alpha(opacity=' + opacity + ')';
+				}
 			
 				// Work out difference
 				var opacitydiff = opacity - (element[e].style.opacity * 100);
@@ -43,7 +46,7 @@ function(element, opacity, timeframe, callback) {
 				{
 					timers[i] = setTimeout((function(privateEye) {
 					return function() {
-						var newopacity = (origopacity + (opacitypps * privateEye));
+						var newopacity = origopacity + (opacitypps * privateEye);
 						element[e].style.opacity = newopacity / 100;
 						element[e].style.filter = 'alpha(opacity=' + newopacity + ')';
 					}})(i), i * steptime);

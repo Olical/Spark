@@ -1,5 +1,6 @@
 function(method, file, data) {
 	// Set up the request, allow for cross browser.
+	var xmlhttp;
 	if(window.XMLHttpRequest)
 		xmlhttp = new XMLHttpRequest(); // For IE7+, Firefox, Chrome, Opera, Safari
 	else

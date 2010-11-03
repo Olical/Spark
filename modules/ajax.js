@@ -3,7 +3,7 @@ function(method, file, data) {
 	if(window.XMLHttpRequest)
 		xmlhttp = new XMLHttpRequest(); // For IE7+, Firefox, Chrome, Opera, Safari
 	else
-		xmlhttp = new ActiveXObject('Microsoft.XMLHTT'); // For IE6, IE5
+		xmlhttp = new ActiveXObject('Microsoft.XMLHTTP'); // For IE6, IE5
 	
 	// Convert to upper case.
 	method = method.toUpperCase();

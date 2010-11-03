@@ -9,7 +9,7 @@
 print('Preparing document.' . "\n");
 $header = 'function Spark() {' . "\n";
 $content = '';
-$footer = '} '. "\n" . 'var s = new Spark()';
+$footer = '} '. "\n" . 'var s = new Spark();';
 
 if(file_exists('modules.conf'))
 {

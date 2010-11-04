@@ -52,7 +52,8 @@
 				
 				// Event module
 				s.event('a.button', 'click', function(e) {
-					s.content('p.button-target', 'You clicked! :D at the X position of ' + e.pageX + '<br />', true);
+					// Content and location module
+					s.content('p.button-target', 'You clicked! :D at the X position of ' + s.location(e).x + '<br />', true);
 				});
 				
 				// Event module

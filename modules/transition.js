@@ -13,6 +13,7 @@ function(element, transition, timeframe, callback) {
 	
 		// Check what type of transition it is and execute it
 		if(transition == 'fadeout')
+			s.opacity(element, 100);
 			s.opacity(element, 0, timeframe, function() { s.visible(element, false); callback(); });
 		else if(transition == 'fadein')
 		{

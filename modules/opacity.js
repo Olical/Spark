@@ -24,7 +24,7 @@ function(element, opacity, timeframe, callback) {
 					var isSet = element[e].currentStyle.opacity;
 				else if(window.getComputedStyle)
 					var isSet = document.defaultView.getComputedStyle(element[e], null).getPropertyValue('opacity'); 
-				if(isSet == 1)
+				if(isSet == 1 || isSet == undefined)
 				{
 					element[e].style.opacity = 1;
 					element[e].style.MozOpacity = 1;

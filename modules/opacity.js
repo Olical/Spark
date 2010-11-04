@@ -5,13 +5,15 @@ function(element, opacity, timeframe, callback) {
 	{
 		element[e].style.zoom = 1;
 		if(opacity === undefined)
-			return element[e].style.opacity * 100; // Return the transparency of the element
+			return element[e].style.opacity * 100; // Return the transparency of the element as a percentage
 		else
 		{
 			if(timeframe === undefined)
 			{
 				// Change transparency instantly
 				element[e].style.opacity = opacity / 100;
+				element[e].style.MozOpacity = opacity / 100;
+				element[e].style.khtmlOpacity = opacity / 100;
 				element[e].style.filter = 'alpha(opacity=' + opacity + ')';
 			}
 			else
@@ -49,6 +51,8 @@ function(element, opacity, timeframe, callback) {
 					return function() {
 						var newopacity = origopacity + (opacitypps * privateEye);
 						element[e].style.opacity = newopacity / 100;
+						element[e].style.MozOpacity = newopacity / 100;
+						element[e].style.khtmlOpacity = newopacity / 100;
 						element[e].style.filter = 'alpha(opacity=' + newopacity + ')';
 					}})(i), i * steptime);
 				}

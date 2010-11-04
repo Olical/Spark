@@ -28,7 +28,9 @@ function(element, opacity, timeframe, callback) {
 				if(isSet == 1)
 				{
 					element[e].style.opacity = 1;
-					element[e].style.filter = 'alpha(opacity=' + opacity + ')';
+					element[e].style.MozOpacity = 1;
+					element[e].style.khtmlOpacity = 1;
+					element[e].style.filter = 'alpha(opacity=100)';
 				}
 			
 				// Work out difference

@@ -97,6 +97,9 @@
 				s.transition('h1.header', 'fadein', 1000, function() {
 					s.transition('h1.header', 'fadeout', 1000);
 				});
+				
+				// Focus module
+				s.focus('div.size p.height input');
 			}
 			
 			s.event('document', 'load', loaded());

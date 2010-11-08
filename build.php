@@ -7,9 +7,6 @@
  */
 // Set up the variables
 print('Preparing document.' . "\n");
-$H5ES = <<<_END
-eval(function(p,a,c,k,e,r){e=String;if(!''.replace(/^/,String)){while(c--)r[c]=k[c]||c;k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('0.1("2");0.1("3");0.1("4");0.1("5");0.1("6");0.1("7");0.1("8");0.1("9");',10,10,'document|createElement|article|aside|figure|footer|header|hgroup|nav|section'.split('|'),0,{}))
-_END;
 $header = 'function Spark() {' . "\n";
 $content = '';
 $footer = '} '. "\n" . 'var s = new Spark();';
@@ -49,8 +46,8 @@ if(file_exists('modules.conf'))
 			}
 			print('Reading sizzle.' . "\n");
 			$sizzle = file_get_contents('sizzle.js') . "\n";
-			print('Building with HTML5 enabling script.' . "\n");
-			$spark = $H5ES . $sizzle . $header . $content . $footer;
+			print('Building.' . "\n");
+			$spark = $sizzle . $header . $content . $footer;
 			print('Writing.' . "\n");
 			file_put_contents('spark.js', trim($spark));
 			print('Compressing.' . "\n");

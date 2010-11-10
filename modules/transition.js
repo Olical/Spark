@@ -1,6 +1,8 @@
 function(element, transition, timeframe, callback) {
 	if(typeof element == 'string')
 		element = Sizzle(element);
+	else if(element.constructor != Array)
+		element = new Array(element);
 		
 	// Initialise Spark
 	var s = new Spark();

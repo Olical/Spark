@@ -13,12 +13,6 @@ function(theEvent) {
 		docY = theEvent.pageY;
 	}
 	
-	// Return the calculated positions
-	function coord() {
-		var x;
-		var y;
-	};
-	coord.x = docX;
-	coord.y = docY;
-	return coord;
+	// Return the calculated positions in an object
+	return {x: docX, y: docY};
 };

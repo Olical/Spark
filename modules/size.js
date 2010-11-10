@@ -48,9 +48,6 @@ function(element, width, height, timeframe, callback) {
 			}
 		}
 		else
-		{
-			// Give size as an object.
-			return {width: element[e].offsetWidth, element[e].offsetHeight};
-		}
+			return {width: element[e].offsetWidth, height: element[e].offsetHeight}; // Give size as an object.
 	}
 };

@@ -1,6 +1,9 @@
 function(element, width, height, timeframe, callback) {
 	if(typeof element == 'string')
 		element = Sizzle(element);
+	else if(element.constructor != Array)
+		element = new Array(element);
+	
 	for(var e in element)
 	{
 		if(width !== undefined && height !== undefined)
@@ -47,13 +50,7 @@ function(element, width, height, timeframe, callback) {
 		else
 		{
 			// Give size as an object.
-			function size() {
-				var width;
-				var height;
-			};
-			size.width = element[e].offsetWidth;
-			size.height = element[e].offsetHeight;
-			return size;
+			return {width: element[e].offsetWidth, height: size.height = element[e].offsetHeight};
 		}
 	}
 };

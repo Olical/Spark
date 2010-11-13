@@ -1339,11 +1339,12 @@ window.Spark = window.$ = function(selector, context) {
 	}
 	
 	// Assign functions to the returned object
-	result = ({
+	result = {
 		elements: result.elements,
 		event: function(type, callback) {
 			for(var e in this.elements)
 			{
+				// Check if the browser supports addEventListener or attachEvent
 				if(this.elements[e].addEventListener)
 					this.elements[e].addEventListener(type, function(event) {callback(event)}, false);
 				else if(this.elements[e].attachEvent)
@@ -1355,8 +1356,25 @@ window.Spark = window.$ = function(selector, context) {
 					this.elements[e].attachEvent('on' + type, this.elements[type + callback]);
 				}
 			}
+		},
+		content: function(content, append) {
+			for(var e in element)
+			{
+				// Return content of the selected element
+				if(content === undefined)
+					return element[e].innerHTML;
+				else
+				{
+					// Replace content
+					if(append === undefined || append === false)
+						element[e].innerHTML = content;
+					 // Append content
+					else if(append === true)
+						element[e].innerHTML += content;
+				}
+			}
 		}
-	});
+	};
 	
 	// Return the result
 	return result;

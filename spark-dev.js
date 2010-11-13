@@ -1339,10 +1339,24 @@ window.Spark = window.$ = function(selector, context) {
 	}
 	
 	// Assign functions to the returned object
-	result.test = function(text) {
-		for(i in this.elements)
-			alert(text + ': ' + i);
-	};
+	result = ({
+		elements: result.elements,
+		event: function(type, callback) {
+			for(var e in this.elements)
+			{
+				if(this.elements[e].addEventListener)
+					this.elements[e].addEventListener(type, function(event) {callback(event)}, false);
+				else if(this.elements[e].attachEvent)
+				{
+					this.elements['e' + type + callback] = callback;
+					this.elements[type + callback] = function() {
+						this.elements['e' + type + callback](window.event);
+					}
+					this.elements[e].attachEvent('on' + type, this.elements[type + callback]);
+				}
+			}
+		}
+	});
 	
 	// Return the result
 	return result;

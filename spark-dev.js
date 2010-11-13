@@ -1323,7 +1323,18 @@ window.Sizzle = Sizzle;
 
 })();
 
-var Spark = function(selector, context) {
+// Create the Spark instances also under the alias of $
+var Spark = $ = function(selector, context) {
+	// Create the result object
+	var result = new Object();
 	
+	// Check that they have passed arguments to the class
+	if(selector != undefined)
+	{
+		// If context then get result with context, if not just get the element
+		if(context != undefined)
+			result = Sizzle(selector, context);
+		else
+			result = Sizzle(selector);
+	}
 };
-var $ = Spark;

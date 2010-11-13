@@ -1358,19 +1358,19 @@ window.Spark = window.$ = function(selector, context) {
 			}
 		},
 		content: function(content, append) {
-			for(var e in element)
+			for(var e in this.elements)
 			{
 				// Return content of the selected element
 				if(content === undefined)
-					return element[e].innerHTML;
+					return this.elements[e].innerHTML;
 				else
 				{
 					// Replace content
 					if(append === undefined || append === false)
-						element[e].innerHTML = content;
+						this.elements[e].innerHTML = content;
 					 // Append content
 					else if(append === true)
-						element[e].innerHTML += content;
+						this.elements[e].innerHTML += content;
 				}
 			}
 		}

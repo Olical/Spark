@@ -1,11 +1,11 @@
 /*!
  * Spark JavaScript library
  * http://flowdev.co.uk/
- *
+ * 
  * Copyright 2010, Oliver Caldwell
  * Dual licensed under the MIT or GPL Version 2 licenses.
  * https://github.com/Wolfy87/Spark/raw/master/README.md
- *
+ * 
  * Includes Sizzle.js
  * http://sizzlejs.com/
  * Copyright 2010, The Dojo Foundation
@@ -1322,3 +1322,8 @@ var posProcess = function( selector, context ) {
 window.Sizzle = Sizzle;
 
 })();
+
+var Spark = function(selector, context) {
+	
+};
+var $ = Spark;

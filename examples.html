@@ -47,6 +47,11 @@
 				<h2>content</h2>
 				<p>The content of elements (innerHTML) can be read, replaced or appended.</p>
 				<p class='content'>This content will be replaced.</p>
+				
+				<h2>ajax</h2>
+				<p>Data can be sent and received via get and post using AJAX. It uses either the get or post method.</p>
+				<p>This text has been read from a file.</p>
+				<p class='ajax'>Loading the file...</p>
 			</div>
 		</div>
 		
@@ -57,6 +62,9 @@
 				
 				// Change the content of an element
 				$('p.content').content('This content has been changed');
+				
+				// Fetch compress.sh via AJAX and dump it inside a p tag
+				$('p.ajax').content($().ajax('GET', 'compress.sh'));
 			}
 			
 			// Set a load event

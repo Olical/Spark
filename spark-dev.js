@@ -1326,6 +1326,7 @@ window.Sizzle = Sizzle;
 // Create the Spark instances also under the alias of $
 window.Spark = window.$ = function(selector, context) {
 	// Create the result object
+	var functions = new Object();
 	var result = new Object();
 	
 	// Check that they have passed arguments to the class
@@ -1333,14 +1334,14 @@ window.Spark = window.$ = function(selector, context) {
 	{
 		// If context then get result with context, if not just get the element
 		if(context != undefined)
-			result.elements = Sizzle(selector, context);
+			result = Sizzle(selector, context);
 		else
-			result.elements = Sizzle(selector);
+			result = Sizzle(selector);
 	}
 	
 	// Assign functions to the returned object
-	result = {
-		elements: result.elements,
+	functions = {
+		elements: result,
 		event: function(type, callback) {
 			for(var e in this.elements)
 			{
@@ -1373,9 +1374,40 @@ window.Spark = window.$ = function(selector, context) {
 						this.elements[e].innerHTML += content;
 				}
 			}
+		},
+		ajax: function(method, file, data) {
+			// Set up the request, allow for cross browser.
+			var xmlhttp;
+			if(window.XMLHttpRequest)
+				xmlhttp = new XMLHttpRequest(); // For IE7+, Firefox, Chrome, Opera, Safari
+			else
+				xmlhttp = new ActiveXObject('Microsoft.XMLHTTP'); // For IE6, IE5
+			
+			// Convert to upper case.
+			method = method.toUpperCase();
+			
+			// If the method is get then append the data to the file string
+			if(method == 'GET' && data !== undefined)
+				file += '?' + data;
+			
+			xmlhttp.open(method, file, false);
+			
+			// If the method is post then send the headers and the data
+			if(method == 'POST')
+			{
+				xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+				if(data !== undefined)
+					xmlhttp.send(data);
+				else
+					xmlhttp.send(null);
+			}
+			else
+				xmlhttp.send(null); // Otherwise just send the data
+			
+			return xmlhttp.responseText;
 		}
 	};
 	
-	// Return the result
-	return result;
+	// Return the functions
+	return functions;
 };

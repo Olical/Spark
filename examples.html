@@ -43,6 +43,10 @@
 			<div class='section'>
 				<h2>event</h2>
 				<p>Functions can be assigned to events, in this case, when the load event is triggered (when the page finishes loading) the function, loaded(), will be run.</p>
+				
+				<h2>content</h2>
+				<p>The content of elements (innerHTML) can be read, replaced or appended.</p>
+				<p class='content'>This content will be replaced.</p>
 			</div>
 		</div>
 		
@@ -50,6 +54,9 @@
 		<script type='text/javascript'>
 			function loaded() {
 				alert('Load event fired');
+				
+				// Change the content of an element
+				$('p.content').content('This content has been changed');
 			}
 			
 			// Set a load event

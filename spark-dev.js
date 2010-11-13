@@ -1324,7 +1324,7 @@ window.Sizzle = Sizzle;
 })();
 
 // Create the Spark instances also under the alias of $
-var Spark = $ = function(selector, context) {
+window.Spark = window.$ = function(selector, context) {
 	// Create the result object
 	var result = new Object();
 	
@@ -1333,8 +1333,17 @@ var Spark = $ = function(selector, context) {
 	{
 		// If context then get result with context, if not just get the element
 		if(context != undefined)
-			result = Sizzle(selector, context);
+			result.elements = Sizzle(selector, context);
 		else
-			result = Sizzle(selector);
+			result.elements = Sizzle(selector);
 	}
+	
+	// Assign functions to the returned object
+	result.test = function(text) {
+		for(i in this.elements)
+			alert(text + ': ' + i);
+	};
+	
+	// Return the result
+	return result;
 };

@@ -64,7 +64,7 @@
 				$('p.content').content('This content has been changed');
 				
 				// Fetch compress.sh via AJAX and dump it inside a p tag
-				$('p.ajax').content($().ajax('GET', 'compress.sh'));
+				$('p.ajax').content($.ajax('GET', 'compress.sh'));
 			}
 			
 			// Set a load event

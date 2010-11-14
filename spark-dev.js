@@ -1321,8 +1321,6 @@ var posProcess = function( selector, context ) {
 
 window.Sizzle = Sizzle;
 
-})();
-
 // Create the Spark instances also under the alias of $
 window.Spark = window.$ = function(selector, context) {
 	// Create the result object
@@ -1411,3 +1409,7 @@ window.Spark = window.$ = function(selector, context) {
 	// Return the functions
 	return functions;
 };
+
+// Take out the need for brackets on functions that do not need an element
+window.Spark.ajax = window.$.ajax = window.Spark().ajax;
+})();

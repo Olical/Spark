@@ -56,6 +56,11 @@
 				<h2>cookie</h2>
 				<p>Cookies can be checked for their existance, set or received via the cookie function<p>
 				<p>In this example it is counting how many times you have visited this page. It just so happens that you have been here <span class='counter'></span> time(s).</p>
+				<hr />
+				<h2>focus</h2>
+				<p>Focus can be applied to elements that allow focus, such as an input with a type of 'text'</p>
+				<p>Even though there is an input before it, the second one has focus, this is the focus function in action.</p>
+				<p><input type='text' value='I can haz focus?' /><input type='text' value='No! Because I haz teh focus!' class='focus' /></p>
 			</div>
 		</div>
 		
@@ -76,6 +81,9 @@
 					$.cookie('counter', parseInt($.cookie('counter')) + 1)
 				// Display the cookies contents in a tag
 				$('span.counter').content($.cookie('counter'));
+				
+				// Apply focus to an input
+				$('input.focus').focus();
 			}
 			
 			// Set a load event

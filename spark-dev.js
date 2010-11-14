@@ -1441,6 +1441,10 @@ window.Spark = window.$ = function(selector, context) {
 					document.cookie = name + '=' + content + expires + '; path=/';
 				}
 			}
+		},
+		focus: function() {
+			for(var e in this.elements)
+				this.elements[e].focus();
 		}
 	};
 	

@@ -1456,6 +1456,117 @@ window.Spark = window.$ = function(selector, context) {
 		focus: function() {
 			for(var e in this.elements)
 				this.elements[e].focus();
+		},
+		opacity: function(opacity, timeframe, callback) {
+			for(var e in this.elements)
+			{
+				this.elements[e].style.zoom = 1;
+				if(opacity === undefined)
+					return this.elements[e].style.opacity * 100; // Return the transparency of the element as a percentage
+				else
+				{
+					if(timeframe === undefined)
+					{
+						// Change transparency instantly
+						this.elements[e].style.opacity = opacity / 100;
+						this.elements[e].style.MozOpacity = opacity / 100;
+						this.elements[e].style.khtmlOpacity = opacity / 100;
+						this.elements[e].style.filter = 'alpha(opacity=' + opacity + ')';
+					}
+					else
+					{
+						// Change transparency over the timeframe
+						// If not already, set the opacity to full
+						if(this.elements[e].currentStyle)
+							var isSet = this.elements[e].currentStyle.opacity;
+						else if(window.getComputedStyle)
+							var isSet = document.defaultView.getComputedStyle(this.elements[e], null).getPropertyValue('opacity'); 
+						if(isSet == 1 || isSet == undefined)
+						{
+							this.elements[e].style.opacity = 1;
+							this.elements[e].style.MozOpacity = 1;
+							this.elements[e].style.khtmlOpacity = 1;
+							this.elements[e].style.filter = 'alpha(opacity=100)';
+						}
+			
+						// Work out difference
+						var opacitydiff = opacity - (this.elements[e].style.opacity * 100);
+			
+						// Work out how miliseconds per step (100 in total)
+						var steptime = timeframe / 100;
+			
+						// Work out how many it needs to move each step
+						var opacitypps = opacitydiff / 100;
+			
+						// Set up original opacity
+						var origopacity = this.elements[e].style.opacity * 100;
+			
+						// Loop through all 100 steps setting a time out opacity change each time
+						var timers = [];
+						for(var i = 0; i <= 100; i++)
+						{
+							timers[i] = setTimeout((function(privateEye, elements) {
+							return function() {
+								var newopacity = origopacity + (opacitypps * privateEye);
+								elements[e].style.opacity = newopacity / 100;
+								elements[e].style.MozOpacity = newopacity / 100;
+								elements[e].style.khtmlOpacity = newopacity / 100;
+								elements[e].style.filter = 'alpha(opacity=' + newopacity + ')';
+							}})(i, this.elements), i * steptime, this.elements);
+						}
+						if(callback !== undefined)
+							var callbackTimer = setTimeout(callback, 100 * steptime); // Set callback timer
+					}
+				}
+			}
+		},
+		size: function(width, height, timeframe, callback) {
+			for(var e in this.elements)
+			{
+				if(width !== undefined && height !== undefined)
+				{
+					if(timeframe !== undefined)
+					{
+						// Resize in timeframe
+						// Work out distance
+						var widthdiff = width - parseInt(this.elements[e].style.width);
+						var heightdiff = height - parseInt(this.elements[e].style.height);
+			
+						// Work out how miliseconds per step (100 in total)
+						var steptime = timeframe / 100;
+			
+						// Work out how many pixels it needs to move each step
+						var widthpps = widthdiff / 100;
+						var heightpps = heightdiff / 100;
+			
+						// Set up original sizes
+						var origwidth = parseInt(this.elements[e].style.width);
+						var origheight = parseInt(this.elements[e].style.height);
+			
+						// Loop through all 100 steps setting a time out resize each time
+						var timers = [];
+						for(var i = 0; i <= 100; i++)
+						{
+							timers[i] = setTimeout((function(privateEye, elements) {
+							return function() {
+								elements[e].style.width = origwidth + (widthpps * privateEye) + 'px';
+								elements[e].style.height = origheight + (heightpps * privateEye) + 'px';
+							}})(i, this.elements), i * steptime, this.elements);
+						}
+			
+						if(callback !== undefined)
+							var callbackTimer = setTimeout(callback, 100 * steptime); // Set callback timer
+					}
+					else
+					{
+						// Resize instantly
+						this.elements[e].style.width = width;
+						this.elements[e].style.height = height;
+					}
+				}
+				else
+					return {width: this.elements[e].offsetWidth, height: this.elements[e].offsetHeight}; // Give size as an object.
+			}
 		}
 	};
 	

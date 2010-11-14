@@ -30,6 +30,12 @@
 				margin: 25px 25px 10px 25px;
 				padding: 10px 0 0 10px;
 				float: left;
+				overflow: hidden;
+			}
+			
+			div.size {
+				background-color: #CCCCCC;
+				margin: 0 0 10px 0;
 			}
 		</style>
 	</head>
@@ -40,7 +46,7 @@
 				<h1>Spark examples</h1>
 			</div>
 			
-			<div class='section'>
+			<div class='section fadein'>
 				<h2>event</h2>
 				<p>Functions can be assigned to events, in this case, when the load event is triggered (when the page finishes loading) the function, loaded(), will be run.</p>
 				<p>Also, when ever you move your mouse the pageX/Y of the move event will be put in the tags below. The pageX/Y property has been corrected with Spark so that it can be used in Internet Explorer and all the other browsers.</p>
@@ -64,12 +70,22 @@
 				<p>Focus can be applied to elements that allow focus, such as an input with a type of 'text'</p>
 				<p>Even though there is an input before it, the second one has focus, this is the focus function in action.</p>
 				<p><input type='text' value='I can haz focus?' /><input type='text' value='No! Because I haz teh focus!' class='focus' /></p>
+				<hr />
+				<h2>opacity</h2>
+				<p>The opacity of an element can be retreived, set or set over a period of time, the example for this is the whole page fading in on load.</p>
+				<hr />
+				<h2>size</h2>
+				<p>The size of an element can be retreived, set or set over a period of time, click <a href='javascript:void(0)' class='size'>here</a> to demonstrate the size function.</p>
+				<div class='size' style='width: 100px; height: 10px;'></div>
 			</div>
 		</div>
 		
 		<script type='text/javascript' src='spark-dev.js'></script>
 		<script type='text/javascript'>
 			function loaded() {
+				// Hide the example div first
+				$('div.fadein').opacity(0);
+				
 				// Change the content of an element
 				$('p.content').content('This content has been changed');
 				
@@ -87,6 +103,14 @@
 				
 				// Apply focus to an input
 				$('input.focus').focus();
+				
+				// Fade in the example div
+				$('div.fadein').opacity(100, 1000);
+				
+				// Set an event with callback for clicking the size link
+				$('a.size').event('click', function() {
+					$('div.size').size(880, 100, 1000);
+				});
 			}
 			
 			function mousemoved(e) {

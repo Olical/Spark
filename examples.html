@@ -43,6 +43,9 @@
 			<div class='section'>
 				<h2>event</h2>
 				<p>Functions can be assigned to events, in this case, when the load event is triggered (when the page finishes loading) the function, loaded(), will be run.</p>
+				<p>Also, when ever you move your mouse the pageX/Y of the move event will be put in the tags below. The pageX/Y property has been corrected with Spark so that it can be used in Internet Explorer and all the other browsers.</p>
+				<p class='pageX'></p>
+				<p class='pageY'></p>
 				<hr />
 				<h2>content</h2>
 				<p>The content of elements (innerHTML) can be read, replaced or appended.</p>
@@ -86,8 +89,16 @@
 				$('input.focus').focus();
 			}
 			
+			function mousemoved(e) {
+				$('p.pageX').content('pageX: ' + e.pageX);
+				$('p.pageY').content('pageY: ' + e.pageY);
+			}
+			
 			// Set a load event
-			$('document').event('load', loaded());
+			$('html').event('load', loaded());
+			
+			// Set a mouse move event
+			$('html').event('mousemove', mousemoved);
 		</script>
 	</body>
 </html>

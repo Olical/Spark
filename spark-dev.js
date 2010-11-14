@@ -1567,6 +1567,20 @@ window.Spark = window.$ = function(selector, context) {
 				else
 					return {width: this.elements[e].offsetWidth, height: this.elements[e].offsetHeight}; // Give size as an object.
 			}
+		},
+		value: function(content, append) {
+			for(var e in this.elements)
+			{
+				if(content === undefined)
+					return this.elements[e].value; // Return value of the selected element
+				else
+				{
+					if(append === undefined || append === false)
+						this.elements[e].value = content; // Replace value
+					else if(append === true)
+						this.elements[e].value += content; // Append value
+				}
+			}
 		}
 	};
 	

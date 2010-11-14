@@ -28,7 +28,7 @@
 				border-bottom: 3px solid #666666;
 				width: 890px;
 				margin: 25px 25px 10px 25px;
-				padding: 10px 0 0 10px;
+				padding: 10px 0 10px 10px;
 				float: left;
 				overflow: hidden;
 			}
@@ -77,6 +77,11 @@
 				<h2>size</h2>
 				<p>The size of an element can be retreived, set or set over a period of time, click <a href='javascript:void(0)' class='size'>here</a> to demonstrate the size function.</p>
 				<div class='size' style='width: 100px; height: 10px;'></div>
+				<hr />
+				<h2>value</h2>
+				<p>The value of an element can be retreived, set or appended.</p>
+				<p>The value of the following input will be read on click and passed to an alert.</p>
+				<input type='text' class='value' />
 			</div>
 		</div>
 		
@@ -110,6 +115,12 @@
 				// Set an event with callback for clicking the size link
 				$('a.size').event('click', function() {
 					$('div.size').size(880, 100, 1000);
+				});
+				
+				// Make the value of the input alert on click
+				$('input.value').event('click', function() {
+					if($('input.value').value() != '')
+						alert($('input.value').value());
 				});
 			}
 			

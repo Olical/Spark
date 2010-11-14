@@ -43,15 +43,19 @@
 			<div class='section'>
 				<h2>event</h2>
 				<p>Functions can be assigned to events, in this case, when the load event is triggered (when the page finishes loading) the function, loaded(), will be run.</p>
-				
+				<hr />
 				<h2>content</h2>
 				<p>The content of elements (innerHTML) can be read, replaced or appended.</p>
 				<p class='content'>This content will be replaced.</p>
-				
+				<hr />
 				<h2>ajax</h2>
 				<p>Data can be sent and received via get and post using AJAX. It uses either the get or post method.</p>
 				<p>This text has been read from a file.</p>
 				<p class='ajax'>Loading the file...</p>
+				<hr />
+				<h2>cookie</h2>
+				<p>Cookies can be checked for their existance, set or received via the cookie function<p>
+				<p>In this example it is counting how many times you have visited this page. It just so happens that you have been here <span class='counter'></span> time(s).</p>
 			</div>
 		</div>
 		
@@ -65,6 +69,15 @@
 				
 				// Fetch compress.sh via AJAX and dump it inside a p tag
 				$('p.ajax').content($.ajax('GET', 'compress.sh'));
+				
+				// Set a counting cookie if not already set
+				if(!$.cookie('counter'))
+					$.cookie('counter', 1);
+				// Otherwise, increment the counter
+				else
+					$.cookie('counter', parseInt($.cookie('counter')) + 1)
+				// Display the cookies contents in a tag
+				$('span.counter').content($.cookie('counter'));
 			}
 			
 			// Set a load event

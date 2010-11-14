@@ -1581,6 +1581,23 @@ window.Spark = window.$ = function(selector, context) {
 						this.elements[e].value += content; // Append value
 				}
 			}
+		},
+		visible: function(visible) {
+			for(var e in this.elements)
+			{
+				if(visible === true)
+					this.elements[e].style.display = 'block'; // Show it
+				else if(visible === false)
+					this.elements[e].style.display = 'none'; // Hide it
+				else if(visible === undefined)
+				{
+					// Toggle
+					if(this.elements[e].style.display != 'none')
+						this.elements[e].style.display = 'none'; // Hide it
+					else
+						this.elements[e].style.display = 'block'; // Show it
+				}
+			}
 		}
 	};
 	

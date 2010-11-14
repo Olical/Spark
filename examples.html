@@ -82,6 +82,11 @@
 				<p>The value of an element can be retreived, set or appended.</p>
 				<p>The value of the following input will be read on click and passed to an alert.</p>
 				<input type='text' class='value' />
+				<hr />
+				<h2>visible</h2>
+				<p>The visibility of elements can be set to true, false or be toggled.</p>
+				<p>For example, you should not be able to see the text below...</p>
+				<p class='visible'>The cake is a lie! Love, Mr. Freeman.</p>
 			</div>
 		</div>
 		
@@ -122,6 +127,9 @@
 					if($('input.value').value() != '')
 						alert($('input.value').value());
 				});
+				
+				// Hide an element
+				$('p.visible').visible(false);
 			}
 			
 			function mousemoved(e) {

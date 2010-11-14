@@ -1451,5 +1451,5 @@ window.Spark = window.$ = function(selector, context) {
 // Take out the need for brackets on functions that do not need an element
 fn = {'ajax', 'cookie'};
 for(i in fn)
-	window.Spark[fn] = window.$[fn] = window.Spark()[fn];
+	window.Spark[fn[i]] = window.$[fn[i]] = window.Spark()[fn[i]];
 })();

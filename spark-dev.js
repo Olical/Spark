@@ -1529,8 +1529,8 @@ window.Spark = window.$ = function(selector, context) {
 					{
 						// Resize in timeframe
 						// Work out distance
-						var widthdiff = width - parseInt(this.elements[e].style.width);
-						var heightdiff = height - parseInt(this.elements[e].style.height);
+						var widthdiff = width - parseInt(this.elements[e].offsetWidth);
+						var heightdiff = height - parseInt(this.elements[e].offsetHeight);
 			
 						// Work out how miliseconds per step (100 in total)
 						var steptime = timeframe / 100;
@@ -1540,8 +1540,8 @@ window.Spark = window.$ = function(selector, context) {
 						var heightpps = heightdiff / 100;
 			
 						// Set up original sizes
-						var origwidth = parseInt(this.elements[e].style.width);
-						var origheight = parseInt(this.elements[e].style.height);
+						var origwidth = parseInt(this.elements[e].offsetWidth);
+						var origheight = parseInt(this.elements[e].offsetHeight);
 			
 						// Loop through all 100 steps setting a time out resize each time
 						var timers = [];

@@ -1461,8 +1461,16 @@ window.Spark = window.$ = function(selector, context) {
 			for(var e in this.elements)
 			{
 				this.elements[e].style.zoom = 1;
+				
+				// Get origopacity
+				if(this.elements[e].currentStyle)
+					var origopacity = this.elements[e].currentStyle.opacity;
+				else if(window.getComputedStyle)
+					var origopacity = document.defaultView.getComputedStyle(this.elements[e], null).getPropertyValue('opacity');
+				origopacity = parseInt(origopacity);
+				
 				if(opacity === undefined)
-					return this.elements[e].style.opacity * 100; // Return the transparency of the element as a percentage
+					return origopacity * 100; // Return the transparency of the element as a percentage
 				else
 				{
 					if(timeframe === undefined)
@@ -1477,20 +1485,13 @@ window.Spark = window.$ = function(selector, context) {
 					{
 						// Change transparency over the timeframe
 						// If not already, set the opacity to full
-						if(this.elements[e].currentStyle)
-							var isSet = this.elements[e].currentStyle.opacity;
-						else if(window.getComputedStyle)
-							var isSet = document.defaultView.getComputedStyle(this.elements[e], null).getPropertyValue('opacity'); 
-						if(isSet == 1 || isSet == undefined)
-						{
-							this.elements[e].style.opacity = 1;
-							this.elements[e].style.MozOpacity = 1;
-							this.elements[e].style.khtmlOpacity = 1;
-							this.elements[e].style.filter = 'alpha(opacity=100)';
-						}
+						this.elements[e].style.opacity = origopacity;
+						this.elements[e].style.MozOpacity = origopacity;
+						this.elements[e].style.khtmlOpacity = origopacity;
+						this.elements[e].style.filter = 'alpha(opacity=' + (origopacity * 100) + ')';
 			
 						// Work out difference
-						var opacitydiff = opacity - (this.elements[e].style.opacity * 100);
+						var opacitydiff = opacity - (origopacity * 100);
 			
 						// Work out how miliseconds per step (100 in total)
 						var steptime = timeframe / 100;
@@ -1499,7 +1500,7 @@ window.Spark = window.$ = function(selector, context) {
 						var opacitypps = opacitydiff / 100;
 			
 						// Set up original opacity
-						var origopacity = this.elements[e].style.opacity * 100;
+						var origopacity = origopacity * 100;
 			
 						// Loop through all 100 steps setting a time out opacity change each time
 						var timers = [];

@@ -1647,7 +1647,7 @@ window.Spark = window.$ = function(selector, context) {
 				else
 					return {x: this.elements[e].offsetTop, y: this.elements[e].offsetWidth}; // Return the location as an object
 			}
-		},
+		}
 	};
 	
 	// Return the functions

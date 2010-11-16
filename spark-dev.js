@@ -1599,7 +1599,55 @@ window.Spark = window.$ = function(selector, context) {
 						this.elements[e].style.display = 'block'; // Show it
 				}
 			}
-		}
+		},
+		location: function(x, y, timeframe, callback) {
+			for(var e in this.elements)
+			{
+				if(x !== undefined && y !== undefined)
+				{
+					if(timeframe !== undefined)
+					{
+						// Resize in timeframe
+						// Work out distance
+						var xdiff = x - parseInt(this.elements[e].offsetLeft);
+						var ydiff = y - parseInt(this.elements[e].offsetTop);
+						
+						// Work out how miliseconds per step (100 in total)
+						var steptime = timeframe / 100;
+						
+						// Work out how many pixels it needs to move each step
+						var xpps = xdiff / 100;
+						var ypps = ydiff / 100;
+						
+						// Set up original positions
+						var origx = parseInt(this.elements[e].offsetLeft);
+						var origy = parseInt(this.elements[e].offsetTop);
+						
+						// Loop through all 100 steps setting a time out reposition each time
+						var timers = [];
+						for(var i = 0; i <= 100; i++)
+						{
+							timers[i] = setTimeout((function(privateEye, elements) {
+							return function() {
+								elements[e].style.left = origx + (xpps * privateEye) + 'px';
+								elements[e].style.top = origy + (ypps * privateEye) + 'px';
+							}})(i, this.elements), i * steptime, this.elements);
+						}
+						
+						if(callback !== undefined)
+							var callbackTimer = setTimeout(callback, 100 * steptime); // Set callback timer
+					}
+					else
+					{
+						// Resize instantly
+						this.elements[e].style.left = x + 'px';
+						this.elements[e].style.top = y + 'px';
+					}
+				}
+				else
+					return {x: this.elements[e].offsetTop, y: this.elements[e].offsetWidth}; // Return the location as an object
+			}
+		},
 	};
 	
 	// Return the functions

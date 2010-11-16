@@ -39,6 +39,22 @@
 				width: 100px;
 				height: 10px;
 			}
+			
+			div.location {
+				width: 800px;
+				height: 200px;
+				margin: 0 auto;
+				border: 1px solid #666666;
+				position: relative;
+				}
+				div.location div {
+					width: 100px;
+					height: 100px;
+					background-color: #CCCCCC;
+					position: absolute;
+					left: 5px;
+					top: 5px;
+				}
 		</style>
 	</head>
 	
@@ -89,6 +105,11 @@
 				<p>The visibility of elements can be set to true, false or be toggled.</p>
 				<p>For example, you should not be able to see the text below...</p>
 				<p class='visible'>The cake is a lie! Love, Mr. Freeman.</p>
+				<hr />
+				<h2>location</h2>
+				<p>The location of an element (x and y) can be changed instantly or overtime and can also be retreived within an object.</p>
+				<p>In this example we are moving the element over the course of one second to a new location. Just click the box.</p>
+				<div class='location'><div></div></div>
 			</div>
 		</div>
 		
@@ -132,6 +153,11 @@
 				
 				// Hide an element
 				$('p.visible').visible(false);
+				
+				// Move an element over time
+				$('div.location div').event('click', function() {
+					$('div.location div').location(695, 95, 1000);
+				});
 			}
 			
 			function mousemoved(e) {

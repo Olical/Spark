@@ -4,7 +4,7 @@
  * 
  * Copyright 2010, Oliver Caldwell
  * Dual licensed under the MIT or GPL Version 2 licenses.
- * https://github.com/Wolfy87/Spark/raw/master/README.md
+ * https://github.com/Wolfy87/Spark
  * 
  * Includes Sizzle.js
  * http://sizzlejs.com/

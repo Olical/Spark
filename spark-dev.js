@@ -1420,8 +1420,6 @@ window.Spark = window.$ = function(selector, context) {
 			else
 				xmlhttp.send(null); // Otherwise just send the data
 			
-			window.xmlhttp = xmlhttp;
-			
 			if(callback == undefined)
 				return xmlhttp.responseText;
 		},

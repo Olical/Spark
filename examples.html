@@ -127,8 +127,8 @@
 				// Fetch compress.sh via AJAX and dump it inside a p tag
 				$('p.ajax').content($.ajax('GET', 'compress.sh'));
 				
-				// Fetch compress.sh via AJAX asynchronously and dump it inside a p tag
-				$.ajax('GET', 'compress.sh', function(data) {
+				// Fetch compress.sh via AJAX asynchronously
+				$.ajax('GET', 'compress.sh', false, function(data) {
 					$('p.ajax-async').content(data);
 				});
 				

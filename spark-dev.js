@@ -1384,13 +1384,13 @@ window.Spark = window.$ = function(selector, context) {
 				}
 			}
 		},
-		ajax: function(method, file, data) {
+		ajax: function(method, file, data, callback) {
 			// Set up the request, allow for cross browser.
 			var xmlhttp;
 			if(window.XMLHttpRequest)
 				xmlhttp = new XMLHttpRequest(); // For IE7+, Firefox, Chrome, Opera, Safari
 			else
-				xmlhttp = new ActiveXObject('Microsoft.XMLHTTP'); // For IE6, IE5
+				xmlhttp = new ActiveXObject('Microsoft.XMLHTTP'); // For IE5 and IE6
 			
 			// Convert to upper case.
 			method = method.toUpperCase();

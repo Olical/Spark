@@ -79,6 +79,8 @@
 				<p>Data can be sent and received via get and post using AJAX. It uses either the get or post method.</p>
 				<p>This text has been read from a file.</p>
 				<p class='ajax'>Loading the file...</p>
+				<p>This text has also been read from the same file but asynchronously.</p>
+				<p class='ajax-async'>Loading the file...</p>
 				<hr />
 				<h2>cookie</h2>
 				<p>Cookies can be checked for their existance, set or received via the cookie function<p>
@@ -124,6 +126,11 @@
 				
 				// Fetch compress.sh via AJAX and dump it inside a p tag
 				$('p.ajax').content($.ajax('GET', 'compress.sh'));
+				
+				// Fetch compress.sh via AJAX asynchronously and dump it inside a p tag
+				$.ajax('GET', 'compress.sh', function(data) {
+					$('p.ajax-async').content(data);
+				});
 				
 				// Set a counting cookie if not already set
 				if(!$.cookie('counter'))

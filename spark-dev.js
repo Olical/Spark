@@ -1399,6 +1399,7 @@ window.Spark = window.$ = function(selector, context) {
 			if(method == 'GET' && data !== undefined && data !== false)
 				file += '?' + data;
 			
+			// Run the call back if it was a success and the callback is set
 			if(callback != undefined)
 				xmlhttp.onreadystatechange = function() {
 					if(xmlhttp.readyState == 4) {
@@ -1406,6 +1407,7 @@ window.Spark = window.$ = function(selector, context) {
 					}
 				};
 			
+			// Open the reader, if callback set then make it async
 			xmlhttp.open(method, file, (callback != undefined) ? true : false);
 			
 			// If the method is post then send the headers and the data

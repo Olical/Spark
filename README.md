@@ -4,6 +4,7 @@
 Spark is my attitude towards coding summed up in one lovely script. I love to reinvent the wheel, but better. So what I did was take something that already exists (a JavaScript library), and make it easier to learn and use. It is easier to learn because I have tried to make all of the functions as multiuse as possible.
 
 For example you can perform a basic AJAX call like so: `alert($.ajax('get', 'someFile.php', 'data=some data'));`
+
 You can then make this into an asynchronous request by just adding a callback, like so: `$.ajax('get', 'someFile.php', 'data=some data', function(data) { alert(data) });`
 
 All functions are explained in the wiki as well as how to make plugins. Here is an example of making an element fade out to 0% opacity over the course of 1000 milliseconds, one second.

@@ -1414,7 +1414,7 @@ window.Spark = window.$ = function(selector, context) {
 			if(method == 'POST')
 			{
 				xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-				if(data !== undefined && date !== false)
+				if(data !== undefined && data !== false)
 					xmlhttp.send(data);
 				else
 					xmlhttp.send(null);

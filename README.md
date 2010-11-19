@@ -1,9 +1,10 @@
 **Spark - A lightweight yet powerful JavaScript library.**
 
 ## About
-Spark is a project of mine inspired by the work of jQuery. I plan to make it even simpler to use and even more light weight.
+Spark is my attitude towards coding summed up in one lovely script. I love to reinvent the wheel, but better. So what I did was take something that already exists (a JavaScript library), and make it easier to learn and use. It is easier to learn because I have tried to make all of the functions as multiuse as possible.
 
-It has modular development with a PHP script I wrote which minifys and combines all of the modules into one file. This means that if you need to test certain modules all you have to do is add / remove modules from `modules.conf` and rebuild.
+For example you can perform a basic AJAX call like so: `alert($.ajax('get', 'someFile.php', 'data=some data'));`
+You can then make this into an asynchronous request by just adding a callback, like so: `$.ajax('get', 'someFile.php', 'data=some data', function(data) { alert(data) });`
 
 All functions are explained in the wiki as well as how to make plugins. Here is an example of making an element fade out to 0% opacity over the course of 1000 milliseconds, one second.
 

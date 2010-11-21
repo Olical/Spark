@@ -1321,21 +1321,6 @@ var posProcess = function( selector, context ) {
 
 window.Sizzle = Sizzle;
 
-// Function for making the pageX/Y values work in IE
-window.fixEventLocation = function(theEvent) {
-	if(theEvent.pageX == null)
-	{
-		var d = (document.documentElement && document.documentElement.scrollLeft != null) ? document.documentElement : document.body;
-		docX = theEvent.clientX + d.scrollLeft;
-		docY = theEvent.clientY + d.scrollTop;
-		theEvent.pageX = docX;
-		theEvent.pageY = docY;
-	}
-	
-	// Return the calculated positions in an object
-	return theEvent;
-};
-
 // Create the Spark instances also under the alias of $
 window.Spark = window.$ = function(selector, context) {
 	// Create the result object
@@ -1360,10 +1345,10 @@ window.Spark = window.$ = function(selector, context) {
 			{
 				// Check if the browser supports addEventListener or attachEvent
 				if(this.elements[e].addEventListener)
-					this.elements[e].addEventListener(type, function(event) {callback(fixEventLocation(event))}, false);
+					this.elements[e].addEventListener(type, function(event) {callback(Spark.fixEventLocation(event))}, false);
 				else if(this.elements[e].attachEvent)
 				{
-					this.elements[e].attachEvent('on' + type, function(event) {callback(fixEventLocation(event))});
+					this.elements[e].attachEvent('on' + type, function(event) {callback(Spark.fixEventLocation(event))});
 				}
 			}
 		},
@@ -1662,6 +1647,21 @@ window.Spark = window.$ = function(selector, context) {
 	
 	// Return the functions
 	return functions;
+};
+
+// Function for making the pageX/Y values work in IE
+Spark.fixEventLocation = function(theEvent) {
+	if(theEvent.pageX == null)
+	{
+		var d = (document.documentElement && document.documentElement.scrollLeft != null) ? document.documentElement : document.body;
+		docX = theEvent.clientX + d.scrollLeft;
+		docY = theEvent.clientY + d.scrollTop;
+		theEvent.pageX = docX;
+		theEvent.pageY = docY;
+	}
+	
+	// Return the calculated positions in an object
+	return theEvent;
 };
 
 // Take out the need for brackets on functions that do not need an element

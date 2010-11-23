@@ -112,6 +112,10 @@
 				<p>The location of an element (x and y) can be changed instantly or overtime and can also be retreived within an object.</p>
 				<p>In this example we are moving the element over the course of one second to a new location. Just click the box.</p>
 				<div class='location'><div></div></div>
+				<h2>json</h2>
+				<p>Data can be encoded to JSON or decoded from it using the JSON function.</p>
+				<p>The string below is an encoded object.</p>
+				<p class='json'>Encoding...</p>
 			</div>
 		</div>
 		
@@ -165,6 +169,9 @@
 				$('div.location div').event('click', function() {
 					$('div.location div').location(695, 95, 1000);
 				});
+				
+				// JSON encode a string and show it
+				$('p.json').content($.json('encode', {name: 'Oliver Caldwell', age: 16}));
 			}
 			
 			function mousemoved(e) {

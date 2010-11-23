@@ -1945,9 +1945,6 @@ window.Spark = window.$ = function(selector, context) {
 				return JSON.parse(data);
 		},
 		css: function(css) {
-			if(css == undefined)
-				return this.elements[0].style;
-			
 			for(var e in this.elements)
 			{
 				for(var c in css)
@@ -1955,11 +1952,10 @@ window.Spark = window.$ = function(selector, context) {
 					this.elements[e].style[c] = css[c];
 				}
 			}
+			
+			return this.elements[0].style;
 		},
 		attribute: function(attribute) {
-			if(attribute == undefined)
-				return this.elements[0];
-			
 			for(var e in this.elements)
 			{
 				for(var a in attribute)
@@ -1967,6 +1963,8 @@ window.Spark = window.$ = function(selector, context) {
 					this.elements[e][a] = attribute[a];
 				}
 			}
+			
+			return this.elements[0];
 		}
 	};
 	

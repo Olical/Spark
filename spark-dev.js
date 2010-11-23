@@ -1778,10 +1778,6 @@ window.Spark = window.$ = function(selector, context) {
 				}
 			}
 		},
-		focus: function() {
-			for(var e in this.elements)
-				this.elements[e].focus();
-		},
 		opacity: function(opacity, timeframe, callback) {
 			for(var e in this.elements)
 			{
@@ -1892,37 +1888,6 @@ window.Spark = window.$ = function(selector, context) {
 				}
 				else
 					return {width: this.elements[e].offsetWidth, height: this.elements[e].offsetHeight}; // Give size as an object.
-			}
-		},
-		value: function(content, append) {
-			for(var e in this.elements)
-			{
-				if(content === undefined)
-					return this.elements[e].value; // Return value of the selected element
-				else
-				{
-					if(append === undefined || append === false)
-						this.elements[e].value = content; // Replace value
-					else if(append === true)
-						this.elements[e].value += content; // Append value
-				}
-			}
-		},
-		visible: function(visible) {
-			for(var e in this.elements)
-			{
-				if(visible === true)
-					this.elements[e].style.display = 'block'; // Show it
-				else if(visible === false)
-					this.elements[e].style.display = 'none'; // Hide it
-				else if(visible === undefined)
-				{
-					// Toggle
-					if(this.elements[e].style.display != 'none')
-						this.elements[e].style.display = 'none'; // Hide it
-					else
-						this.elements[e].style.display = 'block'; // Show it
-				}
 			}
 		},
 		location: function(x, y, timeframe, callback) {

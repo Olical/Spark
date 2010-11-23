@@ -86,27 +86,12 @@
 				<p>Cookies can be checked for their existance, set or received via the cookie function<p>
 				<p>In this example it is counting how many times you have visited this page. It just so happens that you have been here <span class='counter'></span> time(s).</p>
 				<hr />
-				<h2>focus</h2>
-				<p>Focus can be applied to elements that allow focus, such as an input with a type of 'text'</p>
-				<p>Even though there is an input before it, the second one has focus, this is the focus function in action.</p>
-				<p><input type='text' value='I can haz focus?' /><input type='text' value='No! Because I haz teh focus!' class='focus' /></p>
-				<hr />
 				<h2>opacity</h2>
 				<p>The opacity of an element can be retreived, set or set over a period of time, the example for this is the whole page fading in on load.</p>
 				<hr />
 				<h2>size</h2>
 				<p>The size of an element can be retreived, set or set over a period of time, click <a href='javascript:void(0)' class='size'>here</a> to demonstrate the size function.</p>
 				<div class='size'></div>
-				<hr />
-				<h2>value</h2>
-				<p>The value of an element can be retreived, set or appended.</p>
-				<p>The value of the following input will be read on click and passed to an alert.</p>
-				<input type='text' class='value' />
-				<hr />
-				<h2>visible</h2>
-				<p>The visibility of elements can be set to true, false or be toggled.</p>
-				<p>For example, you should not be able to see the text below...</p>
-				<p class='visible'>The cake is a lie! Love, Mr. Freeman.</p>
 				<hr />
 				<h2>location</h2>
 				<p>The location of an element (x and y) can be changed instantly or overtime and can also be retreived within an object.</p>
@@ -152,9 +137,6 @@
 				// Display the cookies contents in a tag
 				$('span.counter').content($.cookie('counter'));
 				
-				// Apply focus to an input
-				$('input.focus').focus();
-				
 				// Fade in the example div
 				$('div.fadein').opacity(100, 1000);
 				
@@ -162,15 +144,6 @@
 				$('a.size').event('click', function() {
 					$('div.size').size(880, 100, 1000);
 				});
-				
-				// Make the value of the input alert on click
-				$('input.value').event('click', function() {
-					if($('input.value').value() != '')
-						alert($('input.value').value());
-				});
-				
-				// Hide an element
-				$('p.visible').visible(false);
 				
 				// Move an element over time
 				$('div.location div').event('click', function() {

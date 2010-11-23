@@ -1972,6 +1972,12 @@ window.Spark = window.$ = function(selector, context) {
 				else
 					return {x: this.elements[e].offsetTop, y: this.elements[e].offsetWidth}; // Return the location as an object
 			}
+		},
+		json: function(method, data) {
+			if(method == 'encode')
+				return JSON.stringify(data);
+			else if('decode')
+				return JSON.parse(data);
 		}
 	};
 	
@@ -1995,7 +2001,7 @@ Spark.fixEventLocation = function(theEvent) {
 };
 
 // Take out the need for brackets on functions that do not need an element
-var fn = new Array('ajax', 'cookie');
+var fn = new Array('ajax', 'cookie', 'json');
 for(i in fn)
 	window.Spark[fn[i]] = window.$[fn[i]] = window.Spark()[fn[i]];
 })();

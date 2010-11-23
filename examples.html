@@ -116,6 +116,10 @@
 				<p>Data can be encoded to JSON or decoded from it using the JSON function.</p>
 				<p>The string below is an encoded object.</p>
 				<p class='json'>Encoding...</p>
+				<h2>css</h2>
+				<p>CSS can be retreived or set.<p>
+				<p class='css'>This tag has been formatted by the CSS function.</p>
+				<p class='css2'>The color of this text is: </p>
 			</div>
 		</div>
 		
@@ -172,6 +176,12 @@
 				
 				// JSON encode a string and show it
 				$('p.json').content($.json('encode', {name: 'Oliver Caldwell', age: 16}));
+				
+				// Set the CSS of an element
+				$('p.css').css({color: '#FF0000', textDecoration: 'underline'});
+				
+				// Get the CSS of an element
+				$('p.css2').content($('p.css').css().color, true);
 			}
 			
 			function mousemoved(e) {

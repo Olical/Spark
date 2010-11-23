@@ -120,6 +120,9 @@
 				<p>CSS can be retreived or set.<p>
 				<p class='css'>This tag has been formatted by the CSS function.</p>
 				<p class='css2'>The color of this text is: </p>
+				<h2>attribute</h2>
+				<p>An elements attributes can be retreived or set</p>
+				<p class='attribute'>This elements title has been set.</p>
 			</div>
 		</div>
 		
@@ -182,6 +185,9 @@
 				
 				// Get the CSS of an element
 				$('p.css2').content($('p.css').css().color, true);
+				
+				// Assign a title to an element
+				$('p.attribute').attribute({title: 'Set via the attribute function'});
 			}
 			
 			function mousemoved(e) {

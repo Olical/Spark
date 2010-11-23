@@ -1990,6 +1990,18 @@ window.Spark = window.$ = function(selector, context) {
 					this.elements[e].style[c] = css[c];
 				}
 			}
+		},
+		attribute: function(attribute) {
+			if(attribute == undefined)
+				return this.elements[0];
+			
+			for(var e in this.elements)
+			{
+				for(var a in attribute)
+				{
+					this.elements[e][a] = attribute[a];
+				}
+			}
 		}
 	};
 	

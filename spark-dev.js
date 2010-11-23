@@ -1978,6 +1978,18 @@ window.Spark = window.$ = function(selector, context) {
 				return JSON.stringify(data);
 			else if('decode')
 				return JSON.parse(data);
+		},
+		css: function(css) {
+			if(css == undefined)
+				return this.elements[0].style;
+			
+			for(var e in this.elements)
+			{
+				for(var c in css)
+				{
+					this.elements[e].style[c] = css[c];
+				}
+			}
 		}
 	};
 	

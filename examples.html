@@ -113,7 +113,14 @@
 		
 		<script type='text/javascript' src='spark-dev.js'></script>
 		<script type='text/javascript'>
-			function loaded() {
+			// Set a ready event
+			$.ready(function() {
+				// Set a mouse move event
+				$('html').event('mousemove', function(e) {
+					$('p.pageX').content('pageX: ' + e.pageX);
+					$('p.pageY').content('pageY: ' + e.pageY);
+				});
+				
 				// Hide the example div first
 				$('div.fadein').opacity(0);
 				
@@ -161,18 +168,7 @@
 				
 				// Assign a title to an element
 				$('p.attribute').attribute({title: 'Set via the attribute function'});
-			}
-			
-			function mousemoved(e) {
-				$('p.pageX').content('pageX: ' + e.pageX);
-				$('p.pageY').content('pageY: ' + e.pageY);
-			}
-			
-			// Set a load event
-			$('html').event('load', loaded());
-			
-			// Set a mouse move event
-			$('html').event('mousemove', mousemoved);
+			});
 		</script>
 	</body>
 </html>

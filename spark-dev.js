@@ -2012,7 +2012,6 @@ Spark.fixEventLocation = function(theEvent) {
 };
 
 // Take out the need for brackets on functions that do not need an element
-var fn = new Array('ajax', 'cookie', 'json', 'ready');
-for(i in fn)
-	Spark[fn[i]] = $[fn[i]] = Spark()[fn[i]];
+for(i in Spark())
+	Spark[i] = $[i] = Spark()[i];
 })();

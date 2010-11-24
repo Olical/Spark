@@ -1675,11 +1675,9 @@ window.Spark = window.$ = function(selector, context) {
 			{
 				// Check if the browser supports addEventListener or attachEvent
 				if(this.elements[e].addEventListener)
-					this.elements[e].addEventListener(type, function(event) {callback(Spark.fixEventLocation(event))}, false);
+					this.elements[e].addEventListener(type, function(event) {callback(Spark.fixEvents(event))}, false);
 				else if(this.elements[e].attachEvent)
-				{
-					this.elements[e].attachEvent('on' + type, function(event) {callback(Spark.fixEventLocation(event))});
-				}
+					this.elements[e].attachEvent('on' + type, function(event) {callback(Spark.fixEvents(event))});
 			}
 		},
 		content: function(content, append) {
@@ -1997,7 +1995,7 @@ window.Spark = window.$ = function(selector, context) {
 };
 
 // Function for making the pageX/Y values work in IE
-Spark.fixEventLocation = function(theEvent) {
+Spark.fixEvents = function(theEvent) {
 	if(theEvent.pageX == null)
 	{
 		var d = (document.documentElement && document.documentElement.scrollLeft != null) ? document.documentElement : document.body;
@@ -2006,6 +2004,9 @@ Spark.fixEventLocation = function(theEvent) {
 		theEvent.pageX = docX;
 		theEvent.pageY = docY;
 	}
+	
+	if(!theEvent.target)
+		theEvent.target == theEvent.srcElement;
 	
 	// Return the calculated positions in an object
 	return theEvent;

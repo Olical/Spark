@@ -1967,8 +1967,8 @@ window.Spark = window.$ = function(selector, context) {
 			return this.elements[0];
 		},
 		ready: function(callback) {
-			var alreadyrunflag = 0;
-
+			window.alreadyrunflag = 0;
+			
 			if(document.addEventListener)
 				document.addEventListener("DOMContentLoaded", function() { alreadyrunflag = 1; callback() }, false);
 			else if(document.all && !window.opera)
@@ -1985,7 +1985,7 @@ window.Spark = window.$ = function(selector, context) {
 					}
 				};
 			}
-
+			
 			window.onload = function() {
 				setTimeout("if(!alreadyrunflag) callback()", 0);
 			};

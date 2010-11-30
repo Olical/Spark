@@ -6,8 +6,25 @@
  */
 
 (function() {
+	// Setup the plugin
 	SparkPlugin.replace = function() {
-		
+		// Loop through all returned elements
+		for(var e in this.elements)
+		{
+			// On focus, if default value then empty
+			$(this.selector).event('focus', function(e) {
+				if(e.target.value == e.target.defaultValue)
+					e.target.value = '';
+			});
+			
+			// On blur, if empty set value to default
+			$(this.selector).event('blur', function(e) {
+				if(e.target.value == '')
+					e.target.value = e.target.defaultValue;
+			});
+		}
 	};
+	
+	// Reinitialise Spark
 	SparkInit();
 })();

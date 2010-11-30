@@ -115,11 +115,22 @@
 				<h2>ready</h2>
 				<p>The ready function runs it's callback on dom ready.</p>
 				<p>All of the functions in this test page are run by the ready function.</p>
+				<hr />
+				<h2>Plugins</h2>
+				<p>Plugins can be created by assigning functions to 'SparkPlugin', for example, 'SparkPlugin.myPlugin = function() {...};'</p>
+				<p>After creating your plugin, you have to run 'SparkInit();' to reload your plugin into Spark.</p>
+				<p>Click <a href='javascript:void(0)' class='plugin'>here</a> to run the test plugin. It reads the specified element, in this case, the header (h1 tag).</p>
 			</div>
 		</div>
 		
 		<script type='text/javascript' src='spark-dev.js'></script>
 		<script type='text/javascript'>
+			// Create a plugin that echos the contents of the element
+			SparkPlugin.read = function() {
+				alert(this.elements[0].innerHTML);
+			};
+			SparkInit();
+			
 			// Set a ready event
 			$.ready(function() {
 				// Set a mouse move event
@@ -175,6 +186,11 @@
 				
 				// Assign a title to an element
 				$('p.attribute').attribute({title: 'Set via the attribute function'});
+				
+				// Run our plugin when the link is clicked
+				$('a.plugin').event('click', function() {
+					$('h1').read();
+				});
 			});
 		</script>
 	</body>

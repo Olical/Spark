@@ -1651,368 +1651,383 @@ var posProcess = function( selector, context ) {
 
 window.Sizzle = Sizzle;
 
-// Create the Spark instances also under the alias of $
-window.Spark = window.$ = function(selector, context) {
-	// Create the result object
-	var functions = new Object();
-	var result = new Object();
+// Create the plugin holder
+window.SparkPlugin = {};
+
+// Create the initialise function
+window.SparkInit = function()
+{
+	// Create the Spark instances also under the alias of $
+	window.Spark = window.$ = function(selector, context) {
+		// Create the result object
+		var functions = new Object();
+		var result = new Object();
 	
-	// Check that they have passed arguments to the class
-	if(selector != undefined)
-	{
-		// If context then get result with context, if not just get the element
-		if(context != undefined)
-			result = Sizzle(selector, context);
-		else
-			result = Sizzle(selector);
-	}
-	
-	// Assign functions to the returned object
-	functions = {
-		elements: result,
-		event: function(type, callback) {
-			for(var e in this.elements)
-			{
-				// Check if the browser supports addEventListener or attachEvent
-				if(this.elements[e].addEventListener)
-					this.elements[e].addEventListener(type, function(event) {callback(Spark.fixEvents(event))}, false);
-				else if(this.elements[e].attachEvent)
-					this.elements[e].attachEvent('on' + type, function(event) {callback(Spark.fixEvents(event))});
-			}
-		},
-		content: function(content, append) {
-			for(var e in this.elements)
-			{
-				// Return content of the selected element
-				if(content === undefined)
-					return this.elements[e].innerHTML;
-				else
-				{
-					// Replace content
-					if(append === undefined || append === false)
-						this.elements[e].innerHTML = content;
-					 // Append content
-					else if(append === true)
-						this.elements[e].innerHTML += content;
-				}
-			}
-		},
-		ajax: function(method, file, data, callback) {
-			// Set up the request, allow for cross browser.
-			var xmlhttp;
-			if(window.XMLHttpRequest)
-				xmlhttp = new XMLHttpRequest(); // For IE7+, Firefox, Chrome, Opera, Safari
+		// Check that they have passed arguments to the class
+		if(selector != undefined)
+		{
+			// If context then get result with context, if not just get the element
+			if(context != undefined)
+				result = Sizzle(selector, context);
 			else
-				xmlhttp = new ActiveXObject('Microsoft.XMLHTTP'); // For IE6, IE5
-			
-			// Convert to upper case.
-			method = method.toUpperCase();
-			
-			// If the method is get then append the data to the file string
-			if(method == 'GET' && data !== undefined && data !== false)
-				file += '?' + data;
-			
-			// Run the call back if it was a success and the callback is set
-			if(callback != undefined)
-				xmlhttp.onreadystatechange = function() {
-					if(xmlhttp.readyState == 4) {
-						callback(xmlhttp.responseText);
-					}
-				};
-			
-			// Open the reader, if callback set then make it async
-			xmlhttp.open(method, file, (callback != undefined) ? true : false);
-			
-			// If the method is post then send the headers and the data
-			if(method == 'POST')
-			{
-				xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-				if(data !== undefined && data !== false)
-					xmlhttp.send(data);
-				else
-					xmlhttp.send(null);
-			}
-			else
-				xmlhttp.send(null); // Otherwise just send the data
-			
-			if(callback == undefined)
-				return xmlhttp.responseText;
-		},
-		cookie: function(name, content, duration) {
-			if(content === undefined)
-			{
-				// Return cookie's content
-				var nameEQ = name + '=';
-				var ca = document.cookie.split(';');
-				for(var i = 0; i < ca.length; i++)
-				{
-					var c = ca[i];
-					while(c.charAt(0) == ' ')
-					{
-						c = c.substring(1, c.length);
-					}
-					if(c.indexOf(nameEQ) == 0)
-						return c.substring(nameEQ.length, c.length);
-				}
-				return false;
-			}
-			else
-			{
-				if(duration === undefined)
-				{
-					// Create cookie with preset duration of one year
-					var date = new Date();
-					date.setTime(date.getTime() + 31536000000);
-					var expires = '; expires=' + date.toGMTString();
-					document.cookie = name + '=' + content + expires + '; path=/';
-				}
-				else
-				{
-					// Create cookie with specified duration
-					var date = new Date();
-					date.setTime(date.getTime() + duration);
-					var expires = '; expires=' + date.toGMTString();
-					document.cookie = name + '=' + content + expires + '; path=/';
-				}
-			}
-		},
-		opacity: function(opacity, timeframe, callback) {
-			for(var e in this.elements)
-			{
-				this.elements[e].style.zoom = 1;
-				
-				// Get origopacity
-				if(this.elements[e].currentStyle)
-					var origopacity = this.elements[e].currentStyle.opacity;
-				else if(window.getComputedStyle)
-					var origopacity = document.defaultView.getComputedStyle(this.elements[e], null).getPropertyValue('opacity');
-				origopacity = parseInt(origopacity);
-				
-				if(opacity === undefined)
-					return origopacity * 100; // Return the transparency of the element as a percentage
-				else
-				{
-					if(timeframe === undefined)
-					{
-						// Change transparency instantly
-						this.elements[e].style.opacity = opacity / 100;
-						this.elements[e].style.MozOpacity = opacity / 100;
-						this.elements[e].style.khtmlOpacity = opacity / 100;
-						this.elements[e].style.filter = 'alpha(opacity=' + opacity + ')';
-					}
-					else
-					{
-						// Change transparency over the timeframe
-						// If not already, set the opacity to full
-						this.elements[e].style.opacity = origopacity;
-						this.elements[e].style.MozOpacity = origopacity;
-						this.elements[e].style.khtmlOpacity = origopacity;
-						this.elements[e].style.filter = 'alpha(opacity=' + (origopacity * 100) + ')';
-			
-						// Work out difference
-						var opacitydiff = opacity - (origopacity * 100);
-			
-						// Work out how miliseconds per step (100 in total)
-						var steptime = timeframe / 100;
-			
-						// Work out how many it needs to move each step
-						var opacitypps = opacitydiff / 100;
-			
-						// Set up original opacity
-						var origopacity = origopacity * 100;
-			
-						// Loop through all 100 steps setting a time out opacity change each time
-						var timers = [];
-						for(var i = 0; i <= 100; i++)
-						{
-							timers[i] = setTimeout((function(privateEye, elements) {
-							return function() {
-								var newopacity = origopacity + (opacitypps * privateEye);
-								elements[e].style.opacity = newopacity / 100;
-								elements[e].style.MozOpacity = newopacity / 100;
-								elements[e].style.khtmlOpacity = newopacity / 100;
-								elements[e].style.filter = 'alpha(opacity=' + newopacity + ')';
-							}})(i, this.elements), i * steptime, this.elements);
-						}
-						if(callback !== undefined)
-							var callbackTimer = setTimeout(callback, 100 * steptime); // Set callback timer
-					}
-				}
-			}
-		},
-		size: function(width, height, timeframe, callback) {
-			for(var e in this.elements)
-			{
-				if(width !== undefined && height !== undefined)
-				{
-					if(timeframe !== undefined)
-					{
-						// Resize in timeframe
-						// Work out distance
-						var widthdiff = width - parseInt(this.elements[e].offsetWidth);
-						var heightdiff = height - parseInt(this.elements[e].offsetHeight);
-			
-						// Work out how miliseconds per step (100 in total)
-						var steptime = timeframe / 100;
-			
-						// Work out how many pixels it needs to move each step
-						var widthpps = widthdiff / 100;
-						var heightpps = heightdiff / 100;
-			
-						// Set up original sizes
-						var origwidth = parseInt(this.elements[e].offsetWidth);
-						var origheight = parseInt(this.elements[e].offsetHeight);
-			
-						// Loop through all 100 steps setting a time out resize each time
-						var timers = [];
-						for(var i = 0; i <= 100; i++)
-						{
-							timers[i] = setTimeout((function(privateEye, elements) {
-							return function() {
-								elements[e].style.width = origwidth + (widthpps * privateEye) + 'px';
-								elements[e].style.height = origheight + (heightpps * privateEye) + 'px';
-							}})(i, this.elements), i * steptime, this.elements);
-						}
-			
-						if(callback !== undefined)
-							var callbackTimer = setTimeout(callback, 100 * steptime); // Set callback timer
-					}
-					else
-					{
-						// Resize instantly
-						this.elements[e].style.width = width;
-						this.elements[e].style.height = height;
-					}
-				}
-				else
-					return {width: this.elements[e].offsetWidth, height: this.elements[e].offsetHeight}; // Give size as an object.
-			}
-		},
-		location: function(x, y, timeframe, callback) {
-			for(var e in this.elements)
-			{
-				if(x !== undefined && y !== undefined)
-				{
-					if(timeframe !== undefined)
-					{
-						// Resize in timeframe
-						// Work out distance
-						var xdiff = x - parseInt(this.elements[e].offsetLeft);
-						var ydiff = y - parseInt(this.elements[e].offsetTop);
-						
-						// Work out how miliseconds per step (100 in total)
-						var steptime = timeframe / 100;
-						
-						// Work out how many pixels it needs to move each step
-						var xpps = xdiff / 100;
-						var ypps = ydiff / 100;
-						
-						// Set up original positions
-						var origx = parseInt(this.elements[e].offsetLeft);
-						var origy = parseInt(this.elements[e].offsetTop);
-						
-						// Loop through all 100 steps setting a time out reposition each time
-						var timers = [];
-						for(var i = 0; i <= 100; i++)
-						{
-							timers[i] = setTimeout((function(privateEye, elements) {
-							return function() {
-								elements[e].style.left = origx + (xpps * privateEye) + 'px';
-								elements[e].style.top = origy + (ypps * privateEye) + 'px';
-							}})(i, this.elements), i * steptime, this.elements);
-						}
-						
-						if(callback !== undefined)
-							var callbackTimer = setTimeout(callback, 100 * steptime); // Set callback timer
-					}
-					else
-					{
-						// Resize instantly
-						this.elements[e].style.left = x + 'px';
-						this.elements[e].style.top = y + 'px';
-					}
-				}
-				else
-					return {x: this.elements[e].offsetTop, y: this.elements[e].offsetWidth}; // Return the location as an object
-			}
-		},
-		json: function(method, data) {
-			if(method == 'encode')
-				return JSON.stringify(data);
-			else if('decode')
-				return JSON.parse(data);
-		},
-		css: function(css) {
-			for(var e in this.elements)
-			{
-				for(var c in css)
-				{
-					this.elements[e].style[c] = css[c];
-				}
-			}
-			
-			return this.elements[0].style;
-		},
-		attribute: function(attribute) {
-			for(var e in this.elements)
-			{
-				for(var a in attribute)
-				{
-					this.elements[e][a] = attribute[a];
-				}
-			}
-			
-			return this.elements[0];
-		},
-		ready: function(callback) {
-			window.alreadyrunflag = 0;
-			
-			if(document.addEventListener)
-				document.addEventListener("DOMContentLoaded", function() { alreadyrunflag = 1; callback() }, false);
-			else if(document.all && !window.opera)
-			{
-				document.write('<script type="text/javascript" id="contentloadtag" defer="defer" src="javascript:void(0)"><\/script>');
-				
-				var contentloadtag = document.getElementById("contentloadtag");
-				
-				contentloadtag.onreadystatechange = function() {
-					if(this.readyState == "complete")
-					{
-						alreadyrunflag = 1;
-						callback();
-					}
-				};
-			}
-			
-			window.onload = function() {
-				setTimeout("if(!alreadyrunflag) callback()", 0);
-			};
+				result = Sizzle(selector);
 		}
+	
+		// Assign functions to the returned object
+		functions = {
+			elements: result,
+			event: function(type, callback) {
+				for(var e in this.elements)
+				{
+					// Check if the browser supports addEventListener or attachEvent
+					if(this.elements[e].addEventListener)
+						this.elements[e].addEventListener(type, function(event) {callback(Spark.fixEvents(event))}, false);
+					else if(this.elements[e].attachEvent)
+						this.elements[e].attachEvent('on' + type, function(event) {callback(Spark.fixEvents(event))});
+				}
+			},
+			content: function(content, append) {
+				for(var e in this.elements)
+				{
+					// Return content of the selected element
+					if(content === undefined)
+						return this.elements[e].innerHTML;
+					else
+					{
+						// Replace content
+						if(append === undefined || append === false)
+							this.elements[e].innerHTML = content;
+						 // Append content
+						else if(append === true)
+							this.elements[e].innerHTML += content;
+					}
+				}
+			},
+			ajax: function(method, file, data, callback) {
+				// Set up the request, allow for cross browser.
+				var xmlhttp;
+				if(window.XMLHttpRequest)
+					xmlhttp = new XMLHttpRequest(); // For IE7+, Firefox, Chrome, Opera, Safari
+				else
+					xmlhttp = new ActiveXObject('Microsoft.XMLHTTP'); // For IE6, IE5
+			
+				// Convert to upper case.
+				method = method.toUpperCase();
+			
+				// If the method is get then append the data to the file string
+				if(method == 'GET' && data !== undefined && data !== false)
+					file += '?' + data;
+			
+				// Run the call back if it was a success and the callback is set
+				if(callback != undefined)
+					xmlhttp.onreadystatechange = function() {
+						if(xmlhttp.readyState == 4) {
+							callback(xmlhttp.responseText);
+						}
+					};
+			
+				// Open the reader, if callback set then make it async
+				xmlhttp.open(method, file, (callback != undefined) ? true : false);
+			
+				// If the method is post then send the headers and the data
+				if(method == 'POST')
+				{
+					xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+					if(data !== undefined && data !== false)
+						xmlhttp.send(data);
+					else
+						xmlhttp.send(null);
+				}
+				else
+					xmlhttp.send(null); // Otherwise just send the data
+			
+				if(callback == undefined)
+					return xmlhttp.responseText;
+			},
+			cookie: function(name, content, duration) {
+				if(content === undefined)
+				{
+					// Return cookie's content
+					var nameEQ = name + '=';
+					var ca = document.cookie.split(';');
+					for(var i = 0; i < ca.length; i++)
+					{
+						var c = ca[i];
+						while(c.charAt(0) == ' ')
+						{
+							c = c.substring(1, c.length);
+						}
+						if(c.indexOf(nameEQ) == 0)
+							return c.substring(nameEQ.length, c.length);
+					}
+					return false;
+				}
+				else
+				{
+					if(duration === undefined)
+					{
+						// Create cookie with preset duration of one year
+						var date = new Date();
+						date.setTime(date.getTime() + 31536000000);
+						var expires = '; expires=' + date.toGMTString();
+						document.cookie = name + '=' + content + expires + '; path=/';
+					}
+					else
+					{
+						// Create cookie with specified duration
+						var date = new Date();
+						date.setTime(date.getTime() + duration);
+						var expires = '; expires=' + date.toGMTString();
+						document.cookie = name + '=' + content + expires + '; path=/';
+					}
+				}
+			},
+			opacity: function(opacity, timeframe, callback) {
+				for(var e in this.elements)
+				{
+					this.elements[e].style.zoom = 1;
+				
+					// Get origopacity
+					if(this.elements[e].currentStyle)
+						var origopacity = this.elements[e].currentStyle.opacity;
+					else if(window.getComputedStyle)
+						var origopacity = document.defaultView.getComputedStyle(this.elements[e], null).getPropertyValue('opacity');
+					origopacity = parseInt(origopacity);
+				
+					if(opacity === undefined)
+						return origopacity * 100; // Return the transparency of the element as a percentage
+					else
+					{
+						if(timeframe === undefined)
+						{
+							// Change transparency instantly
+							this.elements[e].style.opacity = opacity / 100;
+							this.elements[e].style.MozOpacity = opacity / 100;
+							this.elements[e].style.khtmlOpacity = opacity / 100;
+							this.elements[e].style.filter = 'alpha(opacity=' + opacity + ')';
+						}
+						else
+						{
+							// Change transparency over the timeframe
+							// If not already, set the opacity to full
+							this.elements[e].style.opacity = origopacity;
+							this.elements[e].style.MozOpacity = origopacity;
+							this.elements[e].style.khtmlOpacity = origopacity;
+							this.elements[e].style.filter = 'alpha(opacity=' + (origopacity * 100) + ')';
+			
+							// Work out difference
+							var opacitydiff = opacity - (origopacity * 100);
+			
+							// Work out how miliseconds per step (100 in total)
+							var steptime = timeframe / 100;
+			
+							// Work out how many it needs to move each step
+							var opacitypps = opacitydiff / 100;
+			
+							// Set up original opacity
+							var origopacity = origopacity * 100;
+			
+							// Loop through all 100 steps setting a time out opacity change each time
+							var timers = [];
+							for(var i = 0; i <= 100; i++)
+							{
+								timers[i] = setTimeout((function(privateEye, elements) {
+								return function() {
+									var newopacity = origopacity + (opacitypps * privateEye);
+									elements[e].style.opacity = newopacity / 100;
+									elements[e].style.MozOpacity = newopacity / 100;
+									elements[e].style.khtmlOpacity = newopacity / 100;
+									elements[e].style.filter = 'alpha(opacity=' + newopacity + ')';
+								}})(i, this.elements), i * steptime, this.elements);
+							}
+							if(callback !== undefined)
+								var callbackTimer = setTimeout(callback, 100 * steptime); // Set callback timer
+						}
+					}
+				}
+			},
+			size: function(width, height, timeframe, callback) {
+				for(var e in this.elements)
+				{
+					if(width !== undefined && height !== undefined)
+					{
+						if(timeframe !== undefined)
+						{
+							// Resize in timeframe
+							// Work out distance
+							var widthdiff = width - parseInt(this.elements[e].offsetWidth);
+							var heightdiff = height - parseInt(this.elements[e].offsetHeight);
+			
+							// Work out how miliseconds per step (100 in total)
+							var steptime = timeframe / 100;
+			
+							// Work out how many pixels it needs to move each step
+							var widthpps = widthdiff / 100;
+							var heightpps = heightdiff / 100;
+			
+							// Set up original sizes
+							var origwidth = parseInt(this.elements[e].offsetWidth);
+							var origheight = parseInt(this.elements[e].offsetHeight);
+			
+							// Loop through all 100 steps setting a time out resize each time
+							var timers = [];
+							for(var i = 0; i <= 100; i++)
+							{
+								timers[i] = setTimeout((function(privateEye, elements) {
+								return function() {
+									elements[e].style.width = origwidth + (widthpps * privateEye) + 'px';
+									elements[e].style.height = origheight + (heightpps * privateEye) + 'px';
+								}})(i, this.elements), i * steptime, this.elements);
+							}
+			
+							if(callback !== undefined)
+								var callbackTimer = setTimeout(callback, 100 * steptime); // Set callback timer
+						}
+						else
+						{
+							// Resize instantly
+							this.elements[e].style.width = width;
+							this.elements[e].style.height = height;
+						}
+					}
+					else
+						return {width: this.elements[e].offsetWidth, height: this.elements[e].offsetHeight}; // Give size as an object.
+				}
+			},
+			location: function(x, y, timeframe, callback) {
+				for(var e in this.elements)
+				{
+					if(x !== undefined && y !== undefined)
+					{
+						if(timeframe !== undefined)
+						{
+							// Resize in timeframe
+							// Work out distance
+							var xdiff = x - parseInt(this.elements[e].offsetLeft);
+							var ydiff = y - parseInt(this.elements[e].offsetTop);
+						
+							// Work out how miliseconds per step (100 in total)
+							var steptime = timeframe / 100;
+						
+							// Work out how many pixels it needs to move each step
+							var xpps = xdiff / 100;
+							var ypps = ydiff / 100;
+						
+							// Set up original positions
+							var origx = parseInt(this.elements[e].offsetLeft);
+							var origy = parseInt(this.elements[e].offsetTop);
+						
+							// Loop through all 100 steps setting a time out reposition each time
+							var timers = [];
+							for(var i = 0; i <= 100; i++)
+							{
+								timers[i] = setTimeout((function(privateEye, elements) {
+								return function() {
+									elements[e].style.left = origx + (xpps * privateEye) + 'px';
+									elements[e].style.top = origy + (ypps * privateEye) + 'px';
+								}})(i, this.elements), i * steptime, this.elements);
+							}
+						
+							if(callback !== undefined)
+								var callbackTimer = setTimeout(callback, 100 * steptime); // Set callback timer
+						}
+						else
+						{
+							// Resize instantly
+							this.elements[e].style.left = x + 'px';
+							this.elements[e].style.top = y + 'px';
+						}
+					}
+					else
+						return {x: this.elements[e].offsetTop, y: this.elements[e].offsetWidth}; // Return the location as an object
+				}
+			},
+			json: function(method, data) {
+				if(method == 'encode')
+					return JSON.stringify(data);
+				else if('decode')
+					return JSON.parse(data);
+			},
+			css: function(css) {
+				for(var e in this.elements)
+				{
+					for(var c in css)
+					{
+						this.elements[e].style[c] = css[c];
+					}
+				}
+			
+				return this.elements[0].style;
+			},
+			attribute: function(attribute) {
+				for(var e in this.elements)
+				{
+					for(var a in attribute)
+					{
+						this.elements[e][a] = attribute[a];
+					}
+				}
+			
+				return this.elements[0];
+			},
+			ready: function(callback) {
+				window.alreadyrunflag = 0;
+			
+				if(document.addEventListener)
+					document.addEventListener("DOMContentLoaded", function() { alreadyrunflag = 1; callback() }, false);
+				else if(document.all && !window.opera)
+				{
+					document.write('<script type="text/javascript" id="contentloadtag" defer="defer" src="javascript:void(0)"><\/script>');
+				
+					var contentloadtag = document.getElementById("contentloadtag");
+				
+					contentloadtag.onreadystatechange = function() {
+						if(this.readyState == "complete")
+						{
+							alreadyrunflag = 1;
+							callback();
+						}
+					};
+				}
+			
+				window.onload = function() {
+					setTimeout("if(!alreadyrunflag) callback()", 0);
+				};
+			}
+		};
+		
+		for(var p in SparkPlugin)
+		{
+			functions[p] = SparkPlugin[p];
+		}
+	
+		// Return the functions
+		return functions;
 	};
-	
-	// Return the functions
-	return functions;
-};
 
-// Function for making the pageX/Y values work in IE
-Spark.fixEvents = function(theEvent) {
-	if(theEvent.pageX == null)
-	{
-		var d = (document.documentElement && document.documentElement.scrollLeft != null) ? document.documentElement : document.body;
-		docX = theEvent.clientX + d.scrollLeft;
-		docY = theEvent.clientY + d.scrollTop;
-		theEvent.pageX = docX;
-		theEvent.pageY = docY;
-	}
+	// Function for making the pageX/Y values work in IE
+	Spark.fixEvents = function(theEvent) {
+		if(theEvent.pageX == null)
+		{
+			var d = (document.documentElement && document.documentElement.scrollLeft != null) ? document.documentElement : document.body;
+			docX = theEvent.clientX + d.scrollLeft;
+			docY = theEvent.clientY + d.scrollTop;
+			theEvent.pageX = docX;
+			theEvent.pageY = docY;
+		}
 	
-	if(!theEvent.target)
-		theEvent.target == theEvent.srcElement;
+		if(!theEvent.target)
+			theEvent.target == theEvent.srcElement;
 	
-	// Return the calculated positions in an object
-	return theEvent;
-};
+		// Return the calculated positions in an object
+		return theEvent;
+	};
 
-// Take out the need for brackets on functions that do not need an element
-for(var i in Spark())
-	Spark[i] = $[i] = Spark()[i];
+	// Take out the need for brackets on functions that do not need an element
+	for(var i in Spark())
+		Spark[i] = $[i] = Spark()[i];
+}
+
+// Initialise Spark
+SparkInit();
 })();

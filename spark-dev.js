@@ -1,5 +1,5 @@
 /*!
- * Spark JavaScript library v0.6.0
+ * Spark JavaScript library v0.8.0
  * http://flowdev.co.uk/
  * 
  * Copyright 2010, Oliver Caldwell

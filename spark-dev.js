@@ -1690,6 +1690,7 @@ window.SparkInit = function()
 	
 		// Assign functions to the returned object
 		functions = {
+			selector: selector,
 			elements: result,
 			event: function(type, callback) {
 				for(var e in this.elements)

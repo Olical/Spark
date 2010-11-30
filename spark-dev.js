@@ -1939,7 +1939,7 @@ window.SparkInit = function()
 						}
 					}
 					else
-						return {x: this.elements[e].offsetTop, y: this.elements[e].offsetWidth}; // Return the location as an object
+						return {x: this.elements[0].offsetLeft, y: this.elements[0].offsetTop}; // Return the location as an object
 				}
 			},
 			json: function(method, data) {

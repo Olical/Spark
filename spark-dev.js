@@ -1501,7 +1501,7 @@ if ( document.querySelectorAll ) {
 (function(){
 	var div = document.createElement("div");
 
-	div.innerHTML = "<div class='test e'></div><div class='test'></div>";
+	div.innerHTML = "<div class='test e'></div><div class='test'></div>";//"
 
 	// Opera can't find a second classname (in 9.6)
 	// Also, make sure that getElementsByClassName actually exists

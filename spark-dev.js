@@ -1,5 +1,5 @@
 /*!
- * Spark JavaScript library v0.8.0
+ * Spark JavaScript library v0.9.0
  * http://flowdev.co.uk/
  * 
  * Copyright 2010, Oliver Caldwell
@@ -1667,10 +1667,25 @@ window.SparkInit = function()
 		if(selector != undefined)
 		{
 			// If context then get result with context, if not just get the element
-			if(context != undefined)
-				result = Sizzle(selector, context);
+			// This also checks if querySelectorAll is avaliable, is so it uses it instead of Sizzle
+			if(document.querySelectorAll == undefined)
+			{
+				if(context != undefined)
+					result = Sizzle(selector, context);
+				else
+					result = Sizzle(selector);
+			}
 			else
-				result = Sizzle(selector);
+			{
+				if(context != undefined)
+					var resultb = context.querySelectorAll(selector);
+				else
+					var resultb = document.querySelectorAll(selector);
+				
+				for(var i = 0; i < resultb.length; ++i) {
+					result[i] = resultb[i];
+				}
+			}
 		}
 	
 		// Assign functions to the returned object

@@ -7,7 +7,7 @@
 
 (function() {
 	// Setup the plugin
-	SparkPlugin.replace = function() {
+	SparkPlugin.twitter = function() {
 		
 	};
 	

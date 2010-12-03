@@ -1858,6 +1858,15 @@ window.SparkInit = function()
 								}})(i, this.elements), i * this.fps, this.elements);
 							}
 							
+							timers[frames + 1] = setTimeout((function(privateEye, elements) {
+								return function() {
+									var newopacity = origopacity + (opacitypps * privateEye);
+									elements[e].style.opacity = opacity / 100;
+									elements[e].style.MozOpacity = opacity / 100;
+									elements[e].style.khtmlOpacity = opacity / 100;
+									elements[e].style.filter = 'alpha(opacity=' + opacity + ')';
+								}})(i, this.elements), timeframe, this.elements);
+							
 							// Set callback timer if a callback is set
 							if(callback !== undefined)
 								var callbackTimer = setTimeout(callback, timeframe);

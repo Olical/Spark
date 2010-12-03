@@ -1690,6 +1690,7 @@ window.SparkInit = function()
 	
 		// Assign functions to the returned object
 		functions = {
+			fps: 24,
 			selector: selector,
 			elements: result,
 			event: function(type, callback) {
@@ -1834,18 +1835,18 @@ window.SparkInit = function()
 							// Work out difference
 							var opacitydiff = opacity - (origopacity * 100);
 			
-							// Work out how miliseconds per step (100 in total)
-							var steptime = timeframe / 100;
+							// Work out how many frames are needed
+							var frames = timeframe / this.fps;
 			
-							// Work out how many it needs to move each step
-							var opacitypps = opacitydiff / 100;
+							// Work out how many it needs to move each frame
+							var opacitypps = opacitydiff / frames;
 			
 							// Set up original opacity
 							var origopacity = origopacity * 100;
 			
-							// Loop through all 100 steps setting a time out opacity change each time
+							// Loop through all frames setting a time out opacity change each time
 							var timers = [];
-							for(var i = 0; i <= 100; i++)
+							for(var i = 0; i <= frames; i++)
 							{
 								timers[i] = setTimeout((function(privateEye, elements) {
 								return function() {
@@ -1854,10 +1855,12 @@ window.SparkInit = function()
 									elements[e].style.MozOpacity = newopacity / 100;
 									elements[e].style.khtmlOpacity = newopacity / 100;
 									elements[e].style.filter = 'alpha(opacity=' + newopacity + ')';
-								}})(i, this.elements), i * steptime, this.elements);
+								}})(i, this.elements), i * this.fps, this.elements);
 							}
+							
+							// Set callback timer if a callback is set
 							if(callback !== undefined)
-								var callbackTimer = setTimeout(callback, 100 * steptime); // Set callback timer
+								var callbackTimer = setTimeout(callback, timeframe);
 						}
 					}
 				}

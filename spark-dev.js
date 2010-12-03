@@ -1941,30 +1941,37 @@ window.SparkInit = function()
 							var xdiff = x - parseInt(this.elements[e].offsetLeft);
 							var ydiff = y - parseInt(this.elements[e].offsetTop);
 						
-							// Work out how miliseconds per step (100 in total)
-							var steptime = timeframe / 100;
+							// Work out how many frames are required
+							var frames = timeframe / this.fps;
 						
-							// Work out how many pixels it needs to move each step
-							var xpps = xdiff / 100;
-							var ypps = ydiff / 100;
+							// Work out how many pixels it needs to move each frame
+							var xpps = xdiff / frames;
+							var ypps = ydiff / frames;
 						
 							// Set up original positions
 							var origx = parseInt(this.elements[e].offsetLeft);
 							var origy = parseInt(this.elements[e].offsetTop);
 						
-							// Loop through all 100 steps setting a time out reposition each time
+							// Loop through all frames setting a time out reposition each time
 							var timers = [];
-							for(var i = 0; i <= 100; i++)
+							for(var i = 0; i <= frames; i++)
 							{
 								timers[i] = setTimeout((function(privateEye, elements) {
 								return function() {
 									elements[e].style.left = origx + (xpps * privateEye) + 'px';
 									elements[e].style.top = origy + (ypps * privateEye) + 'px';
-								}})(i, this.elements), i * steptime, this.elements);
+								}})(i, this.elements), i * this.fps, this.elements);
 							}
-						
+							
+							timers[frames + 1] = setTimeout((function(privateEye, elements) {
+								return function() {
+									elements[e].style.left = x + 'px';
+									elements[e].style.top = y + 'px';
+								}})(i, this.elements), timeframe, this.elements);
+							
+							// Set callback timer
 							if(callback !== undefined)
-								var callbackTimer = setTimeout(callback, 100 * steptime); // Set callback timer
+								var callbackTimer = setTimeout(callback, timeframe);
 						}
 						else
 						{

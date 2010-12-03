@@ -1877,12 +1877,12 @@ window.SparkInit = function()
 							var widthdiff = width - parseInt(this.elements[e].offsetWidth);
 							var heightdiff = height - parseInt(this.elements[e].offsetHeight);
 			
-							// Work out how miliseconds per step (100 in total)
-							var steptime = timeframe / 100;
+							// Work out how many frames are required
+							var frames = timeframe / this.fps;
 			
-							// Work out how many pixels it needs to move each step
-							var widthpps = widthdiff / 100;
-							var heightpps = heightdiff / 100;
+							// Work out how many pixels it needs to move each frame
+							var widthpps = widthdiff / frames;
+							var heightpps = heightdiff / frames;
 			
 							// Set up original sizes
 							var origwidth = parseInt(this.elements[e].offsetWidth);
@@ -1890,17 +1890,24 @@ window.SparkInit = function()
 			
 							// Loop through all 100 steps setting a time out resize each time
 							var timers = [];
-							for(var i = 0; i <= 100; i++)
+							for(var i = 0; i <= frames; i++)
 							{
 								timers[i] = setTimeout((function(privateEye, elements) {
 								return function() {
 									elements[e].style.width = origwidth + (widthpps * privateEye) + 'px';
 									elements[e].style.height = origheight + (heightpps * privateEye) + 'px';
-								}})(i, this.elements), i * steptime, this.elements);
+								}})(i, this.elements), i * this.fps, this.elements);
 							}
-			
+							
+							timers[frames + 1] = setTimeout((function(privateEye, elements) {
+								return function() {
+									elements[e].style.width = width + 'px';
+									elements[e].style.height = height + 'px';
+								}})(i, this.elements), timeframe, this.elements);
+							
+							// Set callback timer
 							if(callback !== undefined)
-								var callbackTimer = setTimeout(callback, 100 * steptime); // Set callback timer
+								var callbackTimer = setTimeout(callback, timeframe);
 						}
 						else
 						{

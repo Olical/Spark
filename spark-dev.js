@@ -2013,9 +2013,7 @@ window.SparkInit = function()
 		};
 		
 		for(var p in SparkPlugin)
-		{
 			functions[p] = SparkPlugin[p];
-		}
 	
 		// Return the functions
 		return functions;

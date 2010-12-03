@@ -1858,6 +1858,7 @@ window.SparkInit = function()
 								}})(i, this.elements), i * this.fps, this.elements);
 							}
 							
+							// Correct floating point problem
 							timers[frames + 1] = setTimeout((function(privateEye, elements) {
 								return function() {
 									var newopacity = origopacity + (opacitypps * privateEye);
@@ -1897,7 +1898,7 @@ window.SparkInit = function()
 							var origwidth = parseInt(this.elements[e].offsetWidth);
 							var origheight = parseInt(this.elements[e].offsetHeight);
 			
-							// Loop through all 100 steps setting a time out resize each time
+							// Loop through all frames setting a time out resize each time
 							var timers = [];
 							for(var i = 0; i <= frames; i++)
 							{
@@ -1908,6 +1909,7 @@ window.SparkInit = function()
 								}})(i, this.elements), i * this.fps, this.elements);
 							}
 							
+							// Correct floating point problem
 							timers[frames + 1] = setTimeout((function(privateEye, elements) {
 								return function() {
 									elements[e].style.width = width + 'px';
@@ -1963,6 +1965,7 @@ window.SparkInit = function()
 								}})(i, this.elements), i * this.fps, this.elements);
 							}
 							
+							// Correct floating point problem
 							timers[frames + 1] = setTimeout((function(privateEye, elements) {
 								return function() {
 									elements[e].style.left = x + 'px';

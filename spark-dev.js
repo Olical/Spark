@@ -1923,8 +1923,8 @@ window.SparkInit = function()
 						else
 						{
 							// Resize instantly
-							this.elements[e].style.width = width;
-							this.elements[e].style.height = height;
+							this.elements[e].style.width = width + 'px';
+							this.elements[e].style.height = height + 'px';
 						}
 					}
 					else

@@ -1888,7 +1888,7 @@ window.SparkInit = function()
 							var heightdiff = height - parseInt(this.elements[e].offsetHeight);
 							
 							// Work out how many frames are required
-							var frames = timeframe / this.fps;
+							var frames = timeframe / (1000 / this.fps);
 							
 							// Work out how many pixels it needs to move each frame
 							var widthpps = widthdiff / frames;
@@ -1906,7 +1906,7 @@ window.SparkInit = function()
 								return function() {
 									elements[e].style.width = origwidth + (widthpps * privateEye) + 'px';
 									elements[e].style.height = origheight + (heightpps * privateEye) + 'px';
-								}})(i, this.elements), i * this.fps, this.elements);
+								}})(i, this.elements), i * (1000 / this.fps), this.elements);
 							}
 							
 							// Correct floating point problem

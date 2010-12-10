@@ -18,9 +18,6 @@ modules =	${srcdir}core.js\
 			${srcdir}size.js\
 			${srcdir}init.js
 
-# Combine all modules into spark-dev.js
-spark-dev.js: ${modules}
-
-# Compress spark-dev.js into spark.js
-spark.js: spark-dev.js
+# Compress all of the modules into spark.js
+spark.js: ${modules}
 	java -jar yuicompressor.jar -o $@ $^

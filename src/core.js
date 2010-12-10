@@ -85,4 +85,4 @@ window.SparkIn = function()
 	// Take out the need for brackets on functions that do not need an element
 	for(var i in Spark())
 		Spark[i] = $[i] = Spark()[i];
-}
+};

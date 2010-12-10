@@ -1886,18 +1886,18 @@ window.SparkInit = function()
 							// Work out distance
 							var widthdiff = width - parseInt(this.elements[e].offsetWidth);
 							var heightdiff = height - parseInt(this.elements[e].offsetHeight);
-			
+							
 							// Work out how many frames are required
 							var frames = timeframe / this.fps;
-			
+							
 							// Work out how many pixels it needs to move each frame
 							var widthpps = widthdiff / frames;
 							var heightpps = heightdiff / frames;
-			
+							
 							// Set up original sizes
 							var origwidth = parseInt(this.elements[e].offsetWidth);
 							var origheight = parseInt(this.elements[e].offsetHeight);
-			
+							
 							// Loop through all frames setting a time out resize each time
 							var timers = [];
 							for(var i = 0; i <= frames; i++)
@@ -1914,7 +1914,7 @@ window.SparkInit = function()
 								return function() {
 									elements[e].style.width = width + 'px';
 									elements[e].style.height = height + 'px';
-								}})(i, this.elements), timeframe, this.elements);
+							}})(i, this.elements), timeframe, this.elements);
 							
 							// Set callback timer
 							if(callback !== undefined)

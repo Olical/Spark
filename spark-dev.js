@@ -1690,7 +1690,7 @@ window.SparkInit = function()
 	
 		// Assign functions to the returned object
 		functions = {
-			fps: 24,
+			fps: 60,
 			selector: selector,
 			elements: result,
 			event: function(type, callback) {

@@ -1848,7 +1848,7 @@ window.SparkInit = function()
 							var timers = [];
 							for(var i = 0; i <= frames; i++)
 							{
-								timers[i] = setTimeout((function(privateEye, elements) {
+								setTimeout((function(privateEye, elements) {
 								return function() {
 									var newopacity = origopacity + (opacitypps * privateEye);
 									elements[e].style.opacity = newopacity / 100;
@@ -1859,13 +1859,13 @@ window.SparkInit = function()
 							}
 							
 							// Correct floating point problem
-							timers[frames + 1] = setTimeout((function(privateEye, elements) {
-								return function() {
-									var newopacity = origopacity + (opacitypps * privateEye);
-									elements[e].style.opacity = opacity / 100;
-									elements[e].style.MozOpacity = opacity / 100;
-									elements[e].style.khtmlOpacity = opacity / 100;
-									elements[e].style.filter = 'alpha(opacity=' + opacity + ')';
+							setTimeout((function(privateEye, elements) {
+							return function() {
+								var newopacity = origopacity + (opacitypps * privateEye);
+								elements[e].style.opacity = opacity / 100;
+								elements[e].style.MozOpacity = opacity / 100;
+								elements[e].style.khtmlOpacity = opacity / 100;
+								elements[e].style.filter = 'alpha(opacity=' + opacity + ')';
 							}})(i, this.elements), timeframe, this.elements);
 							
 							// Set callback timer if a callback is set

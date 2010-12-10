@@ -126,10 +126,10 @@
 		<script type='text/javascript' src='spark-dev.js'></script>
 		<script type='text/javascript'>
 			// Create a plugin that echos the contents of the element
-			SparkPlugin.read = function() {
+			SparkFn.read = function() {
 				alert(this.elements[0].innerHTML);
 			};
-			SparkInit();
+			SparkIn();
 			
 			// Set a ready event
 			$.ready(function() {
@@ -146,10 +146,10 @@
 				$('p.content').content('This content has been changed');
 				
 				// Fetch compress.sh via AJAX and dump it inside a p tag
-				$('p.ajax').content($.ajax('GET', 'compress.sh'));
+				$('p.ajax').content($.ajax('GET', 'ajaxtest.txt'));
 				
 				// Fetch compress.sh via AJAX asynchronously
-				$.ajax('GET', 'compress.sh', false, function(data) {
+				$.ajax('GET', 'ajaxtest.txt', false, function(data) {
 					$('p.ajax-async').content(data);
 				});
 				

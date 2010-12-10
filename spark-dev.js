@@ -1902,7 +1902,7 @@ window.SparkInit = function()
 							var timers = [];
 							for(var i = 0; i <= frames; i++)
 							{
-								timers[i] = setTimeout((function(privateEye, elements) {
+								setTimeout((function(privateEye, elements) {
 								return function() {
 									elements[e].style.width = origwidth + (widthpps * privateEye) + 'px';
 									elements[e].style.height = origheight + (heightpps * privateEye) + 'px';
@@ -1910,15 +1910,15 @@ window.SparkInit = function()
 							}
 							
 							// Correct floating point problem
-							timers[frames + 1] = setTimeout((function(privateEye, elements) {
-								return function() {
-									elements[e].style.width = width + 'px';
-									elements[e].style.height = height + 'px';
+							setTimeout((function(privateEye, elements) {
+							return function() {
+								elements[e].style.width = width + 'px';
+								elements[e].style.height = height + 'px';
 							}})(i, this.elements), timeframe, this.elements);
 							
 							// Set callback timer
 							if(callback !== undefined)
-								var callbackTimer = setTimeout(callback, timeframe);
+								setTimeout(callback, timeframe);
 						}
 						else
 						{

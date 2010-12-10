@@ -1803,14 +1803,14 @@ window.SparkInit = function()
 				for(var e in this.elements)
 				{
 					this.elements[e].style.zoom = 1;
-				
+					
 					// Get origopacity
 					if(this.elements[e].currentStyle)
 						var origopacity = this.elements[e].currentStyle.opacity;
 					else if(window.getComputedStyle)
 						var origopacity = document.defaultView.getComputedStyle(this.elements[e], null).getPropertyValue('opacity');
 					origopacity = parseInt(origopacity);
-				
+					
 					if(opacity === undefined)
 						return origopacity * 100; // Return the transparency of the element as a percentage
 					else
@@ -1831,19 +1831,19 @@ window.SparkInit = function()
 							this.elements[e].style.MozOpacity = origopacity;
 							this.elements[e].style.khtmlOpacity = origopacity;
 							this.elements[e].style.filter = 'alpha(opacity=' + (origopacity * 100) + ')';
-			
+							
 							// Work out difference
 							var opacitydiff = opacity - (origopacity * 100);
-			
+							
 							// Work out how many frames are needed
-							var frames = timeframe / this.fps;
-			
+							var frames = timeframe / (1000 / this.fps);
+							
 							// Work out how many it needs to move each frame
 							var opacitypps = opacitydiff / frames;
-			
+							
 							// Set up original opacity
 							var origopacity = origopacity * 100;
-			
+							
 							// Loop through all frames setting a time out opacity change each time
 							var timers = [];
 							for(var i = 0; i <= frames; i++)
@@ -1855,7 +1855,7 @@ window.SparkInit = function()
 									elements[e].style.MozOpacity = newopacity / 100;
 									elements[e].style.khtmlOpacity = newopacity / 100;
 									elements[e].style.filter = 'alpha(opacity=' + newopacity + ')';
-								}})(i, this.elements), i * this.fps, this.elements);
+								}})(i, this.elements), i * (1000 / this.fps), this.elements);
 							}
 							
 							// Correct floating point problem
@@ -1866,7 +1866,7 @@ window.SparkInit = function()
 									elements[e].style.MozOpacity = opacity / 100;
 									elements[e].style.khtmlOpacity = opacity / 100;
 									elements[e].style.filter = 'alpha(opacity=' + opacity + ')';
-								}})(i, this.elements), timeframe, this.elements);
+							}})(i, this.elements), timeframe, this.elements);
 							
 							// Set callback timer if a callback is set
 							if(callback !== undefined)

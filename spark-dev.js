@@ -1870,7 +1870,7 @@ window.SparkInit = function()
 							
 							// Set callback timer if a callback is set
 							if(callback !== undefined)
-								var callbackTimer = setTimeout(callback, timeframe);
+								setTimeout(callback, timeframe);
 						}
 					}
 				}

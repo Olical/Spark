@@ -1942,18 +1942,18 @@ window.SparkInit = function()
 							// Work out distance
 							var xdiff = x - parseInt(this.elements[e].offsetLeft);
 							var ydiff = y - parseInt(this.elements[e].offsetTop);
-						
+							
 							// Work out how many frames are required
 							var frames = timeframe / this.fps;
-						
+							
 							// Work out how many pixels it needs to move each frame
 							var xpps = xdiff / frames;
 							var ypps = ydiff / frames;
-						
+							
 							// Set up original positions
 							var origx = parseInt(this.elements[e].offsetLeft);
 							var origy = parseInt(this.elements[e].offsetTop);
-						
+							
 							// Loop through all frames setting a time out reposition each time
 							var timers = [];
 							for(var i = 0; i <= frames; i++)

@@ -1,0 +1,2 @@
+// Initialise Spark
+SparkIn();

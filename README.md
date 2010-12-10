@@ -15,6 +15,8 @@ If you are unsure of anything then the wiki will sort you out. <http://github.co
 
 You can see a practical example in a jsFiddle I made. It is draggable box. <http://jsfiddle.net/Wolfy87/HY2u4/>
 
+For up to date news, follow Spark on Twitter. <http://twitter.com/#!/SparkJavaScript>
+
 ## Thanks
 If you are using Spark and you like it or at least like where it is going then please watch the repository or send me a message, I really would like to know how many people this is helping and what they would like to see in the future. *Any* suggestions are welcome.
 

@@ -27,20 +27,20 @@ window.SparkIn = function()
 		var result = new Object();
 		
 		// Check that they have passed arguments to the class
-		if(selector != undefined)
+		if(selector)
 		{
 			// If context then get result with context, if not just get the element
 			// This also checks if querySelectorAll is avaliable, is so it uses it instead of Sizzle
-			if(document.querySelectorAll == undefined)
+			if(!document.querySelectorAll)
 			{
-				if(context != undefined)
+				if(context)
 					result = Sizzle(selector, context);
 				else
 					result = Sizzle(selector);
 			}
 			else
 			{
-				if(context != undefined)
+				if(context)
 					var resultb = context.querySelectorAll(selector);
 				else
 					var resultb = document.querySelectorAll(selector);
@@ -59,14 +59,14 @@ window.SparkIn = function()
 		
 		for(var p in SparkFn)
 			built[p] = SparkFn[p];
-	
+		
 		// Return the functions
 		return built;
 	};
-
+	
 	// Function for making the pageX/Y values work in IE
 	Spark.fixEvents = function(theEvent) {
-		if(theEvent.pageX == null)
+		if(!theEvent.pageX)
 		{
 			var d = (document.documentElement && document.documentElement.scrollLeft != null) ? document.documentElement : document.body;
 			docX = theEvent.clientX + d.scrollLeft;
@@ -74,14 +74,14 @@ window.SparkIn = function()
 			theEvent.pageX = docX;
 			theEvent.pageY = docY;
 		}
-	
+		
 		if(!theEvent.target)
 			theEvent.target == theEvent.srcElement;
-	
+		
 		// Return the calculated positions in an object
 		return theEvent;
 	};
-
+	
 	// Take out the need for brackets on functions that do not need an element
 	for(var i in Spark())
 		Spark[i] = $[i] = Spark()[i];

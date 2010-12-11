@@ -11,7 +11,7 @@ SparkFn.ajax = function(method, file, data, callback) {
 	method = method.toUpperCase();
 	
 	// If the method is get then append the data to the file string
-	if(method == 'GET' && data !== undefined && data !== false)
+	if(method == 'GET' && data != false)
 		file += '?' + data;
 	
 	// Run the call back if it was a success and the callback is set

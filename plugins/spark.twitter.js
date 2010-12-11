@@ -1,5 +1,5 @@
 /*!
- * Twitter plugin for Spark JavaScript library v1.0.0
+ * Twitter plugin for Spark JavaScript library v1.1.0
  * http://flowdev.co.uk/
  * 
  * Copyright 2010, Oliver Caldwell
@@ -10,7 +10,7 @@
 	window.twitterPluginData = new Array();
 	
 	// Setup the plugin
-	SparkPlugin.twitter = function(user) {
+	SparkFn.twitter = function(user) {
 		// Set up the callback function
 		window.twitterPluginDataLoaded = function(data) {
 			$(twitterPluginData[data.query]).content(data.results[0].text);
@@ -36,5 +36,5 @@
 	};
 	
 	// Reinitialise Spark
-	SparkInit();
+	SparkIn();
 })();

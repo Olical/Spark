@@ -75,7 +75,7 @@ window.SparkIn = function()
 		}
 		
 		if(!theEvent.target)
-			theEvent.target == theEvent.srcElement;
+			theEvent.target = theEvent.srcElement;
 		
 		// Return the calculated positions in an object
 		return theEvent;

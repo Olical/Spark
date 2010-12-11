@@ -216,15 +216,15 @@ SparkFn.event = function(type, callback) {
 SparkFn.json = function(method, data) {
 	if(method == 'encode')
 		return JSON.stringify(data);
-	else if('decode')
+	else
 		return JSON.parse(data);
 };
 SparkFn.location = function(x, y, timeframe, callback) {
 	for(var e in this.elements)
 	{
-		if(x !== undefined && y !== undefined)
+		if(x && y)
 		{
-			if(timeframe !== undefined)
+			if(timeframe)
 			{
 				// Resize in timeframe
 				// Work out distance
@@ -261,7 +261,7 @@ SparkFn.location = function(x, y, timeframe, callback) {
 				}})(i, this.elements), timeframe, this.elements);
 				
 				// Set callback timer
-				if(callback !== undefined)
+				if(callback)
 					setTimeout(callback, timeframe);
 			}
 			else
@@ -272,7 +272,8 @@ SparkFn.location = function(x, y, timeframe, callback) {
 			}
 		}
 		else
-			return {x: this.elements[0].offsetLeft, y: this.elements[0].offsetTop}; // Return the location as an object
+			// Return the location as an object
+			return {x: this.elements[e].offsetLeft, y: this.elements[e].offsetTop};
 	}
 };
 SparkFn.opacity = function(opacity, timeframe, callback) {

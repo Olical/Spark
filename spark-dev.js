@@ -140,15 +140,13 @@ SparkFn.content = function(content, append) {
 	for(var e in this.elements)
 	{
 		// Return content of the selected element
-		if(content === undefined)
+		if(!content)
 			return this.elements[e].innerHTML;
 		else
 		{
-			// Replace content
-			if(append === undefined || append === false)
-				this.elements[e].innerHTML = content;
-			 // Append content
-			else if(append === true)
+			// Append or replace content depending on the append flag
+			(!append) ?
+				this.elements[e].innerHTML = content :
 				this.elements[e].innerHTML += content;
 		}
 	}

@@ -86,6 +86,352 @@ window.SparkIn = function()
 	for(var i in Spark())
 		Spark[i] = $[i] = Spark()[i];
 };
+SparkFn.ajax = function(method, file, data, callback) {
+	// Set up the request, allow for cross browser.
+	var xmlhttp;
+	if(window.XMLHttpRequest)
+		xmlhttp = new XMLHttpRequest(); // For IE7+, Firefox, Chrome, Opera, Safari
+	else
+		xmlhttp = new ActiveXObject('Microsoft.XMLHTTP'); // For IE6, IE5
+
+	// Convert to upper case.
+	method = method.toUpperCase();
+
+	// If the method is get then append the data to the file string
+	if(method == 'GET' && data !== undefined && data !== false)
+		file += '?' + data;
+
+	// Run the call back if it was a success and the callback is set
+	if(callback != undefined)
+		xmlhttp.onreadystatechange = function() {
+			if(xmlhttp.readyState == 4) {
+				callback(xmlhttp.responseText);
+			}
+		};
+
+	// Open the reader, if callback set then make it async
+	xmlhttp.open(method, file, (callback != undefined) ? true : false);
+
+	// If the method is post then send the headers and the data
+	if(method == 'POST')
+	{
+		xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+		if(data !== undefined && data !== false)
+			xmlhttp.send(data);
+		else
+			xmlhttp.send(null);
+	}
+	else
+		xmlhttp.send(null); // Otherwise just send the data
+
+	if(callback == undefined)
+		return xmlhttp.responseText;
+};
+SparkFn.attribute = function(attribute) {
+	for(var e in this.elements)
+	{
+		for(var a in attribute)
+		{
+			this.elements[e][a] = attribute[a];
+		}
+	}
+	
+	return this.elements[0];
+};
+SparkFn.content = function(content, append) {
+	for(var e in this.elements)
+	{
+		// Return content of the selected element
+		if(content === undefined)
+			return this.elements[e].innerHTML;
+		else
+		{
+			// Replace content
+			if(append === undefined || append === false)
+				this.elements[e].innerHTML = content;
+			 // Append content
+			else if(append === true)
+				this.elements[e].innerHTML += content;
+		}
+	}
+};
+SparkFn.cookie = function(name, content, duration) {
+	if(content === undefined)
+	{
+		// Return cookie's content
+		var nameEQ = name + '=';
+		var ca = document.cookie.split(';');
+		for(var i = 0; i < ca.length; i++)
+		{
+			var c = ca[i];
+			while(c.charAt(0) == ' ')
+			{
+				c = c.substring(1, c.length);
+			}
+			if(c.indexOf(nameEQ) == 0)
+				return c.substring(nameEQ.length, c.length);
+		}
+		return false;
+	}
+	else
+	{
+		if(duration === undefined)
+		{
+			// Create cookie with preset duration of one year
+			var date = new Date();
+			date.setTime(date.getTime() + 31536000000);
+			var expires = '; expires=' + date.toGMTString();
+			document.cookie = name + '=' + content + expires + '; path=/';
+		}
+		else
+		{
+			// Create cookie with specified duration
+			var date = new Date();
+			date.setTime(date.getTime() + duration);
+			var expires = '; expires=' + date.toGMTString();
+			document.cookie = name + '=' + content + expires + '; path=/';
+		}
+	}
+};
+SparkFn.css = function(css) {
+	for(var e in this.elements)
+	{
+		for(var c in css)
+		{
+			this.elements[e].style[c] = css[c];
+		}
+	}
+	
+	return this.elements[0].style;
+};
+SparkFn.event = function(type, callback) {
+	for(var e in this.elements)
+	{
+		// Check if the browser supports addEventListener or attachEvent
+		if(this.elements[e].addEventListener)
+			this.elements[e].addEventListener(type, function(event) {callback(Spark.fixEvents(event))}, false);
+		else if(this.elements[e].attachEvent)
+			this.elements[e].attachEvent('on' + type, function(event) {callback(Spark.fixEvents(event))});
+	}
+};
+SparkFn.json = function(method, data) {
+	if(method == 'encode')
+		return JSON.stringify(data);
+	else if('decode')
+		return JSON.parse(data);
+};
+SparkFn.location = function(x, y, timeframe, callback) {
+	for(var e in this.elements)
+	{
+		if(x !== undefined && y !== undefined)
+		{
+			if(timeframe !== undefined)
+			{
+				// Resize in timeframe
+				// Work out distance
+				var xdiff = x - parseInt(this.elements[e].offsetLeft);
+				var ydiff = y - parseInt(this.elements[e].offsetTop);
+				
+				// Work out how many frames are required
+				var frames = timeframe / (1000 / this.fps);
+				
+				// Work out how many pixels it needs to move each frame
+				var xpps = xdiff / frames;
+				var ypps = ydiff / frames;
+				
+				// Set up original positions
+				var origx = parseInt(this.elements[e].offsetLeft);
+				var origy = parseInt(this.elements[e].offsetTop);
+				
+				// Loop through all frames setting a time out reposition each time
+				var timers = [];
+				for(var i = 0; i <= frames; i++)
+				{
+					setTimeout((function(privateEye, elements) {
+					return function() {
+						elements[e].style.left = origx + (xpps * privateEye) + 'px';
+						elements[e].style.top = origy + (ypps * privateEye) + 'px';
+					}})(i, this.elements), i * (1000 / this.fps), this.elements);
+				}
+				
+				// Correct floating point problem
+				setTimeout((function(privateEye, elements) {
+				return function() {
+					elements[e].style.left = x + 'px';
+					elements[e].style.top = y + 'px';
+				}})(i, this.elements), timeframe, this.elements);
+				
+				// Set callback timer
+				if(callback !== undefined)
+					setTimeout(callback, timeframe);
+			}
+			else
+			{
+				// Resize instantly
+				this.elements[e].style.left = x + 'px';
+				this.elements[e].style.top = y + 'px';
+			}
+		}
+		else
+			return {x: this.elements[0].offsetLeft, y: this.elements[0].offsetTop}; // Return the location as an object
+	}
+};
+SparkFn.opacity = function(opacity, timeframe, callback) {
+	for(var e in this.elements)
+	{
+		this.elements[e].style.zoom = 1;
+		
+		// Get origopacity
+		if(this.elements[e].currentStyle)
+			var origopacity = this.elements[e].currentStyle.opacity;
+		else if(window.getComputedStyle)
+			var origopacity = document.defaultView.getComputedStyle(this.elements[e], null).getPropertyValue('opacity');
+		origopacity = parseInt(origopacity);
+		
+		if(opacity === undefined)
+			return origopacity * 100; // Return the transparency of the element as a percentage
+		else
+		{
+			if(timeframe === undefined)
+			{
+				// Change transparency instantly
+				this.elements[e].style.opacity = opacity / 100;
+				this.elements[e].style.MozOpacity = opacity / 100;
+				this.elements[e].style.khtmlOpacity = opacity / 100;
+				this.elements[e].style.filter = 'alpha(opacity=' + opacity + ')';
+			}
+			else
+			{
+				// Change transparency over the timeframe
+				// If not already, set the opacity to full
+				this.elements[e].style.opacity = origopacity;
+				this.elements[e].style.MozOpacity = origopacity;
+				this.elements[e].style.khtmlOpacity = origopacity;
+				this.elements[e].style.filter = 'alpha(opacity=' + (origopacity * 100) + ')';
+				
+				// Work out difference
+				var opacitydiff = opacity - (origopacity * 100);
+				
+				// Work out how many frames are needed
+				var frames = timeframe / (1000 / this.fps);
+				
+				// Work out how many it needs to move each frame
+				var opacitypps = opacitydiff / frames;
+				
+				// Set up original opacity
+				var origopacity = origopacity * 100;
+				
+				// Loop through all frames setting a time out opacity change each time
+				var timers = [];
+				for(var i = 0; i <= frames; i++)
+				{
+					setTimeout((function(privateEye, elements) {
+					return function() {
+						var newopacity = origopacity + (opacitypps * privateEye);
+						elements[e].style.opacity = newopacity / 100;
+						elements[e].style.MozOpacity = newopacity / 100;
+						elements[e].style.khtmlOpacity = newopacity / 100;
+						elements[e].style.filter = 'alpha(opacity=' + newopacity + ')';
+					}})(i, this.elements), i * (1000 / this.fps), this.elements);
+				}
+				
+				// Correct floating point problem
+				setTimeout((function(privateEye, elements) {
+				return function() {
+					var newopacity = origopacity + (opacitypps * privateEye);
+					elements[e].style.opacity = opacity / 100;
+					elements[e].style.MozOpacity = opacity / 100;
+					elements[e].style.khtmlOpacity = opacity / 100;
+					elements[e].style.filter = 'alpha(opacity=' + opacity + ')';
+				}})(i, this.elements), timeframe, this.elements);
+				
+				// Set callback timer if a callback is set
+				if(callback !== undefined)
+					setTimeout(callback, timeframe);
+			}
+		}
+	}
+};
+SparkFn.ready = function(callback) {
+	window.alreadyrunflag = 0;
+
+	if(document.addEventListener)
+		document.addEventListener("DOMContentLoaded", function() { alreadyrunflag = 1; callback() }, false);
+	else if(document.all && !window.opera)
+	{
+		document.write('<script type="text/javascript" id="contentloadtag" defer="defer" src="javascript:void(0)"><\/script>');
+
+		var contentloadtag = document.getElementById("contentloadtag");
+
+		contentloadtag.onreadystatechange = function() {
+			if(this.readyState == "complete")
+			{
+				alreadyrunflag = 1;
+				callback();
+			}
+		};
+	}
+
+	window.onload = function() {
+		setTimeout("if(!alreadyrunflag) callback()", 0);
+	};
+};
+SparkFn.size = function(width, height, timeframe, callback) {
+	for(var e in this.elements)
+	{
+		if(width !== undefined && height !== undefined)
+		{
+			if(timeframe !== undefined)
+			{
+				// Resize in timeframe
+				// Work out distance
+				var widthdiff = width - parseInt(this.elements[e].offsetWidth);
+				var heightdiff = height - parseInt(this.elements[e].offsetHeight);
+				
+				// Work out how many frames are required
+				var frames = timeframe / (1000 / this.fps);
+				
+				// Work out how many pixels it needs to move each frame
+				var widthpps = widthdiff / frames;
+				var heightpps = heightdiff / frames;
+				
+				// Set up original sizes
+				var origwidth = parseInt(this.elements[e].offsetWidth);
+				var origheight = parseInt(this.elements[e].offsetHeight);
+				
+				// Loop through all frames setting a time out resize each time
+				var timers = [];
+				for(var i = 0; i <= frames; i++)
+				{
+					setTimeout((function(privateEye, elements) {
+					return function() {
+						elements[e].style.width = origwidth + (widthpps * privateEye) + 'px';
+						elements[e].style.height = origheight + (heightpps * privateEye) + 'px';
+					}})(i, this.elements), i * (1000 / this.fps), this.elements);
+				}
+				
+				// Correct floating point problem
+				setTimeout((function(privateEye, elements) {
+				return function() {
+					elements[e].style.width = width + 'px';
+					elements[e].style.height = height + 'px';
+				}})(i, this.elements), timeframe, this.elements);
+				
+				// Set callback timer
+				if(callback !== undefined)
+					setTimeout(callback, timeframe);
+			}
+			else
+			{
+				// Resize instantly
+				this.elements[e].style.width = width + 'px';
+				this.elements[e].style.height = height + 'px';
+			}
+		}
+		else
+			return {width: this.elements[e].offsetWidth, height: this.elements[e].offsetHeight}; // Give size as an object.
+	}
+};
 /*!
  * Sizzle CSS Selector Engine - v1.0
  *  Copyright 2009, The Dojo Foundation
@@ -1904,351 +2250,5 @@ if (!this.JSON) {
         };
     }
 }());
-SparkFn.ajax = function(method, file, data, callback) {
-	// Set up the request, allow for cross browser.
-	var xmlhttp;
-	if(window.XMLHttpRequest)
-		xmlhttp = new XMLHttpRequest(); // For IE7+, Firefox, Chrome, Opera, Safari
-	else
-		xmlhttp = new ActiveXObject('Microsoft.XMLHTTP'); // For IE6, IE5
-
-	// Convert to upper case.
-	method = method.toUpperCase();
-
-	// If the method is get then append the data to the file string
-	if(method == 'GET' && data !== undefined && data !== false)
-		file += '?' + data;
-
-	// Run the call back if it was a success and the callback is set
-	if(callback != undefined)
-		xmlhttp.onreadystatechange = function() {
-			if(xmlhttp.readyState == 4) {
-				callback(xmlhttp.responseText);
-			}
-		};
-
-	// Open the reader, if callback set then make it async
-	xmlhttp.open(method, file, (callback != undefined) ? true : false);
-
-	// If the method is post then send the headers and the data
-	if(method == 'POST')
-	{
-		xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-		if(data !== undefined && data !== false)
-			xmlhttp.send(data);
-		else
-			xmlhttp.send(null);
-	}
-	else
-		xmlhttp.send(null); // Otherwise just send the data
-
-	if(callback == undefined)
-		return xmlhttp.responseText;
-};
-SparkFn.attribute = function(attribute) {
-	for(var e in this.elements)
-	{
-		for(var a in attribute)
-		{
-			this.elements[e][a] = attribute[a];
-		}
-	}
-	
-	return this.elements[0];
-};
-SparkFn.content = function(content, append) {
-	for(var e in this.elements)
-	{
-		// Return content of the selected element
-		if(content === undefined)
-			return this.elements[e].innerHTML;
-		else
-		{
-			// Replace content
-			if(append === undefined || append === false)
-				this.elements[e].innerHTML = content;
-			 // Append content
-			else if(append === true)
-				this.elements[e].innerHTML += content;
-		}
-	}
-};
-SparkFn.cookie = function(name, content, duration) {
-	if(content === undefined)
-	{
-		// Return cookie's content
-		var nameEQ = name + '=';
-		var ca = document.cookie.split(';');
-		for(var i = 0; i < ca.length; i++)
-		{
-			var c = ca[i];
-			while(c.charAt(0) == ' ')
-			{
-				c = c.substring(1, c.length);
-			}
-			if(c.indexOf(nameEQ) == 0)
-				return c.substring(nameEQ.length, c.length);
-		}
-		return false;
-	}
-	else
-	{
-		if(duration === undefined)
-		{
-			// Create cookie with preset duration of one year
-			var date = new Date();
-			date.setTime(date.getTime() + 31536000000);
-			var expires = '; expires=' + date.toGMTString();
-			document.cookie = name + '=' + content + expires + '; path=/';
-		}
-		else
-		{
-			// Create cookie with specified duration
-			var date = new Date();
-			date.setTime(date.getTime() + duration);
-			var expires = '; expires=' + date.toGMTString();
-			document.cookie = name + '=' + content + expires + '; path=/';
-		}
-	}
-};
-SparkFn.css = function(css) {
-	for(var e in this.elements)
-	{
-		for(var c in css)
-		{
-			this.elements[e].style[c] = css[c];
-		}
-	}
-	
-	return this.elements[0].style;
-};
-SparkFn.event = function(type, callback) {
-	for(var e in this.elements)
-	{
-		// Check if the browser supports addEventListener or attachEvent
-		if(this.elements[e].addEventListener)
-			this.elements[e].addEventListener(type, function(event) {callback(Spark.fixEvents(event))}, false);
-		else if(this.elements[e].attachEvent)
-			this.elements[e].attachEvent('on' + type, function(event) {callback(Spark.fixEvents(event))});
-	}
-};
-SparkFn.json = function(method, data) {
-	if(method == 'encode')
-		return JSON.stringify(data);
-	else if('decode')
-		return JSON.parse(data);
-};
-SparkFn.location = function(x, y, timeframe, callback) {
-	for(var e in this.elements)
-	{
-		if(x !== undefined && y !== undefined)
-		{
-			if(timeframe !== undefined)
-			{
-				// Resize in timeframe
-				// Work out distance
-				var xdiff = x - parseInt(this.elements[e].offsetLeft);
-				var ydiff = y - parseInt(this.elements[e].offsetTop);
-				
-				// Work out how many frames are required
-				var frames = timeframe / (1000 / this.fps);
-				
-				// Work out how many pixels it needs to move each frame
-				var xpps = xdiff / frames;
-				var ypps = ydiff / frames;
-				
-				// Set up original positions
-				var origx = parseInt(this.elements[e].offsetLeft);
-				var origy = parseInt(this.elements[e].offsetTop);
-				
-				// Loop through all frames setting a time out reposition each time
-				var timers = [];
-				for(var i = 0; i <= frames; i++)
-				{
-					setTimeout((function(privateEye, elements) {
-					return function() {
-						elements[e].style.left = origx + (xpps * privateEye) + 'px';
-						elements[e].style.top = origy + (ypps * privateEye) + 'px';
-					}})(i, this.elements), i * (1000 / this.fps), this.elements);
-				}
-				
-				// Correct floating point problem
-				setTimeout((function(privateEye, elements) {
-				return function() {
-					elements[e].style.left = x + 'px';
-					elements[e].style.top = y + 'px';
-				}})(i, this.elements), timeframe, this.elements);
-				
-				// Set callback timer
-				if(callback !== undefined)
-					setTimeout(callback, timeframe);
-			}
-			else
-			{
-				// Resize instantly
-				this.elements[e].style.left = x + 'px';
-				this.elements[e].style.top = y + 'px';
-			}
-		}
-		else
-			return {x: this.elements[0].offsetLeft, y: this.elements[0].offsetTop}; // Return the location as an object
-	}
-};
-SparkFn.opacity = function(opacity, timeframe, callback) {
-	for(var e in this.elements)
-	{
-		this.elements[e].style.zoom = 1;
-		
-		// Get origopacity
-		if(this.elements[e].currentStyle)
-			var origopacity = this.elements[e].currentStyle.opacity;
-		else if(window.getComputedStyle)
-			var origopacity = document.defaultView.getComputedStyle(this.elements[e], null).getPropertyValue('opacity');
-		origopacity = parseInt(origopacity);
-		
-		if(opacity === undefined)
-			return origopacity * 100; // Return the transparency of the element as a percentage
-		else
-		{
-			if(timeframe === undefined)
-			{
-				// Change transparency instantly
-				this.elements[e].style.opacity = opacity / 100;
-				this.elements[e].style.MozOpacity = opacity / 100;
-				this.elements[e].style.khtmlOpacity = opacity / 100;
-				this.elements[e].style.filter = 'alpha(opacity=' + opacity + ')';
-			}
-			else
-			{
-				// Change transparency over the timeframe
-				// If not already, set the opacity to full
-				this.elements[e].style.opacity = origopacity;
-				this.elements[e].style.MozOpacity = origopacity;
-				this.elements[e].style.khtmlOpacity = origopacity;
-				this.elements[e].style.filter = 'alpha(opacity=' + (origopacity * 100) + ')';
-				
-				// Work out difference
-				var opacitydiff = opacity - (origopacity * 100);
-				
-				// Work out how many frames are needed
-				var frames = timeframe / (1000 / this.fps);
-				
-				// Work out how many it needs to move each frame
-				var opacitypps = opacitydiff / frames;
-				
-				// Set up original opacity
-				var origopacity = origopacity * 100;
-				
-				// Loop through all frames setting a time out opacity change each time
-				var timers = [];
-				for(var i = 0; i <= frames; i++)
-				{
-					setTimeout((function(privateEye, elements) {
-					return function() {
-						var newopacity = origopacity + (opacitypps * privateEye);
-						elements[e].style.opacity = newopacity / 100;
-						elements[e].style.MozOpacity = newopacity / 100;
-						elements[e].style.khtmlOpacity = newopacity / 100;
-						elements[e].style.filter = 'alpha(opacity=' + newopacity + ')';
-					}})(i, this.elements), i * (1000 / this.fps), this.elements);
-				}
-				
-				// Correct floating point problem
-				setTimeout((function(privateEye, elements) {
-				return function() {
-					var newopacity = origopacity + (opacitypps * privateEye);
-					elements[e].style.opacity = opacity / 100;
-					elements[e].style.MozOpacity = opacity / 100;
-					elements[e].style.khtmlOpacity = opacity / 100;
-					elements[e].style.filter = 'alpha(opacity=' + opacity + ')';
-				}})(i, this.elements), timeframe, this.elements);
-				
-				// Set callback timer if a callback is set
-				if(callback !== undefined)
-					setTimeout(callback, timeframe);
-			}
-		}
-	}
-};
-SparkFn.ready = function(callback) {
-	window.alreadyrunflag = 0;
-
-	if(document.addEventListener)
-		document.addEventListener("DOMContentLoaded", function() { alreadyrunflag = 1; callback() }, false);
-	else if(document.all && !window.opera)
-	{
-		document.write('<script type="text/javascript" id="contentloadtag" defer="defer" src="javascript:void(0)"><\/script>');
-
-		var contentloadtag = document.getElementById("contentloadtag");
-
-		contentloadtag.onreadystatechange = function() {
-			if(this.readyState == "complete")
-			{
-				alreadyrunflag = 1;
-				callback();
-			}
-		};
-	}
-
-	window.onload = function() {
-		setTimeout("if(!alreadyrunflag) callback()", 0);
-	};
-};
-SparkFn.size = function(width, height, timeframe, callback) {
-	for(var e in this.elements)
-	{
-		if(width !== undefined && height !== undefined)
-		{
-			if(timeframe !== undefined)
-			{
-				// Resize in timeframe
-				// Work out distance
-				var widthdiff = width - parseInt(this.elements[e].offsetWidth);
-				var heightdiff = height - parseInt(this.elements[e].offsetHeight);
-				
-				// Work out how many frames are required
-				var frames = timeframe / (1000 / this.fps);
-				
-				// Work out how many pixels it needs to move each frame
-				var widthpps = widthdiff / frames;
-				var heightpps = heightdiff / frames;
-				
-				// Set up original sizes
-				var origwidth = parseInt(this.elements[e].offsetWidth);
-				var origheight = parseInt(this.elements[e].offsetHeight);
-				
-				// Loop through all frames setting a time out resize each time
-				var timers = [];
-				for(var i = 0; i <= frames; i++)
-				{
-					setTimeout((function(privateEye, elements) {
-					return function() {
-						elements[e].style.width = origwidth + (widthpps * privateEye) + 'px';
-						elements[e].style.height = origheight + (heightpps * privateEye) + 'px';
-					}})(i, this.elements), i * (1000 / this.fps), this.elements);
-				}
-				
-				// Correct floating point problem
-				setTimeout((function(privateEye, elements) {
-				return function() {
-					elements[e].style.width = width + 'px';
-					elements[e].style.height = height + 'px';
-				}})(i, this.elements), timeframe, this.elements);
-				
-				// Set callback timer
-				if(callback !== undefined)
-					setTimeout(callback, timeframe);
-			}
-			else
-			{
-				// Resize instantly
-				this.elements[e].style.width = width + 'px';
-				this.elements[e].style.height = height + 'px';
-			}
-		}
-		else
-			return {width: this.elements[e].offsetWidth, height: this.elements[e].offsetHeight}; // Give size as an object.
-	}
-};
 // Initialise Spark
 SparkIn();

@@ -6,13 +6,30 @@ Repository    https://github.com/Wolfy87/Spark
 Documentation https://github.com/Wolfy87/Spark/wiki
 
 ====================================
+=       1.1.0 - (11/12/2010)       =
+====================================
+
+Bug fixes:
+	[+] Replaced an operator in the AJAX module that would not work in IE.
+	[+] Updated all of the plugins to conform with the new core code.
+
+Files:
+	[+] Added the makefile.
+	[+] Added the AJAX test file.
+	[+] Seperated all of the functions into individual files (/src/*).
+	[-] Removed compress.sh.
+
+Optimisation:
+	[-] Removed many unnecessary blocks of code and if statements.
+
+====================================
 =       1.0.0 - (10/12/2010)       =
 ====================================
 
 Bug fixes:
 	[+] Fixed FPS when animating.
 
-New files:
+Files:
 	[+] Added the change log.
 
 General:

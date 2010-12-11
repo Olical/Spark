@@ -11,11 +11,11 @@ SparkFn.ajax = function(method, file, data, callback) {
 	method = method.toUpperCase();
 	
 	// If the method is get then append the data to the file string
-	if(method == 'GET' && data != false)
+	if(method == 'GET' && data)
 		file += '?' + data;
 	
 	// Run the call back if it was a success and the callback is set
-	if(callback != undefined)
+	if(callback)
 		xmlhttp.onreadystatechange = function() {
 			if(xmlhttp.readyState == 4) {
 				callback(xmlhttp.responseText);
@@ -23,13 +23,13 @@ SparkFn.ajax = function(method, file, data, callback) {
 		};
 	
 	// Open the reader, if callback set then make it async
-	xmlhttp.open(method, file, (callback != undefined) ? true : false);
+	xmlhttp.open(method, file, (callback) ? true : false);
 	
 	// If the method is post then send the headers and the data
 	if(method == 'POST')
 	{
 		xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-		if(data !== undefined && data !== false)
+		if(data)
 			xmlhttp.send(data);
 		else
 			xmlhttp.send(null);
@@ -38,6 +38,6 @@ SparkFn.ajax = function(method, file, data, callback) {
 	else
 		xmlhttp.send(null);
 	
-	if(callback == undefined)
+	if(!callback)
 		return xmlhttp.responseText;
 };

@@ -54,7 +54,8 @@ window.SparkIn = function()
 		var built = {
 			fps: 60,
 			selector: selector,
-			elements: result
+			elements: result,
+			library: 'Spark'
 		};
 		
 		for(var p in SparkFn)

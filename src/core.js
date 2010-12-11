@@ -37,10 +37,7 @@ window.SparkIn = function()
 			}
 			else
 			{
-				if(context)
-					var resultb = context.querySelectorAll(selector);
-				else
-					var resultb = document.querySelectorAll(selector);
+				var resultb = ((context) ? context : document).querySelectorAll(selector);
 				
 				for(var i = 0; i < resultb.length; ++i)
 					result[i] = resultb[i];

@@ -29,10 +29,9 @@ SparkFn.ajax = function(method, file, data, callback) {
 	if(method == 'POST')
 	{
 		xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-		if(data)
-			xmlhttp.send(data);
-		else
-			xmlhttp.send(null);
+		
+		// Only send the data if it is set
+		xmlhttp.send((data) ? data : null);
 	}
 	// Otherwise just send the data
 	else

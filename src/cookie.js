@@ -1,5 +1,5 @@
 SparkFn.cookie = function(name, content, duration) {
-	if(content === undefined)
+	if(!content)
 	{
 		// Return cookie's content
 		var nameEQ = name + '=';
@@ -18,7 +18,7 @@ SparkFn.cookie = function(name, content, duration) {
 	}
 	else
 	{
-		if(duration === undefined)
+		if(!duration)
 		{
 			// Create cookie with preset duration of one year
 			var date = new Date();

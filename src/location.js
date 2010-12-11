@@ -51,6 +51,7 @@ SparkFn.location = function(x, y, timeframe, callback) {
 			}
 		}
 		else
-			return {x: this.elements[0].offsetLeft, y: this.elements[0].offsetTop}; // Return the location as an object
+			// Return the location as an object
+			return {x: this.elements[e].offsetLeft, y: this.elements[e].offsetTop};
 	}
 };

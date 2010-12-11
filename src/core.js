@@ -33,10 +33,7 @@ window.SparkIn = function()
 			// This also checks if querySelectorAll is avaliable, is so it uses it instead of Sizzle
 			if(!document.querySelectorAll)
 			{
-				if(context)
-					result = Sizzle(selector, context);
-				else
-					result = Sizzle(selector);
+				(context) ? result = Sizzle(selector, context) : Sizzle(selector);
 			}
 			else
 			{

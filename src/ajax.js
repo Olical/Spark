@@ -1,13 +1,11 @@
 SparkFn.ajax = function(method, file, data, callback) {
 	// Set up the request, allow for cross browser.
-	var xmlhttp;
-	
 	// For IE7+, Firefox, Chrome, Opera, Safari
 	if(window.XMLHttpRequest)
-		xmlhttp = new XMLHttpRequest();
+		var xmlhttp = new XMLHttpRequest();
 	// For IE6, IE5
 	else
-		xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');
+		var xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');
 	
 	// Convert to upper case.
 	method = method.toUpperCase();

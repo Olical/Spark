@@ -33,12 +33,15 @@ window.SparkIn = function()
 			// This also checks if querySelectorAll is avaliable, is so it uses it instead of Sizzle
 			if(!document.querySelectorAll)
 			{
+				// Run sizzle with or without a context
 				(context) ? result = Sizzle(selector, context) : Sizzle(selector);
 			}
 			else
 			{
+				// Run the query selector with or without a context
 				var resultb = ((context) ? context : document).querySelectorAll(selector);
 				
+				// Change the format of the returned elements so it resembles sizzle
 				for(var i = 0; i < resultb.length; ++i)
 					result[i] = resultb[i];
 			}
@@ -52,6 +55,7 @@ window.SparkIn = function()
 			library: 'Spark'
 		};
 		
+		// Add in the functions
 		for(var p in SparkFn)
 			built[p] = SparkFn[p];
 		
@@ -77,7 +81,7 @@ window.SparkIn = function()
 		return theEvent;
 	};
 	
-	// Take out the need for brackets on functions that do not need an element
+	// Take out the need for brackets
 	for(var i in Spark())
 		Spark[i] = $[i] = Spark()[i];
 };

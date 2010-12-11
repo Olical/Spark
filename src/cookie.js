@@ -31,22 +31,13 @@ SparkFn.cookie = function(name, content, duration) {
 	}
 	else
 	{
-		// Check if a duration is set
-		if(!duration)
-		{
-			// Set it to a year if not
-			var date = new Date();
-			date.setTime(date.getTime() + 31536000000);
-			var expires = '; expires=' + date.toGMTString();
-			document.cookie = name + '=' + content + expires + '; path=/';
-		}
-		else
-		{
-			// Create cookie with specified duration
-			var date = new Date();
-			date.setTime(date.getTime() + duration);
-			var expires = '; expires=' + date.toGMTString();
-			document.cookie = name + '=' + content + expires + '; path=/';
-		}
+		// Get the current time
+		var date = new Date();
+		
+		// Push the time on by either a year or the user defined duration
+		date.setTime(date.getTime() + ((duration) ? duration : 31536000000));
+		
+		// Set the cookie
+		document.cookie = name + '=' + content + '; expires=' + date.toGMTString() + '; path=/';
 	}
 };

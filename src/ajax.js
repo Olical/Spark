@@ -2,10 +2,12 @@ SparkFn.ajax = function(method, file, data, callback) {
 	// Set up the request, allow for cross browser.
 	var xmlhttp;
 	
+	// For IE7+, Firefox, Chrome, Opera, Safari
 	if(window.XMLHttpRequest)
-		xmlhttp = new XMLHttpRequest(); // For IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp = new XMLHttpRequest();
+	// For IE6, IE5
 	else
-		xmlhttp = new ActiveXObject('Microsoft.XMLHTTP'); // For IE6, IE5
+		xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');
 	
 	// Convert to upper case.
 	method = method.toUpperCase();
@@ -34,8 +36,9 @@ SparkFn.ajax = function(method, file, data, callback) {
 		else
 			xmlhttp.send(null);
 	}
+	// Otherwise just send the data
 	else
-		xmlhttp.send(null); // Otherwise just send the data
+		xmlhttp.send(null);
 	
 	if(callback == undefined)
 		return xmlhttp.responseText;

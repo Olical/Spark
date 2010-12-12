@@ -34,7 +34,7 @@ window.SparkIn = function()
 			if(!document.querySelectorAll)
 			{
 				// Run sizzle with or without a context
-				(context) ? result = Sizzle(selector, context) : Sizzle(selector);
+				result = (context) ? Sizzle(selector, context) : Sizzle(selector);
 			}
 			else
 			{
@@ -86,7 +86,7 @@ window.SparkIn = function()
 };
 SparkFn.ajax = function(method, file, data, callback) {
 	// Set up the request, allow for cross browser.
-	var xmlhttp = (XMLHttpRequest) ?
+	var xmlhttp = (window.XMLHttpRequest) ?
 		new XMLHttpRequest :
 		new ActiveXObject('Microsoft.XMLHTTP');
 	

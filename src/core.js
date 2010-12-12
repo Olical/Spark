@@ -34,7 +34,7 @@ window.SparkIn = function()
 			if(!document.querySelectorAll)
 			{
 				// Run sizzle with or without a context
-				(context) ? result = Sizzle(selector, context) : Sizzle(selector);
+				result = (context) ? Sizzle(selector, context) : Sizzle(selector);
 			}
 			else
 			{

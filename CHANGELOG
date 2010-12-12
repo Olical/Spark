@@ -12,6 +12,8 @@ Documentation https://github.com/Wolfy87/Spark/wiki
 Bug fixes:
 	[+] Replaced an operator in the AJAX module that would not work in IE.
 	[+] Updated all of the plugins to conform with the new core code.
+	[+] XMLHtppRequest check in the ajax module, now does a not undefined comparison.
+	[+] Fixed an assignment fail in the running of Sizzle in the core module.
 
 Files:
 	[+] Added the makefile.

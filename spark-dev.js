@@ -64,7 +64,7 @@ window.SparkIn = function()
 	
 	// Function for making the pageX/Y values work in IE
 	Spark.fixEvents = function(theEvent) {
-		if(!theEvent.pageX)
+		if(theEvent.pageX === undefined)
 		{
 			var d = (document.documentElement && document.documentElement.scrollLeft != null) ? document.documentElement : document.body;
 			docX = theEvent.clientX + d.scrollLeft;

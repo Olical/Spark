@@ -6,6 +6,15 @@ Repository    https://github.com/Wolfy87/Spark
 Documentation https://github.com/Wolfy87/Spark/wiki
 
 ====================================
+=       1.2.0 - (06/1/2011)       =
+====================================
+
+Files:
+	[+] Created the browser module's source file.
+	[+] Added the browser module to the make file.
+	[+] Added an example of the browser module.
+
+====================================
 =       1.1.0 - (11/12/2010)       =
 ====================================
 

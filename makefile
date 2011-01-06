@@ -22,7 +22,8 @@ modules =	${srcdir}ajax.js\
 			${srcdir}location.js\
 			${srcdir}opacity.js\
 			${srcdir}ready.js\
-			${srcdir}size.js
+			${srcdir}size.js\
+			${srcdir}browser.js
 
 # Build full list of files
 files = ${core} ${modules} ${dependencies} ${initialisation}

@@ -6,7 +6,7 @@ SparkFn.browser = function() {
 			this.version = this.searchVersion(navigator.userAgent)
 				|| this.searchVersion(navigator.appVersion)
 				|| "an unknown version";
-			this.OS = this.searchString(this.dataOS) || "an unknown OS";
+			this.os = this.searchString(this.dataOS) || "an unknown OS";
 		},
 		searchString: function (data) {
 			for (var i=0;i<data.length;i++)	{

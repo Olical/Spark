@@ -32,7 +32,7 @@ Bug fixes:
 Files:
 	[+] Added the makefile.
 	[+] Added the AJAX test file.
-	[+] Seperated all of the functions into individual files (/src/*).
+	[+] Separated all of the functions into individual files (/src/*).
 	[-] Removed compress.sh.
 
 Optimisation:

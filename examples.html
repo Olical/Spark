@@ -116,6 +116,10 @@
 				<p>The ready function runs it's callback on dom ready.</p>
 				<p>All of the functions in this test page are run by the ready function.</p>
 				<hr />
+				<h2>browser</h2>
+				<p>The browser function returns in-depth information about the clients browser.</p>
+				<p class='browser'>Your browser data will be loaded here.</p>
+				<hr />
 				<h2>Plugins</h2>
 				<p>Plugins can be created by assigning functions to 'SparkFn', for example, 'SparkFn.myPlugin = function() {...};'</p>
 				<p>After creating your plugin, you have to run 'SparkIn();' to reload your plugin into Spark.</p>
@@ -191,6 +195,9 @@
 				$('a.plugin').event('click', function() {
 					$('h1').read();
 				});
+				
+				// Display the clients browsers information
+				$('p.browser').content('You are using ' + $.browser().browser + ' version ' + $.browser().version + ' on ' + $.browser().os);
 			});
 		</script>
 	</body>

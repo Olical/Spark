@@ -1,6 +1,6 @@
 /*
  * Spark JavaScript library v1.2.0
- * http://flowdev.co.uk/
+ * http://sparkjs.co.uk/
  * 
  * Copyright 2010, Oliver Caldwell
  * Dual licensed under the MIT or GPL Version 2 licenses.

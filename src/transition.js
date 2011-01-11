@@ -1,11 +1,10 @@
 SparkFn.transition = function(method, timeframe, callback) {
 	// Check if we have a callback, if not set it to and empty function
 	if(callback === undefined)
-	callback = new Function();
+		callback = new Function();
 	
 	// Loop through all elements
-	for(var e in this.elements)
-	{
+	for(var e in this.elements) {
 		// Set overflow to hidden
 		$(this.selector).css({overflow: 'hidden'});
 		

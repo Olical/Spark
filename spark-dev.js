@@ -296,6 +296,9 @@ SparkFn.location = function(x, y, timeframe, callback) {
 			// Return the location as an object
 			return {x: this.elements[e].offsetLeft, y: this.elements[e].offsetTop};
 	}
+	
+	// Return the Spark object
+	return this;
 };
 SparkFn.opacity = function(opacity, timeframe, callback) {
 	for(var e in this.elements)

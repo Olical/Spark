@@ -53,4 +53,7 @@ SparkFn.size = function(width, height, timeframe, callback) {
 		else
 			return {width: this.elements[e].offsetWidth, height: this.elements[e].offsetHeight}; // Give size as an object.
 	}
+	
+	// Return the Spark object
+	return this;
 };

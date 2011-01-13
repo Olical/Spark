@@ -1,12 +1,6 @@
 SparkFn.ajax = function(method, file, data, callback) {
-	// If we are in IE <= 6 set a flag
-	var browser = Spark.browser();
-	if(browser.browser == "Explorer" && browser.version <= 6)
-		// OH GOD IE <= 6! Don't panic, we can make it through this.
-		var ie = true;
-	
 	// Set up the request, allow for cross browser.
-	var xmlhttp = (ie) ? 
+	var xmlhttp = (!XMLHttpRequest) ? 
 		new ActiveXObject('Microsoft.XMLHTTP') :
 		new XMLHttpRequest;
 	

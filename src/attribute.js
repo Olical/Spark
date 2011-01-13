@@ -7,7 +7,7 @@ SparkFn.attribute = function(attribute) {
 		}
 	}
 	
-	if(attribute !== undefined)
+	if(attribute === undefined)
 		return this.elements[0];
 	
 	return this;

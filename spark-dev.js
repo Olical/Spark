@@ -27,25 +27,9 @@ window.SparkIn = function()
 		var result = new Object();
 		
 		// Check that they have passed arguments to the class
-		if(selector)
-		{
-			// If context then get result with context, if not just get the element
-			// This also checks if querySelectorAll is avaliable, is so it uses it instead of Sizzle
-			if(!document.querySelectorAll)
-			{
-				// Run sizzle with or without a context
-				result = (context) ? Sizzle(selector, context) : Sizzle(selector);
-			}
-			else
-			{
-				// Run the query selector with or without a context
-				var resultb = ((context) ? context : document).querySelectorAll(selector);
-				
-				// Change the format of the returned elements so it resembles sizzle
-				for(var i = 0; i < resultb.length; ++i)
-					result[i] = resultb[i];
-			}
-		}
+		if(selector !== undefined)
+			// Run sizzle with or without a context
+			result = (context) ? Sizzle(selector, context) : Sizzle(selector);
 		
 		// Assign data to the built object
 		var built = {

@@ -57,7 +57,7 @@ window.SparkIn = function()
 			theEvent.pageY = docY;
 		}
 		
-		if(theEvent.target === undefined)
+		if(!theEvent.target)
 			theEvent.target = theEvent.srcElement;
 		
 		// Return the calculated positions in an object

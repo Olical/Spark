@@ -7,4 +7,7 @@ SparkFn.event = function(type, callback) {
 		else if(this.elements[e].attachEvent)
 			this.elements[e].attachEvent('on' + type, function(event) {callback(Spark.fixEvents(event))});
 	}
+	
+	// Return the Spark object
+	return this;
 };

@@ -7,8 +7,10 @@ SparkFn.attribute = function(attribute) {
 		}
 	}
 	
+	// If they did not set anything, return the first element
 	if(attribute === undefined)
 		return this.elements[0];
 	
+	// Otherwise return the Spark object
 	return this;
 };

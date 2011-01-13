@@ -69,14 +69,8 @@ window.SparkIn = function()
 		Spark[i] = $[i] = Spark()[i];
 };
 SparkFn.ajax = function(method, file, data, callback) {
-	// If we are in IE <= 6 set a flag
-	var browser = Spark.browser();
-	if(browser.browser == "Explorer" && browser.version <= 6)
-		// OH GOD IE <= 6! Don't panic, we can make it through this.
-		var ie = true;
-	
 	// Set up the request, allow for cross browser.
-	var xmlhttp = (ie) ? 
+	var xmlhttp = (!XMLHttpRequest) ? 
 		new ActiveXObject('Microsoft.XMLHTTP') :
 		new XMLHttpRequest;
 	
@@ -136,12 +130,10 @@ SparkFn.content = function(content, append) {
 		if(!content)
 			return this.elements[e].innerHTML;
 		else
-		{
 			// Append or replace content depending on the append flag
 			(!append) ?
 				this.elements[e].innerHTML = content :
 				this.elements[e].innerHTML += content;
-		}
 	}
 	
 	return this;
@@ -159,15 +151,13 @@ SparkFn.cookie = function(name, content, duration) {
 		var ca = document.cookie.split(';');
 		
 		// Loop through all of the cookies looking for ours
-		for(var i = 0; i < ca.length; i++)
+		for(var i in ca)
 		{
 			var c = ca[i];
 			
 			// Cut of the whitespace
 			while(c.charAt(0) == ' ')
-			{
 				c = c.substring(1, c.length);
-			}
 			
 			// If the cookie has the right name, return its contents
 			if(c.indexOf(nameEQ) == 0)

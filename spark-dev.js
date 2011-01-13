@@ -203,8 +203,8 @@ SparkFn.event = function(type, callback) {
 SparkFn.json = function(method, data) {
 	if(method == 'encode')
 		return JSON.stringify(data);
-	else
-		return JSON.parse(data);
+	
+	return JSON.parse(data);
 };
 SparkFn.location = function(x, y, timeframe, callback) {
 	for(var e in this.elements)

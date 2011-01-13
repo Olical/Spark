@@ -138,7 +138,10 @@ SparkFn.attribute = function(attribute) {
 		}
 	}
 	
-	return this.elements[0];
+	if(attribute !== undefined)
+		return this.elements[0];
+	
+	return this;
 };
 SparkFn.content = function(content, append) {
 	for(var e in this.elements)

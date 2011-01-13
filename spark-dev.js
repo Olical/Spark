@@ -375,6 +375,9 @@ SparkFn.opacity = function(opacity, timeframe, callback) {
 			}
 		}
 	}
+	
+	// Return the Spark object
+	return this;
 };
 SparkFn.ready = function(callback) {
 	window.alreadyrunflag = 0;

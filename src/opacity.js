@@ -73,4 +73,7 @@ SparkFn.opacity = function(opacity, timeframe, callback) {
 			}
 		}
 	}
+	
+	// Return the Spark object
+	return this;
 };

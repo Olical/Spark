@@ -212,7 +212,10 @@ SparkFn.css = function(css) {
 		}
 	}
 	
-	return this.elements[0].style;
+	if(css === undefined)
+		return this.elements[0].style;
+	
+	return this;
 };
 SparkFn.event = function(type, callback) {
 	for(var e in this.elements)

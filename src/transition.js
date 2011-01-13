@@ -74,4 +74,7 @@ SparkFn.transition = function(method, timeframe, callback) {
 				break;
 		}
 	}
+	
+	// Return the Spark object
+	return this;
 };

@@ -7,5 +7,8 @@ SparkFn.attribute = function(attribute) {
 		}
 	}
 	
-	return this.elements[0];
+	if(attribute !== undefined)
+		return this.elements[0];
+	
+	return this;
 };

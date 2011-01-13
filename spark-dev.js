@@ -661,6 +661,9 @@ SparkFn.browser = function() {
 				break;
 		}
 	}
+	
+	// Return the Spark object
+	return this;
 };(function(){
 
 var chunker = /((?:\((?:\([^()]+\)|[^()]+)+\)|\[(?:\[[^\[\]]*\]|['"][^'"]*['"]|[^\[\]'"]+)+\]|\\.|[^ >+~,(\[\\]+)+|[>+~])(\s*,\s*)?((?:.|\r|\n)*)/g,

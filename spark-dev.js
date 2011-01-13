@@ -138,9 +138,11 @@ SparkFn.attribute = function(attribute) {
 		}
 	}
 	
+	// If they did not set anything, return the first element
 	if(attribute === undefined)
 		return this.elements[0];
 	
+	// Otherwise return the Spark object
 	return this;
 };
 SparkFn.content = function(content, append) {
@@ -212,9 +214,11 @@ SparkFn.css = function(css) {
 		}
 	}
 	
+	// If they did not set anything, return the first element's style
 	if(css === undefined)
 		return this.elements[0].style;
 	
+	// Otherwise return the Spark object
 	return this;
 };
 SparkFn.event = function(type, callback) {
@@ -226,6 +230,9 @@ SparkFn.event = function(type, callback) {
 		else if(this.elements[e].attachEvent)
 			this.elements[e].attachEvent('on' + type, function(event) {callback(Spark.fixEvents(event))});
 	}
+	
+	// Return the Spark object
+	return this;
 };
 SparkFn.json = function(method, data) {
 	if(method == 'encode')

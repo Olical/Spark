@@ -5,12 +5,10 @@ SparkFn.content = function(content, append) {
 		if(!content)
 			return this.elements[e].innerHTML;
 		else
-		{
 			// Append or replace content depending on the append flag
 			(!append) ?
 				this.elements[e].innerHTML = content :
 				this.elements[e].innerHTML += content;
-		}
 	}
 	
 	return this;

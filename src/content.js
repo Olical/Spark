@@ -12,4 +12,6 @@ SparkFn.content = function(content, append) {
 				this.elements[e].innerHTML += content;
 		}
 	}
+	
+	return this;
 };

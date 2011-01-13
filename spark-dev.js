@@ -154,6 +154,8 @@ SparkFn.content = function(content, append) {
 				this.elements[e].innerHTML += content;
 		}
 	}
+	
+	return this;
 };
 SparkFn.cookie = function(name, content, duration) {
 	// Check if content is set

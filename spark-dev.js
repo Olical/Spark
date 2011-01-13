@@ -109,12 +109,8 @@ SparkFn.ajax = function(method, file, data, callback) {
 };
 SparkFn.attribute = function(attribute) {
 	for(var e in this.elements)
-	{
 		for(var a in attribute)
-		{
 			this.elements[e][a] = attribute[a];
-		}
-	}
 	
 	// If they did not set anything, return the first element
 	if(attribute === undefined)
@@ -181,12 +177,8 @@ SparkFn.cookie = function(name, content, duration) {
 };
 SparkFn.css = function(css) {
 	for(var e in this.elements)
-	{
 		for(var c in css)
-		{
 			this.elements[e].style[c] = css[c];
-		}
-	}
 	
 	// If they did not set anything, return the first element's style
 	if(css === undefined)

@@ -667,7 +667,7 @@ SparkFn.browser = function() {
 						return function() {
 							extelement.style[extp] = extoriginal + (extpixels * exti) + extunit;
 						}
-					})(i, element, p, original, pixels, unit), i * (1000 / 60), this.elements[e], p, original, pixels, unit);
+					})(i, this.elements[e], p, original, pixels, unit), i * (1000 / 60), this.elements[e], p, original, pixels, unit);
 				}
 				
 				// Correct floating point problem
@@ -675,7 +675,7 @@ SparkFn.browser = function() {
 					return function() {
 						extelement.style[extp] = extproperties[extp] + extunit;
 					}
-				})(i, element, p, properties, unit), timeframe, this.elements[e], p, properties, unit);
+				})(i, this.elements[e], p, properties, unit), timeframe, this.elements[e], p, properties, unit);
 		}
 	}
 	

@@ -669,7 +669,7 @@ SparkFn.browser = function() {
 			var unit = (isNaN(properties[p])) ? properties[p].replace(/[0-9]/g, '') : 'px';
 			
 			// Another opacity fix
-			if(properties.opacity)
+			if(p == 'opacity' || p == 'MozOpacity' || p == 'khtmlOpacity')
 				unit = false;
 			
 			// Loop through each frame

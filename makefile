@@ -21,7 +21,6 @@ modules =	${srcdir}ajax.js\
 			${srcdir}json.js\
 			${srcdir}ready.js\
 			${srcdir}browser.js\
-			${srcdir}transition.js\
 			${srcdir}animate.js
 
 # Build full list of files

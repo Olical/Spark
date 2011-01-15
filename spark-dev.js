@@ -636,6 +636,14 @@ SparkFn.browser = function() {
 		// Set a default timeframe
 		if(timeframe === undefined) timeframe = 800;
 		
+		// Fix opacity
+		if(properties.opacity) {
+			properties.opacity = properties.opacity / 100;
+			properties.MozOpacity = properties.opacity;
+			properties.khtmlOpacity = properties.opacity;
+			properties.filter = properties.opacity;
+		}
+		
 		// Loop through all of the properties
 		for(var p in properties) {
 			// Make sure the style is set
@@ -647,10 +655,10 @@ SparkFn.browser = function() {
 				if(this.elements[e].style[p] == 'auto') this.elements[e].style[p] = 0;
 				
 				// Get the original
-				var original = parseInt(this.elements[e].style[p]);
+				var original = parseFloat(this.elements[e].style[p]);
 				
 				// Work out the difference
-				var difference = parseInt(properties[p]) - original;
+				var difference = parseFloat(properties[p]) - original;
 				
 				// Work out how many frames
 				var frames = timeframe / (1000 / 60);
@@ -661,11 +669,18 @@ SparkFn.browser = function() {
 				// Work out the unit of measurement
 				var unit = (isNaN(properties[p])) ? properties[p].replace(/[0-9]/g, '') : 'px';
 				
+				// Another opacity fix
+				if(properties.opacity)
+					unit = false;
+				
 				// Loop through each frame
 				for(var i = 0; i <= frames; i++) {
 					setTimeout((function(exti, extelement, extp, extoriginal, extpixels, extunit) {
 						return function() {
-							extelement.style[extp] = extoriginal + (extpixels * exti) + extunit;
+							if(extp != 'filter')
+								extelement.style[extp] = extoriginal + (extpixels * exti) + extunit;
+							else
+								extelement.style[extp] = 'alpha(opacity=' + extoriginal + ((extpixels * 100) * exti) + ')';
 						}
 					})(i, this.elements[e], p, original, pixels, unit), i * (1000 / 60), this.elements[e], p, original, pixels, unit);
 				}

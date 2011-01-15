@@ -206,145 +206,6 @@ SparkFn.json = function(method, data) {
 	
 	return JSON.parse(data);
 };
-SparkFn.location = function(x, y, timeframe, callback) {
-	for(var e in this.elements)
-	{
-		if(x && y)
-		{
-			if(timeframe)
-			{
-				// Resize in timeframe
-				// Work out distance
-				var xdiff = x - parseInt(this.elements[e].offsetLeft);
-				var ydiff = y - parseInt(this.elements[e].offsetTop);
-				
-				// Work out how many frames are required
-				var frames = timeframe / (1000 / this.fps);
-				
-				// Work out how many pixels it needs to move each frame
-				var xpps = xdiff / frames;
-				var ypps = ydiff / frames;
-				
-				// Set up original positions
-				var origx = parseInt(this.elements[e].offsetLeft);
-				var origy = parseInt(this.elements[e].offsetTop);
-				
-				// Loop through all frames setting a time out reposition each time
-				var timers = [];
-				for(var i = 0; i <= frames; i++)
-				{
-					setTimeout((function(privateEye, elements) {
-					return function() {
-						elements[e].style.left = origx + (xpps * privateEye) + 'px';
-						elements[e].style.top = origy + (ypps * privateEye) + 'px';
-					}})(i, this.elements), i * (1000 / this.fps), this.elements);
-				}
-				
-				// Correct floating point problem
-				setTimeout((function(privateEye, elements) {
-				return function() {
-					elements[e].style.left = x + 'px';
-					elements[e].style.top = y + 'px';
-				}})(i, this.elements), timeframe, this.elements);
-				
-				// Set callback timer
-				if(callback)
-					setTimeout(callback, timeframe);
-			}
-			else
-			{
-				// Resize instantly
-				this.elements[e].style.left = x + 'px';
-				this.elements[e].style.top = y + 'px';
-			}
-		}
-		else
-			// Return the location as an object
-			return {x: this.elements[e].offsetLeft, y: this.elements[e].offsetTop};
-	}
-	
-	// Return the Spark object
-	return this;
-};
-SparkFn.opacity = function(opacity, timeframe, callback) {
-	for(var e in this.elements)
-	{
-		this.elements[e].style.zoom = 1;
-		
-		// Get origopacity
-		if(this.elements[e].currentStyle)
-			var origopacity = this.elements[e].currentStyle.opacity;
-		else if(window.getComputedStyle)
-			var origopacity = document.defaultView.getComputedStyle(this.elements[e], null).getPropertyValue('opacity');
-		origopacity = parseInt(origopacity);
-		
-		if(opacity === undefined)
-			return origopacity * 100; // Return the transparency of the element as a percentage
-		else
-		{
-			if(timeframe === undefined)
-			{
-				// Change transparency instantly
-				this.elements[e].style.opacity = opacity / 100;
-				this.elements[e].style.MozOpacity = opacity / 100;
-				this.elements[e].style.khtmlOpacity = opacity / 100;
-				this.elements[e].style.filter = 'alpha(opacity=' + opacity + ')';
-			}
-			else
-			{
-				// Change transparency over the timeframe
-				// If not already, set the opacity to full
-				this.elements[e].style.opacity = origopacity;
-				this.elements[e].style.MozOpacity = origopacity;
-				this.elements[e].style.khtmlOpacity = origopacity;
-				this.elements[e].style.filter = 'alpha(opacity=' + (origopacity * 100) + ')';
-				
-				// Work out difference
-				var opacitydiff = opacity - (origopacity * 100);
-				
-				// Work out how many frames are needed
-				var frames = timeframe / (1000 / this.fps);
-				
-				// Work out how many it needs to move each frame
-				var opacitypps = opacitydiff / frames;
-				
-				// Set up original opacity
-				var origopacity = origopacity * 100;
-				
-				// Loop through all frames setting a time out opacity change each time
-				var timers = [];
-				for(var i = 0; i <= frames; i++)
-				{
-					setTimeout((function(privateEye, elements) {
-					return function() {
-						var newopacity = origopacity + (opacitypps * privateEye);
-						elements[e].style.opacity = newopacity / 100;
-						elements[e].style.MozOpacity = newopacity / 100;
-						elements[e].style.khtmlOpacity = newopacity / 100;
-						elements[e].style.filter = 'alpha(opacity=' + newopacity + ')';
-					}})(i, this.elements), i * (1000 / this.fps), this.elements);
-				}
-				
-				// Correct floating point problem
-				setTimeout((function(privateEye, elements) {
-				return function() {
-					var newopacity = origopacity + (opacitypps * privateEye);
-					elements[e].style.opacity = opacity / 100;
-					elements[e].style.MozOpacity = opacity / 100;
-					elements[e].style.khtmlOpacity = opacity / 100;
-					elements[e].style.filter = 'alpha(opacity=' + opacity + ')';
-				}})(i, this.elements), timeframe, this.elements);
-				
-				// Set callback timer if a callback is set
-				if(callback !== undefined)
-					setTimeout(callback, timeframe);
-			}
-		}
-	}
-	
-	// Return the Spark object
-	return this;
-};
 SparkFn.ready = function(callback) {
 	window.alreadyrunflag = 0;
 
@@ -368,65 +229,6 @@ SparkFn.ready = function(callback) {
 	window.onload = function() {
 		setTimeout("if(!alreadyrunflag) callback()", 0);
 	};
-};
-SparkFn.size = function(width, height, timeframe, callback) {
-	for(var e in this.elements)
-	{
-		if(width !== undefined && height !== undefined)
-		{
-			if(timeframe !== undefined)
-			{
-				// Resize in timeframe
-				// Work out distance
-				var widthdiff = width - parseInt(this.elements[e].offsetWidth);
-				var heightdiff = height - parseInt(this.elements[e].offsetHeight);
-				
-				// Work out how many frames are required
-				var frames = timeframe / (1000 / this.fps);
-				
-				// Work out how many pixels it needs to move each frame
-				var widthpps = widthdiff / frames;
-				var heightpps = heightdiff / frames;
-				
-				// Set up original sizes
-				var origwidth = parseInt(this.elements[e].offsetWidth);
-				var origheight = parseInt(this.elements[e].offsetHeight);
-				
-				// Loop through all frames setting a time out resize each time
-				var timers = [];
-				for(var i = 0; i <= frames; i++)
-				{
-					setTimeout((function(privateEye, elements) {
-					return function() {
-						elements[e].style.width = origwidth + (widthpps * privateEye) + 'px';
-						elements[e].style.height = origheight + (heightpps * privateEye) + 'px';
-					}})(i, this.elements), i * (1000 / this.fps), this.elements);
-				}
-				
-				// Correct floating point problem
-				setTimeout((function(privateEye, elements) {
-				return function() {
-					elements[e].style.width = width + 'px';
-					elements[e].style.height = height + 'px';
-				}})(i, this.elements), timeframe, this.elements);
-				
-				// Set callback timer
-				if(callback !== undefined)
-					setTimeout(callback, timeframe);
-			}
-			else
-			{
-				// Resize instantly
-				this.elements[e].style.width = width + 'px';
-				this.elements[e].style.height = height + 'px';
-			}
-		}
-		else
-			return {width: this.elements[e].offsetWidth, height: this.elements[e].offsetHeight}; // Give size as an object.
-	}
-	
-	// Return the Spark object
-	return this;
 };
 SparkFn.browser = function() {
 	// A browser detection function from http://www.quirksmode.org/js/detect.html
@@ -640,7 +442,7 @@ SparkFn.browser = function() {
 		if(properties.opacity) {
 			properties.opacity = properties.opacity;
 			properties.MozOpacity = properties.opacity;
-			properties.khtmlOpacity = properties.opacity;
+			properties.KhtmlOpacity = properties.opacity;
 			properties.filter = properties.opacity * 100;
 		}
 		
@@ -658,10 +460,10 @@ SparkFn.browser = function() {
 				this.elements[e].style[p] = 'alpha(opacity=100)';
 			
 			// Get the original
-			var original = (p == 'opacity' || p == 'MozOpacity' || p == 'khtmlOpacity') ? parseFloat(this.elements[e].style[p]) : parseInt(this.elements[e].style[p].replace('alpha(opacity=', '').replace(')', ''));
+			var original = (p == 'opacity' || p == 'MozOpacity' || p == 'KhtmlOpacity') ? parseFloat(this.elements[e].style[p]) : parseInt(this.elements[e].style[p].replace('alpha(opacity=', '').replace(')', ''));
 			
 			// Work out the difference
-			var difference = (p == 'opacity' || p == 'MozOpacity' || p == 'khtmlOpacity') ? parseFloat(properties[p]) - original : parseInt(properties[p]) - original;
+			var difference = (p == 'opacity' || p == 'MozOpacity' || p == 'KhtmlOpacity') ? parseFloat(properties[p]) - original : parseInt(properties[p]) - original;
 			
 			// Work out how many frames
 			var frames = timeframe / (1000 / 60);
@@ -673,7 +475,7 @@ SparkFn.browser = function() {
 			var unit = (isNaN(properties[p])) ? properties[p].replace(/[0-9]/g, '') : 'px';
 			
 			// Another opacity fix
-			if(p == 'opacity' || p == 'MozOpacity' || p == 'khtmlOpacity')
+			if(p == 'opacity' || p == 'MozOpacity' || p == 'KhtmlOpacity')
 				unit = false;
 			else if(p == 'filter') {
 				unit = ')';

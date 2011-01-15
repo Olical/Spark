@@ -8,7 +8,7 @@ SparkFn.animate = function(properties, timeframe, callback) {
 		if(properties.opacity) {
 			properties.opacity = properties.opacity;
 			properties.MozOpacity = properties.opacity;
-			properties.khtmlOpacity = properties.opacity;
+			properties.KhtmlOpacity = properties.opacity;
 			properties.filter = properties.opacity * 100;
 		}
 		
@@ -26,10 +26,10 @@ SparkFn.animate = function(properties, timeframe, callback) {
 				this.elements[e].style[p] = 'alpha(opacity=100)';
 			
 			// Get the original
-			var original = (p == 'opacity' || p == 'MozOpacity' || p == 'khtmlOpacity') ? parseFloat(this.elements[e].style[p]) : parseInt(this.elements[e].style[p].replace('alpha(opacity=', '').replace(')', ''));
+			var original = (p == 'opacity' || p == 'MozOpacity' || p == 'KhtmlOpacity') ? parseFloat(this.elements[e].style[p]) : parseInt(this.elements[e].style[p].replace('alpha(opacity=', '').replace(')', ''));
 			
 			// Work out the difference
-			var difference = (p == 'opacity' || p == 'MozOpacity' || p == 'khtmlOpacity') ? parseFloat(properties[p]) - original : parseInt(properties[p]) - original;
+			var difference = (p == 'opacity' || p == 'MozOpacity' || p == 'KhtmlOpacity') ? parseFloat(properties[p]) - original : parseInt(properties[p]) - original;
 			
 			// Work out how many frames
 			var frames = timeframe / (1000 / 60);
@@ -41,7 +41,7 @@ SparkFn.animate = function(properties, timeframe, callback) {
 			var unit = (isNaN(properties[p])) ? properties[p].replace(/[0-9]/g, '') : 'px';
 			
 			// Another opacity fix
-			if(p == 'opacity' || p == 'MozOpacity' || p == 'khtmlOpacity')
+			if(p == 'opacity' || p == 'MozOpacity' || p == 'KhtmlOpacity')
 				unit = false;
 			else if(p == 'filter') {
 				unit = ')';

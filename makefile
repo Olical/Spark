@@ -19,10 +19,7 @@ modules =	${srcdir}ajax.js\
 			${srcdir}css.js\
 			${srcdir}event.js\
 			${srcdir}json.js\
-			${srcdir}location.js\
-			${srcdir}opacity.js\
 			${srcdir}ready.js\
-			${srcdir}size.js\
 			${srcdir}browser.js\
 			${srcdir}transition.js\
 			${srcdir}animate.js

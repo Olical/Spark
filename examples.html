@@ -144,7 +144,7 @@
 				});
 				
 				// Hide the example div first
-				$('div.fadein').opacity(0);
+				$('div.fadein').css({opacity: 0});
 				
 				// Change the content of an element
 				$('p.content').content('This content has been changed');
@@ -167,16 +167,16 @@
 				$('span.counter').content($.cookie('counter'));
 				
 				// Fade in the example div
-				$('div.fadein').opacity(100, 1000);
+				$('div.fadein').animate({opacity: 1});
 				
 				// Set an event with callback for clicking the size link
 				$('a.size').event('click', function() {
-					$('div.size').size(880, 100, 1000);
+					$('div.size').animate({width: 880, height: 100});
 				});
 				
 				// Move an element over time
 				$('div.location div').event('click', function() {
-					$('div.location div').location(695, 95, 1000);
+					$('div.location div').animate({left: 695, top: 95});
 				});
 				
 				// JSON encode a string and show it

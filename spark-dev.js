@@ -1,5 +1,5 @@
 /*!
- * Spark JavaScript library v1.3.5
+ * Spark JavaScript library v1.4.0
  * http://sparkjs.co.uk/
  * 
  * Copyright 2010, Oliver Caldwell
@@ -176,9 +176,18 @@ SparkFn.cookie = function(name, content, duration) {
 	}
 };
 SparkFn.css = function(css) {
-	for(var e in this.elements)
-		for(var c in css)
+	for(var e in this.elements) {
+		for(var c in css) {
 			this.elements[e].style[c] = css[c];
+			
+			if(c == 'opacity') {
+				this.elements[e].style.MozOpacity = css[c];
+				this.elements[e].style.KhtmlOpacity = css[c];
+				this.elements[e].style.filter = 'alpha(opacity=' + (css[c] * 100) + ')';
+				this.elements[e].style.zoom = '1';
+			}
+		}
+	}
 	
 	// If they did not set anything, return the first element's style
 	if(css === undefined)
@@ -354,19 +363,18 @@ SparkFn.browser = function() {
 	// Return the data
 	return BrowserDetect;
 };SparkFn.animate = function(properties, timeframe, callback) {
+	// Set a default timeframe
+	if(timeframe === undefined) timeframe = 800;
+	
+	// Fix opacity
+	if(properties.opacity) {
+		properties.MozOpacity = properties.opacity;
+		properties.KhtmlOpacity = properties.opacity;
+		properties.filter = properties.opacity * 100;
+	}
+	
 	// Loop through all the elements
 	for(var e in this.elements) {
-		// Set a default timeframe
-		if(timeframe === undefined) timeframe = 800;
-		
-		// Fix opacity
-		if(properties.opacity) {
-			properties.opacity = properties.opacity;
-			properties.MozOpacity = properties.opacity;
-			properties.KhtmlOpacity = properties.opacity;
-			properties.filter = properties.opacity * 100;
-		}
-		
 		// Loop through all of the properties
 		for(var p in properties) {
 			// Make sure the style is set
@@ -376,8 +384,9 @@ SparkFn.browser = function() {
 			
 			// Fix for IE stuff
 			if(this.elements[e].style[p] == 'auto') this.elements[e].style[p] = 0;
+			this.elements[e].style.zoom = '1';
 			
-			if(p == 'filter')
+			if(p == 'filter' && !this.elements[e].style[p])
 				this.elements[e].style[p] = 'alpha(opacity=100)';
 			
 			// Get the original
@@ -387,7 +396,7 @@ SparkFn.browser = function() {
 			var difference = (p == 'opacity' || p == 'MozOpacity' || p == 'KhtmlOpacity') ? parseFloat(properties[p]) - original : parseInt(properties[p]) - original;
 			
 			// Work out how many frames
-			var frames = timeframe / (1000 / 60);
+			var frames = timeframe / (1000 / this.fps);
 			
 			// Work out how many pixels per frame
 			var pixels = difference / frames;
@@ -411,7 +420,7 @@ SparkFn.browser = function() {
 					return function() {
 						extelement.style[extp] = extprefix + (extoriginal + (extpixels * exti)) + extunit;
 					}
-				})(i, this.elements[e], p, original, pixels, unit, prefix), i * (1000 / 60), this.elements[e], p, original, pixels, unit, prefix);
+				})(i, this.elements[e], p, original, pixels, unit, prefix), i * (1000 / this.fps), this.elements[e], p, original, pixels, unit, prefix);
 			}
 			
 			// Correct floating point problem

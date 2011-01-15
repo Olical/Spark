@@ -442,8 +442,9 @@ SparkFn.browser = function() {
 	// Set the source file
 	script.src = file + '?callback=' + callback;
 	
-	// Loop through the parameters adding them to the src
+	// Loop through the parameters
 	for(p in parameters) {
+		// And an ampersand and the specified parameter
 		script.src += '&' + parameters[p];
 	}
 	

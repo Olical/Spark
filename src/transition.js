@@ -10,23 +10,25 @@ SparkFn.transition = function(method, timeframe, callback) {
 	// Loop through all elements
 	for(var e in this.elements) {
 		// Set overflow to hidden
-		$(this.selector).css({overflow: 'hidden'});
+		this.css({overflow: 'hidden'});
 		
 		// Work out what method we need to do
 		switch(method)
 		{
 			case 'slidedown':
 				// Display it
-				$(this.selector).css({display: 'block'});
+				this.css({display: 'block'});
 				
 				// Get original height
-				var original = $(this.selector).size().height;
+				var original = (window.getComputedStyle) ?
+					window.getComputedStyle(this.elements[e], null).height :
+					this.elements[e].currentStyle.height;
 				
 				// Set height to 0
-				$(this.selector).size($(this.selector).size().width, 0);
+				this.css({height: 0});
 				
 				// Slide height to original
-				$(this.selector).size($(this.selector).size().width, original, timeframe, callback);
+				this.animate({height: original}, timeframe, callback);
 				break;
 			
 			case 'slideup':

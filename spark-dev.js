@@ -488,15 +488,17 @@ SparkFn.browser = function() {
 			case 'slideup':
 				var selector = this.selector;
 				
+				var element = this.elements[e];
+								
 				// Get original height
 				var original = this.elements[e].offsetHeight;
 				
 				// Slide height to 0
 				this.animate({height: 0}, timeframe, function() {
 					// Set height to original
-					$(selector).css({height: original, display: 'none'});
-					alert(selector);
-					alert(original);
+					element.style.height = original + 'px';
+					element.style.display = 'none';
+					
 					// Run the callback
 					callback();
 				});

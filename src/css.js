@@ -7,6 +7,7 @@ SparkFn.css = function(css) {
 				this.elements[e].style.MozOpacity = css[c];
 				this.elements[e].style.KhtmlOpacity = css[c];
 				this.elements[e].style.filter = 'alpha(opacity=' + (css[c] * 100) + ')';
+				this.elements[e].style.zoom = '1';
 			}
 		}
 	}

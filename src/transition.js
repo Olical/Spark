@@ -52,13 +52,13 @@ SparkFn.transition = function(method, timeframe, callback) {
 			
 			case 'fadein':
 				// Display it
-				$(this.selector).css({display: 'block'});
+				this.css({display: 'block'});
 				
 				// Set opacity to 0
-				$(this.selector).opacity(0);
+				this.css({opacity: 0});
 				
 				// Fade opacity to 100
-				$(this.selector).opacity(100, timeframe, callback);
+				this.animate({opacity: 1}, timeframe, callback);
 				break;
 			
 			case 'fadeout':

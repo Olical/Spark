@@ -28,7 +28,7 @@ SparkFn.transition = function(method, timeframe, callback) {
 				this.css({height: 0});
 				
 				// Slide height to original
-				this.animate({height: original}, timeframe, callback);
+				this.animate({height: parseInt(original)}, timeframe, callback);
 				break;
 			
 			case 'slideup':

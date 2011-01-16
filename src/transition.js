@@ -3,6 +3,10 @@ SparkFn.transition = function(method, timeframe, callback) {
 	if(callback === undefined)
 		callback = new Function();
 	
+	// Check if the timeframe is set, if not default it to 800ms
+	if(timeframe === undefined)
+		timeframe = 800;
+	
 	// Loop through all elements
 	for(var e in this.elements) {
 		// Set overflow to hidden

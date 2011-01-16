@@ -33,18 +33,17 @@ SparkFn.transition = function(method, timeframe, callback) {
 			
 			case 'slideup':
 				// Get original height
-				var original = $(this.selector).size().height;
-				
-				// Se the selector so it is in scope
-				var selector = this.selector;
+				var original = (window.getComputedStyle) ?
+					window.getComputedStyle(this.elements[e], null).height :
+					this.elements[e].currentStyle.height;
 				
 				// Slide height to 0
-				$(this.selector).size($(this.selector).size().width, 0, timeframe, function() {
+				this.animate({height: 0}, timeframe, function() {
 					// Set height to original
-					$(selector).size($(selector).size().width, original);
+					this.css({height: parseInt(original)});
 					
 					// Hide it
-					$(selector).css({display: 'none'});
+					this.css({display: 'none'});
 					
 					// Run the callback
 					callback();

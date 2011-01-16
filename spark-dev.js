@@ -440,26 +440,20 @@ SparkFn.browser = function() {
 	// Return the Spark object
 	return this;
 };SparkFn.jsonp = function(file, callback, parameters) {
-	// Grab the head element
-	var head = document.getElementsByTagName('head')[0];
+	// Add the callback
+	file += '?callback=' + callback;
 	
-	// Create a script element
-	var script = document.createElement('script');
-	
-	// Set the type
-	script.type = 'text/javascript';
-	
-	// Set the source file
-	script.src = file + '?callback=' + callback;
-	
-	// Loop through the parameters
-	for(p in parameters) {
-		// And an ampersand and the specified parameter
-		script.src += '&' + parameters[p];
+	// If we have parameters
+	if(parameters !== undefined) {
+		// Loop through the parameters
+		for(p in parameters) {
+			// And an ampersand and the specified parameter
+			file += '&' + parameters[p];
+		}
 	}
 	
-	// Add the script element to the head
-	head.appendChild(script);
+	// Load the file
+	this.load(file);
 };SparkFn.transition = function(method, timeframe, callback) {
 	// Check if we have a callback, if not set it to and empty function
 	if(callback === undefined)
@@ -541,6 +535,21 @@ SparkFn.browser = function() {
 	
 	// Return the Spark object
 	return this;
+};SparkFn.load = function(file) {
+	// Grab the head element
+	var head = document.getElementsByTagName('head')[0];
+	
+	// Create a script element
+	var script = document.createElement('script');
+	
+	// Set the type
+	script.type = 'text/javascript';
+	
+	// Set the source file
+	script.src = file;
+	
+	// Add the script element to the head
+	head.appendChild(script);
 };(function(){
 
 var chunker = /((?:\((?:\([^()]+\)|[^()]+)+\)|\[(?:\[[^\[\]]*\]|['"][^'"]*['"]|[^\[\]'"]+)+\]|\\.|[^ >+~,(\[\\]+)+|[>+~])(\s*,\s*)?((?:.|\r|\n)*)/g,

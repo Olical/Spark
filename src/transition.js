@@ -32,6 +32,8 @@ SparkFn.transition = function(method, timeframe, callback) {
 				break;
 			
 			case 'slideup':
+				var selector = this.selector;
+				
 				// Get original height
 				var original = (window.getComputedStyle) ?
 					window.getComputedStyle(this.elements[e], null).height :
@@ -40,10 +42,10 @@ SparkFn.transition = function(method, timeframe, callback) {
 				// Slide height to 0
 				this.animate({height: 0}, timeframe, function() {
 					// Set height to original
-					this.css({height: parseInt(original)});
+					$(this.selector).css({height: parseInt(original)});
 					
 					// Hide it
-					this.css({display: 'none'});
+					$(this.selector).css({display: 'none'});
 					
 					// Run the callback
 					callback();
@@ -62,13 +64,15 @@ SparkFn.transition = function(method, timeframe, callback) {
 				break;
 			
 			case 'fadeout':
+				var selector = this.selector;
+				
 				// Fade opacity to 0
 				this.animate({opacity: 0}, timeframe, function() {
 					// Set opacity to 100
-					this.css({opacity: 1});
+					$(this.selector).css({opacity: 1});
 					
 					// Hide it
-					this.css({display: 'none'});
+					$(this.selector).css({display: 'none'});
 					
 					// Run the callback
 					callback();

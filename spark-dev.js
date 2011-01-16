@@ -184,6 +184,7 @@ SparkFn.css = function(css) {
 				this.elements[e].style.MozOpacity = css[c];
 				this.elements[e].style.KhtmlOpacity = css[c];
 				this.elements[e].style.filter = 'alpha(opacity=' + (css[c] * 100) + ')';
+				this.elements[e].style.zoom = '1';
 			}
 		}
 	}
@@ -487,6 +488,8 @@ SparkFn.browser = function() {
 				break;
 			
 			case 'slideup':
+				var selector = this.selector;
+				
 				// Get original height
 				var original = (window.getComputedStyle) ?
 					window.getComputedStyle(this.elements[e], null).height :
@@ -495,10 +498,10 @@ SparkFn.browser = function() {
 				// Slide height to 0
 				this.animate({height: 0}, timeframe, function() {
 					// Set height to original
-					this.css({height: parseInt(original)});
+					$(this.selector).css({height: parseInt(original)});
 					
 					// Hide it
-					this.css({display: 'none'});
+					$(this.selector).css({display: 'none'});
 					
 					// Run the callback
 					callback();
@@ -517,13 +520,15 @@ SparkFn.browser = function() {
 				break;
 			
 			case 'fadeout':
+				var selector = this.selector;
+				
 				// Fade opacity to 0
 				this.animate({opacity: 0}, timeframe, function() {
 					// Set opacity to 100
-					this.css({opacity: 1});
+					$(this.selector).css({opacity: 1});
 					
 					// Hide it
-					this.css({display: 'none'});
+					$(this.selector).css({display: 'none'});
 					
 					// Run the callback
 					callback();

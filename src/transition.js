@@ -20,24 +20,20 @@ SparkFn.transition = function(method, timeframe, callback) {
 				this.css({display: 'block'});
 				
 				// Get original height
-				var original = (window.getComputedStyle) ?
-					window.getComputedStyle(this.elements[e], null).height :
-					this.elements[e].currentStyle.height;
+				var original = parseInt(this.elements[e].offsetHeight);
 				
 				// Set height to 0
 				this.css({height: 0});
 				
 				// Slide height to original
-				this.animate({height: parseInt(original)}, timeframe, callback);
+				this.animate({height: original}, timeframe, callback);
 				break;
 			
 			case 'slideup':
 				var selector = this.selector;
 				
 				// Get original height
-				var original = (window.getComputedStyle) ?
-					window.getComputedStyle(this.elements[e], null).height :
-					this.elements[e].currentStyle.height;
+				var original = parseInt(this.elements[e].offsetHeight);
 				
 				// Slide height to 0
 				this.animate({height: 0}, timeframe, function() {

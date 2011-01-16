@@ -404,15 +404,16 @@ SparkFn.browser = function() {
 			// Work out the unit of measurement
 			var unit = (isNaN(properties[p])) ? properties[p].replace(/[0-9]/g, '') : 'px';
 			
+			// Set up the prefix
+			var prefix = '';
+			
 			// Another opacity fix
 			if(p == 'opacity' || p == 'MozOpacity' || p == 'KhtmlOpacity')
-				unit = false;
+				unit = '';
 			else if(p == 'filter') {
 				unit = ')';
-				var prefix = 'alpha(opacity=';
+				prefix = 'alpha(opacity=';
 			}
-			else
-				var prefix = false;
 			
 			// Loop through each frame
 			for(var i = 0; i <= frames; i++) {

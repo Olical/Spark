@@ -1,5 +1,5 @@
 /*!
- * Spark JavaScript library v1.4.0
+ * Spark JavaScript library v1.4.1
  * http://sparkjs.co.uk/
  * 
  * Copyright 2010, Oliver Caldwell
@@ -542,6 +542,15 @@ SparkFn.browser = function() {
 	
 	// Add the script element to the head
 	head.appendChild(script);
+};SparkFn.each = function(callback) {
+	// Loop through all of the elements
+	for(var e in this.elements) {
+		// Run the specified function and pass the element to it
+		callback(this.elements[e]);
+	}
+	
+	// Return the Spark object
+	return this;
 };(function(){
 
 var chunker = /((?:\((?:\([^()]+\)|[^()]+)+\)|\[(?:\[[^\[\]]*\]|['"][^'"]*['"]|[^\[\]'"]+)+\]|\\.|[^ >+~,(\[\\]+)+|[>+~])(\s*,\s*)?((?:.|\r|\n)*)/g,

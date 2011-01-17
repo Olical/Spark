@@ -7,9 +7,9 @@ For example you can perform a basic AJAX call like so: `alert($.ajax('get', 'som
 
 You can then make this into an asynchronous request by just adding a callback, like so: `$.ajax('get', 'someFile.php', 'data=some data', function(data) { alert(data) });`
 
-All functions are explained in the wiki as well as how to make plugins. Here is an example of making an element fade out to 0% opacity over the course of 1000 milliseconds, one second.
+All functions are explained in the documentation as well as how to make plugins. Here is an example of making an element fade out to 0% opacity over the course of 1000 milliseconds, one second.
 
-`$('p.myParagraph').opacity(0, 1000);`
+`$('p.myParagraph').animate({opacity: 0}, 1000);`
 
 If you are unsure of anything then the documentation will sort you out. <http://sparkjs.co.uk/documentation>
 

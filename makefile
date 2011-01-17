@@ -24,7 +24,8 @@ modules =	${srcdir}ajax.js\
 			${srcdir}animate.js\
 			${srcdir}jsonp.js\
 			${srcdir}transition.js\
-			${srcdir}load.js
+			${srcdir}load.js\
+			${srcdir}each.js
 
 # Build full list of files
 files = ${core} ${modules} ${dependencies} ${initialisation}

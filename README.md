@@ -23,7 +23,7 @@ If you are using Spark and you like it or at least like where it is going then p
 ## Licences
 
 ### MIT
-Copyright (c) 2010 Oliver Caldwell
+Copyright (C) 2011 Oliver Caldwell
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -44,7 +44,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 ### GPL
-Copyright (C) 2010 Oliver Caldwell
+Copyright (C) 2011 Oliver Caldwell
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

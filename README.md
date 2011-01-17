@@ -11,7 +11,7 @@ All functions are explained in the wiki as well as how to make plugins. Here is 
 
 `$('p.myParagraph').opacity(0, 1000);`
 
-If you are unsure of anything then the wiki will sort you out. <http://github.com/Wolfy87/Spark/wiki>
+If you are unsure of anything then the documentation will sort you out. <http://sparkjs.co.uk/documentation>
 
 You can see a practical example in a jsFiddle I made. It is draggable box. <http://jsfiddle.net/Wolfy87/HY2u4/>
 

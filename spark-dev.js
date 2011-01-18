@@ -415,21 +415,25 @@ SparkFn.browser = function() {
 				prefix = 'alpha(opacity=';
 			}
 			
+			this.data(this.elements[e], 'Spark.animations', 'START');
+			
 			// Loop through each frame
 			for(var i = 0; i <= frames; i++) {
-				setTimeout((function(exti, extelement, extp, extoriginal, extpixels, extunit, extprefix) {
+				this.data(this.elements[e], 'Spark.animations', this.data(this.elements[e], 'Spark.animations') + ',' + setTimeout((function(exti, extelement, extp, extoriginal, extpixels, extunit, extprefix) {
 					return function() {
 						extelement.style[extp] = extprefix + (extoriginal + (extpixels * exti)) + extunit;
 					}
-				})(i, this.elements[e], p, original, pixels, unit, prefix), i * (1000 / this.fps), this.elements[e], p, original, pixels, unit, prefix);
+				})(i, this.elements[e], p, original, pixels, unit, prefix), i * (1000 / this.fps), this.elements[e], p, original, pixels, unit, prefix));
 			}
 			
 			// Correct floating point problem
-			setTimeout((function(exti, extelement, extp, extproperties, extunit, extprefix) {
+			this.data(this.elements[e], 'Spark.animations', this.data(this.elements[e], 'Spark.animations') + ',' + setTimeout((function(exti, extelement, extp, extproperties, extunit, extprefix) {
 				return function() {
 					extelement.style[extp] = extprefix + extproperties[extp] + extunit;
 				}
-			})(i, this.elements[e], p, properties, unit, prefix), timeframe, this.elements[e], p, properties, unit, prefix);
+			})(i, this.elements[e], p, properties, unit, prefix), timeframe, this.elements[e], p, properties, unit, prefix));
+			
+			this.data(this.elements[e], 'Spark.animations', this.data(this.elements[e], 'Spark.animations').replace('START,', ''));
 		}
 	}
 	
@@ -567,7 +571,22 @@ SparkFn.browser = function() {
 			return storage[uid][key];
 		}
 	};
-})();(function(){
+})();SparkFn.stop = function() {
+	// Loop through each of the elements
+	for(var e in this.elements) {
+		// Make sure it is set
+		if(this.data(this.elements[e], 'Spark.animations') === undefined)
+			this.data(this.elements[e], 'Spark.animations', '');
+		
+		// Get the animations
+		var animations = this.data(this.elements[e], 'Spark.animations').split(',');
+		
+		// Loop through them all, canceling them all
+		for(var a in animations) {
+			clearTimeout(animations[a]);
+		}
+	}
+};(function(){
 
 var chunker = /((?:\((?:\([^()]+\)|[^()]+)+\)|\[(?:\[[^\[\]]*\]|['"][^'"]*['"]|[^\[\]'"]+)+\]|\\.|[^ >+~,(\[\\]+)+|[>+~])(\s*,\s*)?((?:.|\r|\n)*)/g,
 	done = 0,

@@ -53,19 +53,19 @@ SparkFn.animate = function(properties, timeframe, callback) {
 			
 			// Loop through each frame
 			for(var i = 0; i <= frames; i++) {
-				setTimeout((function(exti, extelement, extp, extoriginal, extpixels, extunit, extprefix) {
+				this.data(this.elements[e], 'Spark.animate.' + p + '[' + i + ']', setTimeout((function(exti, extelement, extp, extoriginal, extpixels, extunit, extprefix) {
 					return function() {
 						extelement.style[extp] = extprefix + (extoriginal + (extpixels * exti)) + extunit;
 					}
-				})(i, this.elements[e], p, original, pixels, unit, prefix), i * (1000 / this.fps), this.elements[e], p, original, pixels, unit, prefix);
+				})(i, this.elements[e], p, original, pixels, unit, prefix), i * (1000 / this.fps), this.elements[e], p, original, pixels, unit, prefix));
 			}
 			
 			// Correct floating point problem
-			setTimeout((function(exti, extelement, extp, extproperties, extunit, extprefix) {
+			this.data(this.elements[e], 'Spark.animate.' + p + '[' + (i + 1) + ']', setTimeout((function(exti, extelement, extp, extproperties, extunit, extprefix) {
 				return function() {
 					extelement.style[extp] = extprefix + extproperties[extp] + extunit;
 				}
-			})(i, this.elements[e], p, properties, unit, prefix), timeframe, this.elements[e], p, properties, unit, prefix);
+			})(i, this.elements[e], p, properties, unit, prefix), timeframe, this.elements[e], p, properties, unit, prefix));
 		}
 	}
 	

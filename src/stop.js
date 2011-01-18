@@ -1,0 +1,3 @@
+SparkFn.stop = function() {
+	
+};

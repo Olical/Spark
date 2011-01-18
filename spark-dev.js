@@ -2,13 +2,13 @@
  * Spark JavaScript library v1.4.1
  * http://sparkjs.co.uk/
  * 
- * Copyright 2010, Oliver Caldwell
+ * Copyright 2011, Oliver Caldwell
  * Dual licensed under the MIT or GPL Version 2 licenses.
  * https://github.com/Wolfy87/Spark
  * 
  * Includes sizzle.js
  * http://sizzlejs.com/
- * Copyright 2010, The Dojo Foundation
+ * Copyright 2011, The Dojo Foundation
  * Released under the MIT, BSD, and GPL Licenses.
  * 
  * Includes json2.js
@@ -551,7 +551,23 @@ SparkFn.browser = function() {
 	
 	// Return the Spark object
 	return this;
-};(function(){
+};SparkFn.data = (function () {
+	// Set up the variables
+	var storage = {};
+	var counter = 1;
+	
+	return function (el, key, value) {
+		var uid = el.uniqueID || (el.uniqueID = counter++);
+		storage[uid] || (storage[uid] = {});
+		
+		if(typeof value != "undefined") {
+			storage[uid][key] = value;
+		}
+		else {
+			return storage[uid][key];
+		}
+	};
+})();(function(){
 
 var chunker = /((?:\((?:\([^()]+\)|[^()]+)+\)|\[(?:\[[^\[\]]*\]|['"][^'"]*['"]|[^\[\]'"]+)+\]|\\.|[^ >+~,(\[\\]+)+|[>+~])(\s*,\s*)?((?:.|\r|\n)*)/g,
 	done = 0,

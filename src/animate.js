@@ -9,6 +9,9 @@ SparkFn.animate = function(properties, timeframe, callback) {
 		properties.filter = properties.opacity * 100;
 	}
 	
+	// Stop any previous animations
+	this.stop();
+	
 	// Loop through all the elements
 	for(var e in this.elements) {
 		// Loop through all of the properties

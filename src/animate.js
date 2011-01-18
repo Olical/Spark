@@ -51,9 +51,11 @@ SparkFn.animate = function(properties, timeframe, callback) {
 				prefix = 'alpha(opacity=';
 			}
 			
+			this.data(this.elements[e], 'Spark.animations', 'START');
+			
 			// Loop through each frame
 			for(var i = 0; i <= frames; i++) {
-				this.data(this.elements[e], 'Spark.animate.' + p + '[' + i + ']', setTimeout((function(exti, extelement, extp, extoriginal, extpixels, extunit, extprefix) {
+				this.data(this.elements[e], 'Spark.animations', this.data(this.elements[e], 'Spark.animations') + ',' + setTimeout((function(exti, extelement, extp, extoriginal, extpixels, extunit, extprefix) {
 					return function() {
 						extelement.style[extp] = extprefix + (extoriginal + (extpixels * exti)) + extunit;
 					}
@@ -61,11 +63,13 @@ SparkFn.animate = function(properties, timeframe, callback) {
 			}
 			
 			// Correct floating point problem
-			this.data(this.elements[e], 'Spark.animate.' + p + '[' + (i + 1) + ']', setTimeout((function(exti, extelement, extp, extproperties, extunit, extprefix) {
+			this.data(this.elements[e], 'Spark.animations', this.data(this.elements[e], 'Spark.animations') + ',' + setTimeout((function(exti, extelement, extp, extproperties, extunit, extprefix) {
 				return function() {
 					extelement.style[extp] = extprefix + extproperties[extp] + extunit;
 				}
 			})(i, this.elements[e], p, properties, unit, prefix), timeframe, this.elements[e], p, properties, unit, prefix));
+			
+			this.data(this.elements[e], 'Spark.animations', this.data(this.elements[e], 'Spark.animations').replace('START,', ''));
 		}
 	}
 	

@@ -401,8 +401,8 @@ SparkFn.browser = function() {
 		for(var p in properties) {
 			// Make sure the style is set
 			this.elements[e].style[p] = (window.getComputedStyle) ?
-				((window.getComputedStyle(this.elements[e], null)[p]) ? window.getComputedStyle(this.elements[e], null)[p] : '0px') :
-				((this.elements[e].currentStyle[p]) ? this.elements[e].currentStyle[p] : '0px');
+				((window.getComputedStyle(this.elements[e], null)[p]) ? window.getComputedStyle(this.elements[e], null)[p] : '0') :
+				((this.elements[e].currentStyle[p]) ? this.elements[e].currentStyle[p] : '0');
 			
 			// Fix for IE stuff
 			if(this.elements[e].style[p] == 'auto') this.elements[e].style[p] = 0;
@@ -449,11 +449,11 @@ SparkFn.browser = function() {
 			}
 			
 			// Correct floating point problem
-			this.data(this.elements[e], 'Spark.animations', this.data(this.elements[e], 'Spark.animations') + ',' + setTimeout((function(exti, extelement, extp, extproperties, extunit, extprefix) {
+			this.data(this.elements[e], 'Spark.animations', this.data(this.elements[e], 'Spark.animations') + ',' + setTimeout((function(extelement, extp, extproperties, extunit, extprefix) {
 				return function() {
 					extelement.style[extp] = extprefix + extproperties[extp] + extunit;
 				}
-			})(i, this.elements[e], p, properties, unit, prefix), timeframe, this.elements[e], p, properties, unit, prefix));
+			})(this.elements[e], p, properties, unit, prefix), timeframe, this.elements[e], p, properties, unit, prefix));
 			
 			this.data(this.elements[e], 'Spark.animations', this.data(this.elements[e], 'Spark.animations').replace('START,', ''));
 		}

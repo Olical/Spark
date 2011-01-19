@@ -373,6 +373,10 @@ SparkFn.browser = function() {
 		properties.filter = properties.opacity * 100;
 	}
 	
+	// Allow the passing of the element so it can be accessed from within the library
+	if(properties.elements !== undefined)
+		this.elements = properties.elements;
+	
 	// Stop any previous animations
 	this.stop();
 	

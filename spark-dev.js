@@ -553,6 +553,22 @@ SparkFn.browser = function() {
 					callback();
 				});
 				break;
+			
+			case 'sneakin':
+				// Set overflow to hidden
+				this.css({overflow: 'hidden', display: 'block', opacity: 0, elements: {0: this.elements[e]}});
+				
+				// Get original height
+				var original = (window.getComputedStyle) ?
+					window.getComputedStyle(this.elements[e], null).height :
+					this.elements[e].currentStyle.height;
+				
+				// Set height to 0
+				this.css({height: 0, elements: {0: this.elements[e]}});
+				
+				// Slide height to original
+				this.animate({height: original, opacity: 1, elements: {0: this.elements[e]}}, timeframe, callback);
+				break;
 		}
 	}
 	

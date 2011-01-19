@@ -10,8 +10,10 @@ SparkFn.animate = function(properties, timeframe, callback) {
 	}
 	
 	// Allow the passing of the element so it can be accessed from within the library
-	if(properties.elements !== undefined)
+	if(properties.elements !== undefined) {
 		this.elements = properties.elements;
+		delete properties.elements;
+	}
 	
 	// Stop any previous animations
 	this.stop();

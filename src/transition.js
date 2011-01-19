@@ -87,6 +87,27 @@ SparkFn.transition = function(method, timeframe, callback) {
 				// Slide height to original
 				this.animate({height: original, opacity: 1, elements: {0: this.elements[e]}}, timeframe, callback);
 				break;
+			
+			case 'sneakout':
+				var selector = this.selector;
+				
+				var element = this.elements[e];
+								
+				// Get original height
+				var original = (window.getComputedStyle) ?
+					window.getComputedStyle(this.elements[e], null).height :
+					this.elements[e].currentStyle.height;
+				
+				// Slide height to 0
+				this.animate({height: 0, opacity: 0, elements: {0: element}}, timeframe, function() {
+					// Set height to original
+					element.style.height = original + 'px';
+					element.style.display = 'none';
+					
+					// Run the callback
+					callback();
+				});
+				break;
 		}
 	}
 	

@@ -545,10 +545,12 @@ SparkFn.browser = function() {
 			case 'fadeout':
 				var selector = this.selector;
 				
+				var element = this.elements[e];
+				
 				// Fade opacity to 0
-				this.animate({opacity: 0}, timeframe, function() {
+				this.animate({opacity: 0, elements: {0: element}}, timeframe, function() {
 					// Set opacity to 100
-					$(selector).css({opacity: 1, display: 'none'});
+					$(selector).css({opacity: 1, display: 'none', elements: {0: element}});
 					
 					// Run the callback
 					callback();

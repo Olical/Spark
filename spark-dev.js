@@ -176,6 +176,13 @@ SparkFn.cookie = function(name, content, duration) {
 	}
 };
 SparkFn.css = function(css) {
+	// Allow the passing of the element so it can be accessed from within the library
+	if(css.elements !== undefined) {
+		this.customElements = this.elements;
+		this.elements = css.elements;
+		delete css.elements;
+	}
+	
 	for(var e in this.elements) {
 		for(var c in css) {
 			this.elements[e].style[c] = css[c];
@@ -187,6 +194,11 @@ SparkFn.css = function(css) {
 				this.elements[e].style.zoom = '1';
 			}
 		}
+	}
+	
+	if(this.customElements !== undefined) {
+		this.elements = this.customElements;
+		delete this.customElements;
 	}
 	
 	// If they did not set anything, return the first element's style
@@ -375,6 +387,7 @@ SparkFn.browser = function() {
 	
 	// Allow the passing of the element so it can be accessed from within the library
 	if(properties.elements !== undefined) {
+		this.customElements = this.elements;
 		this.elements = properties.elements;
 		delete properties.elements;
 	}
@@ -450,6 +463,11 @@ SparkFn.browser = function() {
 	if(callback !== undefined)
 		setTimeout(callback, timeframe);
 	
+	if(this.customElements !== undefined) {
+		this.elements = this.customElements;
+		delete this.customElements;
+	}
+	
 	// Return the Spark object
 	return this;
 };SparkFn.jsonp = function(file, callback, parameters) {
@@ -473,24 +491,23 @@ SparkFn.browser = function() {
 	
 	// Loop through all elements
 	for(var e in this.elements) {
-		// Set overflow to hidden
-		this.css({overflow: 'hidden'});
-		
 		// Work out what method we need to do
 		switch(method)
 		{
 			case 'slidedown':
-				// Display it
-				this.css({display: 'block'});
+				// Set overflow to hidden
+				this.css({overflow: 'hidden', display: 'block', elements: {0: this.elements[e]}});
 				
 				// Get original height
-				var original = this.elements[e].offsetHeight;
+				var original = (window.getComputedStyle) ?
+					window.getComputedStyle(this.elements[e], null).height :
+					this.elements[e].currentStyle.height;
 				
 				// Set height to 0
-				this.css({height: 0});
+				this.css({height: 0, elements: {0: this.elements[e]}});
 				
 				// Slide height to original
-				this.animate({height: original}, timeframe, callback);
+				this.animate({height: original, elements: {0: this.elements[e]}}, timeframe, callback);
 				break;
 			
 			case 'slideup':

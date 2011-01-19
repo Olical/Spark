@@ -11,6 +11,7 @@ SparkFn.animate = function(properties, timeframe, callback) {
 	
 	// Allow the passing of the element so it can be accessed from within the library
 	if(properties.elements !== undefined) {
+		this.customElements = this.elements;
 		this.elements = properties.elements;
 		delete properties.elements;
 	}
@@ -85,6 +86,11 @@ SparkFn.animate = function(properties, timeframe, callback) {
 	// Set callback timer
 	if(callback !== undefined)
 		setTimeout(callback, timeframe);
+	
+	if(this.customElements !== undefined) {
+		this.elements = this.customElements;
+		delete this.customElements;
+	}
 	
 	// Return the Spark object
 	return this;

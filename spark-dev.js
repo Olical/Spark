@@ -523,7 +523,7 @@ SparkFn.browser = function() {
 				// Slide height to 0
 				this.animate({height: 0, elements: {0: element}}, timeframe, function() {
 					// Set height to original
-					element.style.height = original + 'px';
+					element.style.height = original;
 					element.style.display = 'none';
 					
 					// Run the callback
@@ -583,7 +583,7 @@ SparkFn.browser = function() {
 				// Slide height to 0
 				this.animate({height: 0, opacity: 0, elements: {0: element}}, timeframe, function() {
 					// Set height to original
-					element.style.height = original + 'px';
+					element.style.height = original;
 					element.style.display = 'none';
 					
 					// Run the callback

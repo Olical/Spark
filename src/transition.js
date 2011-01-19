@@ -34,10 +34,12 @@ SparkFn.transition = function(method, timeframe, callback) {
 				var element = this.elements[e];
 								
 				// Get original height
-				var original = this.elements[e].offsetHeight;
+				var original = (window.getComputedStyle) ?
+					window.getComputedStyle(this.elements[e], null).height :
+					this.elements[e].currentStyle.height;
 				
 				// Slide height to 0
-				this.animate({height: 0}, timeframe, function() {
+				this.animate({height: 0, elements: {0: element}}, timeframe, function() {
 					// Set height to original
 					element.style.height = original + 'px';
 					element.style.display = 'none';

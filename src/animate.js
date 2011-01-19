@@ -73,11 +73,11 @@ SparkFn.animate = function(properties, timeframe, callback) {
 			}
 			
 			// Correct floating point problem
-			this.data(this.elements[e], 'Spark.animations', this.data(this.elements[e], 'Spark.animations') + ',' + setTimeout((function(exti, extelement, extp, extproperties, extunit, extprefix) {
+			this.data(this.elements[e], 'Spark.animations', this.data(this.elements[e], 'Spark.animations') + ',' + setTimeout((function(extelement, extp, extproperties, extunit, extprefix) {
 				return function() {
 					extelement.style[extp] = extprefix + extproperties[extp] + extunit;
 				}
-			})(i, this.elements[e], p, properties, unit, prefix), timeframe, this.elements[e], p, properties, unit, prefix));
+			})(this.elements[e], p, properties, unit, prefix), timeframe, this.elements[e], p, properties, unit, prefix));
 			
 			this.data(this.elements[e], 'Spark.animations', this.data(this.elements[e], 'Spark.animations').replace('START,', ''));
 		}

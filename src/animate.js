@@ -75,7 +75,7 @@ SparkFn.animate = function(properties, timeframe, callback) {
 			// Correct floating point problem
 			this.data(this.elements[e], 'Spark.animations', this.data(this.elements[e], 'Spark.animations') + ',' + setTimeout((function(extelement, extp, extproperties, extunit, extprefix) {
 				return function() {
-					extelement.style[extp] = extprefix + extproperties[extp] + extunit;
+					extelement.style[extp] = extprefix + parseInt(extproperties[extp]) + extunit;
 				}
 			})(this.elements[e], p, properties, unit, prefix), timeframe, this.elements[e], p, properties, unit, prefix));
 			

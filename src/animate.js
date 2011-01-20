@@ -7,6 +7,7 @@ SparkFn.animate = function(properties, timeframe, callback) {
 		properties.MozOpacity = properties.opacity;
 		properties.KhtmlOpacity = properties.opacity;
 		properties.filter = properties.opacity * 100;
+		this.css({zoom: 1});
 	}
 	
 	// Allow the passing of the element so it can be accessed from within the library

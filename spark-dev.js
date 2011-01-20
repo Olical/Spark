@@ -383,7 +383,6 @@ SparkFn.browser = function() {
 		properties.MozOpacity = properties.opacity;
 		properties.KhtmlOpacity = properties.opacity;
 		properties.filter = properties.opacity * 100;
-		this.css({zoom: 1});
 	}
 	
 	// Allow the passing of the element so it can be accessed from within the library
@@ -409,7 +408,7 @@ SparkFn.browser = function() {
 			if(this.elements[e].style[p] == 'auto') this.elements[e].style[p] = 0;
 			this.elements[e].style.zoom = '1';
 			
-			if(p == 'filter' && !this.elements[e].style[p])
+			if(p == 'filter')
 				this.elements[e].style[p] = 'alpha(opacity=100)';
 			
 			// Get the original

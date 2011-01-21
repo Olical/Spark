@@ -59,7 +59,6 @@ SparkFn.animate = function(properties, timeframe, callback) {
 			else if(p == 'filter') {
 				prefix = 'alpha(opacity=';
 				unit = ')';
-				original = parseInt(original);
 			}
 			
 			this.data(this.elements[e], 'Spark.animations', 'START');

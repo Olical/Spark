@@ -408,6 +408,9 @@ SparkFn.browser = function() {
 			if(this.elements[e].style[p] == 'auto') this.elements[e].style[p] = '0';
 			this.elements[e].style.zoom = '1';
 			
+			if(p == 'filter' && p === undefined)
+				this.elements[e].style[p] = 'alpha(opacity=100)';
+			
 			// Get the original
 			var original = (p == 'opacity' || p == 'MozOpacity' || p == 'KhtmlOpacity') ? parseFloat(this.elements[e].style[p]) : parseInt(this.elements[e].style[p].replace('alpha(opacity=', '').replace(')', ''));
 			

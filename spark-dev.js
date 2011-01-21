@@ -405,7 +405,7 @@ SparkFn.browser = function() {
 				((this.elements[e].currentStyle[p]) ? this.elements[e].currentStyle[p] : '0');
 			
 			// Fix for IE stuff
-			if(this.elements[e].style[p] == 'auto') this.elements[e].style[p] = 0;
+			if(this.elements[e].style[p] == 'auto') this.elements[e].style[p] = '0';
 			this.elements[e].style.zoom = '1';
 			
 			if(p == 'filter')
@@ -433,8 +433,8 @@ SparkFn.browser = function() {
 			if(p == 'opacity' || p == 'MozOpacity' || p == 'KhtmlOpacity')
 				unit = '';
 			else if(p == 'filter') {
-				unit = ')';
 				prefix = 'alpha(opacity=';
+				unit = ')';
 			}
 			
 			this.data(this.elements[e], 'Spark.animations', 'START');

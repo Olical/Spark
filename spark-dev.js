@@ -408,9 +408,6 @@ SparkFn.browser = function() {
 			if(this.elements[e].style[p] == 'auto') this.elements[e].style[p] = '0';
 			this.elements[e].style.zoom = '1';
 			
-			if(p == 'filter')
-				this.elements[e].style[p] = 'alpha(opacity=100)';
-			
 			// Get the original
 			var original = (p == 'opacity' || p == 'MozOpacity' || p == 'KhtmlOpacity') ? parseFloat(this.elements[e].style[p]) : parseInt(this.elements[e].style[p].replace('alpha(opacity=', '').replace(')', ''));
 			
@@ -435,7 +432,6 @@ SparkFn.browser = function() {
 			else if(p == 'filter') {
 				prefix = 'alpha(opacity=';
 				unit = ')';
-				original = parseInt(original);
 			}
 			
 			this.data(this.elements[e], 'Spark.animations', 'START');

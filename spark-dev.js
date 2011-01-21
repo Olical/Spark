@@ -408,7 +408,7 @@ SparkFn.browser = function() {
 			if(this.elements[e].style[p] == 'auto') this.elements[e].style[p] = '0';
 			this.elements[e].style.zoom = '1';
 			
-			if(p == 'filter' && p === undefined)
+			if(p == 'filter' && this.elements[e].style[p] === undefined)
 				this.elements[e].style[p] = 'alpha(opacity=100)';
 			
 			// Get the original

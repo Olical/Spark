@@ -57,8 +57,8 @@ SparkFn.animate = function(properties, timeframe, callback) {
 			if(p == 'opacity' || p == 'MozOpacity' || p == 'KhtmlOpacity')
 				unit = '';
 			else if(p == 'filter') {
-				unit = ')';
 				prefix = 'alpha(opacity=';
+				unit = ')';
 			}
 			
 			this.data(this.elements[e], 'Spark.animations', 'START');

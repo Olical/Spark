@@ -22,7 +22,7 @@ window.SparkFn = new Object();
 window.SparkIn = function()
 {
 	// Create the Spark instances also under the alias of $
-	window.Spark = window.$ = function(selector, context) {
+	window.Spark = function(selector, context) {
 		// Create the result object
 		var result = new Object();
 		
@@ -46,6 +46,8 @@ window.SparkIn = function()
 		return built;
 	};
 	
+	if(!SparkCo) window.$ = Spark;
+	
 	// Function for making the pageX/Y values work in IE
 	Spark.fixEvents = function(theEvent) {
 		if(theEvent.pageX === undefined)
@@ -65,6 +67,9 @@ window.SparkIn = function()
 	};
 	
 	// Take out the need for brackets
-	for(var i in Spark())
-		Spark[i] = $[i] = Spark()[i];
+	for(var i in Spark()) {
+		Spark[i] = Spark()[i];
+		
+		if(!SparkCo) $[i] = Spark()[i];
+	}
 };

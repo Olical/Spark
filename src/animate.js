@@ -29,7 +29,7 @@ SparkFn.animate = function(properties, timeframe, callback) {
 				((this.elements[e].currentStyle[p]) ? this.elements[e].currentStyle[p] : '0');
 			
 			// Fix for IE stuff
-			if(this.elements[e].style[p] == 'auto') this.elements[e].style[p] = 0;
+			if(this.elements[e].style[p] == 'auto') this.elements[e].style[p] = '0';
 			this.elements[e].style.zoom = '1';
 			
 			if(p == 'filter')

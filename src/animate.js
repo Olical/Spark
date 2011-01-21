@@ -31,7 +31,7 @@ SparkFn.animate = function(properties, timeframe, callback) {
 			// Fix for IE stuff
 			if(this.elements[e].style[p] == 'auto') this.elements[e].style[p] = '0';
 			this.elements[e].style.zoom = '1';
-			
+			alert(typeof this.elements[e].style[p] + ': ' + this.elements[e].style[p]);
 			if(p == 'filter' && this.elements[e].style[p] == '')
 				this.elements[e].style[p] = 'alpha(opacity=100)';
 			

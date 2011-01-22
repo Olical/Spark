@@ -11,14 +11,28 @@
 	
 	// Setup the plugin
 	SparkFn.twitter = function(user) {
-		Spark.jsonp('http://search.twitter.com/search.json', 'sparkTwitterPluginLoaded', 'q=from%3A' + user);
+		// Set up the callback function
+		window.twitterPluginDataLoaded = function(data) {
+			$(twitterPluginData[data.query]).content(data.results[0].text);
+		};
 		
-		// Put the elements in scope
-		window.sparkTwitterPluginData['q=from%3A' + user] = this.elements;
+		// Grab the head element
+		var head = document.getElementsByTagName('head')[0];
 		
-		window.sparkTwitterPluginLoaded = function(data) {
-		   Spark(sparkTwitterPluginData[data.query]).content(data.results[0].text);
-		}
+		// Create a script element
+		var script = document.createElement('script');
+		
+		// Set the type
+		script.type = 'text/javascript';
+		
+		// Set the source file
+		script.src = 'http://search.twitter.com/search.json?callback=twitterPluginDataLoaded&q=from%3A' + user;
+		
+		// Just so we can access it, because we can pass parameters
+		twitterPluginData['from%3A' + user] = this.selector;
+		
+		// Add the script element to the head
+		head.appendChild(script);
 	};
 	
 	// Reinitialise Spark

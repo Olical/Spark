@@ -1,5 +1,5 @@
 /*!
- * Replace plugin for Spark JavaScript library v1.1.0
+ * Replace plugin for Spark JavaScript library v1.5.0
  * http://flowdev.co.uk/
  * 
  * Copyright 2010, Oliver Caldwell

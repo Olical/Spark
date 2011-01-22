@@ -14,7 +14,7 @@ SparkFn.transition = function(method, timeframe, callback) {
 		{
 			case 'slidedown':
 				// Set overflow to hidden
-				this.css({overflow: 'hidden', display: 'block', elements: {0: this.elements[e]}});
+				Spark(this.elements[e]).css({overflow: 'hidden', display: 'block'});
 				
 				// Get original height
 				var original = (window.getComputedStyle) ?
@@ -22,10 +22,10 @@ SparkFn.transition = function(method, timeframe, callback) {
 					this.elements[e].currentStyle.height;
 				
 				// Set height to 0
-				this.css({height: 0, elements: {0: this.elements[e]}});
+				Spark(this.elements[e]).css({height: 0});
 				
 				// Slide height to original
-				this.animate({height: original, elements: {0: this.elements[e]}}, timeframe, callback);
+				Spark(this.elements[e]).animate({height: original}, timeframe, callback);
 				break;
 			
 			case 'slideup':

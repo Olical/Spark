@@ -70,7 +70,7 @@ window.SparkIn = function()
 	for(var i in Spark()) {
 		Spark[i] = Spark()[i];
 		
-		if(!SparkCo) $[i] = Spark()[i];
+		if(SparkCo !== undefined) $[i] = Spark()[i];
 	}
 };SparkFn.ajax = function(method, file, data, callback) {
 	// Set up the request, allow for cross browser.

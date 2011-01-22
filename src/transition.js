@@ -50,10 +50,10 @@ SparkFn.transition = function(method, timeframe, callback) {
 			
 			case 'fadein':
 				// Display it
-				this.css({display: 'block', opacity: 0, elements: {0: this.elements[e]}});
+				Spark(this.elements[e]).css({display: 'block', opacity: 0});
 				
 				// Fade opacity to 100
-				this.animate({opacity: 1, elements: {0: this.elements[e]}}, timeframe, callback);
+				Spark(this.elements[e]).animate({opacity: 1}, timeframe, callback);
 				break;
 			
 			case 'fadeout':
@@ -62,9 +62,9 @@ SparkFn.transition = function(method, timeframe, callback) {
 				var element = this.elements[e];
 				
 				// Fade opacity to 0
-				this.animate({opacity: 0, elements: {0: element}}, timeframe, function() {
+				Spark(this.elements[e]).animate({opacity: 0}, timeframe, function() {
 					// Set opacity to 100
-					Spark(selector).css({opacity: 1, display: 'none', elements: {0: element}});
+					Spark(element).css({opacity: 1, display: 'none'});
 					
 					// Run the callback
 					callback();

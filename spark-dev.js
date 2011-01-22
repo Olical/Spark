@@ -64,13 +64,13 @@ window.SparkIn = function()
 		return theEvent;
 	};
 	
-	if(SparkCo === undefined) window.$ = Spark;
+	if(window.SparkCo === undefined) window.$ = Spark;
 	
 	// Take out the need for brackets
 	for(var i in Spark()) {
 		Spark[i] = Spark()[i];
 		
-		if(SparkCo === undefined) $[i] = Spark()[i];
+		if(window.SparkCo === undefined) $[i] = Spark()[i];
 	}
 };SparkFn.ajax = function(method, file, data, callback) {
 	// Set up the request, allow for cross browser.

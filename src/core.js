@@ -26,7 +26,7 @@ window.SparkIn = function()
 		// Create the result object
 		var result = new Object();
 		
-		// Check that they have passed arguments to the class
+		// Check that they have passed arguments to the class and also if they have passed an element or a string
 		if(selector !== undefined) {
 			if(typeof selector == 'string') {
 				// Run sizzle with or without a context

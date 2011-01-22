@@ -46,8 +46,6 @@ window.SparkIn = function()
 		return built;
 	};
 	
-	if(!SparkCo) window.$ = Spark;
-	
 	// Function for making the pageX/Y values work in IE
 	Spark.fixEvents = function(theEvent) {
 		if(theEvent.pageX === undefined)
@@ -66,11 +64,13 @@ window.SparkIn = function()
 		return theEvent;
 	};
 	
+	if(SparkCo === undefined) window.$ = Spark;
+	
 	// Take out the need for brackets
 	for(var i in Spark()) {
 		Spark[i] = Spark()[i];
 		
-		if(SparkCo !== undefined) $[i] = Spark()[i];
+		if(SparkCo === undefined) $[i] = Spark()[i];
 	}
 };SparkFn.ajax = function(method, file, data, callback) {
 	// Set up the request, allow for cross browser.

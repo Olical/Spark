@@ -8,21 +8,17 @@
 (function() {
 	// Setup the plugin
 	SparkFn.replace = function() {
-		// Loop through all returned elements
-		for(var e in this.elements)
-		{
-			// On focus, if default value then empty
-			$(this.selector).event('focus', function(e) {
-				if(e.target.value == e.target.defaultValue)
-					e.target.value = '';
-			});
-			
-			// On blur, if empty set value to default
-			$(this.selector).event('blur', function(e) {
-				if(e.target.value == '')
-					e.target.value = e.target.defaultValue;
-			});
-		}
+		// On focus, if default value then empty
+		Spark(this.elements).event('focus', function(e) {
+			if(e.target.value == e.target.defaultValue)
+				e.target.value = '';
+		});
+		
+		// On blur, if empty set value to default
+		Spark(this.elements).event('blur', function(e) {
+			if(e.target.value == '')
+				e.target.value = e.target.defaultValue;
+		});
 	};
 	
 	// Reinitialise Spark

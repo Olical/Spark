@@ -14,10 +14,10 @@
 		Spark.jsonp('http://search.twitter.com/search.json', 'sparkTwitterPluginLoaded', 'q=from%3A' + user);
 		
 		// Put the elements in scope
-		var elements = this.elements;
+		window.sparkTwitterPluginData['q=from%3A' + user] = this.elements;
 		
 		window.sparkTwitterPluginLoaded = function(data) {
-		   Spark(this.elements).content(data.results[0].text);
+		   Spark(sparkTwitterPluginData[data.query]).content(data.results[0].text);
 		}
 	};
 	

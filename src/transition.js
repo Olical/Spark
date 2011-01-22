@@ -73,7 +73,7 @@ SparkFn.transition = function(method, timeframe, callback) {
 			
 			case 'sneakin':
 				// Set overflow to hidden
-				this.css({overflow: 'hidden', display: 'block', opacity: 0, elements: {0: this.elements[e]}});
+				Spark(this.elements[e]).css({overflow: 'hidden', display: 'block', opacity: 0});
 				
 				// Get original height
 				var original = (window.getComputedStyle) ?
@@ -81,10 +81,10 @@ SparkFn.transition = function(method, timeframe, callback) {
 					this.elements[e].currentStyle.height;
 				
 				// Set height to 0
-				this.css({height: 0, elements: {0: this.elements[e]}});
+				Spark(this.elements[e]).css({height: 0});
 				
 				// Slide height to original
-				this.animate({height: original, opacity: 1, elements: {0: this.elements[e]}}, timeframe, callback);
+				Spark(this.elements[e]).animate({height: original, opacity: 1}, timeframe, callback);
 				break;
 			
 			case 'sneakout':
@@ -98,10 +98,9 @@ SparkFn.transition = function(method, timeframe, callback) {
 					this.elements[e].currentStyle.height;
 				
 				// Slide height to 0
-				this.animate({height: 0, opacity: 0, elements: {0: element}}, timeframe, function() {
+				Spark(this.elements[e]).animate({height: 0, opacity: 0}, timeframe, function() {
 					// Set height to original
-					element.style.height = original;
-					element.style.display = 'none';
+					Spark(element).css({height: original, display: 'none'});
 					
 					// Run the callback
 					callback();

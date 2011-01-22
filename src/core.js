@@ -70,6 +70,6 @@ window.SparkIn = function()
 	for(var i in Spark()) {
 		Spark[i] = Spark()[i];
 		
-		if(SparkCo !== undefined) $[i] = Spark()[i];
+		if(SparkCo === undefined) $[i] = Spark()[i];
 	}
 };

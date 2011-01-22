@@ -191,13 +191,6 @@ SparkFn.cookie = function(name, content, duration) {
 	}
 };
 SparkFn.css = function(css) {
-	// Allow the passing of the element so it can be accessed from within the library
-	if(css.elements !== undefined) {
-		this.customElements = this.elements;
-		this.elements = css.elements;
-		delete css.elements;
-	}
-	
 	for(var e in this.elements) {
 		for(var c in css) {
 			this.elements[e].style[c] = css[c];
@@ -209,11 +202,6 @@ SparkFn.css = function(css) {
 				this.elements[e].style.zoom = '1';
 			}
 		}
-	}
-	
-	if(this.customElements !== undefined) {
-		this.elements = this.customElements;
-		delete this.customElements;
 	}
 	
 	// If they did not set anything, return the first element's style
@@ -400,13 +388,6 @@ SparkFn.browser = function() {
 		properties.filter = properties.opacity * 100;
 	}
 	
-	// Allow the passing of the element so it can be accessed from within the library
-	if(properties.elements !== undefined) {
-		this.customElements = this.elements;
-		this.elements = properties.elements;
-		delete properties.elements;
-	}
-	
 	// Stop any previous animations
 	this.stop();
 	
@@ -478,11 +459,6 @@ SparkFn.browser = function() {
 	if(callback !== undefined)
 		setTimeout(callback, timeframe);
 	
-	if(this.customElements !== undefined) {
-		this.elements = this.customElements;
-		delete this.customElements;
-	}
-	
 	// Return the Spark object
 	return this;
 };SparkFn.jsonp = function(file, callback, parameters) {
@@ -511,7 +487,7 @@ SparkFn.browser = function() {
 		{
 			case 'slidedown':
 				// Set overflow to hidden
-				this.css({overflow: 'hidden', display: 'block', elements: {0: this.elements[e]}});
+				Spark(this.elements[e]).css({overflow: 'hidden', display: 'block'});
 				
 				// Get original height
 				var original = (window.getComputedStyle) ?
@@ -519,10 +495,10 @@ SparkFn.browser = function() {
 					this.elements[e].currentStyle.height;
 				
 				// Set height to 0
-				this.css({height: 0, elements: {0: this.elements[e]}});
+				Spark(this.elements[e]).css({height: 0});
 				
 				// Slide height to original
-				this.animate({height: original, elements: {0: this.elements[e]}}, timeframe, callback);
+				Spark(this.elements[e]).animate({height: original}, timeframe, callback);
 				break;
 			
 			case 'slideup':
@@ -536,10 +512,9 @@ SparkFn.browser = function() {
 					this.elements[e].currentStyle.height;
 				
 				// Slide height to 0
-				this.animate({height: 0, elements: {0: element}}, timeframe, function() {
+				Spark(this.elements[e]).animate({height: 0}, timeframe, function() {
 					// Set height to original
-					element.style.height = original;
-					element.style.display = 'none';
+					Spark(element).css({height: original, display: 'none'});
 					
 					// Run the callback
 					callback();
@@ -548,10 +523,10 @@ SparkFn.browser = function() {
 			
 			case 'fadein':
 				// Display it
-				this.css({display: 'block', opacity: 0, elements: {0: this.elements[e]}});
+				Spark(this.elements[e]).css({display: 'block', opacity: 0});
 				
 				// Fade opacity to 100
-				this.animate({opacity: 1, elements: {0: this.elements[e]}}, timeframe, callback);
+				Spark(this.elements[e]).animate({opacity: 1}, timeframe, callback);
 				break;
 			
 			case 'fadeout':
@@ -560,9 +535,9 @@ SparkFn.browser = function() {
 				var element = this.elements[e];
 				
 				// Fade opacity to 0
-				this.animate({opacity: 0, elements: {0: element}}, timeframe, function() {
+				Spark(this.elements[e]).animate({opacity: 0}, timeframe, function() {
 					// Set opacity to 100
-					Spark(selector).css({opacity: 1, display: 'none', elements: {0: element}});
+					Spark(element).css({opacity: 1, display: 'none'});
 					
 					// Run the callback
 					callback();
@@ -571,7 +546,7 @@ SparkFn.browser = function() {
 			
 			case 'sneakin':
 				// Set overflow to hidden
-				this.css({overflow: 'hidden', display: 'block', opacity: 0, elements: {0: this.elements[e]}});
+				Spark(this.elements[e]).css({overflow: 'hidden', display: 'block', opacity: 0});
 				
 				// Get original height
 				var original = (window.getComputedStyle) ?
@@ -579,10 +554,10 @@ SparkFn.browser = function() {
 					this.elements[e].currentStyle.height;
 				
 				// Set height to 0
-				this.css({height: 0, elements: {0: this.elements[e]}});
+				Spark(this.elements[e]).css({height: 0});
 				
 				// Slide height to original
-				this.animate({height: original, opacity: 1, elements: {0: this.elements[e]}}, timeframe, callback);
+				Spark(this.elements[e]).animate({height: original, opacity: 1}, timeframe, callback);
 				break;
 			
 			case 'sneakout':
@@ -596,10 +571,9 @@ SparkFn.browser = function() {
 					this.elements[e].currentStyle.height;
 				
 				// Slide height to 0
-				this.animate({height: 0, opacity: 0, elements: {0: element}}, timeframe, function() {
+				Spark(this.elements[e]).animate({height: 0, opacity: 0}, timeframe, function() {
 					// Set height to original
-					element.style.height = original;
-					element.style.display = 'none';
+					Spark(element).css({height: original, display: 'none'});
 					
 					// Run the callback
 					callback();

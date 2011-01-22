@@ -27,9 +27,20 @@ window.SparkIn = function()
 		var result = new Object();
 		
 		// Check that they have passed arguments to the class
-		if(selector !== undefined)
-			// Run sizzle with or without a context
-			result = (context) ? Sizzle(selector, context) : Sizzle(selector);
+		if(selector !== undefined) {
+			if(typeof selector == 'string') {
+				// Run sizzle with or without a context
+				result = (context) ? Sizzle(selector, context) : Sizzle(selector);
+			}
+			else {
+				if(selector.hasProperty('tagName')) {
+					result = {0: selector};
+				}
+				else {
+					result = selector;
+				}
+			}
+		}
 		
 		// Assign data to the built object
 		var built = {

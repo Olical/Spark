@@ -13,6 +13,9 @@
 	SparkFn.twitter = function(user) {
 		Spark.jsonp('http://search.twitter.com/search.json', 'sparkTwitterPluginLoaded', 'q=from%3A' + user);
 		
+		// Put the elements in scope
+		var elements = this.elements;
+		
 		window.sparkTwitterPluginLoaded = function(data) {
 		   Spark(this.elements).content(data.results[0].text);
 		}

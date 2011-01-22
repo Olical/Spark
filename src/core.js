@@ -33,7 +33,7 @@ window.SparkIn = function()
 				result = (context) ? Sizzle(selector, context) : Sizzle(selector);
 			}
 			else {
-				if(selector.hasProperty('tagName')) {
+				if(selector.tagName !== undefined) {
 					result = {0: selector};
 				}
 				else {

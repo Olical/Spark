@@ -27,7 +27,8 @@ modules =	${srcdir}ajax.js\
 			${srcdir}load.js\
 			${srcdir}each.js\
 			${srcdir}data.js\
-			${srcdir}stop.js
+			${srcdir}stop.js\
+			${srcdir}computed.js
 
 # Build full list of files
 files = ${core} ${modules} ${dependencies} ${initialisation}

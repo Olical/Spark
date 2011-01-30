@@ -388,8 +388,10 @@ SparkFn.browser = function() {
 		properties.filter = properties.opacity * 100;
 	}
 	
-	// Stop any previous animations
-	this.stop();
+	// Initiate the offset as 0 if there is none
+	if(this.offset === undefined) {
+		this.offset = 0;
+	}
 	
 	// Loop through all the elements
 	for(var e in this.elements) {
@@ -441,15 +443,15 @@ SparkFn.browser = function() {
 					return function() {
 						extelement.style[extp] = extprefix + (extoriginal + (extpixels * exti)) + extunit;
 					}
-				})(i, this.elements[e], p, original, pixels, unit, prefix), i * (1000 / this.fps), this.elements[e], p, original, pixels, unit, prefix));
+				})(i, this.elements[e], p, original, pixels, unit, prefix), i * (1000 / this.fps) + this.offset, this.elements[e], p, original, pixels, unit, prefix));
 			}
 			
 			// Correct floating point problem
 			this.data(this.elements[e], 'Spark.animations', this.data(this.elements[e], 'Spark.animations') + ',' + setTimeout((function(extelement, extp, extproperties, extunit, extprefix) {
 				return function() {
-					extelement.style[extp] = extprefix + parseInt(extproperties[extp]) + extunit;
+					extelement.style[extp] = extprefix + ((extp == 'opacity' || extp == 'MozOpacity' || extp == 'KhtmlOpacity') ? parseFloat(extproperties[extp]) : parseInt(extproperties[extp])) + extunit;
 				}
-			})(this.elements[e], p, properties, unit, prefix), timeframe, this.elements[e], p, properties, unit, prefix));
+			})(this.elements[e], p, properties, unit, prefix), timeframe + this.offset, this.elements[e], p, properties, unit, prefix));
 			
 			this.data(this.elements[e], 'Spark.animations', this.data(this.elements[e], 'Spark.animations').replace('START,', ''));
 		}
@@ -458,6 +460,9 @@ SparkFn.browser = function() {
 	// Set callback timer
 	if(callback !== undefined)
 		setTimeout(callback, timeframe);
+	
+	// Set up the offset for chaining
+	this.offset += timeframe;
 	
 	// Return the Spark object
 	return this;

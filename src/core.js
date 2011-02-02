@@ -11,3 +11,11 @@
  * Copyright 2011, The Dojo Foundation
  * Released under the MIT, BSD, and GPL Licenses.
  */
+
+// Create the function holder
+window.SparkFn = new Object();
+
+// Create the initialise function
+window.SparkIn = function() {
+	
+};

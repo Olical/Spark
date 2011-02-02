@@ -17,5 +17,8 @@ window.SparkFn = new Object();
 
 // Create the initialise function
 window.SparkIn = function() {
-	
+	// Create the Spark object
+	window.Spark = function(selector, context) {
+		
+	};
 };

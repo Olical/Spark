@@ -9,10 +9,10 @@ dependencies =	${srcdir}sizzle.js\
 				${srcdir}json2.js
 
 # Create the initialisation file path
-initialisation = ${srcdir}init.js
+initialisation = ${srcdir}initialise.js
 
 # Create the list of modules paths
-modules =	${srcdir}ajax.js\
+#modules =	${srcdir}ajax.js\
 			${srcdir}attribute.js\
 			${srcdir}content.js\
 			${srcdir}cookie.js\

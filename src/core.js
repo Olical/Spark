@@ -44,13 +44,19 @@ window.SparkIn = function() {
 			}
 		}
 		
-		// Add the functions to the result object
+		// Create the built object
+		var built = new Object();
+		
+		// Add the functions to the built object
 		for(var f in SparkFn) {
-			result[f] = SparkFn[f];
+			built[f] = SparkFn[f];
 		}
 		
+		// Add the results to the built object
+		built.elements = result;
+		
 		// Return the built object
-		return {elements: result};
+		return built;
 	};
 	
 	// Check if we can use $
@@ -58,7 +64,7 @@ window.SparkIn = function() {
 	if(typeof $ == 'undefined') {
 		inUse = false;
 	}
-	else if($.fixEvent !== undefined) {
+	else if($.fixEvent() !== undefined) {
 		inUse = false;
 	}
 	

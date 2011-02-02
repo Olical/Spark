@@ -53,5 +53,12 @@ window.SparkIn = function() {
 		return result;
 	};
 	
-	
+	// Check if we can use $
+	var inUse = true;
+	if($ === undefined) {
+		inUse = false;
+	}
+	else if($.fixEvent !== undefined) {
+		inUse = false;
+	}
 };

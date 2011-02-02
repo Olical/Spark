@@ -21,5 +21,27 @@ window.SparkIn = function() {
 	window.Spark = function(selector, context) {
 		// Create the result object
 		var result = new Object();
+		
+		// Check if a selector has been passed
+		if(selector !== undefined) {
+			// If so check if Sizzle needs to be run
+			if(typeof selector == 'string') {
+				// Run sizzle with or without a context
+				result = (context) ? Sizzle(selector, context) : Sizzle(selector);
+			}
+			else {
+				// If it is an element
+				if(typeof HTMLElement === 'object' ?
+					selector instanceof HTMLElement :
+			    	typeof selector === 'object' && selector.nodeType === 1 && typeof selector.nodeName === 'string') {
+					// Place it within the result object
+					result = {0: selector};
+				}
+				else {
+					// It is an object, copy it into result
+					result = selector;
+				}
+			}
+		}
 	};
 };

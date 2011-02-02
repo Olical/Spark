@@ -3,9 +3,9 @@ SparkFn.event = function(type, callback) {
 	var element = null;
 	
 	// Loop through all of the elements
-	for(var e in this) {
+	for(var e in this.elements) {
 		// Grab the current element
-		element = this[e];
+		element = this.elements[e];
 		
 		// Check if the browser supports addEventListener or attachEvent and use it
 		(element.addEventListener) ? 

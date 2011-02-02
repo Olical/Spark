@@ -11,9 +11,16 @@
 	</head>
 	
 	<body>
+		<h1>text</h1>
+		<p class='text'>Text read</p>
+		<p class='text2'></p>
+		
 		<script type='text/javascript' src='spark-dev.js'></script>
 		<script type='text/javascript'>
-			
+			// text
+			Spark('p.text2')
+				.text(Spark('p.text'))
+				.text(' and appended.', true);
 		</script>
 	</body>
 </html>

@@ -1,14 +1,29 @@
-<!DOCTYPE html>
-<html lang='en'>
-	<head>
-		<title>fixEvent</title>
-		<meta name='author' content='Oliver Caldwell'>
-		<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
-		<!--[if lt IE 9]><script type='text/javascript' src='http://html5shim.googlecode.com/svn/trunk/html5.js'></script><![endif]-->
-		<link rel='stylesheet' type='text/css' href='' />
-	</head>
+SparkFn.fixEvent = function(e) {
+	// Fix the page mouse location for IE
+	if(e.clientX || e.clientY) {
+		e.pageX = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+		e.pageY = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+	}
 	
-	<body>
-		
-	</body>
-</html>
+	// If its IE we need to copy srcElement over to target
+	if(e.target === undefined) {
+		e.target = e.srcElement;
+	}
+	
+	// Fix the offsetX/Y in Firefox
+	var offsetX = offsetY = 0;
+	var obj = e.target;
+	
+	if(obj.offsetParent) {
+		do {
+			offsetX += obj.offsetLeft;
+			offsetY += obj.offsetTop;
+		} while(obj = obj.offsetParent);
+	
+		e.offsetX = offsetX;
+		e.offsetY = offsetY;
+	}
+	
+	// Return the calculated positions
+	return e;
+};

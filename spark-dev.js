@@ -1,5 +1,5 @@
 /*!
- * Spark JavaScript library v1.4.6
+ * Spark JavaScript library v1.4.7
  * http://sparkjs.co.uk/
  * 
  * Copyright 2011, Oliver Caldwell
@@ -128,15 +128,14 @@ SparkFn.attribute = function(attribute) {
 			this.elements[e][a] = attribute[a];
 	
 	// If they did not set anything, return the first element
-	if(attribute === undefined)
+	if(!attribute)
 		return this.elements[0];
 	
-	// Otherwise return the Spark object
+	// Otherwise return the Spark object for chaining
 	return this;
 };
 SparkFn.content = function(content, append) {
-	for(var e in this.elements)
-	{
+	for(var e in this.elements) {
 		// Return content of the selected element if there is no content
 		if(!content)
 			return this.elements[e].innerHTML;
@@ -147,12 +146,12 @@ SparkFn.content = function(content, append) {
 				this.elements[e].innerHTML += content;
 	}
 	
+	// Return the Spark object for chaining
 	return this;
 };
 SparkFn.cookie = function(name, content, duration) {
 	// Check if content is set
-	if(!content)
-	{
+	if(!content) {
 		// If not, return its content
 		
 		// Set up any variables needed
@@ -178,8 +177,7 @@ SparkFn.cookie = function(name, content, duration) {
 		// If we didnt find it, return false
 		return false;
 	}
-	else
-	{
+	else {
 		// Get the current time
 		var date = new Date();
 		
@@ -212,12 +210,10 @@ SparkFn.css = function(css) {
 	return this;
 };
 SparkFn.event = function(type, callback) {
-	for(var e in this.elements)
-	{
+	for(var e in this.elements) {
 		// Check if the browser supports addEventListener or attachEvent
-		if(this.elements[e].addEventListener)
-			this.elements[e].addEventListener(type, function(event) {callback(Spark.fixEvents(event))}, false);
-		else if(this.elements[e].attachEvent)
+		(this.elements[e].addEventListener) ? 
+			this.elements[e].addEventListener(type, function(event) {callback(Spark.fixEvents(event))}, false) :
 			this.elements[e].attachEvent('on' + type, function(event) {callback(Spark.fixEvents(event))});
 	}
 	
@@ -379,28 +375,30 @@ SparkFn.browser = function() {
 	return BrowserDetect;
 };SparkFn.animate = function(properties, timeframe, callback) {
 	// Set a default timeframe
-	if(timeframe === undefined) timeframe = 800;
+	if(!timeframe) timeframe = 800;
 	
 	// Fix opacity
-	if(properties.opacity !== undefined) {
+	if(!properties.opacity) {
 		properties.MozOpacity = properties.opacity;
 		properties.KhtmlOpacity = properties.opacity;
 		properties.filter = properties.opacity * 100;
 	}
 	
 	// Initiate the offset as 0 if there is none
-	if(this.offset === undefined) {
+	if(!this.offset) {
 		this.offset = 0;
 	}
+	
+	// Stop all previous animations
+	this.stop();
 	
 	// Loop through all the elements
 	for(var e in this.elements) {
 		// Loop through all of the properties
 		for(var p in properties) {
 			// Make sure the style is set
-			this.elements[e].style[p] = (window.getComputedStyle) ?
-				((window.getComputedStyle(this.elements[e], null)[p]) ? window.getComputedStyle(this.elements[e], null)[p] : '0') :
-				((this.elements[e].currentStyle[p]) ? this.elements[e].currentStyle[p] : '0');
+			var computed = Spark(this.elements[e]).computed()[p];
+			this.elements[e].style[p] = (computed) ? computed : '0';
 			
 			// Fix for IE stuff
 			if(this.elements[e].style[p] == 'auto') this.elements[e].style[p] = '0';
@@ -458,7 +456,7 @@ SparkFn.browser = function() {
 	}
 	
 	// Set callback timer
-	if(callback !== undefined)
+	if(callback)
 		setTimeout(callback, timeframe);
 	
 	// Set up the offset for chaining
@@ -644,8 +642,11 @@ SparkFn.browser = function() {
 			clearTimeout(animations[a]);
 		}
 	}
+	
+	// Return the Spark object to allow chianing
+	return this;
 };SparkFn.computed = function() {
-	if(window.getComputedStyle !== undefined) return window.getComputedStyle(this.elements[0], null);
+	if(window.getComputedStyle) return window.getComputedStyle(this.elements[0], null);
 	return this.elements[0].currentStyle;
 };(function(){
 

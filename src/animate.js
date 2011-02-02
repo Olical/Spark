@@ -3,14 +3,14 @@ SparkFn.animate = function(properties, timeframe, callback) {
 	if(!timeframe) timeframe = 800;
 	
 	// Fix opacity
-	if(properties.opacity !== undefined) {
+	if(!properties.opacity) {
 		properties.MozOpacity = properties.opacity;
 		properties.KhtmlOpacity = properties.opacity;
 		properties.filter = properties.opacity * 100;
 	}
 	
 	// Initiate the offset as 0 if there is none
-	if(this.offset === undefined) {
+	if(!this.offset) {
 		this.offset = 0;
 	}
 	
@@ -82,7 +82,7 @@ SparkFn.animate = function(properties, timeframe, callback) {
 	}
 	
 	// Set callback timer
-	if(callback !== undefined)
+	if(callback)
 		setTimeout(callback, timeframe);
 	
 	// Set up the offset for chaining

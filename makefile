@@ -14,7 +14,8 @@ initialisation = ${srcdir}initialise.js
 modules =	${srcdir}html.js\
 			${srcdir}text.js\
 			${srcdir}fixEvent.js\
-			${srcdir}ready.js
+			${srcdir}ready.js\
+			${srcdir}event.js
 
 #modules =	${srcdir}ajax.js\
 			${srcdir}attribute.js\

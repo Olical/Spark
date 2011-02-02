@@ -61,4 +61,9 @@ window.SparkIn = function() {
 	else if($.fixEvent !== undefined) {
 		inUse = false;
 	}
+	
+	// Copy Spark into $ if it is not in use
+	if(inUse === false) {
+		window.$ = Spark;
+	}
 };

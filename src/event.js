@@ -9,7 +9,7 @@ SparkFn.event = function(type, callback) {
 		
 		// Check if the browser supports addEventListener or attachEvent and use it
 		(element.addEventListener) ? 
-			element.addEventListener(type, function(e) {callback{Spark.fixEvent(e))}, false) :
+			element.addEventListener(type, function(e) {callback(Spark.fixEvent(e))}, false) :
 			element.attachEvent('on' + type, function(e) {callback(Spark.fixEvent(e))});
 	}
 	

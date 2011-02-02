@@ -22,6 +22,9 @@
 		<p class='html'>Text read</p>
 		<p class='html2'></p>
 		
+		<h1>event</h1>
+		<p class='event'>Click me to load the time.</p>
+		
 		<script type='text/javascript' src='spark-dev.js'></script>
 		<script type='text/javascript'>
 			// ready
@@ -35,6 +38,11 @@
 				Spark('p.html2')
 					.html(Spark('p.text').html())
 					.html(' and appended.', true);
+				
+				// event
+				Spark('p.event').event('click', function(e) {
+					Spark(e.target).text(new Date().getTime());
+				});
 			});
 		</script>
 	</body>

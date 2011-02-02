@@ -12,6 +12,8 @@ dependencies =	${srcdir}sizzle.js\
 initialisation = ${srcdir}initialise.js
 
 # Create the list of modules paths
+modules =	${srcdir}content.js
+
 #modules =	${srcdir}ajax.js\
 			${srcdir}attribute.js\
 			${srcdir}content.js\

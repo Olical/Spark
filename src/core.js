@@ -43,5 +43,10 @@ window.SparkIn = function() {
 				}
 			}
 		}
+		
+		// Add the functions to the result object
+		for(var f in SparkFn) {
+			result[f] = SparkFn[f];
+		}
 	};
 };

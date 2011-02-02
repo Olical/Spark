@@ -19,6 +19,7 @@ window.SparkFn = new Object();
 window.SparkIn = function() {
 	// Create the Spark object
 	window.Spark = function(selector, context) {
-		
+		// Create the result object
+		var result = new Object();
 	};
 };

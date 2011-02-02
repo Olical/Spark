@@ -14,6 +14,9 @@ SparkFn.animate = function(properties, timeframe, callback) {
 		this.offset = 0;
 	}
 	
+	// Stop all previous animations
+	this.stop();
+	
 	// Loop through all the elements
 	for(var e in this.elements) {
 		// Loop through all of the properties

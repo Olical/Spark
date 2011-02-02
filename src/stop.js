@@ -13,4 +13,7 @@ SparkFn.stop = function() {
 			clearTimeout(animations[a]);
 		}
 	}
+	
+	// Return the Spark object to allow chianing
+	return this;
 };

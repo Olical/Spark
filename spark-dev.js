@@ -385,12 +385,9 @@ SparkFn.browser = function() {
 	}
 	
 	// Initiate the offset as 0 if there is none
-	if(this.offset === undefined) {
+	if(!this.offset) {
 		this.offset = 0;
 	}
-	
-	// Stop all previous animations
-	this.stop();
 	
 	// Loop through all the elements
 	for(var e in this.elements) {

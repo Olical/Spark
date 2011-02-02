@@ -1,6 +1,6 @@
 SparkFn.animate = function(properties, timeframe, callback) {
 	// Set a default timeframe
-	if(timeframe === undefined) timeframe = 800;
+	if(!timeframe) timeframe = 800;
 	
 	// Fix opacity
 	if(properties.opacity !== undefined) {

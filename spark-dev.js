@@ -55,10 +55,10 @@ window.SparkIn = function() {
 	
 	// Check if we can use $
 	var inUse = true;
-	if($() === undefined) {
+	if(typeof $ == 'undefined') {
 		inUse = false;
 	}
-	else if($().fixEvent !== undefined) {
+	else if($.fixEvent !== undefined) {
 		inUse = false;
 	}
 	

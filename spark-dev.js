@@ -50,7 +50,7 @@ window.SparkIn = function() {
 		}
 		
 		// Return the built object
-		return result;
+		return {elements: result};
 	};
 	
 	// Check if we can use $
@@ -81,9 +81,9 @@ window.SparkIn = function() {
 	var element = null;
 	
 	// Loop through all of the elements
-	for(var e in this) {
+	for(var e in this.elements) {
 		// Grab the current element
-		element = this[e];
+		element = this.elements[e];
 		
 		// Return content of the selected element if there is no content
 		if(content === undefined) {
@@ -104,9 +104,9 @@ window.SparkIn = function() {
 	var element = null;
 	
 	// Loop through all of the elements
-	for(var e in this) {
+	for(var e in this.elements) {
 		// Grab the current element
-		element = this[e];
+		element = this.elements[e];
 		
 		// Return content of the selected element if there is no content
 		if(content === undefined) {
@@ -181,9 +181,9 @@ SparkFn.event = function(type, callback) {
 	var element = null;
 	
 	// Loop through all of the elements
-	for(var e in this) {
+	for(var e in this.elements) {
 		// Grab the current element
-		element = this[e];
+		element = this.elements[e];
 		
 		// Check if the browser supports addEventListener or attachEvent and use it
 		(element.addEventListener) ? 

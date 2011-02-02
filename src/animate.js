@@ -10,7 +10,7 @@ SparkFn.animate = function(properties, timeframe, callback) {
 	}
 	
 	// Initiate the offset as 0 if there is none
-	if(!this.offset) {
+	if(this.offset === undefined) {
 		this.offset = 0;
 	}
 	

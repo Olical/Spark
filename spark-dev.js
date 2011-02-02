@@ -378,7 +378,7 @@ SparkFn.browser = function() {
 	if(!timeframe) timeframe = 800;
 	
 	// Fix opacity
-	if(!properties.opacity) {
+	if(properties.opacity) {
 		properties.MozOpacity = properties.opacity;
 		properties.KhtmlOpacity = properties.opacity;
 		properties.filter = properties.opacity * 100;

@@ -64,6 +64,16 @@ window.SparkIn = function() {
 	
 	// Copy Spark into $ if it is not in use
 	if(inUse === false) {
-		window.$ = Spark;
+		window.$ = Spark();
+	}
+	
+	// Take out the need for brackets
+	for(var i in Spark()) {
+		Spark[i] = Spark()[i];
+		
+		// Only do it to $ if it is not in use
+		if(inUse === false) {
+			$[i] = Spark()[i];
+		}
 	}
 };

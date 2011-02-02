@@ -22,9 +22,8 @@ SparkFn.animate = function(properties, timeframe, callback) {
 		// Loop through all of the properties
 		for(var p in properties) {
 			// Make sure the style is set
-			this.elements[e].style[p] = (window.getComputedStyle) ?
-				((window.getComputedStyle(this.elements[e], null)[p]) ? window.getComputedStyle(this.elements[e], null)[p] : '0') :
-				((this.elements[e].currentStyle[p]) ? this.elements[e].currentStyle[p] : '0');
+			var computed = Spark(this.elements[e]).computed()[p];
+			this.elements[e].style[p] = (computed) ? computed : '0';
 			
 			// Fix for IE stuff
 			if(this.elements[e].style[p] == 'auto') this.elements[e].style[p] = '0';

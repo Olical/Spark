@@ -1,7 +1,6 @@
 SparkFn.cookie = function(name, content, duration) {
 	// Check if content is set
-	if(!content)
-	{
+	if(!content) {
 		// If not, return its content
 		
 		// Set up any variables needed
@@ -27,8 +26,7 @@ SparkFn.cookie = function(name, content, duration) {
 		// If we didnt find it, return false
 		return false;
 	}
-	else
-	{
+	else {
 		// Get the current time
 		var date = new Date();
 		

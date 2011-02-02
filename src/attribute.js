@@ -7,6 +7,6 @@ SparkFn.attribute = function(attribute) {
 	if(!attribute)
 		return this.elements[0];
 	
-	// Otherwise return the Spark object
+	// Otherwise return the Spark object for chaining
 	return this;
 };

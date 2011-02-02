@@ -50,7 +50,7 @@ window.SparkIn = function() {
 		}
 		
 		// Return the built object
-		return result;
+		return {elements: result};
 	};
 	
 	// Check if we can use $

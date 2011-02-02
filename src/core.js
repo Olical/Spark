@@ -64,7 +64,7 @@ window.SparkIn = function() {
 	if(typeof $ == 'undefined') {
 		inUse = false;
 	}
-	else if($.fixEvent() !== undefined) {
+	else if(typeof $.fixEvent != 'undefined') {
 		inUse = false;
 	}
 	

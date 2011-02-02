@@ -48,5 +48,10 @@ window.SparkIn = function() {
 		for(var f in SparkFn) {
 			result[f] = SparkFn[f];
 		}
+		
+		// Return the built object
+		return result;
 	};
+	
+	
 };

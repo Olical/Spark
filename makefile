@@ -13,7 +13,8 @@ initialisation = ${srcdir}initialise.js
 # Create the list of modules paths
 modules =	${srcdir}html.js\
 			${srcdir}text.js\
-			${srcdir}fixEvent.js
+			${srcdir}fixEvent.js\
+			${srcdir}ready.js
 
 #modules =	${srcdir}ajax.js\
 			${srcdir}attribute.js\

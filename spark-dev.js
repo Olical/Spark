@@ -1520,3 +1520,4 @@ var posProcess = function( selector, context ) {
 window.Sizzle = Sizzle;
 
 })();
+SparkIn();

@@ -15,7 +15,8 @@ modules =	${srcdir}html.js\
 			${srcdir}text.js\
 			${srcdir}fixEvent.js\
 			${srcdir}ready.js\
-			${srcdir}event.js
+			${srcdir}event.js\
+			${srcdir}attribute.js
 
 #modules =	${srcdir}ajax.js\
 			${srcdir}attribute.js\

@@ -25,6 +25,9 @@
 		<h1>event</h1>
 		<p class='event'>Click me to load the time.</p>
 		
+		<h1>attribute</h1>
+		<p class='attribute'>Does this element have a title?</p>
+		
 		<script type='text/javascript' src='../spark-dev.js'></script>
 		<script type='text/javascript'>
 			// ready
@@ -43,6 +46,9 @@
 				Spark('p.event').event('click', function(e) {
 					Spark(e.target).text(new Date().getTime());
 				});
+				
+				// attribute
+				Spark('p.attribute').attribute({title: 'Yes it does, it worked.'});
 			});
 		</script>
 	</body>

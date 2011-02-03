@@ -347,6 +347,15 @@ SparkFn.event = function(type, callback) {
 	
 	// Return the data
 	return BrowserDetect;
+};SparkFn.computed = function() {
+	// If we can use getComputedStyle
+	if(window.getComputedStyle) {
+		// Return getComputedStyle
+		return window.getComputedStyle(this.elements[0], null);
+	}
+	
+	// Otherwise return currentStyle
+	return this.elements[0].currentStyle;
 };(function(){
 
 var chunker = /((?:\((?:\([^()]+\)|[^()]+)+\)|\[(?:\[[^\[\]]*\]|['"][^'"]*['"]|[^\[\]'"]+)+\]|\\.|[^ >+~,(\[\\]+)+|[>+~])(\s*,\s*)?((?:.|\r|\n)*)/g,

@@ -28,6 +28,9 @@
 		<h1>attribute</h1>
 		<p class='attribute'>Does this element have a title?</p>
 		
+		<h1>browser</h1>
+		<p class='browser'></p>
+		
 		<script type='text/javascript' src='../spark-dev.js'></script>
 		<script type='text/javascript'>
 			// ready
@@ -49,6 +52,14 @@
 				
 				// attribute
 				Spark('p.attribute').attribute({title: 'Yes it does, it worked.'});
+				
+				// browser
+				var b = Spark.browser();
+				Spark('p.browser').html(
+					'You are using <strong>' + b.browser + '</strong>.' +
+					' Version <strong>' + b.version + '</strong>' +
+					' On <strong>' + b.os + '</strong>'
+				);
 			});
 		</script>
 	</body>

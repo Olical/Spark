@@ -34,6 +34,10 @@
 		<h1>computed</h1>
 		<p class='computed'></p>
 		
+		<h1>cookie</h1>
+		<p><strong>Set:</strong> Cookie 1 = foo. Cookie 2 = bar.</p>
+		<p class='cookie'><strong>Get:</strong> </p>
+		
 		<script type='text/javascript' src='../spark-dev.js'></script>
 		<script type='text/javascript'>
 			// ready
@@ -66,6 +70,14 @@
 				
 				// computed
 				Spark('p.computed').html('The computed height of the body tag is ' + Spark('body').computed().height + '.');
+				
+				// cookie
+				Spark.cookie('Cookie1', 'foo');
+				Spark.cookie('Cookie2', 'bar');
+				Spark('p.cookie').html(
+					'Cookie1 = ' + Spark.cookie('Cookie1') + '.' +
+					' Cookie2 = ' + Spark.cookie('Cookie2') + '.'
+				, true);
 			});
 		</script>
 	</body>

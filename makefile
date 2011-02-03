@@ -18,7 +18,8 @@ modules =	${srcdir}html.js\
 			${srcdir}event.js\
 			${srcdir}attribute.js\
 			${srcdir}browser.js\
-			${srcdir}computed.js
+			${srcdir}computed.js\
+			${srcdir}cookie.js
 
 #modules =	${srcdir}ajax.js\
 			${srcdir}attribute.js\

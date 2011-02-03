@@ -9,6 +9,7 @@ SparkFn.cookie = function(name, content, duration) {
 		
 		// Loop through all of the cookies looking for ours
 		for(var i in ca) {
+			// Grab the current cookie
 			var c = ca[i];
 
 			// Cut of the whitespace
@@ -30,7 +31,7 @@ SparkFn.cookie = function(name, content, duration) {
 		var date = new Date();
 		
 		// Push the time on by either a month or the user defined duration
-		date.setTime(date.getTime() + ((duration) ? duration : 2628000000));
+		date.setTime(date.getTime() + ((duration !== undefined) ? duration : 2628000000));
 		
 		// Set the cookie
 		document.cookie = name + '=' + content + '; expires=' + date.toGMTString() + '; path=/';

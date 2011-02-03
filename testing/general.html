@@ -31,6 +31,9 @@
 		<h1>browser</h1>
 		<p class='browser'></p>
 		
+		<h1>computed</h1>
+		<p class='computed'></p>
+		
 		<script type='text/javascript' src='../spark-dev.js'></script>
 		<script type='text/javascript'>
 			// ready
@@ -60,6 +63,9 @@
 					' Version <strong>' + b.version + '</strong>.' +
 					' On <strong>' + b.os + '</strong>.'
 				);
+				
+				// computed
+				Spark('p.computed').html('The computed height of the body tag is ' + Spark('body').computed().height + '.');
 			});
 		</script>
 	</body>

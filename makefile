@@ -5,7 +5,8 @@ srcdir = src/
 core = ${srcdir}core.js
 
 # Create the list of dependencies
-dependencies =	${srcdir}sizzle.js
+dependencies =	${srcdir}sizzle.js\
+				${srcdir}json2.js
 
 # Create the initialisation file path
 initialisation = ${srcdir}initialise.js

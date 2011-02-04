@@ -1,0 +1,3 @@
+SparkFn.noConflict = function(both) {
+	
+};

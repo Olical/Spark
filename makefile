@@ -24,7 +24,8 @@ modules =	${srcdir}html.js\
 			${srcdir}css.js\
 			${srcdir}data.js\
 			${srcdir}each.js\
-			${srcdir}json.js
+			${srcdir}json.js\
+			${srcdir}noConflict.js
 
 #modules =	${srcdir}ajax.js\
 			${srcdir}attribute.js\

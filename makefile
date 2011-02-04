@@ -32,7 +32,7 @@ modules =	${srcdir}html.js\
 			${srcdir}transition.js\
 			${srcdir}animate.js\
 			${srcdir}ajax.js\
-			${srcdir}class.js
+			${srcdir}classes.js
 
 #modules =	${srcdir}ajax.js\
 			${srcdir}attribute.js\

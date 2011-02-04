@@ -31,7 +31,8 @@ modules =	${srcdir}html.js\
 			${srcdir}stop.js\
 			${srcdir}transition.js\
 			${srcdir}animate.js\
-			${srcdir}ajax.js
+			${srcdir}ajax.js\
+			${srcdir}class.js
 
 #modules =	${srcdir}ajax.js\
 			${srcdir}attribute.js\

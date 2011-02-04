@@ -38,6 +38,9 @@
 		<p><strong>Set:</strong> Cookie 1 = foo. Cookie 2 = bar.</p>
 		<p class='cookie'><strong>Get:</strong> </p>
 		
+		<h1>css</h1>
+		<p class='css'>This should be red and slightly faded out.</p>
+		
 		<script type='text/javascript' src='../spark-dev.js'></script>
 		<script type='text/javascript'>
 			// ready
@@ -78,6 +81,12 @@
 					'Cookie1 = ' + Spark.cookie('Cookie1') + '.' +
 					' Cookie2 = ' + Spark.cookie('Cookie2') + '.'
 				, true);
+				
+				// css
+				Spark('p.css').css({
+					color: '#FF0000',
+					opacity: .5
+				});
 			});
 		</script>
 	</body>

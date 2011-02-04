@@ -44,6 +44,10 @@
 		<h1>data</h1>
 		<p class='data'>This elements data is set to (foo = 'bar') and retrieved as </p>
 		
+		<h1>each</h1>
+		<p class='each'></p>
+		<p class='each'></p>
+		
 		<script type='text/javascript' src='../spark-dev.js'></script>
 		<script type='text/javascript'>
 			// ready
@@ -94,6 +98,11 @@
 				// data
 				Spark.data(Spark('p.data').attribute(), 'foo', 'bar');
 				Spark('p.data').html(Spark.data(Spark('p.data').attribute(), 'foo'), true);
+				
+				// each
+				Spark('p.each').each(function(e) {
+					Spark(e).html('Every element with a class of each now has this content.');
+				});
 			});
 		</script>
 	</body>

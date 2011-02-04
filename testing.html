@@ -54,6 +54,9 @@
 		<h1>noConflict</h1>
 		<p>No conflict has been run, $ has been reverted to its state before Spark got here.</p>
 		
+		<h1>animate</h1>
+		<p class='animate'>Fade to .5 opacity on click.</p>
+		
 		<script type='text/javascript' src='spark-dev.js'></script>
 		<script type='text/javascript'>
 			// ready
@@ -117,6 +120,11 @@
 				
 				// noConflict
 				window.SparkInstance = Spark.noConflict();
+				
+				// animate
+				Spark('p.animate').event('click', function(e) {
+					Spark(e.target).animate({opacity: .5});
+				});
 			});
 		</script>
 	</body>

@@ -20,7 +20,8 @@ modules =	${srcdir}html.js\
 			${srcdir}browser.js\
 			${srcdir}computed.js\
 			${srcdir}cookie.js\
-			${srcdir}css.js
+			${srcdir}css.js\
+			${srcdir}data.js
 
 #modules =	${srcdir}ajax.js\
 			${srcdir}attribute.js\

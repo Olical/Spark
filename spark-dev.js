@@ -507,6 +507,230 @@ SparkFn.css = function(css) {
 	
 	// Add the script element to the head
 	head.appendChild(script);
+};SparkFn.stop = function() {
+	// Set up any variables
+	var element = null;
+	
+	// Loop through all of the elements
+	for(var e in this.elements) {
+		// Grab the current element
+		element = this.elements[e];
+		
+		// Make sure it is set
+		if(this.data(element, 'Spark.animations') === undefined) {
+			this.data(element, 'Spark.animations', '');
+		}
+		
+		// Get the animations
+		var animations = this.data(element, 'Spark.animations').split(',');
+		
+		// Loop through them all, canceling them all
+		for(var a in animations) {
+			clearTimeout(animations[a]);
+		}
+	}
+	
+	// Return the Spark object
+	return this;
+};SparkFn.transition = function(method, timeframe, callback) {
+	// Set up any variables
+	var element = null;
+	
+	// Check if we have a callback, if not set it to and empty function
+	if(callback === undefined) {
+		callback = new Function();
+	}
+	
+	// Check if the timeframe is set, if not default it to 800ms
+	if(timeframe === undefined) {
+		timeframe = 800;
+	}
+	
+	// Loop through all of the elements
+	for(var e in this.elements) {
+		// Grab the current element
+		element = this.elements[e];
+		
+		// Work out what method we need to do
+		switch(method) {
+			case 'slidedown':
+				// Set overflow to hidden
+				Spark(element).css({overflow: 'hidden', display: 'block'});
+				
+				// Get original height
+				var original = Spark(element).computed().height;
+				
+				// Set height to 0
+				Spark(element).css({height: 0});
+				
+				// Slide height to original
+				Spark(element).animate({height: original}, timeframe, callback);
+				break;
+			
+			case 'slideup':				
+				// Get original height
+				var original = Spark(element).attribute().height;
+				
+				// Slide height to 0
+				Spark(element).animate({height: 0}, timeframe, function() {
+					// Set height to original
+					Spark(element).css({height: original, display: 'none'});
+					
+					// Run the callback
+					callback();
+				});
+				break;
+			
+			case 'fadein':
+				// Display it
+				Spark(element).css({display: 'block', opacity: 0});
+				
+				// Fade opacity to 100
+				Spark(element).animate({opacity: 1}, timeframe, callback);
+				break;
+			
+			case 'fadeout':
+				// Fade opacity to 0
+				Spark(element).animate({opacity: 0}, timeframe, function() {
+					// Set opacity to 100
+					Spark(element).css({opacity: 1, display: 'none'});
+					
+					// Run the callback
+					callback();
+				});
+				break;
+			
+			case 'sneakin':
+				// Set overflow to hidden
+				Spark(element).css({overflow: 'hidden', display: 'block', opacity: 0});
+				
+				// Get original height
+				var original = Spark(element).computed().height;
+				
+				// Set height to 0
+				Spark(element).css({height: 0});
+				
+				// Slide height to original
+				Spark(element).animate({height: original, opacity: 1}, timeframe, callback);
+				break;
+			
+			case 'sneakout':		
+				// Get original height
+				var original = Spark(element).computed().height;
+				
+				// Slide height to 0
+				Spark(element).animate({height: 0, opacity: 0}, timeframe, function() {
+					// Set height to original
+					Spark(element).css({height: original, display: 'none'});
+					
+					// Run the callback
+					callback();
+				});
+				break;
+		}
+	}
+	
+	// Return the Spark object
+	return this;
+};SparkFn.animate = function(properties, timeframe, callback) {
+	// Set up any variables
+	var element = null;
+	
+	// Set a default timeframe
+	if(!timeframe) {
+		timeframe = 800;
+	}
+	
+	// Fix opacity
+	if(properties.opacity) {
+		properties.MozOpacity = properties.opacity;
+		properties.KhtmlOpacity = properties.opacity;
+		properties.filter = properties.opacity * 100;
+	}
+	
+	// Initiate the offset as 0 if there is none
+	if(!this.offset) {
+		this.offset = 0;
+	}
+	
+	// Loop through all the elements
+	for(var e in this.elements) {
+		// Grab the current element
+		element = this.elements[e];
+		
+		// Loop through all of the properties
+		for(var p in properties) {
+			// Make sure the style is set
+			var computed = Spark(element).computed()[p];
+			element.style[p] = (computed) ? computed : '0';
+			
+			// Fix for IE stuff
+			if(element.style[p] == 'auto') element.style[p] = '0';
+			element.style.zoom = '1';
+			
+			if(p == 'filter' && element.style[p] == '0') {
+				element.style[p] = 'alpha(opacity=100)';
+			}
+			
+			// Get the original
+			var original = (p == 'opacity' || p == 'MozOpacity' || p == 'KhtmlOpacity') ? parseFloat(element.style[p]) : parseInt(element.style[p].replace('alpha(opacity=', '').replace(')', ''));
+			
+			// Work out the difference
+			var difference = (p == 'opacity' || p == 'MozOpacity' || p == 'KhtmlOpacity') ? parseFloat(properties[p]) - original : parseInt(properties[p]) - original;
+			
+			// Work out how many frames
+			var frames = timeframe / (1000 / this.fps);
+			
+			// Work out how many pixels per frame
+			var pixels = difference / frames;
+			
+			// Work out the unit of measurement
+			var unit = (isNaN(properties[p])) ? properties[p].replace(/[0-9]/g, '') : 'px';
+			
+			// Set up the prefix
+			var prefix = '';
+			
+			// Another opacity fix
+			if(p == 'opacity' || p == 'MozOpacity' || p == 'KhtmlOpacity') {
+				unit = '';
+			}
+			else if(p == 'filter') {
+				prefix = 'alpha(opacity=';
+				unit = ')';
+			}
+			
+			this.data(element, 'Spark.animations', 'START');
+			
+			// Loop through each frame
+			for(var i = 0; i <= frames; i++) {
+				this.data(element, 'Spark.animations', this.data(element, 'Spark.animations') + ',' + setTimeout((function(exti, extelement, extp, extoriginal, extpixels, extunit, extprefix) {
+					return function() {
+						extelement.style[extp] = extprefix + (extoriginal + (extpixels * exti)) + extunit;
+					}
+				})(i, element, p, original, pixels, unit, prefix), i * (1000 / this.fps) + this.offset, element, p, original, pixels, unit, prefix));
+			}
+			
+			// Correct floating point problem
+			this.data(element, 'Spark.animations', this.data(element, 'Spark.animations') + ',' + setTimeout((function(extelement, extp, extproperties, extunit, extprefix) {
+				return function() {
+					extelement.style[extp] = extprefix + ((extp == 'opacity' || extp == 'MozOpacity' || extp == 'KhtmlOpacity') ? parseFloat(extproperties[extp]) : parseInt(extproperties[extp])) + extunit;
+				}
+			})(element, p, properties, unit, prefix), timeframe + this.offset, element, p, properties, unit, prefix));
+			
+			this.data(element, 'Spark.animations', this.data(element, 'Spark.animations').replace('START,', ''));
+		}
+	}
+	
+	// Set callback timer
+	if(callback) {
+		setTimeout(callback, timeframe);
+	}
+	
+	// Set up the offset for chaining
+	this.offset += timeframe;
+	
+	// Return the Spark object
+	return this;
 };(function(){
 
 var chunker = /((?:\((?:\([^()]+\)|[^()]+)+\)|\[(?:\[[^\[\]]*\]|['"][^'"]*['"]|[^\[\]'"]+)+\]|\\.|[^ >+~,(\[\\]+)+|[>+~])(\s*,\s*)?((?:.|\r|\n)*)/g,

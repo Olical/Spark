@@ -41,6 +41,9 @@
 		<h1>css</h1>
 		<p class='css'>This should be red and slightly faded out.</p>
 		
+		<h1>data</h1>
+		<p class='data'>This elements data is set to (foo = 'bar') and retrieved as </p>
+		
 		<script type='text/javascript' src='../spark-dev.js'></script>
 		<script type='text/javascript'>
 			// ready
@@ -87,6 +90,10 @@
 					color: '#FF0000',
 					opacity: .5
 				});
+				
+				// data
+				Spark.data(Spark('p.data').attribute(), 'foo', 'bar');
+				Spark('p.data').html(Spark.data(Spark('p.data').attribute(), 'foo'), true)
 			});
 		</script>
 	</body>

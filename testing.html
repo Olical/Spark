@@ -60,6 +60,10 @@
 		<h1>transition</h1>
 		<p class='transition'>SneakOut on click.</p>
 		
+		<h1>ajax</h1>
+		<p>README.md loaded in via ajax.</p>
+		<p class='ajax'></p>
+		
 		<script type='text/javascript' src='spark-dev.js'></script>
 		<script type='text/javascript'>
 			// ready
@@ -132,6 +136,11 @@
 				// transition
 				Spark('p.transition').event('click', function(e) {
 					Spark(e.target).transition('sneakout');
+				});
+				
+				// ajax
+				Spark.ajax('get', 'README.md', false, function(data) {
+					Spark('p.ajax').html(data);
 				});
 			});
 		</script>

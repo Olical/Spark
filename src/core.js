@@ -20,6 +20,12 @@ window.SparkFn = new Object();
 
 // Create the initialise function
 window.SparkIn = function() {
+	// Back up Spark and $ for use in noConflict mode
+	window.SparkBk = {
+		$: $,
+		Spark: Spark
+	};
+	
 	// Create the Spark object
 	window.$ = window.Spark = function(selector, context) {
 		// Create the result object

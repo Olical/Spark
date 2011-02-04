@@ -51,6 +51,9 @@
 		<h1>json</h1>
 		<p class='json'>Decoded then encoded back to this: </p>
 		
+		<h1>noConflict</h1>
+		<p>No conflict has been run, $ has been reverted to its state before Spark got here.</p>
+		
 		<script type='text/javascript' src='spark-dev.js'></script>
 		<script type='text/javascript'>
 			// ready
@@ -111,6 +114,9 @@
 				Spark('p.json').html(
 					Spark.json('encode', Spark.json('decode', '{"name":"Oliver Caldwell","age":17}'))
 				, true);
+				
+				// noConflict
+				window.SparkInstance = Spark.noConflict();
 			});
 		</script>
 	</body>

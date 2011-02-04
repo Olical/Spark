@@ -29,7 +29,8 @@ modules =	${srcdir}html.js\
 			${srcdir}jsonp.js\
 			${srcdir}load.js\
 			${srcdir}stop.js\
-			${srcdir}transition.js
+			${srcdir}transition.js\
+			${srcdir}animate.js
 
 #modules =	${srcdir}ajax.js\
 			${srcdir}attribute.js\

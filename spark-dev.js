@@ -10,6 +10,9 @@
  * http://sizzlejs.com/
  * Copyright 2011, The Dojo Foundation
  * Released under the MIT, BSD, and GPL Licenses.
+ *
+ * Includes json2.js
+ * http://www.json.org/json2.js
  */
 
 // Create the function holder
@@ -465,6 +468,14 @@ SparkFn.css = function(css) {
 	
 	// Return the Spark object
 	return this;
+};SparkFn.json = function(method, data) {
+	// Check what we need to do
+	if(method == 'encode') {
+		return JSON.stringify(data);
+	}
+	else if(method == 'decode') {
+		return JSON.parse(data);
+	}
 };(function(){
 
 var chunker = /((?:\((?:\([^()]+\)|[^()]+)+\)|\[(?:\[[^\[\]]*\]|['"][^'"]*['"]|[^\[\]'"]+)+\]|\\.|[^ >+~,(\[\\]+)+|[>+~])(\s*,\s*)?((?:.|\r|\n)*)/g,

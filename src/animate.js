@@ -1,6 +1,7 @@
 SparkFn.animate = function(properties, timeframe, callback) {
 	// Set up any variables
 	var element = null;
+	var fps = 60;
 	
 	// Set a default timeframe
 	if(!timeframe) {
@@ -45,7 +46,7 @@ SparkFn.animate = function(properties, timeframe, callback) {
 			var difference = (p == 'opacity' || p == 'MozOpacity' || p == 'KhtmlOpacity') ? parseFloat(properties[p]) - original : parseInt(properties[p]) - original;
 			
 			// Work out how many frames
-			var frames = timeframe / (1000 / this.fps);
+			var frames = timeframe / (1000 / fps);
 			
 			// Work out how many pixels per frame
 			var pixels = difference / frames;
@@ -73,7 +74,7 @@ SparkFn.animate = function(properties, timeframe, callback) {
 					return function() {
 						extelement.style[extp] = extprefix + (extoriginal + (extpixels * exti)) + extunit;
 					}
-				})(i, element, p, original, pixels, unit, prefix), i * (1000 / this.fps) + this.offset, element, p, original, pixels, unit, prefix));
+				})(i, element, p, original, pixels, unit, prefix), i * (1000 / fps) + this.offset, element, p, original, pixels, unit, prefix));
 			}
 			
 			// Correct floating point problem

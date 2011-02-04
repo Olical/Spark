@@ -21,7 +21,7 @@ window.SparkFn = new Object();
 // Create the initialise function
 window.SparkIn = function() {
 	// Create the Spark object
-	window.Spark = function(selector, context) {
+	window.$ = window.Spark = function(selector, context) {
 		// Create the result object
 		var result = new Object();
 		
@@ -62,27 +62,8 @@ window.SparkIn = function() {
 		return built;
 	};
 	
-	// Check if we can use $
-	var inUse = true;
-	if(typeof $ == 'undefined') {
-		inUse = false;
-	}
-	else if(typeof $.fixEvent != 'undefined') {
-		inUse = false;
-	}
-	
-	// Copy Spark into $ if it is not in use
-	if(inUse === false) {
-		window.$ = Spark();
-	}
-	
 	// Take out the need for brackets
 	for(var i in Spark()) {
-		Spark[i] = Spark()[i];
-		
-		// Only do it to $ if it is not in use
-		if(inUse === false) {
-			$[i] = Spark()[i];
-		}
+		$ = Spark[i] = Spark()[i];
 	}
 };

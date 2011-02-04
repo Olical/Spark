@@ -782,7 +782,7 @@ SparkFn.css = function(css) {
 		// Just return the content because it was a syncronous request
 		return xmlhttp.responseText;
 	}
-};SparkFn.class = function(method, name) {
+};SparkFn.classes = function(method, name) {
 	// Set up any variables
 	var element = null;
 	
@@ -799,7 +799,7 @@ SparkFn.css = function(css) {
 				break;
 			case 'add':
 				// Check if it does not already has that class
-				if(!this.class('has', name)) {
+				if(!this.classes('has', name)) {
 					// Append the class name with or without a space
 					element.className += (element.className) ? ' ' + name : name;
 				}

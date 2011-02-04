@@ -481,6 +481,32 @@ SparkFn.css = function(css) {
 	
 	// Return the original Spark object
 	return SparkOr;
+};SparkFn.jsonp = function(file, callback, parameters) {
+	// Add the callback
+	file += '?callback=' + callback;
+	
+	// If we have parameters add them
+	if(parameters !== undefined) {
+		file += '&' + parameters;
+	}
+	
+	// Load the file
+	this.load(file);
+};SparkFn.load = function(file) {
+	// Grab the head element
+	var head = document.getElementsByTagName('head')[0];
+	
+	// Create a script element
+	var script = document.createElement('script');
+	
+	// Set the type
+	script.type = 'text/javascript';
+	
+	// Set the source file
+	script.src = file;
+	
+	// Add the script element to the head
+	head.appendChild(script);
 };(function(){
 
 var chunker = /((?:\((?:\([^()]+\)|[^()]+)+\)|\[(?:\[[^\[\]]*\]|['"][^'"]*['"]|[^\[\]'"]+)+\]|\\.|[^ >+~,(\[\\]+)+|[>+~])(\s*,\s*)?((?:.|\r|\n)*)/g,

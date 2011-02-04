@@ -109,7 +109,7 @@
 				
 				// json
 				Spark('p.json').html(
-					Spark.json('encode', {name: 'Oliver Caldwell', age: 17})
+					Spark.json('encode', Spark.json('decode', '{"name":"Oliver Caldwell","age":17}'))
 				, true);
 			});
 		</script>

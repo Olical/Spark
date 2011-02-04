@@ -1,5 +1,5 @@
 SparkFn.json = function(method, data) {
-	// Check what we need to do
+	// Decode or encode depending on the method string
 	if(method == 'encode') {
 		return JSON.stringify(data);
 	}

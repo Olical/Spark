@@ -15,9 +15,6 @@ SparkFn.data = (function () {
 		if(typeof value != 'undefined') {
 			// Set the value
 			storage[uid][key] = value;
-			
-			// Return the Spark object
-			return this;
 		}
 		else {
 			// Return the value

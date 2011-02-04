@@ -48,6 +48,9 @@
 		<p class='each'></p>
 		<p class='each'></p>
 		
+		<h1>json</h1>
+		<p class='json'>Decoded then encoded back to this: </p>
+		
 		<script type='text/javascript' src='spark-dev.js'></script>
 		<script type='text/javascript'>
 			// ready
@@ -103,6 +106,11 @@
 				Spark('p.each').each(function(e) {
 					Spark(e).html('Every element with a class of each now has this content.');
 				});
+				
+				// json
+				Spark('p.json').html(
+					Spark.json('encode', {name: 'Oliver Caldwell', age: 17});
+				, true);
 			});
 		</script>
 	</body>

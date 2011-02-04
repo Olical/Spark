@@ -22,8 +22,8 @@ window.SparkFn = new Object();
 window.SparkIn = function() {
 	// Back up Spark and $ for use in noConflict mode
 	window.SparkBk = {
-		$: ($) ? $ : false,
-		Spark: (Spark) ? Spark : false
+		$: window.$,
+		Spark: window.Spark
 	};
 	
 	// Create the Spark object

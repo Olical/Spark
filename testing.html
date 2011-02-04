@@ -57,6 +57,9 @@
 		<h1>animate</h1>
 		<p class='animate'>Fade to .5 opacity on click.</p>
 		
+		<h1>transition</h1>
+		<p class='transition'>SneakOut on click.</p>
+		
 		<script type='text/javascript' src='spark-dev.js'></script>
 		<script type='text/javascript'>
 			// ready
@@ -124,6 +127,11 @@
 				// animate
 				Spark('p.animate').event('click', function(e) {
 					Spark(e.target).animate({opacity: .5});
+				});
+				
+				// transition
+				Spark('p.transition').event('click', function(e) {
+					Spark(e.target).transition('sneakout');
 				});
 			});
 		</script>

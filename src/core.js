@@ -10,6 +10,9 @@
  * http://sizzlejs.com/
  * Copyright 2011, The Dojo Foundation
  * Released under the MIT, BSD, and GPL Licenses.
+ *
+ * Includes json2.js
+ * http://www.json.org/json2.js
  */
 
 // Create the function holder

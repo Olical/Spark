@@ -83,7 +83,7 @@ SparkFn.transition = function(method, timeframe, callback) {
 				Spark(element).animate({height: original, opacity: 1}, timeframe, callback);
 				break;
 			
-			case 'sneakout':		
+			case 'sneakout':
 				// Get original height
 				var original = Spark(element).computed().height;
 				

@@ -28,8 +28,8 @@
 		<h1>attribute</h1>
 		<p class='attribute'>Does this element have a title?</p>
 		
-		<h1>browser</h1>
-		<p class='browser'></p>
+		<h1>client</h1>
+		<p class='client'></p>
 		
 		<h1>computed</h1>
 		<p class='computed'></p>
@@ -90,11 +90,11 @@
 				Spark('p.attribute').attribute({title: 'Yes it does, it worked.'});
 				
 				// browser
-				var b = Spark.browser();
+				var client = Spark.client();
 				Spark('p.browser').html(
-					'You are using <strong>' + b.browser + '</strong>.' +
-					' Version <strong>' + b.version + '</strong>.' +
-					' On <strong>' + b.os + '</strong>.'
+					'You are using <strong>' + client.browser + '</strong>.' +
+					' Version <strong>' + client.version + '</strong>.' +
+					' On <strong>' + client.os + '</strong>.'
 				);
 				
 				// computed

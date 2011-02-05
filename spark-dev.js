@@ -137,7 +137,7 @@ window.SparkIn = function() {
 	var offsetX = offsetY = 0;
 	var obj = e.target;
 	
-	if(obj.offsetParent) {
+	if(obj.offsetParent && this.client.browser() == 'Firefox') {
 		do {
 			offsetX += obj.offsetLeft;
 			offsetY += obj.offsetTop;

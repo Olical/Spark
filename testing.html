@@ -89,12 +89,12 @@
 				// attribute
 				Spark('p.attribute').attribute({title: 'Yes it does, it worked.'});
 				
-				// browser
-				var client = Spark.client();
-				Spark('p.browser').html(
-					'You are using <strong>' + client.browser + '</strong>.' +
-					' Version <strong>' + client.version + '</strong>.' +
-					' On <strong>' + client.os + '</strong>.'
+				// client
+				var c = Spark.client();
+				Spark('p.client').html(
+					'You are using <strong>' + c.browser + '</strong>.' +
+					' Version <strong>' + c.version + '</strong>.' +
+					' On <strong>' + c.os + '</strong>.'
 				);
 				
 				// computed

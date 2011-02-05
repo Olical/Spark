@@ -69,7 +69,9 @@ SparkFn.animate = function(properties, timeframe, callback) {
 				unit = ')';
 			}
 			
+			// Prep variables
 			this.data(element, 'Spark.animations', 'START');
+			var setTo = null;
 			
 			// Loop through each frame
 			for(var i = 0; i <= frames; i++) {
@@ -83,7 +85,8 @@ SparkFn.animate = function(properties, timeframe, callback) {
 			// Correct floating point problem
 			this.data(element, 'Spark.animations', this.data(element, 'Spark.animations') + ',' + setTimeout((function(extelement, extp, extproperties, extunit, extprefix) {
 				return function() {
-					extelement.style[extp] = extprefix + ((extp == 'opacity' || extp == 'MozOpacity' || extp == 'KhtmlOpacity') ? parseFloat(extproperties[extp]) : parseInt(extproperties[extp])) + extunit;
+					setTo = ((extp == 'opacity' || extp == 'MozOpacity' || extp == 'KhtmlOpacity') ? parseFloat(extproperties[extp]) : parseInt(extproperties[extp]));
+					extelement.style[extp] = extprefix + ((setTo) ? setTo : '0') + extunit;
 				}
 			})(element, p, properties, unit, prefix), timeframe + this.offset, element, p, properties, unit, prefix));
 			

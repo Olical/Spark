@@ -652,7 +652,7 @@ SparkFn.css = function(css) {
 	if(properties.opacity) {
 		properties.MozOpacity = properties.opacity;
 		properties.KhtmlOpacity = properties.opacity;
-		properties.filter = properties.opacity * 100;
+		properties.filter = properties.opacity * 100 + 1;
 	}
 	
 	// Initiate the offset as 0 if there is none
@@ -707,6 +707,7 @@ SparkFn.css = function(css) {
 			else if(p == 'filter') {
 				prefix = 'alpha(opacity=';
 				unit = ')';
+				properties.filter -= 1;
 			}
 			
 			this.data(element, 'Spark.animations', 'START');

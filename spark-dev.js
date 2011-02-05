@@ -572,7 +572,7 @@ SparkFn.css = function(css) {
 				var original = Spark(element).attribute().offsetHeight;
 				
 				// Set overflow to hidden
-				Spark(element).css({overflow: 'hidden'});
+				Spark(element).css({overflow: 'hidden', height: original});
 				
 				// Slide height to 0
 				Spark(element).animate({height: 0}, timeframe, function() {
@@ -622,7 +622,7 @@ SparkFn.css = function(css) {
 				var original = Spark(element).attribute().offsetHeight;
 				
 				// Set overflow to hidden
-				Spark(element).css({overflow: 'hidden', display: 'block'});
+				Spark(element).css({overflow: 'hidden', height: original});
 				
 				// Slide height to 0
 				Spark(element).animate({height: 0, opacity: 0}, timeframe, function() {

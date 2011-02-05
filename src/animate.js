@@ -12,7 +12,7 @@ SparkFn.animate = function(properties, timeframe, callback) {
 	if(properties.opacity) {
 		properties.MozOpacity = properties.opacity;
 		properties.KhtmlOpacity = properties.opacity;
-		properties.filter = ((properties.opacity === 0) ? properties.opacity : .01 ) * 100;
+		properties.filter = properties.opacity * 100;
 	}
 	
 	// Initiate the offset as 0 if there is none
@@ -81,11 +81,6 @@ SparkFn.animate = function(properties, timeframe, callback) {
 			}
 			
 			// Correct floating point problem
-			if(p == 'filter') {
-				if(properties.opacity == 0) {
-					properties.filter = 0;
-				}
-			}
 			this.data(element, 'Spark.animations', this.data(element, 'Spark.animations') + ',' + setTimeout((function(extelement, extp, extproperties, extunit, extprefix) {
 				return function() {
 					extelement.style[extp] = extprefix + ((extp == 'opacity' || extp == 'MozOpacity' || extp == 'KhtmlOpacity') ? parseFloat(extproperties[extp]) : parseInt(extproperties[extp])) + extunit;

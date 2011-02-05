@@ -668,8 +668,11 @@ SparkFn.css = function(css) {
 		// Loop through all of the properties
 		for(var p in properties) {
 			// Make sure the style is set
-			var computed = Spark(element).computed()[p];
-			element.style[p] = (computed) ? computed : '0';
+			var computed = (Spark(element).computed()[p]);
+			if(!computed) {
+				computed = '';
+			}
+			element.style[p] = computed;
 			
 			// Fix for IE stuff
 			if(element.style[p] == 'auto') element.style[p] = '0';

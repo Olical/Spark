@@ -38,7 +38,7 @@ SparkFn.animate = function(properties, timeframe, callback) {
 			if(element.style[p] == 'auto') element.style[p] = '0';
 			element.style.zoom = '1';
 			
-			if(p == 'filter' && element.style[p] == '0') {
+			if(p == 'filter') {
 				element.style[p] = 'alpha(opacity=100)';
 			}
 			

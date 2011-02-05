@@ -670,7 +670,7 @@ SparkFn.css = function(css) {
 			// Make sure the style is set
 			var computed = (Spark(element).computed()[p]);
 			if(!computed) {
-				computed = '';
+				computed = '0';
 			}
 			element.style[p] = computed;
 			

@@ -59,6 +59,9 @@ SparkFn.transition = function(method, timeframe, callback) {
 				break;
 			
 			case 'fadeout':
+				// Make sure opacity is set
+				Spark(element).css({opacity: 1});
+				
 				// Fade opacity to 0
 				Spark(element).animate({opacity: 0}, timeframe, function() {
 					// Set opacity to 100
@@ -88,7 +91,7 @@ SparkFn.transition = function(method, timeframe, callback) {
 				var original = Spark(element).attribute().offsetHeight;
 				
 				// Set overflow to hidden
-				Spark(element).css({overflow: 'hidden', height: original});
+				Spark(element).css({overflow: 'hidden', height: original, opacity: 1});
 				
 				// Slide height to 0
 				Spark(element).animate({height: 0, opacity: 0}, timeframe, function() {

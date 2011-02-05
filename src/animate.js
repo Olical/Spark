@@ -13,9 +13,6 @@ SparkFn.animate = function(properties, timeframe, callback) {
 		properties.MozOpacity = properties.opacity;
 		properties.KhtmlOpacity = properties.opacity;
 		properties.filter = properties.opacity * 100;
-		if(properties.filter == 0) {
-			properties.filter = 1;
-		}
 	}
 	
 	// Initiate the offset as 0 if there is none

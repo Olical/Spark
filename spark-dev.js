@@ -617,12 +617,12 @@ SparkFn.css = function(css) {
 				Spark(element).animate({height: original, opacity: 1}, timeframe, callback);
 				break;
 			
-			case 'sneakout':		
+			case 'sneakout':
+				// Set overflow to hidden and display to block
+				Spark(element).css({overflow: 'hidden', display: 'block'});
+				
 				// Get original height
 				var original = Spark(element).computed().height;
-				
-				// Set overflow to hidden
-				Spark(element).css({overflow: 'hidden'});
 				
 				// Slide height to 0
 				Spark(element).animate({height: 0, opacity: 0}, timeframe, function() {

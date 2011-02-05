@@ -10,9 +10,10 @@ SparkFn.animate = function(properties, timeframe, callback) {
 	
 	// Fix opacity
 	if(properties.opacity) {
-		properties.MozOpacity = properties.opacity;
-		properties.KhtmlOpacity = properties.opacity;
-		properties.filter = properties.opacity * 100;
+		var op = parseFloat(properties.opacity);
+		properties.MozOpacity = op;
+		properties.KhtmlOpacity = op;
+		properties.filter = op * 100;
 	}
 	
 	// Initiate the offset as 0 if there is none

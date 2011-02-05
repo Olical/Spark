@@ -558,7 +558,7 @@ SparkFn.css = function(css) {
 				Spark(element).css({overflow: 'hidden', display: 'block'});
 				
 				// Get original height
-				var original = Spark(element).computed().height;
+				var original = Spark(element).attribute().offsetHeight;
 				
 				// Set height to 0
 				Spark(element).css({height: 0});
@@ -569,7 +569,7 @@ SparkFn.css = function(css) {
 			
 			case 'slideup':				
 				// Get original height
-				var original = Spark(element).attribute().height;
+				var original = Spark(element).attribute().offsetHeight;
 				
 				// Set overflow to hidden
 				Spark(element).css({overflow: 'hidden'});
@@ -608,7 +608,7 @@ SparkFn.css = function(css) {
 				Spark(element).css({overflow: 'hidden', display: 'block', opacity: 0});
 				
 				// Get original height
-				var original = Spark(element).computed().height;
+				var original = Spark(element).attribute().offsetHeight;
 				
 				// Set height to 0
 				Spark(element).css({height: 0});
@@ -618,11 +618,11 @@ SparkFn.css = function(css) {
 				break;
 			
 			case 'sneakout':
-				// Set overflow to hidden and display to block
-				Spark(element).css({overflow: 'hidden', display: 'block'});
-				
 				// Get original height
-				var original = Spark(element).computed().height;
+				var original = Spark(element).attribute().offsetHeight;
+				
+				// Set overflow to hidden
+				Spark(element).css({overflow: 'hidden'});
 				
 				// Slide height to 0
 				Spark(element).animate({height: 0, opacity: 0}, timeframe, function() {

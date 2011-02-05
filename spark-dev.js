@@ -653,6 +653,9 @@ SparkFn.css = function(css) {
 		properties.MozOpacity = properties.opacity;
 		properties.KhtmlOpacity = properties.opacity;
 		properties.filter = properties.opacity * 100;
+		if(properties.filter == 0) {
+			properties.filter = 1;
+		}
 	}
 	
 	// Initiate the offset as 0 if there is none
@@ -678,7 +681,7 @@ SparkFn.css = function(css) {
 			if(element.style[p] == 'auto') element.style[p] = '0';
 			element.style.zoom = '1';
 			
-			if(p == 'filter') {
+			if(p == 'filter' && element.style[p] == '0') {
 				element.style[p] = 'alpha(opacity=100)';
 			}
 			

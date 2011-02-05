@@ -81,6 +81,11 @@ SparkFn.animate = function(properties, timeframe, callback) {
 			}
 			
 			// Correct floating point problem
+			if(p == 'filter') {
+				if(properties.filter == .01) {
+					properties.filter = 0;
+				}
+			}
 			this.data(element, 'Spark.animations', this.data(element, 'Spark.animations') + ',' + setTimeout((function(extelement, extp, extproperties, extunit, extprefix) {
 				return function() {
 					extelement.style[extp] = extprefix + ((extp == 'opacity' || extp == 'MozOpacity' || extp == 'KhtmlOpacity') ? parseFloat(extproperties[extp]) : parseInt(extproperties[extp])) + extunit;

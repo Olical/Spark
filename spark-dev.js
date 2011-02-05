@@ -593,9 +593,6 @@ SparkFn.css = function(css) {
 				break;
 			
 			case 'fadeout':
-				// Make sure opacity is set
-				Spark(element).css({display: 'block', opacity: 1});
-				
 				// Fade opacity to 0
 				Spark(element).animate({opacity: 0}, timeframe, function() {
 					// Set opacity to 100

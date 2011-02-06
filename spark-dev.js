@@ -660,13 +660,6 @@ SparkFn.css = function(css) {
 		timeframe = 800;
 	}
 	
-	// Fix opacity
-	if(properties.opacity) {
-		properties.MozOpacity = properties.opacity;
-		properties.KhtmlOpacity = properties.opacity;
-		properties.filter = properties.opacity * 100;
-	}
-	
 	// Initiate the offset as 0 if there is none
 	if(!this.offset) {
 		this.offset = 0;
@@ -681,20 +674,19 @@ SparkFn.css = function(css) {
 		for(var p in properties) {
 			// Make sure the style is set
 			var computed = (Spark(element).computed()[p]);
+			if(!computed) {
+				computed = 1;
+			}
 			element.style[p] = computed;
 			
 			// Fix for IE stuff
 			if(element.style[p] == 'auto') element.style[p] = element.offsetHeight;
-			if(p == 'filter') {
-				element.style[p] = 'alpha(opacity=' + (parseFloat(element.style.opacity) * 100) + ')';
-				element.style.zoom = '1';
-			}
 			
 			// Get the original
-			var original = (p == 'opacity' || p == 'MozOpacity' || p == 'KhtmlOpacity') ? parseFloat(element.style[p]) : parseInt(element.style[p].replace('alpha(opacity=', '').replace(')', ''));
+			var original = (p == 'opacity') ? parseFloat(element.style[p]) : parseInt(element.style[p]);
 			
 			// Work out the difference
-			var difference = (p == 'opacity' || p == 'MozOpacity' || p == 'KhtmlOpacity') ? parseFloat(properties[p]) - original : parseInt(properties[p]) - original;
+			var difference = ((p == 'opacity') ? parseFloat(properties[p]) : parseInt(properties[p])) - original;
 			
 			// Work out how many frames
 			var frames = timeframe / (1000 / fps);
@@ -705,35 +697,33 @@ SparkFn.css = function(css) {
 			// Work out the unit of measurement
 			var unit = (isNaN(properties[p])) ? properties[p].replace(/[0-9]/g, '') : 'px';
 			
-			// Set up the prefix
-			var prefix = '';
+			// Set up variables
+			var toSet = new Object();
 			
 			// Another opacity fix
-			if(p == 'opacity' || p == 'MozOpacity' || p == 'KhtmlOpacity') {
+			if(p == 'opacity') {
 				unit = '';
-			}
-			else if(p == 'filter') {
-				prefix = 'alpha(opacity=';
-				unit = ')';
 			}
 			
 			this.data(element, 'Spark.animations', 'START');
 			
 			// Loop through each frame
 			for(var i = 0; i <= frames; i++) {
-				this.data(element, 'Spark.animations', this.data(element, 'Spark.animations') + ',' + setTimeout((function(exti, extelement, extp, extoriginal, extpixels, extunit, extprefix) {
+				this.data(element, 'Spark.animations', this.data(element, 'Spark.animations') + ',' + setTimeout((function(exti, extelement, extp, extoriginal, extpixels, extunit) {
 					return function() {
-						extelement.style[extp] = extprefix + (extoriginal + (extpixels * exti)) + extunit;
+						toSet[extp] = (extoriginal + (extpixels * exti)) + extunit;
+						Spark(extelement).css(toSet);
 					}
-				})(i, element, p, original, pixels, unit, prefix), i * (1000 / fps) + this.offset, element, p, original, pixels, unit, prefix));
+				})(i, element, p, original, pixels, unit, prefix), i * (1000 / fps) + this.offset, element, p, original, pixels, unit));
 			}
 			
 			// Correct floating point problem
-			this.data(element, 'Spark.animations', this.data(element, 'Spark.animations') + ',' + setTimeout((function(extelement, extp, extproperties, extunit, extprefix) {
+			this.data(element, 'Spark.animations', this.data(element, 'Spark.animations') + ',' + setTimeout((function(extelement, extp, extproperties) {
 				return function() {
-					extelement.style[extp] = extprefix + ((extp == 'opacity' || extp == 'MozOpacity' || extp == 'KhtmlOpacity') ? parseFloat(extproperties[extp]) : parseInt(extproperties[extp])) + extunit;
+					toSet[extp] = properties[extp];
+					Spark(extelement).css(toSet);
 				}
-			})(element, p, properties, unit, prefix), timeframe + this.offset, element, p, properties, unit, prefix));
+			})(element, p, properties), timeframe + this.offset, element, p, properties));
 			
 			this.data(element, 'Spark.animations', this.data(element, 'Spark.animations').replace('START,', ''));
 		}

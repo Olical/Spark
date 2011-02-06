@@ -626,7 +626,7 @@ SparkFn.css = function(css) {
 				
 				// Get original height
 				var original = Spark(element).attribute().offsetHeight;
-				console.log(original);
+				
 				// Set height to 0
 				Spark(element).css({height: 0});
 				
@@ -637,7 +637,7 @@ SparkFn.css = function(css) {
 			case 'sneakout':
 				// Get original height
 				var original = Spark(element).attribute().offsetHeight;
-				console.log(original);
+				
 				// Set overflow to hidden
 				Spark(element).css({overflow: 'hidden', height: original});
 				
@@ -645,7 +645,7 @@ SparkFn.css = function(css) {
 				Spark(element).animate({height: 0, opacity: 0}, timeframe, function() {
 					// Set height to original
 					Spark(element).css({height: original, display: 'none'});
-					
+					console.log(original);
 					// Run the callback
 					callback();
 				});

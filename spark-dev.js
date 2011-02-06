@@ -644,7 +644,7 @@ SparkFn.css = function(css) {
 				// Slide height to 0
 				Spark(element).animate({height: 0, opacity: 0}, timeframe, function() {
 					// Set height to original
-					Spark(element).css({height: original, display: 'none'});
+					Spark(element).css({height: parseInt(original), display: 'none'});
 					
 					// Run the callback
 					callback();

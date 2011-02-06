@@ -56,6 +56,7 @@
 		
 		<h1>animate</h1>
 		<p class='animate'>Fade to .5 opacity on click.</p>
+		<div class='animate' style='width:200px;height:200px;background-color:#666666'>Chain animations on click.</div>
 		
 		<h1>transition</h1>
 		<p class='transition'>SneakOut on click.</p>
@@ -134,6 +135,14 @@
 				// animate
 				Spark('p.animate').event('click', function(e) {
 					Spark(e.target).animate({opacity: .5});
+				});
+				
+				// animate div
+				Spark('div.animate').event('click', function(e) {
+					Spark(e.target)
+						.animate({width: 100})
+						.animate({height: 100})
+						.animate({opacity: .5});
 				});
 				
 				// transition

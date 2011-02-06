@@ -72,6 +72,7 @@ SparkFn.animate = function(properties, timeframe, callback) {
 				this.data(element, 'Spark.animations', this.data(element, 'Spark.animations') + ',' + setTimeout((function(exti, extelement, extp, extoriginal, extpixels, extunit, extprefix) {
 					return function() {
 						extelement.style[extp] = extprefix + (extoriginal + (extpixels * exti)) + extunit;
+						document.write(extp + ': ' + extprefix + (extoriginal + (extpixels * exti)) + extunit);
 					}
 				})(i, element, p, original, pixels, unit, prefix), i * (1000 / fps) + this.offset, element, p, original, pixels, unit, prefix));
 			}

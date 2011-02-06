@@ -635,11 +635,8 @@ SparkFn.css = function(css) {
 				break;
 			
 			case 'sneakout':
-				// Get original height
-				var original = Spark(element).attribute().offsetHeight;
-				
 				// Set overflow to hidden
-				Spark(element).css({overflow: 'hidden', height: original});
+				Spark(element).css({overflow: 'hidden'});
 				
 				// Slide height to 0
 				Spark(element).animate({height: 0, opacity: 0}, timeframe, function() {
@@ -683,7 +680,7 @@ SparkFn.css = function(css) {
 			// Make sure the style is set
 			if(element.style[p] === undefined || element.style[p] == '') {
 				var computed = Spark(element).computed()[p];
-				element.style[p] = (computed) ? parseInt(computed) : 1;
+				element.style[p] = (computed) ? computed : 1;
 			}
 			
 			// Fix for IE stuff

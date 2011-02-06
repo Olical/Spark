@@ -645,7 +645,7 @@ SparkFn.css = function(css) {
 				Spark(element).animate({height: 0, opacity: 0}, timeframe, function() {
 					// Set height to original
 					Spark(element).css({height: original, display: 'none'});
-					console.log(original);
+					
 					// Run the callback
 					callback();
 				});
@@ -739,7 +739,7 @@ SparkFn.css = function(css) {
 	
 	// Set callback timer
 	if(callback) {
-		setTimeout(callback, timeframe);
+		setTimeout(callback, timeframe + this.offset);
 	}
 	
 	// Set up the offset for chaining

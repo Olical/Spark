@@ -12,6 +12,11 @@ SparkFn.transition = function(method, timeframe, callback) {
 		timeframe = 800;
 	}
 	
+	// Initiate the offset as 0 if there is none
+	if(!this.offset) {
+		this.offset = 0;
+	}
+	
 	// Loop through all of the elements
 	for(var e in this.elements) {
 		// Grab the current element
@@ -101,6 +106,9 @@ SparkFn.transition = function(method, timeframe, callback) {
 				break;
 		}
 	}
+	
+	// Set up the offset for chaining
+	this.offset += timeframe;
 	
 	// Return the Spark object
 	return this;

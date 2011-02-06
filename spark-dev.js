@@ -682,16 +682,13 @@ SparkFn.css = function(css) {
 			// Make sure the style is set
 			var computed = (Spark(element).computed()[p]);
 			element.style[p] = computed;
-			if(p == 'MozOpacity' || p == 'KhtmlOpacity') {
-				element.style[p] = element.style.opacity;
-			}
-			else if(p == 'filter') {
-				element.style[p] = 'alpha(opacity=' + (element.style.opacity * 100) + ')'
-			}
 			
 			// Fix for IE stuff
 			if(element.style[p] == 'auto') element.style[p] = element.offsetHeight;
-			if(p == 'filter') element.style.zoom = '1';
+			if(p == 'filter') {
+				element.style[p] = 'alpha(opacity=' + (element.style.opacity * 100) + ')';
+				element.style.zoom = '1';
+			}
 			
 			// Get the original
 			var original = (p == 'opacity' || p == 'MozOpacity' || p == 'KhtmlOpacity') ? parseFloat(element.style[p]) : parseInt(element.style[p].replace('alpha(opacity=', '').replace(')', ''));

@@ -89,6 +89,9 @@ SparkFn.transition = function(method, timeframe, callback) {
 				break;
 			
 			case 'sneakout':
+				// Get original height
+				var original = Spark(element).attribute().offsetHeight;
+				
 				// Set overflow to hidden
 				Spark(element).css({overflow: 'hidden'});
 				

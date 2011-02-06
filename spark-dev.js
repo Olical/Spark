@@ -635,6 +635,9 @@ SparkFn.css = function(css) {
 				break;
 			
 			case 'sneakout':
+				// Get original height
+				var original = Spark(element).attribute().offsetHeight;
+				
 				// Set overflow to hidden
 				Spark(element).css({overflow: 'hidden'});
 				

@@ -34,7 +34,7 @@ SparkFn.animate = function(properties, timeframe, callback) {
 			// Fix for IE stuff
 			if(element.style[p] == 'auto') element.style[p] = element.offsetHeight;
 			if(p == 'filter') {
-				element.style[p] = 'alpha(opacity=' + (element.style.opacity * 100) + ')';
+				element.style[p] = 'alpha(opacity=' + (parseFloat(element.style.opacity) * 100) + ')';
 				element.style.zoom = '1';
 			}
 			

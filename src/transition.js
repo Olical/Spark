@@ -25,11 +25,11 @@ SparkFn.transition = function(method, timeframe, callback) {
 		// Work out what method we need to do
 		switch(method) {
 			case 'slidedown':
-				// Get original height
-				var original = Spark(element).attribute().offsetHeight;
-				
 				// Set overflow to hidden
 				Spark(element).css({overflow: 'hidden', display: 'block'});
+				
+				// Get original height
+				var original = Spark(element).attribute().offsetHeight;
 				
 				// Set height to 0
 				Spark(element).css({height: 0});
@@ -75,11 +75,11 @@ SparkFn.transition = function(method, timeframe, callback) {
 				break;
 			
 			case 'sneakin':
-				// Get original height
-				var original = Spark(element).attribute().offsetHeight;
-				
 				// Set overflow to hidden
 				Spark(element).css({overflow: 'hidden', display: 'block', opacity: 0});
+				
+				// Get original height
+				var original = Spark(element).attribute().offsetHeight;
 				
 				// Set height to 0
 				Spark(element).css({height: 0});

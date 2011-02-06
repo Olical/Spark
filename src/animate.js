@@ -21,7 +21,7 @@ SparkFn.animate = function(properties, timeframe, callback) {
 		// Loop through all of the properties
 		for(var p in properties) {
 			// Make sure the style is set
-			if(element.style[p] === undefined || element.style[p] == '') {
+			if(element.style[p] === undefined) {
 				var computed = Spark(element).computed()[p];
 				element.style[p] = (computed) ? computed : 1;
 			}

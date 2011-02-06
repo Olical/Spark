@@ -107,15 +107,27 @@ window.SparkIn = function() {
 		// Grab the current element
 		element = this.elements[e];
 		
-		// Return content of the selected element if there is no content
+		// Return content of the selected element if there is no content and check for Firefox
 		if(content === undefined) {
-			return element.innerText;
+			if(document.all){
+				return element.innerText;
+			}
+			else {
+				return element.textContent;
+			}
 		}
 		else {
-			// Append or replace content depending on the append flag
-			(!append) ?
-				element.innerText = content :
-				element.innerText += content;
+			// Append or replace content depending on the append flag and check for Firefox
+			if(document.all){
+				(!append) ?
+					element.innerText = content :
+					element.innerText += content;
+			}
+			else {
+				(!append) ?
+					element.textContent = content :
+					element.textContent += content;
+			}
 		}
 	}
 	

@@ -558,6 +558,11 @@ SparkFn.css = function(css) {
 		timeframe = 800;
 	}
 	
+	// Initiate the offset as 0 if there is none
+	if(!this.offset) {
+		this.offset = 0;
+	}
+	
 	// Loop through all of the elements
 	for(var e in this.elements) {
 		// Grab the current element
@@ -648,6 +653,9 @@ SparkFn.css = function(css) {
 		}
 	}
 	
+	// Set up the offset for chaining
+	this.offset += timeframe;
+	
 	// Return the Spark object
 	return this;
 };SparkFn.animate = function(properties, timeframe, callback) {
@@ -675,14 +683,12 @@ SparkFn.css = function(css) {
 			// Make sure the style is set
 			if(!element.style[p]) {
 				var computed = Spark(element).computed()[p];
-				if(!computed) {
-					computed = 1;
-				}
-				element.style[p] = computed;
+				element.style[p] = (computed) ? computed : 1;
 			}
 			
 			// Fix for IE stuff
-			if(element.style[p] == 'auto') element.style[p] = element.offsetHeight;
+			if(element.style[p] == 'auto' && p == 'height') element.style[p] = element.offsetHeight;
+			else if(element.style[p] == 'auto' && p == 'width') element.style[p] = element.offsetWidth;
 			
 			// Get the original
 			var original = (p == 'opacity') ? parseFloat(element.style[p]) : parseInt(element.style[p]);

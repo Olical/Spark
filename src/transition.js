@@ -98,7 +98,7 @@ SparkFn.transition = function(method, timeframe, callback) {
 				// Slide height to 0
 				Spark(element).animate({height: 0, opacity: 0}, timeframe, function() {
 					// Set height to original
-					Spark(element).css({height: original, display: 'none'});
+					Spark(element).css({height: original + 'px', display: 'none'});
 					
 					// Run the callback
 					callback();

@@ -1,6 +1,6 @@
 SparkFn.ajax = function(method, file, data, callback) {
 	// Set up the request, allow for cross browser.
-	var xmlhttp = (XMLHttpRequest === undefined) ? 
+	var xmlhttp = (typeof XMLHttpRequest == 'undefined') ? 
 		new ActiveXObject('Microsoft.XMLHTTP') :
 		new XMLHttpRequest;
 	

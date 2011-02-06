@@ -581,7 +581,7 @@ SparkFn.css = function(css) {
 				Spark(element).css({height: 0});
 				
 				// Slide height to original
-				Spark(element).animate({height: original}, timeframe, callback);
+				Spark(element).animate({height: original}, timeframe + this.offset, callback);
 				break;
 			
 			case 'slideup':				
@@ -592,7 +592,7 @@ SparkFn.css = function(css) {
 				Spark(element).css({overflow: 'hidden', height: original});
 				
 				// Slide height to 0
-				Spark(element).animate({height: 0}, timeframe, function() {
+				Spark(element).animate({height: 0}, timeframe + this.offset, function() {
 					// Set height to original
 					Spark(element).css({height: original, display: 'none'});
 					
@@ -606,12 +606,12 @@ SparkFn.css = function(css) {
 				Spark(element).css({display: 'block', opacity: 0});
 				
 				// Fade opacity to 100
-				Spark(element).animate({opacity: 1}, timeframe, callback);
+				Spark(element).animate({opacity: 1}, timeframe + this.offset, callback);
 				break;
 			
 			case 'fadeout':
 				// Fade opacity to 0
-				Spark(element).animate({opacity: 0}, timeframe, function() {
+				Spark(element).animate({opacity: 0}, timeframe + this.offset, function() {
 					// Set opacity to 100
 					Spark(element).css({opacity: 1, display: 'none'});
 					
@@ -631,7 +631,7 @@ SparkFn.css = function(css) {
 				Spark(element).css({height: 0});
 				
 				// Slide height to original
-				Spark(element).animate({height: original, opacity: 1}, timeframe, callback);
+				Spark(element).animate({height: original, opacity: 1}, timeframe + this.offset, callback);
 				break;
 			
 			case 'sneakout':
@@ -642,7 +642,7 @@ SparkFn.css = function(css) {
 				Spark(element).css({overflow: 'hidden', height: original});
 				
 				// Slide height to 0
-				Spark(element).animate({height: 0, opacity: 0}, timeframe, function() {
+				Spark(element).animate({height: 0, opacity: 0}, timeframe + this.offset, function() {
 					// Set height to original
 					Spark(element).css({height: original, display: 'none'});
 					

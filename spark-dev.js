@@ -673,7 +673,7 @@ SparkFn.css = function(css) {
 		// Loop through all of the properties
 		for(var p in properties) {
 			// Make sure the style is set
-			var computed = (Spark(element).computed()[p]);
+			var computed = Spark(element).computed()[p];
 			if(!computed) {
 				computed = 1;
 			}
@@ -714,7 +714,7 @@ SparkFn.css = function(css) {
 						toSet[extp] = (extoriginal + (extpixels * exti)) + extunit;
 						Spark(extelement).css(toSet);
 					}
-				})(i, element, p, original, pixels, unit, prefix), i * (1000 / fps) + this.offset, element, p, original, pixels, unit));
+				})(i, element, p, original, pixels, unit), i * (1000 / fps) + this.offset, element, p, original, pixels, unit));
 			}
 			
 			// Correct floating point problem

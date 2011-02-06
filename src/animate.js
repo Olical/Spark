@@ -23,14 +23,12 @@ SparkFn.animate = function(properties, timeframe, callback) {
 			// Make sure the style is set
 			if(!element.style[p]) {
 				var computed = Spark(element).computed()[p];
-				if(!computed) {
-					computed = 1;
-				}
-				element.style[p] = computed;
+				element.style[p] = (computed) ? computed : 1;
 			}
 			
 			// Fix for IE stuff
-			if(element.style[p] == 'auto') element.style[p] = element.offsetHeight;
+			if(element.style[p] == 'auto' && p == 'height') element.style[p] = element.offsetHeight;
+			else if(element.style[p] == 'auto' && p == 'width') element.style[p] = element.offsetWidth;
 			
 			// Get the original
 			var original = (p == 'opacity') ? parseFloat(element.style[p]) : parseInt(element.style[p]);

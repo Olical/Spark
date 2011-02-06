@@ -687,8 +687,8 @@ SparkFn.css = function(css) {
 			}
 			
 			// Fix for IE stuff
-			if(element.style[p] == 'auto' && p == 'height') element.style[p] = element.offsetHeight;
-			else if(element.style[p] == 'auto' && p == 'width') element.style[p] = element.offsetWidth;
+			if(element.style[p] == 'auto' && p == 'height') element.style[p] = parseInt(element.offsetHeight);
+			else if(element.style[p] == 'auto' && p == 'width') element.style[p] = parseInt(element.offsetWidth);
 			
 			// Get the original
 			var original = (p == 'opacity') ? parseFloat(element.style[p]) : parseInt(element.style[p]);

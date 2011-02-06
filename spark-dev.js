@@ -681,7 +681,7 @@ SparkFn.css = function(css) {
 		// Loop through all of the properties
 		for(var p in properties) {
 			// Make sure the style is set
-			if(element.style[p] === undefined) {
+			if(element.style[p] === undefined || element.style[p] === '') {
 				var computed = Spark(element).computed()[p];
 				element.style[p] = (computed) ? computed : 1;
 			}

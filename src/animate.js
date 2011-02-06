@@ -21,11 +21,13 @@ SparkFn.animate = function(properties, timeframe, callback) {
 		// Loop through all of the properties
 		for(var p in properties) {
 			// Make sure the style is set
-			var computed = Spark(element).computed()[p];
-			if(!computed) {
-				computed = 1;
+			if(!element.style[p]) {
+				var computed = Spark(element).computed()[p];
+				if(!computed) {
+					computed = 1;
+				}
+				element.style[p] = computed;
 			}
-			element.style[p] = computed;
 			
 			// Fix for IE stuff
 			if(element.style[p] == 'auto') element.style[p] = element.offsetHeight;

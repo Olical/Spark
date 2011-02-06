@@ -683,7 +683,7 @@ SparkFn.css = function(css) {
 			// Make sure the style is set
 			if(element.style[p] === undefined || element.style[p] == '') {
 				var computed = Spark(element).computed()[p];
-				element.style[p] = (computed) ? computed : 1;
+				element.style[p] = (computed) ? parseInt(computed) : 1;
 			}
 			
 			// Fix for IE stuff

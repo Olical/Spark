@@ -99,7 +99,7 @@ SparkFn.transition = function(method, timeframe, callback) {
 				Spark(element).animate({height: 0, opacity: 0}, timeframe, function() {
 					// Set height to original
 					Spark(element).css({height: original, display: 'none'});
-					console.log(original);
+					
 					// Run the callback
 					callback();
 				});

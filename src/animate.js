@@ -79,7 +79,7 @@ SparkFn.animate = function(properties, timeframe, callback) {
 	
 	// Set callback timer
 	if(callback) {
-		setTimeout(callback, timeframe);
+		setTimeout(callback, timeframe + this.offset);
 	}
 	
 	// Set up the offset for chaining

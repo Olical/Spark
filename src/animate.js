@@ -29,8 +29,11 @@ SparkFn.animate = function(properties, timeframe, callback) {
 		for(var p in properties) {
 			// Make sure the style is set
 			var computed = (Spark(element).computed()[p]);
-			if(!computed) {
-				computed = '0';
+			if(p == 'MozOpacity' || p == 'KhtmlOpacity') {
+				computed = element.style.opacity;
+			}
+			else if(p == 'filter') {
+				computed = 'alpha(opacity=' + (element.style.opacity * 100) + ')'
 			}
 			element.style[p] = computed;
 			

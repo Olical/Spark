@@ -134,8 +134,11 @@ window.SparkIn = function() {
 	// Return the Spark object
 	return this;
 };SparkFn.fixEvent = function(e) {
+	// Grab browser name
+	var browser = this.client().browser;
+	
 	// Fix the page mouse location for IE
-	if(this.client().browser == 'Explorer') {
+	if(browser == 'Explorer') {
 		e.pageX = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
 		e.pageY = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
 	}
@@ -146,10 +149,10 @@ window.SparkIn = function() {
 	}
 	
 	// Fix the offsetX/Y in Firefox
-	var offsetX = offsetY = 0;
-	var obj = e.target;
-	
-	if(obj.offsetParent && this.client().browser == 'Firefox') {
+	if(obj.offsetParent && browser == 'Firefox') {
+		var offsetX = offsetY = 0;
+		var obj = e.target;
+		
 		do {
 			offsetX += obj.offsetLeft;
 			offsetY += obj.offsetTop;
@@ -175,8 +178,7 @@ window.SparkIn = function() {
 		var contentloadtag = document.getElementById('contentloadtag');
 		
 		contentloadtag.onreadystatechange = function() {
-			if(this.readyState == 'complete')
-			{
+			if(this.readyState == 'complete') {
 				alreadyrunflag = 1;
 				callback();
 			}
@@ -190,6 +192,8 @@ window.SparkIn = function() {
 SparkFn.event = function(type, callback) {
 	// Set up any variables
 	var element = null;
+	var runCallback = null;
+	var previousReference = null;
 	
 	// Loop through all of the elements
 	for(var e in this.elements) {
@@ -197,12 +201,12 @@ SparkFn.event = function(type, callback) {
 		element = this.elements[e];
 		
 		// Set up the callback
-		var runCallback = function(e) {
+		runCallback = function(e) {
 			callback(Spark.fixEvent(e));
 		};
 		
 		// Grab the previous reference
-		var previousReference = this.data(element, 'Spark.event.' + type);
+		previousReference = this.data(element, 'Spark.event.' + type);
 		
 		// Save the callback's reference for unsetting
 		this.data(element, 'Spark.event.' + type, runCallback);
@@ -548,6 +552,7 @@ SparkFn.css = function(css) {
 };SparkFn.stop = function() {
 	// Set up any variables
 	var element = null;
+	var animations = null;
 	
 	// Loop through all of the elements
 	for(var e in this.elements) {
@@ -560,7 +565,7 @@ SparkFn.css = function(css) {
 		}
 		
 		// Get the animations
-		var animations = this.data(element, 'Spark.animations').split(',');
+		animations = this.data(element, 'Spark.animations').split(',');
 		
 		// Loop through them all, canceling them all
 		for(var a in animations) {
@@ -573,6 +578,7 @@ SparkFn.css = function(css) {
 };SparkFn.transition = function(method, timeframe, callback) {
 	// Set up any variables
 	var element = null;
+	var original = null;
 	
 	// Check if we have a callback, if not set it to and empty function
 	if(callback === undefined) {
@@ -601,7 +607,7 @@ SparkFn.css = function(css) {
 				Spark(element).css({overflow: 'hidden', display: 'block'});
 				
 				// Get original height
-				var original = Spark(element).attribute().offsetHeight;
+				original = Spark(element).attribute().offsetHeight;
 				
 				// Set height to 0
 				Spark(element).css({height: 0});
@@ -612,7 +618,7 @@ SparkFn.css = function(css) {
 			
 			case 'slideup':				
 				// Get original height
-				var original = Spark(element).attribute().offsetHeight;
+				original = Spark(element).attribute().offsetHeight;
 				
 				// Set overflow to hidden
 				Spark(element).css({overflow: 'hidden', height: original});
@@ -651,7 +657,7 @@ SparkFn.css = function(css) {
 				Spark(element).css({overflow: 'hidden', display: 'block', opacity: 0});
 				
 				// Get original height
-				var original = Spark(element).attribute().offsetHeight;
+				original = Spark(element).attribute().offsetHeight;
 				
 				// Set height to 0
 				Spark(element).css({height: 0});
@@ -662,7 +668,7 @@ SparkFn.css = function(css) {
 			
 			case 'sneakout':
 				// Get original height
-				var original = Spark(element).attribute().offsetHeight;
+				original = Spark(element).attribute().offsetHeight;
 				
 				// Set overflow to hidden
 				Spark(element).css({overflow: 'hidden', height: original});
@@ -688,6 +694,13 @@ SparkFn.css = function(css) {
 	// Set up any variables
 	var element = null;
 	var fps = 60;
+	var original = null;
+	var difference = null;
+	var frames = null;
+	var pixels = null;
+	var unit = null;
+	var toSet = null;
+	var computed = null;
 	
 	// Set a default timeframe
 	if(!timeframe) {
@@ -708,7 +721,7 @@ SparkFn.css = function(css) {
 		for(var p in properties) {
 			// Make sure the style is set
 			if(element.style[p] === undefined || element.style[p] === '') {
-				var computed = Spark(element).computed()[p];
+				computed = Spark(element).computed()[p];
 				element.style[p] = (computed) ? computed : 1;
 			}
 			
@@ -717,22 +730,22 @@ SparkFn.css = function(css) {
 			else if(element.style[p] == 'auto' && p == 'width') element.style[p] = element.offsetWidth;
 			
 			// Get the original
-			var original = (p == 'opacity') ? parseFloat(element.style[p]) : parseInt(element.style[p]);
+			original = (p == 'opacity') ? parseFloat(element.style[p]) : parseInt(element.style[p]);
 			
 			// Work out the difference
-			var difference = ((p == 'opacity') ? parseFloat(properties[p]) : parseInt(properties[p])) - original;
+			difference = ((p == 'opacity') ? parseFloat(properties[p]) : parseInt(properties[p])) - original;
 			
 			// Work out how many frames
-			var frames = timeframe / (1000 / fps);
+			frames = timeframe / (1000 / fps);
 			
 			// Work out how many pixels per frame
-			var pixels = difference / frames;
+			pixels = difference / frames;
 			
 			// Work out the unit of measurement
-			var unit = (isNaN(properties[p])) ? properties[p].replace(/[0-9]/g, '') : 'px';
+			unit = (isNaN(properties[p])) ? properties[p].replace(/[0-9]/g, '') : 'px';
 			
 			// Set up variables
-			var toSet = new Object();
+			toSet = new Object();
 			
 			// Another opacity fix
 			if(p == 'opacity') {

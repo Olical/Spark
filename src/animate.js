@@ -2,6 +2,13 @@ SparkFn.animate = function(properties, timeframe, callback) {
 	// Set up any variables
 	var element = null;
 	var fps = 60;
+	var original = null;
+	var difference = null;
+	var frames = null;
+	var pixels = null;
+	var unit = null;
+	var toSet = null;
+	var computed = null;
 	
 	// Set a default timeframe
 	if(!timeframe) {
@@ -22,7 +29,7 @@ SparkFn.animate = function(properties, timeframe, callback) {
 		for(var p in properties) {
 			// Make sure the style is set
 			if(element.style[p] === undefined || element.style[p] === '') {
-				var computed = Spark(element).computed()[p];
+				computed = Spark(element).computed()[p];
 				element.style[p] = (computed) ? computed : 1;
 			}
 			
@@ -31,22 +38,22 @@ SparkFn.animate = function(properties, timeframe, callback) {
 			else if(element.style[p] == 'auto' && p == 'width') element.style[p] = element.offsetWidth;
 			
 			// Get the original
-			var original = (p == 'opacity') ? parseFloat(element.style[p]) : parseInt(element.style[p]);
+			original = (p == 'opacity') ? parseFloat(element.style[p]) : parseInt(element.style[p]);
 			
 			// Work out the difference
-			var difference = ((p == 'opacity') ? parseFloat(properties[p]) : parseInt(properties[p])) - original;
+			difference = ((p == 'opacity') ? parseFloat(properties[p]) : parseInt(properties[p])) - original;
 			
 			// Work out how many frames
-			var frames = timeframe / (1000 / fps);
+			frames = timeframe / (1000 / fps);
 			
 			// Work out how many pixels per frame
-			var pixels = difference / frames;
+			pixels = difference / frames;
 			
 			// Work out the unit of measurement
-			var unit = (isNaN(properties[p])) ? properties[p].replace(/[0-9]/g, '') : 'px';
+			unit = (isNaN(properties[p])) ? properties[p].replace(/[0-9]/g, '') : 'px';
 			
 			// Set up variables
-			var toSet = new Object();
+			toSet = new Object();
 			
 			// Another opacity fix
 			if(p == 'opacity') {

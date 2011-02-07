@@ -1,6 +1,7 @@
 SparkFn.stop = function() {
 	// Set up any variables
 	var element = null;
+	var animations = null;
 	
 	// Loop through all of the elements
 	for(var e in this.elements) {
@@ -13,7 +14,7 @@ SparkFn.stop = function() {
 		}
 		
 		// Get the animations
-		var animations = this.data(element, 'Spark.animations').split(',');
+		animations = this.data(element, 'Spark.animations').split(',');
 		
 		// Loop through them all, canceling them all
 		for(var a in animations) {

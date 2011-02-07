@@ -1,6 +1,9 @@
 SparkFn.fixEvent = function(e) {
+	// Grab browser name
+	var browser = this.client().browser;
+	
 	// Fix the page mouse location for IE
-	if(this.client().browser == 'Explorer') {
+	if(browser == 'Explorer') {
 		e.pageX = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
 		e.pageY = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
 	}
@@ -11,10 +14,10 @@ SparkFn.fixEvent = function(e) {
 	}
 	
 	// Fix the offsetX/Y in Firefox
-	var offsetX = offsetY = 0;
-	var obj = e.target;
-	
-	if(obj.offsetParent && this.client().browser == 'Firefox') {
+	if(obj.offsetParent && browser == 'Firefox') {
+		var offsetX = offsetY = 0;
+		var obj = e.target;
+		
 		do {
 			offsetX += obj.offsetLeft;
 			offsetY += obj.offsetTop;

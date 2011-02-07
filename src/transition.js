@@ -1,6 +1,7 @@
 SparkFn.transition = function(method, timeframe, callback) {
 	// Set up any variables
 	var element = null;
+	var original = null;
 	
 	// Check if we have a callback, if not set it to and empty function
 	if(callback === undefined) {
@@ -29,7 +30,7 @@ SparkFn.transition = function(method, timeframe, callback) {
 				Spark(element).css({overflow: 'hidden', display: 'block'});
 				
 				// Get original height
-				var original = Spark(element).attribute().offsetHeight;
+				original = Spark(element).attribute().offsetHeight;
 				
 				// Set height to 0
 				Spark(element).css({height: 0});
@@ -40,7 +41,7 @@ SparkFn.transition = function(method, timeframe, callback) {
 			
 			case 'slideup':				
 				// Get original height
-				var original = Spark(element).attribute().offsetHeight;
+				original = Spark(element).attribute().offsetHeight;
 				
 				// Set overflow to hidden
 				Spark(element).css({overflow: 'hidden', height: original});
@@ -79,7 +80,7 @@ SparkFn.transition = function(method, timeframe, callback) {
 				Spark(element).css({overflow: 'hidden', display: 'block', opacity: 0});
 				
 				// Get original height
-				var original = Spark(element).attribute().offsetHeight;
+				original = Spark(element).attribute().offsetHeight;
 				
 				// Set height to 0
 				Spark(element).css({height: 0});
@@ -90,7 +91,7 @@ SparkFn.transition = function(method, timeframe, callback) {
 			
 			case 'sneakout':
 				// Get original height
-				var original = Spark(element).attribute().offsetHeight;
+				original = Spark(element).attribute().offsetHeight;
 				
 				// Set overflow to hidden
 				Spark(element).css({overflow: 'hidden', height: original});

@@ -1,6 +1,8 @@
 SparkFn.event = function(type, callback) {
 	// Set up any variables
 	var element = null;
+	var runCallback = null;
+	var previousReference = null;
 	
 	// Loop through all of the elements
 	for(var e in this.elements) {
@@ -8,12 +10,12 @@ SparkFn.event = function(type, callback) {
 		element = this.elements[e];
 		
 		// Set up the callback
-		var runCallback = function(e) {
+		runCallback = function(e) {
 			callback(Spark.fixEvent(e));
 		};
 		
 		// Grab the previous reference
-		var previousReference = this.data(element, 'Spark.event.' + type);
+		previousReference = this.data(element, 'Spark.event.' + type);
 		
 		// Save the callback's reference for unsetting
 		this.data(element, 'Spark.event.' + type, runCallback);

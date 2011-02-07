@@ -202,7 +202,7 @@ SparkFn.event = function(type, callback) {
 		};
 		
 		// Grab the previous reference
-		var reference = this.data(element, 'Spark.event.' + type);
+		var previousReference = this.data(element, 'Spark.event.' + type);
 		
 		// Save the callback's reference for unsetting
 		this.data(element, 'Spark.event.' + type, runCallback);
@@ -211,7 +211,7 @@ SparkFn.event = function(type, callback) {
 		if(element.addEventListener) {
 			// Removed the old event
 			if(previousReference) {
-				element.removeEventListener(type, reference, false);
+				element.removeEventListener(type, previousReference, false);
 			}
 			
 			// Assign event
@@ -220,7 +220,7 @@ SparkFn.event = function(type, callback) {
 		else {
 			// Removed the old event
 			if(previousReference) {
-				element.detachEvent(type, reference);
+				element.detachEvent(type, previousReference);
 			}
 			
 			// Assign event

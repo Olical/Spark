@@ -23,10 +23,7 @@ window.SparkIn = function() {
 	// Check if SparkBk does not exist yet
 	if(window.SparkBk === undefined) {
 		// Back up Spark and $ for use in noConflict mode
-		window.SparkBk = {
-			$: window.$,
-			Spark: window.Spark
-		};
+		window.SparkBk = window.$;
 	}
 	
 	// Create the Spark object
@@ -508,18 +505,12 @@ SparkFn.css = function(css) {
 	else if(method == 'decode') {
 		return JSON.parse(data);
 	}
-};SparkFn.noConflict = function(both) {
+};SparkFn.noConflict = function() {
 	// Grab the original Spark object
 	var SparkOr = Spark;
 	
 	// Reload $
-	window.$ = SparkBk.$;
-	
-	// If both is true
-	if(both === true) {
-		// Reload Spark
-		window.Spark = SparkBk.Spark;
-	}
+	window.$ = SparkBk;
 	
 	// Return the original Spark object
 	return SparkOr;

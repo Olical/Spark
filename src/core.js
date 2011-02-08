@@ -23,10 +23,7 @@ window.SparkIn = function() {
 	// Check if SparkBk does not exist yet
 	if(window.SparkBk === undefined) {
 		// Back up Spark and $ for use in noConflict mode
-		window.SparkBk = {
-			$: window.$,
-			Spark: window.Spark
-		};
+		window.SparkBk = window.$;
 	}
 	
 	// Create the Spark object

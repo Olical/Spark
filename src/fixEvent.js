@@ -14,9 +14,9 @@ SparkFn.fixEvent = function(e) {
 	}
 	
 	// Fix the offsetX/Y in Firefox
+	var obj = e.target;
 	if(obj.offsetParent && browser == 'Firefox') {
 		var offsetX = offsetY = 0;
-		var obj = e.target;
 		
 		do {
 			offsetX += obj.offsetLeft;

@@ -62,11 +62,7 @@
 		<p class='transition'>SneakOut on click.</p>
 		
 		<h1>classes</h1>
-		<p class='classes'>Element has class classes?</p>
-		
-		<h1>ajax</h1>
-		<p>README.md loaded in via ajax.</p>
-		<p class='ajax'></p>
+		<p class='classes'>Element has class classes? </p>
 		
 		<script type='text/javascript' src='spark-dev.js'></script>
 		<script type='text/javascript'>
@@ -154,11 +150,6 @@
 				
 				// classes
 				Spark('p.classes').html((Spark('p.classes').classes('has', 'classes')) ? 'Yes.' : 'No.', true);
-				
-				// ajax
-				Spark.ajax('get', 'README.md', false, function(data) {
-					Spark('p.ajax').html(data);
-				});
 			});
 		</script>
 	</body>

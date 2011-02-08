@@ -28,7 +28,7 @@ SparkFn.event = function(type, callback) {
 			}
 			
 			// Assign event
-			element.addEventListener(type, runCallback, false);
+			element.addEventListener(type, runCallback(e), false);
 		}
 		else {
 			// Removed the old event
@@ -37,7 +37,7 @@ SparkFn.event = function(type, callback) {
 			}
 			
 			// Assign event
-			element.attachEvent('on' + type, runCallback);
+			element.attachEvent('on' + type, runCallback(e));
 		}
 	}
 	

@@ -21,7 +21,7 @@ SparkFn.animate = function(properties, timeframe, callback) {
 	}
 	
 	// Loop through all the elements
-	for(var e in this.elements) {
+	for(var e = 0; e < this.elements.length; e++) {
 		// Grab the current element
 		element = this.elements[e];
 		

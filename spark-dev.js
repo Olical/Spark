@@ -71,7 +71,7 @@ window.SparkIn = function() {
 	
 	// Take out the need for brackets
 	for(var i in Spark()) {
-		$ = Spark[i] = Spark()[i];
+		$[i] = Spark[i] = Spark()[i];
 	}
 };SparkFn.html = function(content, append) {
 	// Set up any variables

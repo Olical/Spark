@@ -1,5 +1,5 @@
 /*!
- * Spark JavaScript library v2.0.0
+ * Spark JavaScript library v2.1.0
  * http://sparkjs.co.uk/
  * 
  * Copyright 2011, Oliver Caldwell
@@ -21,8 +21,7 @@ window.SparkFn = new Object();
 // Create the initialise function
 window.SparkIn = function() {
 	// Create the Spark object
-	window.$ = window.Spark = new Object();
-	$ = Spark = function(selector, context) {
+	window.$ = window.Spark = function(selector, context) {
 		// Create the result object
 		var result = new Object();
 		
@@ -37,7 +36,7 @@ window.SparkIn = function() {
 				// If it is an element
 				if(typeof HTMLElement === 'object' ?
 					selector instanceof HTMLElement :
-			    	typeof selector === 'object' && selector.nodeType === 1 && typeof selector.nodeName === 'string') {
+			    	typeof selector === 'object' && selector.nodeType === 1 && typeof selector.nodeName == 'string') {
 					// Place it within the result object
 					result = {0: selector};
 				}

@@ -21,7 +21,8 @@ window.SparkFn = new Object();
 // Create the initialise function
 window.SparkIn = function() {
 	// Create the Spark object
-	window.$ = window.Spark = function(selector, context) {
+	window.$ = window.Spark = new Object();
+	$ = Spark = function(selector, context) {
 		// Create the result object
 		var result = new Object();
 		

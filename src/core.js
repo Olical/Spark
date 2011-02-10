@@ -20,12 +20,6 @@ window.SparkFn = new Object();
 
 // Create the initialise function
 window.SparkIn = function() {
-	// Check if SparkBk does not exist yet
-	if(window.SparkBk === undefined) {
-		// Back up Spark and $ for use in noConflict mode
-		window.SparkBk = window.$;
-	}
-	
 	// Create the Spark object
 	window.$ = window.Spark = function(selector, context) {
 		// Create the result object
@@ -67,6 +61,12 @@ window.SparkIn = function() {
 		// Return the built object
 		return built;
 	};
+	
+	// Check if SparkBk does not exist yet
+	if(window.SparkBk === undefined) {
+		// Back up Spark and $ for use in noConflict mode
+		window.SparkBk = window.$;
+	}
 	
 	// Take out the need for brackets
 	for(var i in Spark()) {

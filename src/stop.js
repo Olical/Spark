@@ -4,7 +4,7 @@ SparkFn.stop = function() {
 	var animations = null;
 	
 	// Loop through all of the elements
-	for(var e = 0; e < ((this.elements.length) ? this.elements.length : 1); e++) {
+	for(var e in this.elements) {
 		// Grab the current element
 		element = this.elements[e];
 		

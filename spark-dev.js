@@ -77,7 +77,7 @@ window.SparkIn = function() {
 	var element = null;
 	
 	// Loop through all of the elements
-	for(var e in this.elements) {
+	for(var e = 0; e < ((this.elements.length) ? this.elements.length : 1); e++) {
 		// Grab the current element
 		element = this.elements[e];
 		
@@ -100,7 +100,7 @@ window.SparkIn = function() {
 	var element = null;
 	
 	// Loop through all of the elements
-	for(var e in this.elements) {
+	for(var e = 0; e < ((this.elements.length) ? this.elements.length : 1); e++) {
 		// Grab the current element
 		element = this.elements[e];
 		
@@ -193,7 +193,7 @@ SparkFn.event = function(type, callback) {
 	var previousReference = null;
 	
 	// Loop through all of the elements
-	for(var e in this.elements) {
+	for(var e = 0; e < ((this.elements.length) ? this.elements.length : 1); e++) {
 		// Grab the current element
 		element = this.elements[e];
 		
@@ -236,7 +236,7 @@ SparkFn.event = function(type, callback) {
 	var element = null;
 	
 	// Loop through all of the elements
-	for(var e in this.elements) {
+	for(var e = 0; e < ((this.elements.length) ? this.elements.length : 1); e++) {
 		// Grab the current element
 		element = this.elements[e];
 		
@@ -432,7 +432,7 @@ SparkFn.css = function(css) {
 	var element = null;
 	
 	// Loop through all of the elements
-	for(var e in this.elements) {
+	for(var e = 0; e < ((this.elements.length) ? this.elements.length : 1); e++) {
 		// Grab the current element
 		element = this.elements[e];
 		
@@ -487,7 +487,7 @@ SparkFn.css = function(css) {
 	var element = null;
 	
 	// Loop through all of the elements
-	for(var e in this.elements) {
+	for(var e = 0; e < ((this.elements.length) ? this.elements.length : 1); e++) {
 		// Grab the current element
 		element = this.elements[e];
 		
@@ -546,7 +546,7 @@ SparkFn.css = function(css) {
 	var animations = null;
 	
 	// Loop through all of the elements
-	for(var e in this.elements) {
+	for(var e = 0; e < ((this.elements.length) ? this.elements.length : 1); e++) {
 		// Grab the current element
 		element = this.elements[e];
 		
@@ -587,7 +587,7 @@ SparkFn.css = function(css) {
 	}
 	
 	// Loop through all of the elements
-	for(var e in this.elements) {
+	for(var e = 0; e < ((this.elements.length) ? this.elements.length : 1); e++) {
 		// Grab the current element
 		element = this.elements[e];
 		
@@ -704,7 +704,7 @@ SparkFn.css = function(css) {
 	}
 	
 	// Loop through all the elements
-	for(var e in this.elements) {
+	for(var e = 0; e < ((this.elements.length) ? this.elements.length : 1); e++) {
 		// Grab the current element
 		element = this.elements[e];
 		
@@ -826,7 +826,7 @@ SparkFn.css = function(css) {
 	var element = null;
 	
 	// Loop through all of the elements
-	for(var e in this.elements) {
+	for(var e = 0; e < ((this.elements.length) ? this.elements.length : 1); e++) {
 		// Grab the current element
 		element = this.elements[e];
 		

@@ -66,6 +66,9 @@
 		
 		<script type='text/javascript' src='spark-dev.js'></script>
 		<script type='text/javascript'>
+			// noConflict
+			window.SparkInstance = Spark.noConflict();
+			
 			// ready
 			Spark.ready(function() {
 				// text
@@ -124,9 +127,6 @@
 				Spark('p.json').html(
 					Spark.json('encode', Spark.json('decode', '{"name":"Oliver Caldwell","age":17}'))
 				, true);
-				
-				// noConflict
-				window.SparkInstance = Spark.noConflict();
 				
 				// animate
 				Spark('p.animate').event('click', function(e) {

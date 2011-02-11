@@ -78,18 +78,21 @@ window.SparkIn = function() {
 	
 	// Loop through all of the elements
 	for(var e in this.elements) {
-		// Grab the current element
-		element = this.elements[e];
+		// Make sure that it is an element
+		if(this.elements.hasOwnProperty(e)) {
+			// Grab the current element
+			element = this.elements[e];
 		
-		// Return content of the selected element if there is no content
-		if(content === undefined) {
-			return element.innerHTML;
-		}
-		else {
-			// Append or replace content depending on the append flag
-			(!append) ?
-				element.innerHTML = content :
-				element.innerHTML += content;
+			// Return content of the selected element if there is no content
+			if(content === undefined) {
+				return element.innerHTML;
+			}
+			else {
+				// Append or replace content depending on the append flag
+				(!append) ?
+					element.innerHTML = content :
+					element.innerHTML += content;
+			}
 		}
 	}
 	
@@ -101,29 +104,32 @@ window.SparkIn = function() {
 	
 	// Loop through all of the elements
 	for(var e in this.elements) {
-		// Grab the current element
-		element = this.elements[e];
+		// Make sure that it is an element
+		if(this.elements.hasOwnProperty(e)) {
+			// Grab the current element
+			element = this.elements[e];
 		
-		// Return content of the selected element if there is no content and check for Firefox
-		if(content === undefined) {
-			if(document.all){
-				return element.innerText;
+			// Return content of the selected element if there is no content and check for Firefox
+			if(content === undefined) {
+				if(document.all){
+					return element.innerText;
+				}
+				else {
+					return element.textContent;
+				}
 			}
 			else {
-				return element.textContent;
-			}
-		}
-		else {
-			// Append or replace content depending on the append flag and check for Firefox
-			if(document.all){
-				(!append) ?
-					element.innerText = content :
-					element.innerText += content;
-			}
-			else {
-				(!append) ?
-					element.textContent = content :
-					element.textContent += content;
+				// Append or replace content depending on the append flag and check for Firefox
+				if(document.all){
+					(!append) ?
+						element.innerText = content :
+						element.innerText += content;
+				}
+				else {
+					(!append) ?
+						element.textContent = content :
+						element.textContent += content;
+				}
 			}
 		}
 	}
@@ -194,38 +200,41 @@ SparkFn.event = function(type, callback) {
 	
 	// Loop through all of the elements
 	for(var e in this.elements) {
-		// Grab the current element
-		element = this.elements[e];
+		// Make sure that it is an element
+		if(this.elements.hasOwnProperty(e)) {
+			// Grab the current element
+			element = this.elements[e];
 		
-		// Set up the callback
-		runCallback = function(e) {
-			callback(Spark.fixEvent(e));
-		};
+			// Set up the callback
+			runCallback = function(e) {
+				callback(Spark.fixEvent(e));
+			};
 		
-		// Grab the previous reference
-		previousReference = this.data(element, 'Spark.event.' + type);
+			// Grab the previous reference
+			previousReference = this.data(element, 'Spark.event.' + type);
 		
-		// Save the callback's reference for unsetting
-		this.data(element, 'Spark.event.' + type, runCallback);
+			// Save the callback's reference for unsetting
+			this.data(element, 'Spark.event.' + type, runCallback);
 		
-		// Check if the browser supports addEventListener or attachEvent and use it
-		if(element.addEventListener) {
-			// Removed the old event
-			if(previousReference) {
-				element.removeEventListener(type, previousReference, false);
-			}
+			// Check if the browser supports addEventListener or attachEvent and use it
+			if(element.addEventListener) {
+				// Removed the old event
+				if(previousReference) {
+					element.removeEventListener(type, previousReference, false);
+				}
 			
-			// Assign event
-			element.addEventListener(type, runCallback, false);
-		}
-		else {
-			// Removed the old event
-			if(previousReference) {
-				element.detachEvent(type, previousReference);
+				// Assign event
+				element.addEventListener(type, runCallback, false);
 			}
+			else {
+				// Removed the old event
+				if(previousReference) {
+					element.detachEvent(type, previousReference);
+				}
 			
-			// Assign event
-			element.attachEvent('on' + type, runCallback);
+				// Assign event
+				element.attachEvent('on' + type, runCallback);
+			}
 		}
 	}
 	
@@ -237,19 +246,22 @@ SparkFn.event = function(type, callback) {
 	
 	// Loop through all of the elements
 	for(var e in this.elements) {
-		// Grab the current element
-		element = this.elements[e];
+		// Make sure that it is an element
+		if(this.elements.hasOwnProperty(e)) {
+			// Grab the current element
+			element = this.elements[e];
 		
-		// Check if they provided an attribute object
-		if(attribute !== undefined) {
-			// Loop through all attributes assigning them
-			for(var a in attribute) {
-				element[a] = attribute[a];
+			// Check if they provided an attribute object
+			if(attribute !== undefined) {
+				// Loop through all attributes assigning them
+				for(var a in attribute) {
+					element[a] = attribute[a];
+				}
 			}
-		}
-		else {
-			// Return the elements attributes
-			return element;
+			else {
+				// Return the elements attributes
+				return element;
+			}
 		}
 	}
 	
@@ -433,33 +445,36 @@ SparkFn.css = function(css) {
 	
 	// Loop through all of the elements
 	for(var e in this.elements) {
-		// Grab the current element
-		element = this.elements[e];
+		// Make sure that it is an element
+		if(this.elements.hasOwnProperty(e)) {
+			// Grab the current element
+			element = this.elements[e];
 		
-		// Check if they provided a css object
-		if(css !== undefined) {
-			// Loop through all css values assigning them
-			for(var c in css) {
-				// If the selector contains dashes then convert it to the JavaScript version
-				if(c.indexOf('-') !== -1) {
-					element.style[c.replace(/-([a-z])/gi, function(s, g1) { return g1.toUpperCase() })] = css[c];
-				}
-				else {
-					element.style[c] = css[c];
-				}
+			// Check if they provided a css object
+			if(css !== undefined) {
+				// Loop through all css values assigning them
+				for(var c in css) {
+					// If the selector contains dashes then convert it to the JavaScript version
+					if(c.indexOf('-') !== -1) {
+						element.style[c.replace(/-([a-z])/gi, function(s, g1) { return g1.toUpperCase() })] = css[c];
+					}
+					else {
+						element.style[c] = css[c];
+					}
 				
-				// If opacity is being set we need to set all the other values for cross browser opacity
-				if(c == 'opacity') {
-					element.style.MozOpacity = css[c];
-					element.style.KhtmlOpacity = css[c];
-					element.style.filter = 'alpha(opacity=' + (css[c] * 100) + ')';
-					element.style.zoom = '1';
+					// If opacity is being set we need to set all the other values for cross browser opacity
+					if(c == 'opacity') {
+						element.style.MozOpacity = css[c];
+						element.style.KhtmlOpacity = css[c];
+						element.style.filter = 'alpha(opacity=' + (css[c] * 100) + ')';
+						element.style.zoom = '1';
+					}
 				}
 			}
-		}
-		else {
-			// Return the elements attributes
-			return element.style;
+			else {
+				// Return the elements attributes
+				return element.style;
+			}
 		}
 	}
 	
@@ -494,11 +509,14 @@ SparkFn.css = function(css) {
 	
 	// Loop through all of the elements
 	for(var e in this.elements) {
-		// Grab the current element
-		element = this.elements[e];
+		// Make sure that it is an element
+		if(this.elements.hasOwnProperty(e)) {
+			// Grab the current element
+			element = this.elements[e];
 		
-		// Run the specified function and pass the element to it
-		callback(element);
+			// Run the specified function and pass the element to it
+			callback(element);
+		}
 	}
 	
 	// Return the Spark object
@@ -553,20 +571,23 @@ SparkFn.css = function(css) {
 	
 	// Loop through all of the elements
 	for(var e in this.elements) {
-		// Grab the current element
-		element = this.elements[e];
+		// Make sure that it is an element
+		if(this.elements.hasOwnProperty(e)) {
+			// Grab the current element
+			element = this.elements[e];
 		
-		// Make sure it is set
-		if(this.data(element, 'Spark.animations') === undefined) {
-			this.data(element, 'Spark.animations', '');
-		}
+			// Make sure it is set
+			if(this.data(element, 'Spark.animations') === undefined) {
+				this.data(element, 'Spark.animations', '');
+			}
 		
-		// Get the animations
-		animations = this.data(element, 'Spark.animations').split(',');
+			// Get the animations
+			animations = this.data(element, 'Spark.animations').split(',');
 		
-		// Loop through them all, canceling them all
-		for(var a in animations) {
-			clearTimeout(animations[a]);
+			// Loop through them all, canceling them all
+			for(var a in animations) {
+				clearTimeout(animations[a]);
+			}
 		}
 	}
 	
@@ -594,91 +615,94 @@ SparkFn.css = function(css) {
 	
 	// Loop through all of the elements
 	for(var e in this.elements) {
-		// Grab the current element
-		element = this.elements[e];
+		// Make sure that it is an element
+		if(this.elements.hasOwnProperty(e)) {
+			// Grab the current element
+			element = this.elements[e];
 		
-		// Work out what method we need to do
-		switch(method) {
-			case 'slidedown':
-				// Set overflow to hidden
-				Spark(element).css({overflow: 'hidden', display: 'block'});
+			// Work out what method we need to do
+			switch(method) {
+				case 'slidedown':
+					// Set overflow to hidden
+					Spark(element).css({overflow: 'hidden', display: 'block'});
 				
-				// Get original height
-				original = Spark(element).attribute().offsetHeight;
+					// Get original height
+					original = Spark(element).attribute().offsetHeight;
 				
-				// Set height to 0
-				Spark(element).css({height: 0});
+					// Set height to 0
+					Spark(element).css({height: 0});
 				
-				// Slide height to original
-				Spark(element).animate({height: original}, timeframe, callback);
-				break;
+					// Slide height to original
+					Spark(element).animate({height: original}, timeframe, callback);
+					break;
 			
-			case 'slideup':				
-				// Get original height
-				original = Spark(element).attribute().offsetHeight;
+				case 'slideup':				
+					// Get original height
+					original = Spark(element).attribute().offsetHeight;
 				
-				// Set overflow to hidden
-				Spark(element).css({overflow: 'hidden', height: original});
+					// Set overflow to hidden
+					Spark(element).css({overflow: 'hidden', height: original});
 				
-				// Slide height to 0
-				Spark(element).animate({height: 0}, timeframe, function() {
-					// Set height to original
-					Spark(element).css({height: original + 'px', display: 'none'});
+					// Slide height to 0
+					Spark(element).animate({height: 0}, timeframe, function() {
+						// Set height to original
+						Spark(element).css({height: original + 'px', display: 'none'});
 					
-					// Run the callback
-					callback();
-				});
-				break;
+						// Run the callback
+						callback();
+					});
+					break;
 			
-			case 'fadein':
-				// Display it
-				Spark(element).css({display: 'block', opacity: 0});
+				case 'fadein':
+					// Display it
+					Spark(element).css({display: 'block', opacity: 0});
 				
-				// Fade opacity to 100
-				Spark(element).animate({opacity: 1}, timeframe, callback);
-				break;
+					// Fade opacity to 100
+					Spark(element).animate({opacity: 1}, timeframe, callback);
+					break;
 			
-			case 'fadeout':
-				// Fade opacity to 0
-				Spark(element).animate({opacity: 0}, timeframe, function() {
-					// Set opacity to 100
-					Spark(element).css({opacity: 1, display: 'none'});
+				case 'fadeout':
+					// Fade opacity to 0
+					Spark(element).animate({opacity: 0}, timeframe, function() {
+						// Set opacity to 100
+						Spark(element).css({opacity: 1, display: 'none'});
 					
-					// Run the callback
-					callback();
-				});
-				break;
+						// Run the callback
+						callback();
+					});
+					break;
 			
-			case 'sneakin':
-				// Set overflow to hidden
-				Spark(element).css({overflow: 'hidden', display: 'block', opacity: 0});
+				case 'sneakin':
+					// Set overflow to hidden
+					Spark(element).css({overflow: 'hidden', display: 'block', opacity: 0});
 				
-				// Get original height
-				original = Spark(element).attribute().offsetHeight;
+					// Get original height
+					original = Spark(element).attribute().offsetHeight;
 				
-				// Set height to 0
-				Spark(element).css({height: 0});
+					// Set height to 0
+					Spark(element).css({height: 0});
 				
-				// Slide height to original
-				Spark(element).animate({height: original, opacity: 1}, timeframe, callback);
-				break;
+					// Slide height to original
+					Spark(element).animate({height: original, opacity: 1}, timeframe, callback);
+					break;
 			
-			case 'sneakout':
-				// Get original height
-				original = Spark(element).attribute().offsetHeight;
+				case 'sneakout':
+					// Get original height
+					original = Spark(element).attribute().offsetHeight;
 				
-				// Set overflow to hidden
-				Spark(element).css({overflow: 'hidden', height: original});
+					// Set overflow to hidden
+					Spark(element).css({overflow: 'hidden', height: original});
 				
-				// Slide height to 0
-				Spark(element).animate({height: 0, opacity: 0}, timeframe, function() {
-					// Set height to original
-					Spark(element).css({height: original + 'px', display: 'none'});
+					// Slide height to 0
+					Spark(element).animate({height: 0, opacity: 0}, timeframe, function() {
+						// Set height to original
+						Spark(element).css({height: original + 'px', display: 'none'});
 					
-					// Run the callback
-					callback();
-				});
-				break;
+						// Run the callback
+						callback();
+					});
+					break;
+			}
 		}
 	}
 	
@@ -711,65 +735,68 @@ SparkFn.css = function(css) {
 	
 	// Loop through all the elements
 	for(var e in this.elements) {
-		// Grab the current element
-		element = this.elements[e];
+		// Make sure that it is an element
+		if(this.elements.hasOwnProperty(e)) {
+			// Grab the current element
+			element = this.elements[e];
 		
-		// Loop through all of the properties
-		for(var p in properties) {
-			// Make sure the style is set
-			if(element.style[p] === undefined || element.style[p] === '') {
-				computed = Spark(element).computed()[p];
-				element.style[p] = (computed) ? computed : 1;
-			}
+			// Loop through all of the properties
+			for(var p in properties) {
+				// Make sure the style is set
+				if(element.style[p] === undefined || element.style[p] === '') {
+					computed = Spark(element).computed()[p];
+					element.style[p] = (computed) ? computed : 1;
+				}
 			
-			// Fix for IE stuff
-			if(element.style[p] == 'auto' && p == 'height') element.style[p] = element.offsetHeight;
-			else if(element.style[p] == 'auto' && p == 'width') element.style[p] = element.offsetWidth;
+				// Fix for IE stuff
+				if(element.style[p] == 'auto' && p == 'height') element.style[p] = element.offsetHeight;
+				else if(element.style[p] == 'auto' && p == 'width') element.style[p] = element.offsetWidth;
 			
-			// Get the original
-			original = (p == 'opacity') ? parseFloat(element.style[p]) : parseInt(element.style[p]);
+				// Get the original
+				original = (p == 'opacity') ? parseFloat(element.style[p]) : parseInt(element.style[p]);
 			
-			// Work out the difference
-			difference = ((p == 'opacity') ? parseFloat(properties[p]) : parseInt(properties[p])) - original;
+				// Work out the difference
+				difference = ((p == 'opacity') ? parseFloat(properties[p]) : parseInt(properties[p])) - original;
 			
-			// Work out how many frames
-			frames = timeframe / (1000 / fps);
+				// Work out how many frames
+				frames = timeframe / (1000 / fps);
 			
-			// Work out how many pixels per frame
-			pixels = difference / frames;
+				// Work out how many pixels per frame
+				pixels = difference / frames;
 			
-			// Work out the unit of measurement
-			unit = (isNaN(properties[p])) ? properties[p].replace(/[0-9]/g, '') : 'px';
+				// Work out the unit of measurement
+				unit = (isNaN(properties[p])) ? properties[p].replace(/[0-9]/g, '') : 'px';
 			
-			// Set up variables
-			toSet = new Object();
+				// Set up variables
+				toSet = new Object();
 			
-			// Another opacity fix
-			if(p == 'opacity') {
-				unit = '';
-			}
+				// Another opacity fix
+				if(p == 'opacity') {
+					unit = '';
+				}
 			
-			this.data(element, 'Spark.animations', 'START');
+				this.data(element, 'Spark.animations', 'START');
 			
-			// Loop through each frame
-			for(var i = 0; i <= frames; i++) {
-				this.data(element, 'Spark.animations', this.data(element, 'Spark.animations') + ',' + setTimeout((function(exti, extelement, extp, extoriginal, extpixels, extunit) {
+				// Loop through each frame
+				for(var i = 0; i <= frames; i++) {
+					this.data(element, 'Spark.animations', this.data(element, 'Spark.animations') + ',' + setTimeout((function(exti, extelement, extp, extoriginal, extpixels, extunit) {
+						return function() {
+							toSet[extp] = (extoriginal + (extpixels * exti)) + extunit;
+							Spark(extelement).css(toSet);
+						}
+					})(i, element, p, original, pixels, unit), i * (1000 / fps) + this.offset, element, p, original, pixels, unit));
+				}
+			
+				// Correct floating point problem
+				this.data(element, 'Spark.animations', this.data(element, 'Spark.animations') + ',' + setTimeout((function(extelement, extp, extproperties) {
 					return function() {
-						toSet[extp] = (extoriginal + (extpixels * exti)) + extunit;
+						toSet[extp] = properties[extp];
 						Spark(extelement).css(toSet);
 					}
-				})(i, element, p, original, pixels, unit), i * (1000 / fps) + this.offset, element, p, original, pixels, unit));
+				})(element, p, properties), timeframe + this.offset, element, p, properties));
+			
+				this.data(element, 'Spark.animations', this.data(element, 'Spark.animations').replace('START,', ''));
 			}
-			
-			// Correct floating point problem
-			this.data(element, 'Spark.animations', this.data(element, 'Spark.animations') + ',' + setTimeout((function(extelement, extp, extproperties) {
-				return function() {
-					toSet[extp] = properties[extp];
-					Spark(extelement).css(toSet);
-				}
-			})(element, p, properties), timeframe + this.offset, element, p, properties));
-			
-			this.data(element, 'Spark.animations', this.data(element, 'Spark.animations').replace('START,', ''));
 		}
 	}
 	
@@ -833,29 +860,32 @@ SparkFn.css = function(css) {
 	
 	// Loop through all of the elements
 	for(var e in this.elements) {
-		// Grab the current element
-		element = this.elements[e];
+		// Make sure that it is an element
+		if(this.elements.hasOwnProperty(e)) {
+			// Grab the current element
+			element = this.elements[e];
 		
-		// Check what method we need to execute
-		switch(method) {
-			case 'has':
-				// Return true if the element has the class and vice versa
-				return new RegExp('\\b' + name + '\\b').test(element.className)
-				break;
-			case 'add':
-				// Check if it does not already has that class
-				if(!this.classes('has', name)) {
-					// Append the class name with or without a space
-					element.className += (element.className) ? ' ' + name : name;
-				}
-				break;
-			case 'remove':
-				// Work out if we need to remove the class with or without a space in front of it
-				var search = (element.className.match(' ' + name)) ? ' ' + name : name;
+			// Check what method we need to execute
+			switch(method) {
+				case 'has':
+					// Return true if the element has the class and vice versa
+					return new RegExp('\\b' + name + '\\b').test(element.className)
+					break;
+				case 'add':
+					// Check if it does not already has that class
+					if(!this.classes('has', name)) {
+						// Append the class name with or without a space
+						element.className += (element.className) ? ' ' + name : name;
+					}
+					break;
+				case 'remove':
+					// Work out if we need to remove the class with or without a space in front of it
+					var search = (element.className.match(' ' + name)) ? ' ' + name : name;
 				
-				// Replace the correct search string
-				element.className = element.className.replace(search, '');
-				break;
+					// Replace the correct search string
+					element.className = element.className.replace(search, '');
+					break;
+			}
 		}
 	}
 	

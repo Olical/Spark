@@ -1,5 +1,5 @@
 /*!
- * Spark JavaScript library v2.1.0
+ * Spark JavaScript library v2.2.0
  * http://sparkjs.co.uk/
  * 
  * Copyright 2011, Oliver Caldwell

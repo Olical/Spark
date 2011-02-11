@@ -442,7 +442,7 @@ SparkFn.css = function(css) {
 			for(var c in css) {
 				// If the selector contains dashes then convert it to the JavaScript version
 				if(c.indexOf('-') !== -1) {
-					element.style[c.replace(/-[a-z]/gi, function(s, g1) { return g1.toUpperCase() })] = css[c];
+					element.style[c.replace(/-([a-z])/gi, function(s, g1) { return g1.toUpperCase() })] = css[c];
 				}
 				else {
 					element.style[c] = css[c];

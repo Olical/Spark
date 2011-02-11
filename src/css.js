@@ -11,7 +11,13 @@ SparkFn.css = function(css) {
 		if(css !== undefined) {
 			// Loop through all css values assigning them
 			for(var c in css) {
-				element.style[c] = css[c];
+				// If the selector contains dashes then convert it to the JavaScript version
+				if(c.indexOf('-') !== -1) {
+					element.style[c.replace(/-[a-z]/gi, function(s, g1) { return g1.toUpperCase() })] = css[c];
+				}
+				else {
+					element.style[c] = css[c];
+				}
 				
 				// If opacity is being set we need to set all the other values for cross browser opacity
 				if(c == 'opacity') {

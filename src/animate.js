@@ -223,4 +223,4 @@ SparkFn.animate = function(properties, timeframe, easing, callback) {
 	
 	// Return the Spark object
 	return this;
-}
+};

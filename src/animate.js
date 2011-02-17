@@ -129,7 +129,7 @@ SparkFn.animate = function(properties, timeframe, easing, callback) {
 	
 	// Set a default easing
 	if(!easing) {
-		var easing = 'outQuint';
+		var easing = 'outQuad';
 	}
 	
 	// Initiate the offset as 0 if there is none

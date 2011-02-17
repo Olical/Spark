@@ -16,7 +16,12 @@ SparkFn.ajax = function(method, file, data, callback) {
 	if(callback) {
 		xmlhttp.onreadystatechange = function() {
 			if(xmlhttp.readyState == 4) {
-				callback(xmlhttp.responseText);
+				if(xmlhttp.status == 200) {
+					callback(xmlhttp.responseText);
+				}
+				else {
+					callback(false);
+				}
 			}
 		};
 	}

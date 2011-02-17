@@ -124,7 +124,7 @@ SparkFn.animate = function(properties, timeframe, easing, callback) {
 	
 	// Set a default timeframe
 	if(!timeframe) {
-		var timeframe = 800;
+		var timeframe = 600;
 	}
 	
 	// Set a default easing

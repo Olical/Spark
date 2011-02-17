@@ -608,7 +608,7 @@ SparkFn.css = function(css) {
 	
 	// Check if the timeframe is set, if not default it to 800ms
 	if(timeframe === undefined) {
-		timeframe = 800;
+		timeframe = 600;
 	}
 	
 	// Initiate the offset as 0 if there is none
@@ -840,7 +840,7 @@ SparkFn.css = function(css) {
 	
 	// Set a default timeframe
 	if(!timeframe) {
-		var timeframe = 800;
+		var timeframe = 600;
 	}
 	
 	// Set a default easing

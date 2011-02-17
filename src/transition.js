@@ -10,7 +10,7 @@ SparkFn.transition = function(method, timeframe, callback) {
 	
 	// Check if the timeframe is set, if not default it to 800ms
 	if(timeframe === undefined) {
-		timeframe = 800;
+		timeframe = 600;
 	}
 	
 	// Initiate the offset as 0 if there is none

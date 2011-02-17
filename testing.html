@@ -64,6 +64,10 @@
 		<h1>classes</h1>
 		<p class='classes'>Element has class classes? </p>
 		
+		<h1>add</h1>
+		<p>The add function is used to create DOM elements and add them to the specified element.</p>
+		<div class='add'></div>
+		
 		<script type='text/javascript' src='spark-dev.js'></script>
 		<script type='text/javascript'>
 			// noConflict
@@ -150,6 +154,13 @@
 				
 				// classes
 				Spark('p.classes').html((Spark('p.classes').classes('has', 'classes')) ? 'Yes.' : 'No.', true);
+				
+				// add
+				Spark('div.add').add('p', {
+					innerHTML: 'Element created with the add function'
+				}, {
+					color: '#FF0000'
+				});
 			});
 		</script>
 	</body>

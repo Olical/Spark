@@ -210,6 +210,10 @@ SparkFn.animate = function(properties, timeframe, easing, callback) {
 						Spark(extelement).css(toSet);
 					}
 				})(element, p, properties, unit), timeframe + this.offset, element, p, properties, unit));
+				
+				
+				// Finish the saving of the data
+				this.data(element, 'Spark.animations', this.data(element, 'Spark.animations').replace('START,', ''));
 			}
 		}
 	}

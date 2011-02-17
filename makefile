@@ -34,24 +34,6 @@ modules =	${srcdir}html.js\
 			${srcdir}ajax.js\
 			${srcdir}classes.js
 
-#modules =	${srcdir}ajax.js\
-			${srcdir}attribute.js\
-			${srcdir}content.js\
-			${srcdir}cookie.js\
-			${srcdir}css.js\
-			${srcdir}event.js\
-			${srcdir}json.js\
-			${srcdir}ready.js\
-			${srcdir}browser.js\
-			${srcdir}animate.js\
-			${srcdir}jsonp.js\
-			${srcdir}transition.js\
-			${srcdir}load.js\
-			${srcdir}each.js\
-			${srcdir}data.js\
-			${srcdir}stop.js\
-			${srcdir}computed.js
-
 # Build full list of files
 files = ${core} ${modules} ${dependencies} ${initialisation}
 

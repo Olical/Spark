@@ -190,6 +190,9 @@ SparkFn.animate = function(properties, timeframe, easing, callback) {
 				// Set up the timeout reference storage
 				this.data(element, 'Spark.animations', 'START');
 				
+				// Set up the toSet variable
+				toSet = new Object();
+				
 				// Loop through each frame
 				for(var i = 0; i <= frames; i++) {
 					// Work out the calculated value

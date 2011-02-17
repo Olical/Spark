@@ -1,5 +1,5 @@
 /*!
- * Spark JavaScript library v2.3.0
+ * Spark JavaScript library v2.4.0
  * http://sparkjs.co.uk/
  * 
  * Copyright 2011, Oliver Caldwell
@@ -845,7 +845,7 @@ SparkFn.css = function(css) {
 	
 	// Set a default easing
 	if(!easing) {
-		var easing = 'outQuint';
+		var easing = 'outQuad';
 	}
 	
 	// Initiate the offset as 0 if there is none

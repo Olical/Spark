@@ -149,6 +149,7 @@ SparkFn.animate = function(properties, timeframe, easing, callback) {
 	var unit = null;
 	var calculated = null;
 	var toSet = null;
+	var element = null;
 	
 	// Loop through all the elements
 	for(var e in this.elements) {

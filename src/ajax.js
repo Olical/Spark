@@ -20,6 +20,7 @@ SparkFn.ajax = function(method, file, data, callback) {
 					callback(xmlhttp.responseText);
 				}
 				else {
+					// There was an error so pass false to the callback
 					callback(false);
 				}
 			}
@@ -44,7 +45,13 @@ SparkFn.ajax = function(method, file, data, callback) {
 	
 	// If there is no callback
 	if(!callback) {
-		// Just return the content because it was a syncronous request
-		return xmlhttp.responseText;
+		if(xmlhttp.status == 200) {
+			// Just return the content because it was a syncronous request
+			return xmlhttp.responseText;
+		}
+		else {
+			// There was an error so return false
+			return false;
+		}
 	}
 };

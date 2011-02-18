@@ -147,7 +147,7 @@
 				
 				// transition
 				Spark('p.transition').event('click', function(e) {
-					Spark(e.target).transition('sneakout', 800, function() {
+					Spark(e.target).transition('sneakout', 800, false, function() {
 						Spark(e.target).transition('sneakin');
 					});
 				});

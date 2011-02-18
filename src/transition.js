@@ -1,4 +1,4 @@
-SparkFn.transition = function(method, timeframe, easing callback) {
+SparkFn.transition = function(method, timeframe, easing, callback) {
 	// Set up any variables
 	var element = null;
 	var original = null;

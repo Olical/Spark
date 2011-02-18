@@ -13,7 +13,16 @@ SparkFn.event = function(type, callback) {
 			
 			// Set up the callback
 			runCallback = function(e) {
-				callback(Spark.fixEvent(e));
+				// Run the callback and check if it returned false
+				if(callback(Spark.fixEvent(e)) === false) {
+					// If so then prevent default
+					if(e.preventDefault) {
+						e.preventDefault();
+					}
+					else {
+						e.returnValue = false;
+					}
+				}
 			};
 			
 			// Grab the previous reference

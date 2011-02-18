@@ -1,5 +1,5 @@
 /*!
- * Spark JavaScript library v2.3.1
+ * Spark JavaScript library v2.3.2
  * http://sparkjs.co.uk/
  * 
  * Copyright 2011, Oliver Caldwell
@@ -204,25 +204,34 @@ SparkFn.event = function(type, callback) {
 		if(this.elements.hasOwnProperty(e)) {
 			// Grab the current element
 			element = this.elements[e];
-		
+			
 			// Set up the callback
 			runCallback = function(e) {
-				callback(Spark.fixEvent(e));
+				// Run the callback and check if it returned false
+				if(callback(Spark.fixEvent(e)) === false) {
+					// If so then prevent default
+					if(e.preventDefault) {
+						e.preventDefault();
+					}
+					else {
+						e.returnValue = false;
+					}
+				}
 			};
-		
+			
 			// Grab the previous reference
 			previousReference = this.data(element, 'Spark.event.' + type);
-		
+			
 			// Save the callback's reference for unsetting
 			this.data(element, 'Spark.event.' + type, runCallback);
-		
+			
 			// Check if the browser supports addEventListener or attachEvent and use it
 			if(element.addEventListener) {
 				// Removed the old event
 				if(previousReference) {
 					element.removeEventListener(type, previousReference, false);
 				}
-			
+				
 				// Assign event
 				element.addEventListener(type, runCallback, false);
 			}
@@ -231,7 +240,7 @@ SparkFn.event = function(type, callback) {
 				if(previousReference) {
 					element.detachEvent(type, previousReference);
 				}
-			
+				
 				// Assign event
 				element.attachEvent('on' + type, runCallback);
 			}
@@ -596,7 +605,7 @@ SparkFn.css = function(css) {
 	
 	// Return the Spark object
 	return this;
-};SparkFn.transition = function(method, timeframe, callback) {
+};SparkFn.transition = function(method, timeframe, easing, callback) {
 	// Set up any variables
 	var element = null;
 	var original = null;
@@ -611,6 +620,11 @@ SparkFn.css = function(css) {
 		timeframe = 600;
 	}
 	
+	// Check if the easing is set, if not default it to false
+	if(easing === undefined) {
+		var easing = false;
+	}
+	
 	// Initiate the offset as 0 if there is none
 	if(!this.offset) {
 		this.offset = 0;
@@ -622,85 +636,85 @@ SparkFn.css = function(css) {
 		if(this.elements.hasOwnProperty(e)) {
 			// Grab the current element
 			element = this.elements[e];
-		
+			
 			// Work out what method we need to do
 			switch(method) {
 				case 'slidedown':
 					// Set overflow to hidden
 					Spark(element).css({overflow: 'hidden', display: 'block'});
-				
+					
 					// Get original height
 					original = Spark(element).attribute().offsetHeight;
-				
+					
 					// Set height to 0
 					Spark(element).css({height: 0});
-				
+					
 					// Slide height to original
-					Spark(element).animate({height: original}, timeframe, false, callback);
+					Spark(element).animate({height: original}, timeframe, easing, callback);
 					break;
-			
+				
 				case 'slideup':				
 					// Get original height
 					original = Spark(element).attribute().offsetHeight;
-				
+					
 					// Set overflow to hidden
 					Spark(element).css({overflow: 'hidden', height: original});
-				
+					
 					// Slide height to 0
-					Spark(element).animate({height: 0}, timeframe, false, function() {
+					Spark(element).animate({height: 0}, timeframe, easing, function() {
 						// Set height to original
 						Spark(element).css({height: original + 'px', display: 'none'});
-					
+						
 						// Run the callback
 						callback();
 					});
 					break;
-			
+				
 				case 'fadein':
 					// Display it
 					Spark(element).css({display: 'block', opacity: 0});
-				
+					
 					// Fade opacity to 100
-					Spark(element).animate({opacity: 1}, timeframe, false, callback);
+					Spark(element).animate({opacity: 1}, timeframe, easing, callback);
 					break;
-			
+				
 				case 'fadeout':
 					// Fade opacity to 0
-					Spark(element).animate({opacity: 0}, timeframe, false, function() {
+					Spark(element).animate({opacity: 0}, timeframe, easing, function() {
 						// Set opacity to 100
 						Spark(element).css({opacity: 1, display: 'none'});
-					
+						
 						// Run the callback
 						callback();
 					});
 					break;
-			
+				
 				case 'sneakin':
 					// Set overflow to hidden
 					Spark(element).css({overflow: 'hidden', display: 'block', opacity: 0});
-				
+					
 					// Get original height
 					original = Spark(element).attribute().offsetHeight;
-				
+					
 					// Set height to 0
 					Spark(element).css({height: 0});
-				
+					
 					// Slide height to original
-					Spark(element).animate({height: original, opacity: 1}, timeframe, false, callback);
+					Spark(element).animate({height: original, opacity: 1}, timeframe, easing, callback);
 					break;
-			
+				
 				case 'sneakout':
 					// Get original height
 					original = Spark(element).attribute().offsetHeight;
-				
+					
 					// Set overflow to hidden
 					Spark(element).css({overflow: 'hidden', height: original});
-				
+					
 					// Slide height to 0
-					Spark(element).animate({height: 0, opacity: 0}, timeframe, false, function() {
+					Spark(element).animate({height: 0, opacity: 0}, timeframe, easing, function() {
 						// Set height to original
 						Spark(element).css({height: original + 'px', display: 'none'});
-					
+						
 						// Run the callback
 						callback();
 					});
@@ -969,6 +983,7 @@ SparkFn.css = function(css) {
 					callback(xmlhttp.responseText);
 				}
 				else {
+					// There was an error so pass false to the callback
 					callback(false);
 				}
 			}
@@ -993,8 +1008,14 @@ SparkFn.css = function(css) {
 	
 	// If there is no callback
 	if(!callback) {
-		// Just return the content because it was a syncronous request
-		return xmlhttp.responseText;
+		if(xmlhttp.status == 200) {
+			// Just return the content because it was a syncronous request
+			return xmlhttp.responseText;
+		}
+		else {
+			// There was an error so return false
+			return false;
+		}
 	}
 };SparkFn.classes = function(method, name) {
 	// Set up any variables

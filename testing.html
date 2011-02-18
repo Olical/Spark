@@ -24,6 +24,7 @@
 		
 		<h1>event</h1>
 		<p class='event'>Click me to load the time.</p>
+		<a href='http://www.google.co.uk/' class='event2'>Click me and the returning of false in the callback should prevent the page changing.</a>
 		
 		<h1>attribute</h1>
 		<p class='attribute'>Does this element have a title?</p>
@@ -88,6 +89,10 @@
 				// event
 				Spark('p.event').event('click', function(e) {
 					Spark(e.target).text(new Date().getTime());
+				});
+				
+				Spark('a.event2').event('click', function(e) {
+					return false;
 				});
 				
 				// attribute

@@ -42,24 +42,23 @@ SparkFn.css = function(css) {
 						
 							if(!Spark(element).classes('has', 'IETransformContainer')) {
 								parentNode = element.parentNode;
-								var filter;
-							
+								
 								// This is the container to offset the strange rotation behavior
 								var container = document.createElement('div');
 								Spark(element).classes('add', 'IETransformContainer');
-							
+								
 								container.style.width = element.offsetWidth + 'px';
 								container.style.height = element.offsetHeight + 'px';
-							
+								
 								container.xOriginalWidth = element.offsetWidth;
 								container.xOriginalHeight = element.offsetHeight;
-								container.style.position = 'absolute'
+								container.style.position = 'absolute';
 								container.style.zIndex = element.currentStyle.zIndex;
-							
-							
+								
+								
 								var horizPaddingFactor = 0;
 								var vertPaddingFactor = 0;
-								if (obj.currentStyle.display == 'block') {
+								if(obj.currentStyle.display == 'block') {
 									container.style.left = element.offsetLeft + 13 - horizPaddingFactor + "px";
 									container.style.top = element.offsetTop + 13 +- vertPaddingFactor + 'px';
 								}
@@ -67,8 +66,8 @@ SparkFn.css = function(css) {
 									container.style.left = element.offsetLeft + "px";
 									container.style.top = element.offsetTop + 'px';
 								}
-							
-							
+								
+								
 								element.style.top = "auto";
 								element.style.left = "auto"
 								element.style.bottom = "auto";
@@ -77,15 +76,14 @@ SparkFn.css = function(css) {
 								// flow ok
 								var replacement = element.cloneNode(true);
 								replacement.style.visibility = 'hidden';
-							
+								
 								element.replaceNode(replacement);
-							
+								
 								// now, wrap container around the original node ... 
 								element.style.position = 'absolute';
 								container.appendChild(element);
 								parentNode.insertBefore(container, replacement);
 								container.style.backgroundColor = 'transparent';
-
 								container.style.padding = '0';
 							}
 						}

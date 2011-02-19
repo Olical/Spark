@@ -4,10 +4,6 @@ SparkFn.css = function(css) {
 	var calSin = null;
 	var calCos = null;
 	var radians = null;
-	var a = null;
-	var b = null;
-	var c = null;
-	var d = null;
 	
 	// Loop through all of the elements
 	for(var e in this.elements) {
@@ -43,20 +39,25 @@ SparkFn.css = function(css) {
 						calCos = Math.cos(radians);
 						element.style.filter = 'progid:DXImageTransform.Microsoft.Matrix(M11=' + calCos + ', M12=-' + calSin + ',M21=' + calSin + ', M22=' + calCos + ', sizingMethod="auto expand")';
 						
-						// horizontal shift
-						a = Math.abs(calCos); // or go ternary
-						c = Math.abs(calSin);
-						var sx = (a - 1)*(element.offsetWidth / 2) + c*(element.offsetHeight / 2);
-
-						// vertical shift
-						b = Math.abs(calSin);
-						d = Math.abs(calCos);
-						var sy = b*(element.offsetWidth / 2) + (d - 1)*(element.offsetHeight / 2);
-
+						// original layout
+						var x = target.offsetLeft;
+						var y = target.offsetTop;
+						var w = target.offsetWidth;
+						var h = target.offsetHeight;
+						
+						// find bounding box dimensions
+						// IE has updated these values based on transform set above
+						var wb = target.offsetWidth;
+						var hb = target.offsetHeight;
+						
+						// determine how far origin has shifted
+						var sx = (wb - w) / 2;
+						var sy = (hb - h) / 2;
+						
 						// translation, corrected for origin shift
-						// rounding helps--but doesn't eliminate--integer jittering
-						element.style.left = Math.round(parseInt(element.left) + e - sx) + 'px';
-						element.style.top = Math.round(parseInt(element.top) + f - sy) + 'px';
+						// rounding helps, but doesn't eliminate, integer jittering
+						target.style.left = Math.round(x + e - sx) + 'px';
+						target.style.top = Math.round(y + f - sy) + 'px';
 						
 						element.style.WebkitTransform = 'rotate(' + css[c] + ')';
 						element.style.MozTransform = 'rotate(' + css[c] + ')';

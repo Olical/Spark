@@ -36,22 +36,6 @@ SparkFn.css = function(css) {
 						element.style.MozOpacity = css[c];
 						element.style.KhtmlOpacity = css[c];
 					}
-					
-					// If rotation is being set we need to make it cross browser
-					if(c == 'rotation') {
-						if(browser == 'Explorer') {
-							radians = parseInt(css[c]) * (Math.PI * 2 / 360);
-							calSin = Math.sin(radians);
-							calCos = Math.cos(radians);
-							element.style.filter = 'progid:DXImageTransform.Microsoft.Matrix(M11=' + calCos + ',M12=-' + calSin + ',M21=' + calSin + ',M22=' + calCos + ',sizingMethod="auto expand")';
-							element.style.zoom = '1';
-						}
-						
-						element.style.WebkitTransform = 'rotate(' + css[c] + ')';
-						element.style.MozTransform = 'rotate(' + css[c] + ')';
-						element.style.OTransform = 'rotate(' + css[c] + ')';
-						element.style.transform = 'rotate(' + css[c] + ')';
-					}
 				}
 			}
 			else {

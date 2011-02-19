@@ -45,7 +45,7 @@ SparkFn.css = function(css) {
 								
 								// This is the container to offset the strange rotation behavior
 								var container = document.createElement('div');
-								Spark(element).classes('add', 'IETransformContainer');
+								Spark(container).classes('add', 'IETransformContainer');
 								
 								container.style.width = element.offsetWidth + 'px';
 								container.style.height = element.offsetHeight + 'px';

@@ -6,6 +6,17 @@ SparkFn.css = function(css) {
 	var radians = null;
 	var parentNode = null;
 	var browser = Spark.client().browser;
+	var crossBrowser = {
+		opacity: function(element, style) {
+			if(browser == 'Explorer') {
+				element.style.filter = 'alpha(opacity=' + (css[c] * 100) + ')';
+				element.style.zoom = '1';
+			}
+			
+			element.style.MozOpacity = css[c];
+			element.style.KhtmlOpacity = css[c];
+		}
+	};
 	
 	// Loop through all of the elements
 	for(var e in this.elements) {
@@ -25,16 +36,9 @@ SparkFn.css = function(css) {
 					else {
 						element.style[c] = css[c];
 					}
-				
-					// If opacity is being set we need to set all the other values for cross browser opacity
-					if(c == 'opacity') {
-						if(browser == 'Explorer') {
-							element.style.filter = 'alpha(opacity=' + (css[c] * 100) + ')';
-							element.style.zoom = '1';
-						}
-						
-						element.style.MozOpacity = css[c];
-						element.style.KhtmlOpacity = css[c];
+					
+					if(crossBrowser.hasOwnProperty(c)) {
+						crossBrowser[c](element, css[c]);
 					}
 				}
 			}

@@ -58,7 +58,7 @@ SparkFn.css = function(css) {
 								
 								var horizPaddingFactor = 0;
 								var vertPaddingFactor = 0;
-								if(obj.currentStyle.display == 'block') {
+								if(element.currentStyle.display == 'block') {
 									container.style.left = element.offsetLeft + 13 - horizPaddingFactor + "px";
 									container.style.top = element.offsetTop + 13 +- vertPaddingFactor + 'px';
 								}

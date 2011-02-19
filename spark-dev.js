@@ -481,6 +481,14 @@ SparkFn.css = function(css) {
 						element.style.filter = 'alpha(opacity=' + (css[c] * 100) + ')';
 						element.style.zoom = '1';
 					}
+					
+					// If rotation is being set we need to make it cross browser
+					if(c == 'rotation') {
+						element.style.filter = 'progid:DXImageTransform.Microsoft.BasicImage(rotation=' + css[c] + ')';
+						element.style.WebkitTransform = 'rotate(' + css[c] + ')';
+						element.style.MozTransform = 'rotate(' + css[c] + ')';
+						element.style.OTransform = 'rotate(' + css[c] + ')';
+					}
 				}
 			}
 			else {

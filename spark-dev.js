@@ -508,8 +508,8 @@ SparkFn.css = function(css) {
 
 						// translation, corrected for origin shift
 						// rounding helps--but doesn't eliminate--integer jittering
-						element.style.left = Math.round(x + e - sx) + 'px';
-						element.style.top = Math.round(y + f - sy) + 'px';
+						element.style.left = Math.round(parseInt(element.left) + e - sx) + 'px';
+						element.style.top = Math.round(parseInt(element.top) + f - sy) + 'px';
 						
 						element.style.WebkitTransform = 'rotate(' + css[c] + ')';
 						element.style.MozTransform = 'rotate(' + css[c] + ')';

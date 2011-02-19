@@ -4,6 +4,7 @@ SparkFn.css = function(css) {
 	var calSin = null;
 	var calCos = null;
 	var radians = null;
+	var parentNode = null;
 	
 	// Loop through all of the elements
 	for(var e in this.elements) {
@@ -38,6 +39,56 @@ SparkFn.css = function(css) {
 						calSin = Math.sin(radians);
 						calCos = Math.cos(radians);
 						element.style.filter = 'progid:DXImageTransform.Microsoft.Matrix(M11=' + calCos + ', M12=-' + calSin + ',M21=' + calSin + ', M22=' + calCos + ', sizingMethod="auto expand")';
+						
+						if(Spark(element).classes('has', 'IETransformContainer')) {
+							parentNode = element.parentNode;
+							var filter;
+							
+							// This is the container to offset the strange rotation behavior
+							var container = document.createElement('div');
+							Spark(element).classes('add', 'IETransformContainer');
+							
+							container.style.width = element.offsetWidth + 'px';
+							container.style.height = element.offsetHeight + 'px';
+							
+							container.xOriginalWidth = element.offsetWidth;
+							container.xOriginalHeight = element.offsetHeight;
+							container.style.position = 'absolute'
+							container.style.zIndex = element.currentStyle.zIndex;
+							
+							
+							var horizPaddingFactor = 0;
+							var vertPaddingFactor = 0;
+							if (obj.currentStyle.display == 'block') {
+								container.style.left = element.offsetLeft + 13 - horizPaddingFactor + "px";
+								container.style.top = element.offsetTop + 13 +- vertPaddingFactor + 'px';
+							}
+							else {
+								container.style.left = element.offsetLeft + "px";
+								container.style.top = element.offsetTop + 'px';
+							}
+							
+							
+							element.style.top = "auto";
+							element.style.left = "auto"
+							element.style.bottom = "auto";
+							element.style.right = "auto";
+							// This is what we need in order to insert to keep the document
+							// flow ok
+							var replacement = element.cloneNode(true);
+							replacement.style.visibility = 'hidden';
+							
+							element.replaceNode(replacement);
+							
+							// now, wrap container around the original node ... 
+							element.style.position = 'absolute';
+							container.appendChild(element);
+							parentNode.insertBefore(container, replacement);
+							container.style.backgroundColor = 'transparent';
+
+							container.style.padding = '0';
+						}
+						
 						element.style.WebkitTransform = 'rotate(' + css[c] + ')';
 						element.style.MozTransform = 'rotate(' + css[c] + ')';
 						element.style.OTransform = 'rotate(' + css[c] + ')';

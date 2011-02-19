@@ -40,7 +40,7 @@ SparkFn.css = function(css) {
 							calSin = Math.sin(radians);
 							calCos = Math.cos(radians);
 						
-							if(!Spark(element).classes('has', 'IETransformContainer')) {
+							if(!Spark(element.parentNode).classes('has', 'IETransformContainer')) {
 								parentNode = element.parentNode;
 								
 								// This is the container to offset the strange rotation behavior

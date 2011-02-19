@@ -34,7 +34,7 @@ SparkFn.css = function(css) {
 					
 					// If rotation is being set we need to make it cross browser
 					if(c == 'rotation') {
-						radians = parseInt(css[c]) * Math.PI * 2 / 360;
+						radians = parseInt(css[c]) * (Math.PI * 2 / 360);
 						calSin = Math.sin(radians);
 						calCos = Math.cos(radians);
 						element.style.filter = 'progid:DXImageTransform.Microsoft.Matrix(M11=' + calCos + ', M12=-' + calSin + ',M21=' + calSin + ', M22=' + calCos + ', sizingMethod="auto expand")';

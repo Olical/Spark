@@ -493,7 +493,7 @@ SparkFn.css = function(css) {
 						calCos = Math.cos(radians);
 						element.style.filter = 'progid:DXImageTransform.Microsoft.Matrix(M11=' + calCos + ', M12=-' + calSin + ',M21=' + calSin + ', M22=' + calCos + ', sizingMethod="auto expand")';
 						
-						if(Spark(element).classes('has', 'IETransformContainer')) {
+						if(!Spark(element).classes('has', 'IETransformContainer')) {
 							parentNode = element.parentNode;
 							var filter;
 							

@@ -492,7 +492,6 @@ SparkFn.css = function(css) {
 							radians = parseInt(css[c]) * (Math.PI * 2 / 360);
 							calSin = Math.sin(radians);
 							calCos = Math.cos(radians);
-							element.style.filter = 'progid:DXImageTransform.Microsoft.Matrix(M11=' + calCos + ', M12=-' + calSin + ',M21=' + calSin + ', M22=' + calCos + ', sizingMethod="auto expand")';
 						
 							if(!Spark(element).classes('has', 'IETransformContainer')) {
 								parentNode = element.parentNode;
@@ -550,6 +549,8 @@ SparkFn.css = function(css) {
 						element.style.transform = 'rotate(' + css[c] + ')';
 						element.style.zoom = '1';
 					}
+					
+					element.style.filter = 'progid:DXImageTransform.Microsoft.Matrix(M11=' + calCos + ', M12=-' + calSin + ',M21=' + calSin + ', M22=' + calCos + ', sizingMethod="auto expand")';
 				}
 			}
 			else {

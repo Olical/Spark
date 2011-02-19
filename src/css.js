@@ -40,15 +40,15 @@ SparkFn.css = function(css) {
 						element.style.filter = 'progid:DXImageTransform.Microsoft.Matrix(M11=' + calCos + ', M12=-' + calSin + ',M21=' + calSin + ', M22=' + calCos + ', sizingMethod="auto expand")';
 						
 						// original layout
-						var x = target.offsetLeft;
-						var y = target.offsetTop;
-						var w = target.offsetWidth;
-						var h = target.offsetHeight;
+						var x = element.offsetLeft;
+						var y = element.offsetTop;
+						var w = element.offsetWidth;
+						var h = element.offsetHeight;
 						
 						// find bounding box dimensions
 						// IE has updated these values based on transform set above
-						var wb = target.offsetWidth;
-						var hb = target.offsetHeight;
+						var wb = element.offsetWidth;
+						var hb = element.offsetHeight;
 						
 						// determine how far origin has shifted
 						var sx = (wb - w) / 2;
@@ -56,8 +56,8 @@ SparkFn.css = function(css) {
 						
 						// translation, corrected for origin shift
 						// rounding helps, but doesn't eliminate, integer jittering
-						target.style.left = Math.round(x + e - sx) + 'px';
-						target.style.top = Math.round(y + f - sy) + 'px';
+						element.style.left = Math.round(x + e - sx) + 'px';
+						element.style.top = Math.round(y + f - sy) + 'px';
 						
 						element.style.WebkitTransform = 'rotate(' + css[c] + ')';
 						element.style.MozTransform = 'rotate(' + css[c] + ')';

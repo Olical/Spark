@@ -38,8 +38,8 @@ SparkFn.css = function(css) {
 						calSin = Math.sin(radians);
 						calCos = Math.cos(radians);
 						element.style.filter = 'progid:DXImageTransform.Microsoft.Matrix(M11=' + calCos + ', M12=-' + calSin + ',M21=' + calSin + ', M22=' + calCos + ', sizingMethod="auto expand", Dx=50, Dy=50)';
-						element.style.left = '-50px';
-						element.style.top = '-50px';
+						element.style.left = '-25px';
+						element.style.top = '-25px';
 						element.style.position = 'relative';
 						element.style.WebkitTransform = 'rotate(' + css[c] + ')';
 						element.style.MozTransform = 'rotate(' + css[c] + ')';

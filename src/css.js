@@ -1,6 +1,8 @@
 SparkFn.css = function(css) {
 	// Set up any variables
 	var element = null;
+	var calSin = null;
+	var calCos = null;
 	
 	// Loop through all of the elements
 	for(var e in this.elements) {

@@ -456,6 +456,7 @@ SparkFn.css = function(css) {
 	var element = null;
 	var calSin = null;
 	var calCos = null;
+	var radians = null;
 	
 	// Loop through all of the elements
 	for(var e in this.elements) {
@@ -486,8 +487,9 @@ SparkFn.css = function(css) {
 					
 					// If rotation is being set we need to make it cross browser
 					if(c == 'rotation') {
-						calSin = Math.sin(parseInt(css[c]));
-						calCos = Math.cos(parseInt(css[c]));
+						radians = parseInt(css[c]) * Math.PI * 2 / 360;
+						calSin = Math.sin(radians);
+						calCos = Math.cos(radians);
 						element.style.filter = 'progid:DXImageTransform.Microsoft.Matrix(M11=' + calCos + ', M12=-' + calSin + ',M21=' + calSin + ', M22=' + calCos + ', sizingMethod="auto expand")';
 						element.style.WebkitTransform = 'rotate(' + css[c] + ')';
 						element.style.MozTransform = 'rotate(' + css[c] + ')';

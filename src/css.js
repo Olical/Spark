@@ -31,7 +31,7 @@ SparkFn.css = function(css) {
 					
 					// If rotation is being set we need to make it cross browser
 					if(c == 'rotation') {
-						element.style.filter = 'progid:DXImageTransform.Microsoft.BasicImage(rotation=' + css[c] + ')';
+						element.style.filter = 'progid:DXImageTransform.Microsoft.BasicImage(rotation=' + parseInt(css[c]) + ')';
 						element.style.WebkitTransform = 'rotate(' + css[c] + ')';
 						element.style.MozTransform = 'rotate(' + css[c] + ')';
 						element.style.OTransform = 'rotate(' + css[c] + ')';

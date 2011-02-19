@@ -35,6 +35,7 @@ SparkFn.css = function(css) {
 						element.style.WebkitTransform = 'rotate(' + css[c] + ')';
 						element.style.MozTransform = 'rotate(' + css[c] + ')';
 						element.style.OTransform = 'rotate(' + css[c] + ')';
+						element.style.zoom = '1';
 					}
 				}
 			}

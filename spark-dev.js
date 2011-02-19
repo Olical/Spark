@@ -454,10 +454,6 @@ SparkFn.event = function(type, callback) {
 SparkFn.css = function(css) {
 	// Set up any variables
 	var element = null;
-	var calSin = null;
-	var calCos = null;
-	var radians = null;
-	var parentNode = null;
 	var browser = Spark.client().browser;
 	
 	// Loop through all of the elements

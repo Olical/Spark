@@ -166,14 +166,14 @@
 				Spark('p.classes').html((Spark('p.classes').classes('has', 'classes')) ? 'Yes.' : 'No.', true);
 				
 				// add
-				Spark('div.add').add('p', {
+				Spark('div.add').element('insert', 'p', {
 					innerHTML: 'Element created with the add function'
 				}, {
 					color: '#FF0000'
 				});
 				
 				// remove
-				Spark('p.remove').remove();
+				Spark('p.remove').element('remove');
 			});
 		</script>
 	</body>

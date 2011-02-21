@@ -1,16 +1,7 @@
 SparkFn.load = function(file) {
-	// Grab the head element
-	var head = document.getElementsByTagName('head')[0];
-	
-	// Create a script element
-	var script = document.createElement('script');
-	
-	// Set the type
-	script.type = 'text/javascript';
-	
-	// Set the source file
-	script.src = file;
-	
-	// Add the script element to the head
-	head.appendChild(script);
+	// Create the script tag with the specified file as its src
+	Spark('head').add('script', {
+		type: 'text/javascript',
+		src: file
+	});
 };

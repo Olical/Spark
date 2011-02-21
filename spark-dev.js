@@ -1,5 +1,5 @@
 /*!
- * Spark JavaScript library v2.3.2
+ * Spark JavaScript library v2.3.3
  * http://sparkjs.co.uk/
  * 
  * Copyright 2011, Oliver Caldwell
@@ -566,20 +566,11 @@ SparkFn.css = function(css) {
 	// Load the file
 	this.load(file);
 };SparkFn.load = function(file) {
-	// Grab the head element
-	var head = document.getElementsByTagName('head')[0];
-	
-	// Create a script element
-	var script = document.createElement('script');
-	
-	// Set the type
-	script.type = 'text/javascript';
-	
-	// Set the source file
-	script.src = file;
-	
-	// Add the script element to the head
-	head.appendChild(script);
+	// Create the script tag with the specified file as its src
+	Spark('head').add('script', {
+		type: 'text/javascript',
+		src: file
+	});
 };SparkFn.stop = function() {
 	// Set up any variables
 	var element = null;
@@ -1080,6 +1071,18 @@ SparkFn.css = function(css) {
 		if(this.elements.hasOwnProperty(e)) {
 			// Add the element
 			this.elements[e].appendChild(construct);
+		}
+	}
+	
+	// Return the Spark object to allow chaining
+	return this;
+};SparkFn.remove = function() {
+	// Loop through all elements
+	for(var e in this.elements) {
+		// Make sure that it is an element
+		if(this.elements.hasOwnProperty(e)) {
+			// Remove the element
+			this.elements[e].parentNode.removeChild(this.elements[e]);
 		}
 	}
 	

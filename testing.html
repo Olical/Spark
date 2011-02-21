@@ -65,13 +65,10 @@
 		<h1>classes</h1>
 		<p class='classes'>Element has class classes? </p>
 		
-		<h1>add</h1>
-		<p>The add function is used to create DOM elements and add them to the specified element.</p>
-		<div class='add'></div>
-		
-		<h1>remove</h1>
-		<p>You can remove elements with the remove function, there used to be a p tag beneath here.</p>
-		<p class='remove'>I should have been removed.</p>
+		<h1>element</h1>
+		<p>The element function is used to create DOM elements and add them to the specified element. You can either append, prepend, insert or remove.</p>
+		<div class='element'></div>
+		<p class='remove'>This element will be removed.</p>
 		
 		<script type='text/javascript' src='spark-dev.js'></script>
 		<script type='text/javascript'>
@@ -164,14 +161,26 @@
 				// classes
 				Spark('p.classes').html((Spark('p.classes').classes('has', 'classes')) ? 'Yes.' : 'No.', true);
 				
-				// add
-				Spark('div.add').element('insert', 'p', {
-					innerHTML: 'Element created with the add function'
+				// element
+				Spark('div.element').element('insert', 'p', {
+					innerHTML: 'This element was inserted.',
+					className: 'insert'
 				}, {
 					color: '#FF0000'
 				});
 				
-				// remove
+				Spark('div.element p.insert').element('prepend', 'p', {
+					innerHTML: 'This element was prepended to the inserted one.'
+				}, {
+					color: '#FF0000'
+				});
+				
+				Spark('div.element p.insert').element('append', 'p', {
+					innerHTML: 'This element was appended to the inserted one.'
+				}, {
+					color: '#FF0000'
+				});
+				
 				Spark('p.remove').element('remove');
 			});
 		</script>

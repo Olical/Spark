@@ -33,7 +33,8 @@ modules =	${srcdir}html.js\
 			${srcdir}animate.js\
 			${srcdir}ajax.js\
 			${srcdir}classes.js\
-			${srcdir}add.js
+			${srcdir}add.js\
+			${srcdir}remove.js
 
 # Build full list of files
 files = ${core} ${modules} ${dependencies} ${initialisation}

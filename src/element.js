@@ -30,6 +30,7 @@ SparkFn.element = function(method, tag, attributes, styles) {
 		for(var e in this.elements) {
 			// Make sure that it is an element
 			if(this.elements.hasOwnProperty(e)) {
+				// Perform the right action
 				if(method == 'prepend') {
 					// Prepend the element
 					this.elements[e].parentNode.insertBefore(construct, this.elements[e]);

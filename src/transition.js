@@ -31,87 +31,80 @@ SparkFn.transition = function(method, timeframe, easing, callback) {
 			element = this.elements[e];
 			
 			// Work out what method we need to do
-			switch(method) {
-				case 'slidedown':
-					// Set overflow to hidden
-					Spark(element).css({overflow: 'hidden', display: 'block'});
-					
-					// Get original height
-					original = Spark(element).attribute().offsetHeight;
-					
-					// Set height to 0
-					Spark(element).css({height: 0});
-					
-					// Slide height to original
-					Spark(element).animate({height: original}, timeframe, easing, callback);
-					break;
+			if(method == 'slidedown') {
+				// Set overflow to hidden
+				Spark(element).css({overflow: 'hidden', display: 'block'});
 				
-				case 'slideup':				
-					// Get original height
-					original = Spark(element).attribute().offsetHeight;
-					
-					// Set overflow to hidden
-					Spark(element).css({overflow: 'hidden', height: original});
-					
-					// Slide height to 0
-					Spark(element).animate({height: 0}, timeframe, easing, function() {
-						// Set height to original
-						Spark(element).css({height: original + 'px', display: 'none'});
-						
-						// Run the callback
-						callback();
-					});
-					break;
+				// Get original height
+				original = Spark(element).attribute().offsetHeight;
 				
-				case 'fadein':
-					// Display it
-					Spark(element).css({display: 'block', opacity: 0});
-					
-					// Fade opacity to 100
-					Spark(element).animate({opacity: 1}, timeframe, easing, callback);
-					break;
+				// Set height to 0
+				Spark(element).css({height: 0});
 				
-				case 'fadeout':
-					// Fade opacity to 0
-					Spark(element).animate({opacity: 0}, timeframe, easing, function() {
-						// Set opacity to 100
-						Spark(element).css({opacity: 1, display: 'none'});
-						
-						// Run the callback
-						callback();
-					});
-					break;
+				// Slide height to original
+				Spark(element).animate({height: original}, timeframe, easing, callback);
+			}
+			else if(method == 'slideup') {	
+				// Get original height
+				original = Spark(element).attribute().offsetHeight;
 				
-				case 'sneakin':
-					// Set overflow to hidden
-					Spark(element).css({overflow: 'hidden', display: 'block', opacity: 0});
-					
-					// Get original height
-					original = Spark(element).attribute().offsetHeight;
-					
-					// Set height to 0
-					Spark(element).css({height: 0});
-					
-					// Slide height to original
-					Spark(element).animate({height: original, opacity: 1}, timeframe, easing, callback);
-					break;
+				// Set overflow to hidden
+				Spark(element).css({overflow: 'hidden', height: original});
 				
-				case 'sneakout':
-					// Get original height
-					original = Spark(element).attribute().offsetHeight;
+				// Slide height to 0
+				Spark(element).animate({height: 0}, timeframe, easing, function() {
+					// Set height to original
+					Spark(element).css({height: original + 'px', display: 'none'});
 					
-					// Set overflow to hidden
-					Spark(element).css({overflow: 'hidden', height: original});
+					// Run the callback
+					callback();
+				});
+			}
+			else if(method == 'fadein') {
+				// Display it
+				Spark(element).css({display: 'block', opacity: 0});
+				
+				// Fade opacity to 100
+				Spark(element).animate({opacity: 1}, timeframe, easing, callback);
+			}
+			else if(method == 'fadeout')
+				// Fade opacity to 0
+				Spark(element).animate({opacity: 0}, timeframe, easing, function() {
+					// Set opacity to 100
+					Spark(element).css({opacity: 1, display: 'none'});
 					
-					// Slide height to 0
-					Spark(element).animate({height: 0, opacity: 0}, timeframe, easing, function() {
-						// Set height to original
-						Spark(element).css({height: original + 'px', display: 'none'});
-						
-						// Run the callback
-						callback();
-					});
-					break;
+					// Run the callback
+					callback();
+				});
+			}
+			else if(method == 'sneakin')
+				// Set overflow to hidden
+				Spark(element).css({overflow: 'hidden', display: 'block', opacity: 0});
+				
+				// Get original height
+				original = Spark(element).attribute().offsetHeight;
+				
+				// Set height to 0
+				Spark(element).css({height: 0});
+				
+				// Slide height to original
+				Spark(element).animate({height: original, opacity: 1}, timeframe, easing, callback);
+			}
+			else if(method == 'sneakout')
+				// Get original height
+				original = Spark(element).attribute().offsetHeight;
+				
+				// Set overflow to hidden
+				Spark(element).css({overflow: 'hidden', height: original});
+				
+				// Slide height to 0
+				Spark(element).animate({height: 0, opacity: 0}, timeframe, easing, function() {
+					// Set height to original
+					Spark(element).css({height: original + 'px', display: 'none'});
+					
+					// Run the callback
+					callback();
+				});
 			}
 		}
 	}

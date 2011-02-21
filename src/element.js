@@ -1,4 +1,4 @@
-SparkFn.add = function(method, tag, attributes, styles) {
+SparkFn.element = function(method, tag, attributes, styles) {
 	// Check if we need to remove the element
 	if(method == 'remove') {
 		// Loop through all elements
@@ -30,8 +30,18 @@ SparkFn.add = function(method, tag, attributes, styles) {
 		for(var e in this.elements) {
 			// Make sure that it is an element
 			if(this.elements.hasOwnProperty(e)) {
-				// Add the element
-				this.elements[e].appendChild(construct);
+				if(method == 'prepend') {
+					// Prepend the element
+					this.elements[e].parentNode.insertBefore(construct, this.elements[e]);
+				}
+				else if(method == 'append') {
+					// Append the element
+					this.elements[e].parentNode.insertBefore(construct, this.elements[e].nextSibling);
+				}
+				else if(method == 'insert') {
+					// Insert the element
+					this.elements[e].appendChild(construct);
+				}
 			}
 		}
 	}

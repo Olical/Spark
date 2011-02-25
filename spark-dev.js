@@ -174,13 +174,7 @@ window.SparkIn = function() {
 	// Check if we can add an event listener
 	if(document.addEventListener) {
 		// Add an event listener for for DOMContent loaded
-		Spark(document).event('DOMContentLoaded', function() {
-			// Set the flag to true
-			alreadyRunFlag = true;
-			
-			// Run the callback
-			callback();
-		});
+		document.addEventListener("DOMContentLoaded", function() { alreadyRunFlag = true; callback(); }, false);
 	}
 	else if(document.all && !window.opera) {
 		// Create the script element

@@ -1,11 +1,10 @@
 SparkFn.ready = function(callback) {
 	// Set up variables
-	window.alreadyRunFlag = 0;
-	window.SparkRe = callback;
+	window.alreadyRunFlag = false;
 	
 	// Check if we can add an event listener
 	if(document.addEventListener) {
-		document.addEventListener("DOMContentLoaded", function() { alreadyRunFlag = 1; SparkRe() }, false);
+		document.addEventListener("DOMContentLoaded", function() { alreadyRunFlag = true; callback() }, false);
 	}
 	else if(document.all && !window.opera) {
 		document.write('<script type="text/javascript" id="contentloadtag" defer="defer" src="javascript:void(0)"></script>');
@@ -14,13 +13,17 @@ SparkFn.ready = function(callback) {
 		
 		contentloadtag.onreadystatechange = function() {
 			if(this.readyState == 'complete') {
-				alreadyRunflag = 1;
-				SparkRe();
+				alreadyRunflag = true;
+				callback();
 			}
 		};
 	}
 	
 	window.onload = function() {
-		setTimeout("if(!alreadyRunFlag) SparkRe()", 0);
+		setTimeout(function() {
+			if(alreadyRunFlag === false) {
+				callback();
+			}
+		}, 0);
 	};
 };

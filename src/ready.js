@@ -14,7 +14,7 @@ SparkFn.ready = function(callback) {
 		
 		contentloadtag.onreadystatechange = function() {
 			if(this.readyState == 'complete') {
-				alreadyrunflag = 1;
+				alreadyRunflag = 1;
 				SparkRe();
 			}
 		};

@@ -30,7 +30,7 @@ window.SparkIn = function() {
 			// If so check if Sizzle needs to be run
 			if(typeof selector == 'string') {
 				// Run sizzle with or without a context
-				result = (context) ? Sizzle(selector, context) : Sizzle(selector);
+				result = (context) ? SparkSe(selector, context) : SparkSe(selector);
 			}
 			else {
 				// If it is an element

@@ -30,7 +30,7 @@ window.SparkIn = function() {
 			// If so check if Sizzle needs to be run
 			if(typeof selector == 'string') {
 				// Run sizzle with or without a context
-				result = (context) ? Sizzle(selector, context) : Sizzle(selector);
+				result = (context) ? SparkSe(selector, context) : SparkSe(selector);
 			}
 			else {
 				// If it is an element
@@ -2507,7 +2507,7 @@ var posProcess = function( selector, context ) {
 
 // EXPOSE
 
-window.Sizzle = Sizzle;
+window.SparkSe = Sizzle;
 
 })();
 // Create a JSON object only if one does not already exist. We create the

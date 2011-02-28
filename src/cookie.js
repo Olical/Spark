@@ -1,18 +1,19 @@
 SparkFn.cookie = function(name, content, duration) {
 	// Return the cookies content if content is undefined
-	if(content === undefined) {
+	if(typeof content === 'undefined') {
 		// Set up any variables needed
-		var nameEQ = name + '=';
+		var nameEQ = name + '=',
 		
 		// Split the cookie string
-		var ca = document.cookie.split(';');
+		ca = document.cookie.split(';'),
+		c = null;
 		
 		// Loop through all of the cookies looking for ours
 		for(var i in ca) {
 			// Make sure it is actually a cookie segment
 			if(ca.hasOwnProperty(i)) {
 				// Grab the current cookie
-				var c = ca[i];
+				c = ca[i];
 
 				// Cut of the whitespace
 				while(c.charAt(0) == ' ') {
@@ -34,7 +35,7 @@ SparkFn.cookie = function(name, content, duration) {
 		var date = new Date();
 		
 		// Push the time on by either a month or the user defined duration
-		date.setTime(date.getTime() + ((duration !== undefined) ? duration : 2628000000));
+		date.setTime(date.getTime() + ((typeof duration !== 'undefined') ? duration : 2628000000));
 		
 		// Set the cookie
 		document.cookie = name + '=' + content + '; expires=' + date.toGMTString() + '; path=/';

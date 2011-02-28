@@ -1,7 +1,7 @@
 SparkFn.data = (function () {
 	// Set up the variables
-	var storage = {};
-	var counter = 1;
+	var storage = {},
+	counter = 1;
 	
 	// Return the function to manage saving data
 	return function (el, key, value) {
@@ -12,7 +12,7 @@ SparkFn.data = (function () {
 		storage[uid] || (storage[uid] = {});
 		
 		// Check if a value has been passed
-		if(typeof value != 'undefined') {
+		if(typeof value !== 'undefined') {
 			// Set the value
 			storage[uid][key] = value;
 		}

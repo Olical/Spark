@@ -3,7 +3,7 @@ SparkFn.jsonp = function(file, callback, parameters) {
 	file += '?callback=' + callback;
 	
 	// If we have parameters add them
-	if(parameters !== undefined) {
+	if(typeof parameters !== 'undefined') {
 		file += '&' + parameters;
 	}
 	

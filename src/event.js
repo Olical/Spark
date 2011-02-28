@@ -1,8 +1,8 @@
 SparkFn.event = function(type, callback) {
 	// Set up any variables
-	var element = null;
-	var runCallback = null;
-	var previousReference = null;
+	var element = null,
+	runCallback = null,
+	previousReference = null;
 	
 	// Loop through all of the elements
 	for(var e in this.elements) {
@@ -14,7 +14,7 @@ SparkFn.event = function(type, callback) {
 			// Set up the callback
 			runCallback = function(e) {
 				// Run the callback and check if it returned false
-				if(callback(Spark.fixEvent(e)) === false) {
+				if(callback.call(element,Spark.fixEvent(e)) === false) {
 					// If so then prevent default
 					if(e.preventDefault) {
 						e.preventDefault();

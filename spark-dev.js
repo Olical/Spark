@@ -16,17 +16,17 @@
  */
 
 // Create the function holder
-window.SparkFn = new Object();
+window.SparkFn = {};
 
 // Create the initialise function
 window.SparkIn = function() {
 	// Create the Spark object
 	window.$ = window.Spark = function(selector, context) {
 		// Create the result object
-		var result = new Object();
+		var result = {};
 		
 		// Check if a selector has been passed
-		if(selector !== undefined) {
+		if(typeof selector !== 'undefined') {
 			// If so check if Sizzle needs to be run
 			if(typeof selector == 'string') {
 				// Run sizzle with or without a context
@@ -48,7 +48,7 @@ window.SparkIn = function() {
 		}
 		
 		// Create the built object
-		var built = new Object();
+		var built = {};
 		
 		// Add the functions to the built object
 		for(var f in SparkFn) {
@@ -63,14 +63,15 @@ window.SparkIn = function() {
 	};
 	
 	// Check if SparkBk does not exist yet
-	if(window.SparkBk === undefined) {
+	if(typeof window.SparkBk === 'undefined') {
 		// Back up Spark and $ for use in noConflict mode
 		window.SparkBk = window.$;
 	}
 	
+	var S = Spark();
 	// Take out the need for brackets
-	for(var i in Spark()) {
-		$[i] = Spark[i] = Spark()[i];
+	for(var i in S) {
+		$[i] = Spark[i] = S[i];
 	}
 };SparkFn.html = function(content, append) {
 	// Set up any variables
@@ -84,7 +85,7 @@ window.SparkIn = function() {
 			element = this.elements[e];
 		
 			// Return content of the selected element if there is no content
-			if(content === undefined) {
+			if(typeof content === 'undefined') {
 				return element.innerHTML;
 			}
 			else {
@@ -110,7 +111,7 @@ window.SparkIn = function() {
 			element = this.elements[e];
 		
 			// Return content of the selected element if there is no content and check for Firefox
-			if(content === undefined) {
+			if(typeof content === 'undefined') {
 				if(document.all){
 					return element.innerText;
 				}
@@ -147,7 +148,7 @@ window.SparkIn = function() {
 	}
 	
 	// If its IE we need to copy srcElement over to target
-	if(e.target === undefined) {
+	if(typeof e.target === 'undefined') {
 		e.target = e.srcElement;
 	}
 	
@@ -214,9 +215,9 @@ window.SparkIn = function() {
 	};
 };SparkFn.event = function(type, callback) {
 	// Set up any variables
-	var element = null;
-	var runCallback = null;
-	var previousReference = null;
+	var element = null,
+	runCallback = null,
+	previousReference = null;
 	
 	// Loop through all of the elements
 	for(var e in this.elements) {
@@ -227,8 +228,8 @@ window.SparkIn = function() {
 			
 			// Set up the callback
 			runCallback = function(e) {
-				// Run the callback and check if it returned false
-				if(callback(Spark.fixEvent(e)) === false) {
+				// Run the callback as a method of element and check if it returned false
+				if(callback.call(element,Spark.fixEvent(e)) === false) {
 					// If so then prevent default
 					if(e.preventDefault) {
 						e.preventDefault();
@@ -281,7 +282,7 @@ window.SparkIn = function() {
 			element = this.elements[e];
 		
 			// Check if they provided an attribute object
-			if(attribute !== undefined) {
+			if(typeof attribute !== 'undefined') {
 				// Loop through all attributes assigning them
 				for(var a in attribute) {
 					element[a] = attribute[a];
@@ -306,14 +307,12 @@ window.SparkIn = function() {
 			this.os = this.searchString(this.dataOS) || "an unknown OS";
 		},
 		searchString: function (data) {
-			for (var i = 0; i < data.length; i++)	{
-				var dataString = data[i].string;
-				var dataProp = data[i].prop;
+			for (var i = 0, l = data.length; i < l; i++)	{
+				var dataString = data[i].string,
+				dataProp = data[i].prop;
 				this.versionSearchString = data[i].versionSearch || data[i].identity;
-				if (dataString) {
-					if(dataString.indexOf(data[i].subString) != -1) {
-						return data[i].identity;
-					}
+				if (dataString && dataString.indexOf(data[i].subString) != -1) {
+					return data[i].identity;
 				}
 				else if (dataProp) {
 					return data[i].identity;
@@ -322,7 +321,7 @@ window.SparkIn = function() {
 		},
 		searchVersion: function (dataString) {
 			var index = dataString.indexOf(this.versionSearchString);
-			if(index == -1) return;
+			if(index == -1) { return; }
 			return parseFloat(dataString.substring(index + this.versionSearchString.length + 1));
 		},
 		dataBrowser: [
@@ -431,7 +430,7 @@ window.SparkIn = function() {
 	return this.elements[0].currentStyle;
 };SparkFn.cookie = function(name, content, duration) {
 	// Return the cookies content if content is undefined
-	if(content === undefined) {
+	if(typeof content === 'undefined') {
 		// Set up any variables needed
 		var nameEQ = name + '=';
 		
@@ -465,7 +464,7 @@ window.SparkIn = function() {
 		var date = new Date();
 		
 		// Push the time on by either a month or the user defined duration
-		date.setTime(date.getTime() + ((duration !== undefined) ? duration : 2628000000));
+		date.setTime(date.getTime() + ((typeof duration !== 'undefined') ? duration : 2628000000));
 		
 		// Set the cookie
 		document.cookie = name + '=' + content + '; expires=' + date.toGMTString() + '; path=/';
@@ -473,8 +472,8 @@ window.SparkIn = function() {
 };
 SparkFn.css = function(css) {
 	// Set up any variables
-	var element = null;
-	var browser = Spark.client().browser;
+	var element = null,
+	browser = Spark.client().browser;
 	
 	// Loop through all of the elements
 	for(var e in this.elements) {
@@ -484,7 +483,7 @@ SparkFn.css = function(css) {
 			element = this.elements[e];
 		
 			// Check if they provided a css object
-			if(css !== undefined) {
+			if(typeof css !== 'undefined') {
 				// Loop through all css values assigning them
 				for(var c in css) {
 					// If the selector contains dashes then convert it to the JavaScript version
@@ -518,8 +517,8 @@ SparkFn.css = function(css) {
 	return this;
 };SparkFn.data = (function () {
 	// Set up the variables
-	var storage = {};
-	var counter = 1;
+	var storage = {},
+	counter = 1;
 	
 	// Return the function to manage saving data
 	return function (el, key, value) {
@@ -530,7 +529,7 @@ SparkFn.css = function(css) {
 		storage[uid] || (storage[uid] = {});
 		
 		// Check if a value has been passed
-		if(typeof value != 'undefined') {
+		if(typeof value !== 'undefined') {
 			// Set the value
 			storage[uid][key] = value;
 		}
@@ -579,7 +578,7 @@ SparkFn.css = function(css) {
 	file += '?callback=' + callback;
 	
 	// If we have parameters add them
-	if(parameters !== undefined) {
+	if(typeof parameters !== 'undefined') {
 		file += '&' + parameters;
 	}
 	
@@ -593,8 +592,8 @@ SparkFn.css = function(css) {
 	});
 };SparkFn.stop = function() {
 	// Set up any variables
-	var element = null;
-	var animations = null;
+	var element = null,
+	animations = null;
 	
 	// Loop through all of the elements
 	for(var e in this.elements) {
@@ -604,7 +603,7 @@ SparkFn.css = function(css) {
 			element = this.elements[e];
 		
 			// Make sure it is set
-			if(this.data(element, 'Spark.animations') === undefined) {
+			if(typeof this.data(element, 'Spark.animations') === 'undefined') {
 				this.data(element, 'Spark.animations', '');
 			}
 		
@@ -622,21 +621,21 @@ SparkFn.css = function(css) {
 	return this;
 };SparkFn.transition = function(method, timeframe, easing, callback) {
 	// Set up any variables
-	var element = null;
-	var original = null;
+	var element = null,
+	original = null;
 	
 	// Check if we have a callback, if not set it to and empty function
-	if(callback === undefined) {
-		callback = new Function();
+	if(typeof callback === 'undefined') {
+		callback = function(){};
 	}
 	
 	// Check if the timeframe is set, if not default it to 800ms
-	if(timeframe === undefined) {
+	if(typeof timeframe === 'undefined') {
 		timeframe = 600;
 	}
 	
 	// Check if the easing is set, if not default it to false
-	if(easing === undefined) {
+	if(typeof easing === 'undefined') {
 		var easing = false;
 	}
 	
@@ -862,12 +861,12 @@ SparkFn.css = function(css) {
 	
 	// Set a default timeframe
 	if(!timeframe) {
-		var timeframe = 600;
+		timeframe = 600;
 	}
 	
 	// Set a default easing
 	if(!easing) {
-		var easing = 'outQuad';
+		easing = 'outQuad';
 	}
 	
 	// Initiate the offset as 0 if there is none
@@ -879,15 +878,15 @@ SparkFn.css = function(css) {
 	var fps = 60;
 	
 	// Set up any required variables
-	var computed = null;
-	var original = null;
-	var difference = null;
-	var frames = null;
-	var change = null;
-	var unit = null;
-	var calculated = null;
-	var toSet = null;
-	var element = null;
+	var computed = null,
+	original = null,
+	difference = null,
+	frames = null,
+	change = null,
+	unit = null,
+	calculated = null,
+	toSet = null,
+	element = null;
 	
 	// Loop through all the elements
 	for(var e in this.elements) {
@@ -899,14 +898,14 @@ SparkFn.css = function(css) {
 			// Loop through all of the properties
 			for(var p in properties) {
 				// Make sure the style is set
-				if(element.style[p] === undefined || element.style[p] === '') {
+				if(typeof element.style[p] === 'undefined' || element.style[p] === '') {
 					computed = Spark(element).computed()[p];
 					element.style[p] = (computed) ? computed : 1;
 				}
 				
 				// Fix for IE stuff
-				if(element.style[p] == 'auto' && p == 'height') element.style[p] = element.offsetHeight;
-				else if(element.style[p] == 'auto' && p == 'width') element.style[p] = element.offsetWidth;
+				if(element.style[p] == 'auto' && p == 'height') { element.style[p] = element.offsetHeight; }
+				else if(element.style[p] == 'auto' && p == 'width') { element.style[p] = element.offsetWidth; }
 				
 				// Get the original
 				original = (p == 'opacity') ? parseFloat(element.style[p]) : parseInt(element.style[p]);
@@ -929,7 +928,7 @@ SparkFn.css = function(css) {
 				this.data(element, 'Spark.animations', 'START');
 				
 				// Set up the toSet variable
-				toSet = new Object();
+				toSet = {};
 				
 				// Loop through each frame
 				for(var i = 0; i <= frames; i++) {
@@ -1113,8 +1112,8 @@ SparkFn.css = function(css) {
 	return this;
 };SparkFn.trigger = function(type) {
 	// Set up any variables
-	var element = null;
-	var trigger = null;
+	var element = null,
+	trigger = null;
 	
 	// Loop through all elements
 	for(var e in this.elements) {

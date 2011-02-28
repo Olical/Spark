@@ -8,14 +8,12 @@ SparkFn.client = function() {
 			this.os = this.searchString(this.dataOS) || "an unknown OS";
 		},
 		searchString: function (data) {
-			for (var i = 0; i < data.length; i++)	{
-				var dataString = data[i].string;
-				var dataProp = data[i].prop;
+			for (var i = 0, l = data.length; i < l; i++)	{
+				var dataString = data[i].string,
+				dataProp = data[i].prop;
 				this.versionSearchString = data[i].versionSearch || data[i].identity;
-				if (dataString) {
-					if(dataString.indexOf(data[i].subString) != -1) {
-						return data[i].identity;
-					}
+				if (dataString && dataString.indexOf(data[i].subString) != -1) {
+					return data[i].identity;
 				}
 				else if (dataProp) {
 					return data[i].identity;

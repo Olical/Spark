@@ -1,7 +1,7 @@
 SparkFn.css = function(css) {
 	// Set up any variables
-	var element = null;
-	var browser = Spark.client().browser;
+	var element = null,
+	browser = Spark.client().browser;
 	
 	// Loop through all of the elements
 	for(var e in this.elements) {
@@ -11,7 +11,7 @@ SparkFn.css = function(css) {
 			element = this.elements[e];
 		
 			// Check if they provided a css object
-			if(css !== undefined) {
+			if(typeof css !== 'undefined') {
 				// Loop through all css values assigning them
 				for(var c in css) {
 					// If the selector contains dashes then convert it to the JavaScript version

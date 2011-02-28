@@ -10,7 +10,7 @@ SparkFn.html = function(content, append) {
 			element = this.elements[e];
 		
 			// Return content of the selected element if there is no content
-			if(content === undefined) {
+			if(typeof content === 'undefined') {
 				return element.innerHTML;
 			}
 			else {

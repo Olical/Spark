@@ -16,17 +16,17 @@
  */
 
 // Create the function holder
-window.SparkFn = new Object();
+window.SparkFn = {};
 
 // Create the initialise function
 window.SparkIn = function() {
 	// Create the Spark object
 	window.$ = window.Spark = function(selector, context) {
 		// Create the result object
-		var result = new Object();
+		var result = {};
 		
 		// Check if a selector has been passed
-		if(selector !== undefined) {
+		if(typeof selector !== 'undefined') {
 			// If so check if Sizzle needs to be run
 			if(typeof selector == 'string') {
 				// Run sizzle with or without a context
@@ -48,7 +48,7 @@ window.SparkIn = function() {
 		}
 		
 		// Create the built object
-		var built = new Object();
+		var built = {};
 		
 		// Add the functions to the built object
 		for(var f in SparkFn) {
@@ -63,13 +63,14 @@ window.SparkIn = function() {
 	};
 	
 	// Check if SparkBk does not exist yet
-	if(window.SparkBk === undefined) {
+	if(typeof window.SparkBk === 'undefined') {
 		// Back up Spark and $ for use in noConflict mode
 		window.SparkBk = window.$;
 	}
 	
+	var S = Spark();
 	// Take out the need for brackets
-	for(var i in Spark()) {
-		$[i] = Spark[i] = Spark()[i];
+	for(var i in S) {
+		$[i] = Spark[i] = S[i];
 	}
 };

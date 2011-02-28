@@ -10,7 +10,7 @@ SparkFn.attribute = function(attribute) {
 			element = this.elements[e];
 		
 			// Check if they provided an attribute object
-			if(attribute !== undefined) {
+			if(typeof attribute !== 'undefined') {
 				// Loop through all attributes assigning them
 				for(var a in attribute) {
 					element[a] = attribute[a];

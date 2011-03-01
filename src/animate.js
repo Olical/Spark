@@ -136,16 +136,14 @@ SparkFn.animate = function(properties, timeframe, easing, callback) {
 	fps = 60;
 
 	// Set a default timeframe
-	timeframe = timeframe || 600;
+	timeframe || (timeframe = 600);
 
 	// Set a default easing
-	easing = easing || 'outQuad';
+	easing || (easing = 'outQuad');
 	
 
 	// Initiate the offset as 0 if there is none
-	if(!this.offset) {
-		this.offset = 0;
-	}
+	this.offset || (this.offset = 0);
 	
 	// Loop through all the elements
 	for(var e in this.elements) {

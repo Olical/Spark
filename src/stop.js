@@ -1,7 +1,7 @@
 SparkFn.stop = function() {
 	// Set up any variables
-	var element = null;
-	var animations = null;
+	var element = null,
+	animations = null;
 	
 	// Loop through all of the elements
 	for(var e in this.elements) {

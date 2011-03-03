@@ -1,6 +1,7 @@
 SparkFn.classes = function(method, name) {
 	// Set up any variables
-	var element = null;
+	var element = null,
+		search = null;
 	
 	// Loop through all of the elements
 	for(var e in this.elements) {
@@ -23,7 +24,7 @@ SparkFn.classes = function(method, name) {
 			}
 			else if(method == 'remove') {
 				// Work out if we need to remove the class with or without a space in front of it
-				var search = (element.className.match(' ' + name)) ? ' ' + name : name;
+				search = (element.className.match(' ' + name)) ? ' ' + name : name;
 				
 				// Replace the correct search string
 				element.className = element.className.replace(search, '');

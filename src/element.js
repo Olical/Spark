@@ -13,7 +13,7 @@ SparkFn.element = function(method, tag, attributes, styles, callback) {
 	else {
 		// Create the new element and any other required variables
 		var construct = document.createElement(tag),
-			insertedElement = null;
+			insertedElements = new Array();
 		
 		// Make sure attributes is set
 		if(attributes) {
@@ -34,15 +34,15 @@ SparkFn.element = function(method, tag, attributes, styles, callback) {
 				// Perform the right action
 				if(method == 'prepend') {
 					// Prepend the element
-					insertedElement = this.elements[e].parentNode.insertBefore(construct.cloneNode(true), this.elements[e]);
+					insertedElement.push(this.elements[e].parentNode.insertBefore(construct.cloneNode(true), this.elements[e]));
 				}
 				else if(method == 'append') {
 					// Append the element
-					insertedElement = this.elements[e].parentNode.insertBefore(construct.cloneNode(true), this.elements[e].nextSibling);
+					insertedElement.push(this.elements[e].parentNode.insertBefore(construct.cloneNode(true), this.elements[e].nextSibling));
 				}
 				else if(method == 'insert') {
 					// Insert the element
-					insertedElement = this.elements[e].appendChild(construct.cloneNode(true));
+					insertedElement.push(this.elements[e].appendChild(construct.cloneNode(true)));
 				}
 			}
 		}

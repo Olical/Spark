@@ -34,15 +34,15 @@ SparkFn.element = function(method, tag, attributes, styles) {
 				// Perform the right action
 				if(method == 'prepend') {
 					// Prepend the element
-					this.elements[e].parentNode.insertBefore(construct.cloneNode(true), this.elements[e]);
+					insertedElement = this.elements[e].parentNode.insertBefore(construct.cloneNode(true), this.elements[e]);
 				}
 				else if(method == 'append') {
 					// Append the element
-					this.elements[e].parentNode.insertBefore(construct.cloneNode(true), this.elements[e].nextSibling);
+					insertedElement = this.elements[e].parentNode.insertBefore(construct.cloneNode(true), this.elements[e].nextSibling);
 				}
 				else if(method == 'insert') {
 					// Insert the element
-					this.elements[e].appendChild(construct.cloneNode(true));
+					insertedElement = this.elements[e].appendChild(construct.cloneNode(true));
 				}
 			}
 		}

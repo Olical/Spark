@@ -21,14 +21,20 @@ SparkFn.text = function(content, append) {
 			else {
 				// Append or replace content depending on the append flag and check for Firefox
 				if(document.all){
-					(!append) ?
-						element.innerText = content :
+					if(!append) {
+						element.innerText = content;
+					}
+					else {
 						element.innerText += content;
+					}
 				}
 				else {
-					(!append) ?
-						element.textContent = content :
+					if(!append) {
+						element.textContent = content;
+					}
+					else {
 						element.textContent += content;
+					}
 				}
 			}
 		}

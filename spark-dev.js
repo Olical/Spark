@@ -89,9 +89,12 @@ window.SparkIn = function() {
 			}
 			else {
 				// Append or replace content depending on the append flag
-				(!append) ?
-					element.innerHTML = content :
+				if(!append) {
+					element.innerHTML = content;
+				}
+				else {
 					element.innerHTML += content;
+				}
 			}
 		}
 	}

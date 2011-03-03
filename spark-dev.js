@@ -1074,7 +1074,7 @@ SparkFn.css = function(css) {
 	
 	// Return the Spark object
 	return this;
-};SparkFn.element = function(method, tag, attributes, styles) {
+};SparkFn.element = function(method, tag, attributes, styles, callback) {
 	// Check if we need to remove the element
 	if(method == 'remove') {
 		// Loop through all elements
@@ -1087,8 +1087,9 @@ SparkFn.css = function(css) {
 		}
 	}
 	else {
-		// Create the new element
-		var construct = document.createElement(tag);
+		// Create the new element and any other required variables
+		var construct = document.createElement(tag),
+			insertedElements = new Array();
 		
 		// Make sure attributes is set
 		if(attributes) {
@@ -1109,17 +1110,23 @@ SparkFn.css = function(css) {
 				// Perform the right action
 				if(method == 'prepend') {
 					// Prepend the element
-					this.elements[e].parentNode.insertBefore(construct.cloneNode(true), this.elements[e]);
+					insertedElements.push(this.elements[e].parentNode.insertBefore(construct.cloneNode(true), this.elements[e]));
 				}
 				else if(method == 'append') {
 					// Append the element
-					this.elements[e].parentNode.insertBefore(construct.cloneNode(true), this.elements[e].nextSibling);
+					insertedElements.push(this.elements[e].parentNode.insertBefore(construct.cloneNode(true), this.elements[e].nextSibling));
 				}
 				else if(method == 'insert') {
 					// Insert the element
-					this.elements[e].appendChild(construct.cloneNode(true));
+					insertedElements.push(this.elements[e].appendChild(construct.cloneNode(true)));
 				}
 			}
+		}
+		
+		// Check if a callback was passed
+		if(callback) {
+			// Pass the inserted elements to the callback
+			callback(insertedElements);
 		}
 	}
 	

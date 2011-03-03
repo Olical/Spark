@@ -1,7 +1,7 @@
 SparkFn.trigger = function(type) {
 	// Set up any variables
-	var element = null;
-	var trigger = null;
+	var element = null,
+		trigger = null;
 	
 	// Loop through all elements
 	for(var e in this.elements) {

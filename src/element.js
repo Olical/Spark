@@ -50,7 +50,7 @@ SparkFn.element = function(method, tag, attributes, styles, callback) {
 		// Check if a callback was passed
 		if(callback) {
 			// Pass the inserted elements to the callback
-			callback(insertedElementsg)
+			callback(insertedElements);
 		}
 	}
 	

@@ -25,7 +25,7 @@ SparkFn.fixEvent = function(e) {
 			offsetX += obj.offsetLeft;
 			offsetY += obj.offsetTop;
 		} while(obj = obj.offsetParent);
-	
+		
 		e.offsetX = offsetX;
 		e.offsetY = offsetY;
 	}

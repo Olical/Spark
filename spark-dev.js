@@ -146,8 +146,11 @@ window.SparkIn = function() {
 	// Return the Spark object
 	return this;
 };SparkFn.fixEvent = function(e) {
-	// Grab browser name
-	var browser = this.client().browser;
+	// Grab browser name and set up variables
+	var browser = this.client().browser,
+		obj = null,
+		offsetX = null,
+		offsetY = null;
 	
 	// Fix the page mouse location for IE
 	if(browser == 'Explorer') {
@@ -161,9 +164,9 @@ window.SparkIn = function() {
 	}
 	
 	// Fix the offsetX/Y in Firefox
-	var obj = e.target;
+	obj = e.target;
 	if(obj.offsetParent && browser == 'Firefox') {
-		var offsetX = offsetY = 0;
+		offsetX = offsetY = 0;
 		
 		do {
 			offsetX += obj.offsetLeft;
@@ -223,9 +226,9 @@ window.SparkIn = function() {
 	};
 };SparkFn.event = function(type, callback) {
 	// Set up any variables
-	var element = null;
-	var runCallback = null;
-	var previousReference = null;
+	var element = null,
+		runCallback = null,
+		previousReference = null;
 	
 	// Loop through all of the elements
 	for(var e in this.elements) {

@@ -46,6 +46,12 @@ SparkFn.element = function(method, tag, attributes, styles, callback) {
 				}
 			}
 		}
+		
+		// Check if a callback was passed
+		if(callback) {
+			// Pass the inserted elements to the callback
+			callback(insertedElements)
+		}
 	}
 	
 	// Return the Spark object to allow chaining

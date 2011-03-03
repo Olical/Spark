@@ -1,12 +1,13 @@
 SparkFn.data = (function () {
 	// Set up the variables
-	var storage = {};
-	var counter = 1;
+	var storage = {},
+		counter = 1,
+		uid = null;
 	
 	// Return the function to manage saving data
 	return function (el, key, value) {
 		// Get the unique id
-		var uid = el.uniqueID || (el.uniqueID = counter++);
+		uid = el.uniqueID || (el.uniqueID = counter++);
 		
 		// Set up a place to store the data
 		storage[uid] || (storage[uid] = {});

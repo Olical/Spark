@@ -2,10 +2,8 @@ SparkFn.cookie = function(name, content, duration) {
 	// Return the cookies content if content is undefined
 	if(content === undefined) {
 		// Set up any variables needed
-		var nameEQ = name + '=';
-		
-		// Split the cookie string
-		var ca = document.cookie.split(';');
+		var nameEQ = name + '=',
+			ca = document.cookie.split(';');
 		
 		// Loop through all of the cookies looking for ours
 		for(var i in ca) {

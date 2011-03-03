@@ -34,15 +34,15 @@ SparkFn.element = function(method, tag, attributes, styles, callback) {
 				// Perform the right action
 				if(method == 'prepend') {
 					// Prepend the element
-					insertedElement.push(this.elements[e].parentNode.insertBefore(construct.cloneNode(true), this.elements[e]));
+					insertedElements.push(this.elements[e].parentNode.insertBefore(construct.cloneNode(true), this.elements[e]));
 				}
 				else if(method == 'append') {
 					// Append the element
-					insertedElement.push(this.elements[e].parentNode.insertBefore(construct.cloneNode(true), this.elements[e].nextSibling));
+					insertedElements.push(this.elements[e].parentNode.insertBefore(construct.cloneNode(true), this.elements[e].nextSibling));
 				}
 				else if(method == 'insert') {
 					// Insert the element
-					insertedElement.push(this.elements[e].appendChild(construct.cloneNode(true)));
+					insertedElements.push(this.elements[e].appendChild(construct.cloneNode(true)));
 				}
 			}
 		}
@@ -50,7 +50,7 @@ SparkFn.element = function(method, tag, attributes, styles, callback) {
 		// Check if a callback was passed
 		if(callback) {
 			// Pass the inserted elements to the callback
-			callback(insertedElements)
+			callback(insertedElementsg)
 		}
 	}
 	

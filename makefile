@@ -40,7 +40,7 @@ modules =	${srcdir}html.js\
 files = ${core} ${modules} ${dependencies} ${initialisation}
 
 # Set both to be built
-all: spark-dev.js spark.js
+all: spark-dev.js spark.js spark.js.gz
 
 # Combine all of the files into spark-dev.js
 spark-dev.js: ${files}
@@ -49,3 +49,7 @@ spark-dev.js: ${files}
 # Compress spark-dev.js into spark.js
 spark.js: spark-dev.js
 	java -jar yuicompressor.jar -o $@ $^
+
+# Compress spark.js into spark.js.gz
+spark.js.gz: spark.js
+	gzip -c $^ > $@

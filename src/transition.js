@@ -1,7 +1,7 @@
 SparkFn.transition = function(method, timeframe, easing, callback) {
 	// Set up any variables
-	var element = null;
-	var original = null;
+	var element = null,
+		original = null;
 	
 	// Check if we have a callback, if not set it to and empty function
 	if(callback === undefined) {

@@ -1,7 +1,7 @@
 SparkFn.css = function(css) {
 	// Set up any variables
-	var element = null;
-	var browser = Spark.client().browser;
+	var element = null,
+		browser = Spark.client().browser;
 	
 	// Loop through all of the elements
 	for(var e in this.elements) {
@@ -9,7 +9,7 @@ SparkFn.css = function(css) {
 		if(this.elements.hasOwnProperty(e)) {
 			// Grab the current element
 			element = this.elements[e];
-		
+			
 			// Check if they provided a css object
 			if(css !== undefined) {
 				// Loop through all css values assigning them
@@ -21,7 +21,7 @@ SparkFn.css = function(css) {
 					else {
 						element.style[c] = css[c];
 					}
-				
+					
 					// If opacity is being set we need to set all the other values for cross browser opacity
 					if(c == 'opacity') {
 						if(browser == 'Explorer') {

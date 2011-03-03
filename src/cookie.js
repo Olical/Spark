@@ -3,14 +3,16 @@ SparkFn.cookie = function(name, content, duration) {
 	if(content === undefined) {
 		// Set up any variables needed
 		var nameEQ = name + '=',
-			ca = document.cookie.split(';');
+			ca = document.cookie.split(';'),
+			date = null,
+			c = null;
 		
 		// Loop through all of the cookies looking for ours
 		for(var i in ca) {
 			// Make sure it is actually a cookie segment
 			if(ca.hasOwnProperty(i)) {
 				// Grab the current cookie
-				var c = ca[i];
+				c = ca[i];
 
 				// Cut of the whitespace
 				while(c.charAt(0) == ' ') {
@@ -29,7 +31,7 @@ SparkFn.cookie = function(name, content, duration) {
 	}
 	else {
 		// Get the current time
-		var date = new Date();
+		date = new Date();
 		
 		// Push the time on by either a month or the user defined duration
 		date.setTime(date.getTime() + ((duration !== undefined) ? duration : 2628000000));

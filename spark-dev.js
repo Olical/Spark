@@ -111,7 +111,7 @@ window.SparkIn = function() {
 		if(this.elements.hasOwnProperty(e)) {
 			// Grab the current element
 			element = this.elements[e];
-		
+			
 			// Return content of the selected element if there is no content and check for Firefox
 			if(content === undefined) {
 				if(document.all) {
@@ -172,7 +172,7 @@ window.SparkIn = function() {
 			offsetX += obj.offsetLeft;
 			offsetY += obj.offsetTop;
 		} while(obj = obj.offsetParent);
-	
+		
 		e.offsetX = offsetX;
 		e.offsetY = offsetY;
 	}
@@ -606,8 +606,8 @@ SparkFn.css = function(css) {
 	});
 };SparkFn.stop = function() {
 	// Set up any variables
-	var element = null;
-	var animations = null;
+	var element = null,
+		animations = null;
 	
 	// Loop through all of the elements
 	for(var e in this.elements) {
@@ -615,15 +615,15 @@ SparkFn.css = function(css) {
 		if(this.elements.hasOwnProperty(e)) {
 			// Grab the current element
 			element = this.elements[e];
-		
+			
 			// Make sure it is set
 			if(this.data(element, 'Spark.animations') === undefined) {
 				this.data(element, 'Spark.animations', '');
 			}
-		
+			
 			// Get the animations
 			animations = this.data(element, 'Spark.animations').split(',');
-		
+			
 			// Loop through them all, canceling them all
 			for(var a in animations) {
 				clearTimeout(animations[a]);
@@ -635,8 +635,8 @@ SparkFn.css = function(css) {
 	return this;
 };SparkFn.transition = function(method, timeframe, easing, callback) {
 	// Set up any variables
-	var element = null;
-	var original = null;
+	var element = null,
+		original = null;
 	
 	// Check if we have a callback, if not set it to and empty function
 	if(callback === undefined) {
@@ -1127,8 +1127,8 @@ SparkFn.css = function(css) {
 	return this;
 };SparkFn.trigger = function(type) {
 	// Set up any variables
-	var element = null;
-	var trigger = null;
+	var element = null,
+		trigger = null;
 	
 	// Loop through all elements
 	for(var e in this.elements) {

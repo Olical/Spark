@@ -11,8 +11,9 @@ SparkFn.element = function(method, tag, attributes, styles) {
 		}
 	}
 	else {
-		// Create the new element
-		var construct = document.createElement(tag);
+		// Create the new element and any other required variables
+		var construct = document.createElement(tag),
+			insertedElement = null;
 		
 		// Make sure attributes is set
 		if(attributes) {

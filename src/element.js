@@ -1,4 +1,4 @@
-SparkFn.element = function(method, tag, attributes, styles) {
+SparkFn.element = function(method, tag, attributes, styles, callback) {
 	// Check if we need to remove the element
 	if(method == 'remove') {
 		// Loop through all elements

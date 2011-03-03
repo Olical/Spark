@@ -11,7 +11,7 @@ SparkFn.text = function(content, append) {
 		
 			// Return content of the selected element if there is no content and check for Firefox
 			if(content === undefined) {
-				if(document.all){
+				if(document.all) {
 					return element.innerText;
 				}
 				else {

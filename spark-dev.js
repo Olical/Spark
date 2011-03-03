@@ -442,17 +442,17 @@ window.SparkIn = function() {
 	// Return the cookies content if content is undefined
 	if(content === undefined) {
 		// Set up any variables needed
-		var nameEQ = name + '=';
-		
-		// Split the cookie string
-		var ca = document.cookie.split(';');
+		var nameEQ = name + '=',
+			ca = document.cookie.split(';'),
+			date = null,
+			c = null;
 		
 		// Loop through all of the cookies looking for ours
 		for(var i in ca) {
 			// Make sure it is actually a cookie segment
 			if(ca.hasOwnProperty(i)) {
 				// Grab the current cookie
-				var c = ca[i];
+				c = ca[i];
 
 				// Cut of the whitespace
 				while(c.charAt(0) == ' ') {
@@ -471,7 +471,7 @@ window.SparkIn = function() {
 	}
 	else {
 		// Get the current time
-		var date = new Date();
+		date = new Date();
 		
 		// Push the time on by either a month or the user defined duration
 		date.setTime(date.getTime() + ((duration !== undefined) ? duration : 2628000000));
@@ -482,8 +482,8 @@ window.SparkIn = function() {
 };
 SparkFn.css = function(css) {
 	// Set up any variables
-	var element = null;
-	var browser = Spark.client().browser;
+	var element = null,
+		browser = Spark.client().browser;
 	
 	// Loop through all of the elements
 	for(var e in this.elements) {
@@ -491,7 +491,7 @@ SparkFn.css = function(css) {
 		if(this.elements.hasOwnProperty(e)) {
 			// Grab the current element
 			element = this.elements[e];
-		
+			
 			// Check if they provided a css object
 			if(css !== undefined) {
 				// Loop through all css values assigning them
@@ -503,7 +503,7 @@ SparkFn.css = function(css) {
 					else {
 						element.style[c] = css[c];
 					}
-				
+					
 					// If opacity is being set we need to set all the other values for cross browser opacity
 					if(c == 'opacity') {
 						if(browser == 'Explorer') {
@@ -527,13 +527,14 @@ SparkFn.css = function(css) {
 	return this;
 };SparkFn.data = (function () {
 	// Set up the variables
-	var storage = {};
-	var counter = 1;
+	var storage = {},
+		counter = 1,
+		uid = null;
 	
 	// Return the function to manage saving data
 	return function (el, key, value) {
 		// Get the unique id
-		var uid = el.uniqueID || (el.uniqueID = counter++);
+		uid = el.uniqueID || (el.uniqueID = counter++);
 		
 		// Set up a place to store the data
 		storage[uid] || (storage[uid] = {});
@@ -1036,7 +1037,8 @@ SparkFn.css = function(css) {
 	}
 };SparkFn.classes = function(method, name) {
 	// Set up any variables
-	var element = null;
+	var element = null,
+		search = null;
 	
 	// Loop through all of the elements
 	for(var e in this.elements) {
@@ -1059,7 +1061,7 @@ SparkFn.css = function(css) {
 			}
 			else if(method == 'remove') {
 				// Work out if we need to remove the class with or without a space in front of it
-				var search = (element.className.match(' ' + name)) ? ' ' + name : name;
+				search = (element.className.match(' ' + name)) ? ' ' + name : name;
 				
 				// Replace the correct search string
 				element.className = element.className.replace(search, '');

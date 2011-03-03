@@ -141,15 +141,15 @@ SparkFn.animate = function(properties, timeframe, easing, callback) {
 	var fps = 60;
 	
 	// Set up any required variables
-	var computed = null;
-	var original = null;
-	var difference = null;
-	var frames = null;
-	var change = null;
-	var unit = null;
-	var calculated = null;
-	var toSet = null;
-	var element = null;
+	var computed = null,
+		original = null,
+		difference = null,
+		frames = null,
+		change = null,
+		unit = null,
+		calculated = null,
+		toSet = null,
+		element = null;
 	
 	// Loop through all the elements
 	for(var e in this.elements) {

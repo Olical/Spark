@@ -16,17 +16,17 @@
  */
 
 // Create the function holder
-window.SparkFn = new Object();
+window.SparkFn = {};
 
 // Create the initialise function
 window.SparkIn = function() {
 	// Create the Spark object
 	window.$ = window.Spark = function(selector, context) {
 		// Create the result object
-		var result = new Object();
+		var result = {};
 		
 		// Check if a selector has been passed
-		if(selector !== undefined) {
+		if(typeof selector !== 'undefined') {
 			// If so check if Sizzle needs to be run
 			if(typeof selector == 'string') {
 				// Run sizzle with or without a context
@@ -48,7 +48,7 @@ window.SparkIn = function() {
 		}
 		
 		// Create the built object
-		var built = new Object();
+		var built = {};
 		
 		// Add the functions to the built object
 		for(var f in SparkFn) {
@@ -63,14 +63,15 @@ window.SparkIn = function() {
 	};
 	
 	// Check if SparkBk does not exist yet
-	if(window.SparkBk === undefined) {
+	if(typeof window.SparkBk === 'undefined') {
 		// Back up Spark and $ for use in noConflict mode
 		window.SparkBk = window.$;
 	}
 	
+	var S = Spark();
 	// Take out the need for brackets
-	for(var i in Spark()) {
-		$[i] = Spark[i] = Spark()[i];
+	for(var i in S) {
+		$[i] = Spark[i] = S[i];
 	}
 };SparkFn.html = function(content, append) {
 	// Set up any variables
@@ -84,7 +85,7 @@ window.SparkIn = function() {
 			element = this.elements[e];
 		
 			// Return content of the selected element if there is no content
-			if(content === undefined) {
+			if(typeof content === 'undefined') {
 				return element.innerHTML;
 			}
 			else {
@@ -293,7 +294,7 @@ window.SparkIn = function() {
 			element = this.elements[e];
 		
 			// Check if they provided an attribute object
-			if(attribute !== undefined) {
+			if(typeof attribute !== 'undefined') {
 				// Loop through all attributes assigning them
 				for(var a in attribute) {
 					element[a] = attribute[a];
@@ -318,14 +319,12 @@ window.SparkIn = function() {
 			this.os = this.searchString(this.dataOS) || "an unknown OS";
 		},
 		searchString: function (data) {
-			for (var i = 0; i < data.length; i++)	{
-				var dataString = data[i].string;
-				var dataProp = data[i].prop;
+			for (var i = 0, l = data.length; i < l; i++)	{
+				var dataString = data[i].string,
+				dataProp = data[i].prop;
 				this.versionSearchString = data[i].versionSearch || data[i].identity;
-				if (dataString) {
-					if(dataString.indexOf(data[i].subString) != -1) {
-						return data[i].identity;
-					}
+				if (dataString && dataString.indexOf(data[i].subString) != -1) {
+					return data[i].identity;
 				}
 				else if (dataProp) {
 					return data[i].identity;
@@ -592,7 +591,7 @@ SparkFn.css = function(css) {
 	file += '?callback=' + callback;
 	
 	// If we have parameters add them
-	if(parameters !== undefined) {
+	if(typeof parameters !== 'undefined') {
 		file += '&' + parameters;
 	}
 	

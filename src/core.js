@@ -22,8 +22,9 @@ window.SparkFn = {};
 window.SparkIn = function() {
 	// Create the Spark object
 	window.$ = window.Spark = function(selector, context) {
-		// Create the result object
-		var result = {};
+		// Initialise any variables
+		var result = {},
+			f = null;
 		
 		// Check if a selector has been passed
 		if(typeof selector !== 'undefined') {

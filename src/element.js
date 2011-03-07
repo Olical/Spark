@@ -1,8 +1,13 @@
 SparkFn.element = function(method, tag, attributes, styles, callback) {
+	// Initialise any variables
+	var construct = null,
+		insertedElements = null,
+		e = null;
+	
 	// Check if we need to remove the element
 	if(method == 'remove') {
 		// Loop through all elements
-		for(var e in this.elements) {
+		for(e in this.elements) {
 			// Make sure that it is an element
 			if(this.elements.hasOwnProperty(e)) {
 				// Remove the element
@@ -11,9 +16,9 @@ SparkFn.element = function(method, tag, attributes, styles, callback) {
 		}
 	}
 	else {
-		// Create the new element and any other required variables
-		var construct = document.createElement(tag),
-			insertedElements = new Array();
+		// Create the new element and create the new array
+		construct = document.createElement(tag);
+		insertedElements = new Array();
 		
 		// Make sure attributes is set
 		if(attributes) {
@@ -28,7 +33,7 @@ SparkFn.element = function(method, tag, attributes, styles, callback) {
 		}
 		
 		// Loop through all elements
-		for(var e in this.elements) {
+		for(e in this.elements) {
 			// Make sure that it is an element
 			if(this.elements.hasOwnProperty(e)) {
 				// Perform the right action

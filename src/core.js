@@ -36,7 +36,7 @@ window.SparkIn = function() {
 				// If it is an element
 				if(typeof HTMLElement === 'object' ?
 					selector instanceof HTMLElement :
-					typeof selector === 'object' && selector.nodeType === 1 && typeof selector.nodeName == 'string') {
+					typeof selector === 'object' && selector.nodeType === 1 && typeof selector.nodeName === 'string') {
 					// Place it within the result object
 					result = {0: selector};
 				}

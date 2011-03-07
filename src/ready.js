@@ -22,7 +22,7 @@ SparkFn.ready = function(callback) {
 		// Add a listener for onReadyStateChange
 		contentloadtag.onreadystatechange = function() {
 			// If it is complete
-			if(this.readyState == 'complete') {
+			if(this.readyState === 'complete') {
 				// Set the flag to true
 				alreadyRunflag = true;
 				

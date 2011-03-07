@@ -2,7 +2,7 @@ SparkFn.ajax = function(method, file, data, callback) {
 	// Set up the request, allow for cross browser.
 	var xmlhttp = (typeof XMLHttpRequest === 'undefined') ? 
 		new ActiveXObject('Microsoft.XMLHTTP') :
-		new XMLHttpRequest;
+		new XMLHttpRequest();
 	
 	// Convert to upper case.
 	method = method.toUpperCase();

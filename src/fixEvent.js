@@ -12,7 +12,7 @@ SparkFn.fixEvent = function(e) {
 	}
 	
 	// If its IE we need to copy srcElement over to target
-	if(e.target === undefined) {
+	if(typeof e.target === 'undefined') {
 		e.target = e.srcElement;
 	}
 	

@@ -225,17 +225,20 @@ SparkFn.animate = function(properties, timeframe, easing, callback) {
 		unit = null,
 		calculated = null,
 		toSet = null,
-		element = null;
+		element = null,
+		e = null,
+		p = null,
+		i = null;
 	
 	// Loop through all the elements
-	for(var e in this.elements) {
+	for(e in this.elements) {
 		// Make sure that it is an element
 		if(this.elements.hasOwnProperty(e)) {
 			// Grab the current element
 			element = this.elements[e];
 			
 			// Loop through all of the properties
-			for(var p in properties) {
+			for(p in properties) {
 				// Make sure the style is set
 				if(element.style[p] === undefined || element.style[p] === '') {
 					computed = Spark(element).computed()[p];
@@ -270,7 +273,7 @@ SparkFn.animate = function(properties, timeframe, easing, callback) {
 				toSet = new Object();
 				
 				// Loop through each frame
-				for(var i = 0; i <= frames; i++) {
+				for(i = 0; i <= frames; i++) {
 					// Work out the calculated value
 					calculated = easingMethods[easing](i, original, difference, frames) + unit;
 					

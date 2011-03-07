@@ -32,7 +32,7 @@ SparkFn.transition = function(method, timeframe, easing, callback) {
 			element = this.elements[e];
 			
 			// Work out what method we need to do
-			if(method == 'slidedown') {
+			if(method === 'slidedown') {
 				// Set overflow to hidden
 				Spark(element).css({overflow: 'hidden', display: 'block'});
 				
@@ -45,7 +45,7 @@ SparkFn.transition = function(method, timeframe, easing, callback) {
 				// Slide height to original
 				Spark(element).animate({height: original}, timeframe, easing, callback);
 			}
-			else if(method == 'slideup') {	
+			else if(method === 'slideup') {	
 				// Get original height
 				original = Spark(element).attribute().offsetHeight;
 				
@@ -61,14 +61,14 @@ SparkFn.transition = function(method, timeframe, easing, callback) {
 					callback();
 				});
 			}
-			else if(method == 'fadein') {
+			else if(method === 'fadein') {
 				// Display it
 				Spark(element).css({display: 'block', opacity: 0});
 				
 				// Fade opacity to 100
 				Spark(element).animate({opacity: 1}, timeframe, easing, callback);
 			}
-			else if(method == 'fadeout') {
+			else if(method === 'fadeout') {
 				// Fade opacity to 0
 				Spark(element).animate({opacity: 0}, timeframe, easing, function() {
 					// Set opacity to 100
@@ -78,7 +78,7 @@ SparkFn.transition = function(method, timeframe, easing, callback) {
 					callback();
 				});
 			}
-			else if(method == 'sneakin') {
+			else if(method === 'sneakin') {
 				// Set overflow to hidden
 				Spark(element).css({overflow: 'hidden', display: 'block', opacity: 0});
 				
@@ -91,7 +91,7 @@ SparkFn.transition = function(method, timeframe, easing, callback) {
 				// Slide height to original
 				Spark(element).animate({height: original, opacity: 1}, timeframe, easing, callback);
 			}
-			else if(method == 'sneakout') {
+			else if(method === 'sneakout') {
 				// Get original height
 				original = Spark(element).attribute().offsetHeight;
 				

@@ -5,10 +5,11 @@ SparkFn.cookie = function(name, content, duration) {
 		var nameEQ = name + '=',
 			ca = document.cookie.split(';'),
 			date = null,
-			c = null;
+			c = null,
+			i = null;
 		
 		// Loop through all of the cookies looking for ours
-		for(var i in ca) {
+		for(i in ca) {
 			// Make sure it is actually a cookie segment
 			if(ca.hasOwnProperty(i)) {
 				// Grab the current cookie

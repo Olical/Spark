@@ -254,10 +254,10 @@ SparkFn.animate = function(properties, timeframe, easing, callback) {
 				}
 				
 				// Get the original
-				original = (p === 'opacity') ? parseFloat(element.style[p]) : parseInt(element.style[p]);
+				original = (p === 'opacity') ? parseFloat(element.style[p]) : parseInt(element.style[p], 10);
 				
 				// Work out the difference
-				difference = ((p === 'opacity') ? parseFloat(properties[p]) : parseInt(properties[p])) - original;
+				difference = ((p === 'opacity') ? parseFloat(properties[p]) : parseInt(properties[p], 10)) - original;
 				
 				// Work out how many frames
 				frames = timeframe / (1000 / fps);

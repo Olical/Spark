@@ -12,8 +12,7 @@ SparkFn.ready = function(callback) {
 		Spark('head').element('add', 'script', {
 			type: 'text/javascript',
 			id: 'contentloadtag',
-			defer: 'defer',
-			src: 'javascript:void(0)'
+			defer: 'defer'
 		});
 		
 		// Grab the element

@@ -6,7 +6,7 @@ SparkFn.transition = function(method, timeframe, easing, callback) {
 	
 	// Check if we have a callback, if not set it to and empty function
 	if(callback === undefined) {
-		callback = new Function();
+		callback = function() {};
 	}
 	
 	// Check if the timeframe is set, if not default it to 800ms

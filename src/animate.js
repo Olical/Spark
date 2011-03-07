@@ -294,7 +294,7 @@ SparkFn.animate = function(properties, timeframe, easing, callback) {
 					return function() {
 						toSet[extp] = properties[extp];
 						Spark(extelement).css(toSet);
-					}
+					};
 				})(element, p, properties, unit), timeframe + this.offset, element, p, properties, unit));
 				
 				

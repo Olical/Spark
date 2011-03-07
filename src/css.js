@@ -25,8 +25,8 @@ SparkFn.css = function(css) {
 					}
 					
 					// If opacity is being set we need to set all the other values for cross browser opacity
-					if(c == 'opacity') {
-						if(browser == 'Explorer') {
+					if(c === 'opacity') {
+						if(browser === 'Explorer') {
 							element.style.filter = 'alpha(opacity=' + (css[c] * 100) + ')';
 							element.style.zoom = '1';
 						}

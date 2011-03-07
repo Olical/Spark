@@ -1,10 +1,11 @@
 SparkFn.classes = function(method, name) {
 	// Set up any variables
 	var element = null,
-		search = null;
+		search = null,
+		e = null;
 	
 	// Loop through all of the elements
-	for(var e in this.elements) {
+	for(e in this.elements) {
 		// Make sure that it is an element
 		if(this.elements.hasOwnProperty(e)) {
 			// Grab the current element

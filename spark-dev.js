@@ -984,74 +984,82 @@ SparkFn.css = function(css) {
 		unit = null,
 		calculated = null,
 		toSet = null,
-		element = null;
+		element = null,
+		e = null,
+		p = null,
+		i = null;
 	
 	// Loop through all the elements
-	for(var e in this.elements) {
+	for(e in this.elements) {
 		// Make sure that it is an element
 		if(this.elements.hasOwnProperty(e)) {
 			// Grab the current element
 			element = this.elements[e];
 			
 			// Loop through all of the properties
-			for(var p in properties) {
-				// Make sure the style is set
-				if(element.style[p] === undefined || element.style[p] === '') {
-					computed = Spark(element).computed()[p];
-					element.style[p] = (computed) ? computed : 1;
-				}
-				
-				// Fix for IE stuff
-				if(element.style[p] == 'auto' && p == 'height') element.style[p] = element.offsetHeight;
-				else if(element.style[p] == 'auto' && p == 'width') element.style[p] = element.offsetWidth;
-				
-				// Get the original
-				original = (p == 'opacity') ? parseFloat(element.style[p]) : parseInt(element.style[p]);
-				
-				// Work out the difference
-				difference = ((p == 'opacity') ? parseFloat(properties[p]) : parseInt(properties[p])) - original;
-				
-				// Work out how many frames
-				frames = timeframe / (1000 / fps);
-				
-				// Work out the unit of measurement
-				unit = (isNaN(properties[p])) ? properties[p].replace(/[0-9]/g, '') : 'px';
-				
-				// Make sure we do not have a unit when setting opacity
-				if(p == 'opacity') {
-					unit = '';
-				}
-				
-				// Set up the timeout reference storage
-				this.data(element, 'Spark.animations', 'START');
-				
-				// Set up the toSet variable
-				toSet = new Object();
-				
-				// Loop through each frame
-				for(var i = 0; i <= frames; i++) {
-					// Work out the calculated value
-					calculated = easingMethods[easing](i, original, difference, frames) + unit;
-					
-					this.data(element, 'Spark.animations', this.data(element, 'Spark.animations') + ',' + setTimeout((function(exti, extelement, extp, extcalculated) {
-						return function() {
-							toSet[extp] = extcalculated;
-							Spark(extelement).css(toSet);
-						}
-					})(i, element, p, calculated), i * (1000 / fps) + this.offset, element, p, calculated));
-				}
-				
-				// Stop the floating point problem
-				this.data(element, 'Spark.animations', this.data(element, 'Spark.animations') + ',' + setTimeout((function(extelement, extp, extproperties, extunit) {
-					return function() {
-						toSet[extp] = properties[extp];
-						Spark(extelement).css(toSet);
+			for(p in properties) {
+				if(properties.hasOwnProperty(p)) {
+					// Make sure the style is set
+					if(element.style[p] === undefined || element.style[p] === '') {
+						computed = Spark(element).computed()[p];
+						element.style[p] = (computed) ? computed : 1;
 					}
-				})(element, p, properties, unit), timeframe + this.offset, element, p, properties, unit));
-				
-				
-				// Finish the saving of the data
-				this.data(element, 'Spark.animations', this.data(element, 'Spark.animations').replace('START,', ''));
+					
+					// Fix for IE stuff
+					if(element.style[p] === 'auto' && p === 'height') {
+						element.style[p] = element.offsetHeight;
+					}
+					else if(element.style[p] === 'auto' && p === 'width') {
+						element.style[p] = element.offsetWidth;
+					}
+					
+					// Get the original
+					original = (p === 'opacity') ? parseFloat(element.style[p]) : parseInt(element.style[p], 10);
+					
+					// Work out the difference
+					difference = ((p === 'opacity') ? parseFloat(properties[p]) : parseInt(properties[p], 10)) - original;
+					
+					// Work out how many frames
+					frames = timeframe / (1000 / fps);
+					
+					// Work out the unit of measurement
+					unit = (isNaN(properties[p])) ? properties[p].replace(/[0-9]/g, '') : 'px';
+					
+					// Make sure we do not have a unit when setting opacity
+					if(p === 'opacity') {
+						unit = '';
+					}
+					
+					// Set up the timeout reference storage
+					this.data(element, 'Spark.animations', 'START');
+					
+					// Set up the toSet variable
+					toSet = {};
+					
+					// Loop through each frame
+					for(i = 0; i <= frames; i++) {
+						// Work out the calculated value
+						calculated = easingMethods[easing](i, original, difference, frames) + unit;
+					
+						this.data(element, 'Spark.animations', this.data(element, 'Spark.animations') + ',' + setTimeout((function(exti, extelement, extp, extcalculated) {
+							return function() {
+								toSet[extp] = extcalculated;
+								Spark(extelement).css(toSet);
+							};
+						})(i, element, p, calculated), i * (1000 / fps) + this.offset, element, p, calculated));
+					}
+					
+					// Stop the floating point problem
+					this.data(element, 'Spark.animations', this.data(element, 'Spark.animations') + ',' + setTimeout((function(extelement, extp, extproperties, extunit) {
+						return function() {
+							toSet[extp] = properties[extp];
+							Spark(extelement).css(toSet);
+						};
+					})(element, p, properties, unit), timeframe + this.offset, element, p, properties, unit));
+					
+					// Finish the saving of the data
+					this.data(element, 'Spark.animations', this.data(element, 'Spark.animations').replace('START,', ''));
+				}
 			}
 		}
 	}

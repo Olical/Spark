@@ -14,7 +14,7 @@ SparkFn.classes = function(method, name) {
 			// Check what method we need to execute
 			if(method === 'has') {
 				// Return true if the element has the class and vice versa
-				return new RegExp('\\b' + name + '\\b').test(element.className)
+				return new RegExp('\\b' + name + '\\b').test(element.className);
 			}
 			else if(method === 'add') {
 				// Check if it does not already has that class

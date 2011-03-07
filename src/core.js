@@ -20,6 +20,10 @@ window.SparkFn = {};
 
 // Create the initialise function
 window.SparkIn = function() {
+	// Initialise any variables
+	var s = null,
+		i = null;
+	
 	// Create the Spark object
 	window.$ = window.Spark = function(selector, context) {
 		// Initialise any variables
@@ -71,9 +75,9 @@ window.SparkIn = function() {
 		window.SparkBk = window.$;
 	}
 	
-	var S = Spark();
+	s = Spark();
 	// Take out the need for brackets
-	for(var i in S) {
-		$[i] = Spark[i] = S[i];
+	for(i in s) {
+		$[i] = Spark[i] = s[i];
 	}
 };

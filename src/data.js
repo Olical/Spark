@@ -13,7 +13,7 @@ SparkFn.data = (function () {
 		storage[uid] || (storage[uid] = {});
 		
 		// Check if a value has been passed
-		if(typeof value != 'undefined') {
+		if(typeof value !== 'undefined') {
 			// Set the value
 			storage[uid][key] = value;
 		}

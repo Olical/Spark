@@ -28,7 +28,7 @@ window.SparkIn = function() {
 		// Check if a selector has been passed
 		if(typeof selector !== 'undefined') {
 			// If so check if Sizzle needs to be run
-			if(typeof selector == 'string') {
+			if(typeof selector === 'string') {
 				// Run sizzle with or without a context
 				result = (context) ? SparkSe(selector, context) : SparkSe(selector);
 			}

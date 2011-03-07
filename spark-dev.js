@@ -293,10 +293,12 @@ window.SparkIn = function() {
 	return this;
 };SparkFn.attribute = function(attribute) {
 	// Set up any variables
-	var element = null;
+	var element = null,
+		e = null,
+		a = null;
 	
 	// Loop through all of the elements
-	for(var e in this.elements) {
+	for(e in this.elements) {
 		// Make sure that it is an element
 		if(this.elements.hasOwnProperty(e)) {
 			// Grab the current element
@@ -305,8 +307,10 @@ window.SparkIn = function() {
 			// Check if they provided an attribute object
 			if(typeof attribute !== 'undefined') {
 				// Loop through all attributes assigning them
-				for(var a in attribute) {
-					element[a] = attribute[a];
+				for(a in attribute) {
+					if(attribute.hasOwnProperty(a)) {
+						element[a] = attribute[a];
+					}
 				}
 			}
 			else {
@@ -319,6 +323,9 @@ window.SparkIn = function() {
 	// Return the Spark object
 	return this;
 };SparkFn.client = function() {
+	// Initialise any variables
+	var i = null;
+	
 	var BrowserDetect = {
 		init: function () {
 			this.browser = this.searchString(this.dataBrowser) || "An unknown browser";
@@ -328,11 +335,11 @@ window.SparkIn = function() {
 			this.os = this.searchString(this.dataOS) || "an unknown OS";
 		},
 		searchString: function (data) {
-			for (var i = 0, l = data.length; i < l; i++)	{
+			for(i = 0, l = data.length; i < l; i++) {
 				var dataString = data[i].string,
 				dataProp = data[i].prop;
 				this.versionSearchString = data[i].versionSearch || data[i].identity;
-				if (dataString && dataString.indexOf(data[i].subString) != -1) {
+				if (dataString && dataString.indexOf(data[i].subString) !== -1) {
 					return data[i].identity;
 				}
 				else if (dataProp) {
@@ -342,7 +349,9 @@ window.SparkIn = function() {
 		},
 		searchVersion: function (dataString) {
 			var index = dataString.indexOf(this.versionSearchString);
-			if(index == -1) return;
+			if(index === -1) {
+				return;
+			}
 			return parseFloat(dataString.substring(index + this.versionSearchString.length + 1));
 		},
 		dataBrowser: [
@@ -351,7 +360,7 @@ window.SparkIn = function() {
 				subString: "Chrome",
 				identity: "Chrome"
 			},
-			{ 	string: navigator.userAgent,
+			{	string: navigator.userAgent,
 				subString: "OmniWeb",
 				versionSearch: "OmniWeb/",
 				identity: "OmniWeb"
@@ -403,7 +412,7 @@ window.SparkIn = function() {
 				identity: "Mozilla",
 				versionSearch: "rv"
 			},
-			{ 		// for older Netscapes (4-)
+			{	// for older Netscapes (4-)
 				string: navigator.userAgent,
 				subString: "Mozilla",
 				identity: "Netscape",
@@ -450,28 +459,29 @@ window.SparkIn = function() {
 	// Otherwise return currentStyle
 	return this.elements[0].currentStyle;
 };SparkFn.cookie = function(name, content, duration) {
+	// Set up any variables needed
+	var nameEQ = name + '=',
+		ca = document.cookie.split(';'),
+		date = null,
+		c = null,
+		i = null;
+	
 	// Return the cookies content if content is undefined
 	if(content === undefined) {
-		// Set up any variables needed
-		var nameEQ = name + '=',
-			ca = document.cookie.split(';'),
-			date = null,
-			c = null;
-		
 		// Loop through all of the cookies looking for ours
-		for(var i in ca) {
+		for(i in ca) {
 			// Make sure it is actually a cookie segment
 			if(ca.hasOwnProperty(i)) {
 				// Grab the current cookie
 				c = ca[i];
 
 				// Cut of the whitespace
-				while(c.charAt(0) == ' ') {
+				while(c.charAt(0) === ' ') {
 					c = c.substring(1, c.length);
 				}
 			
 				// If the cookie has the right name, return its contents
-				if(c.indexOf(nameEQ) == 0) {
+				if(c.indexOf(nameEQ) === 0) {
 					return c.substring(nameEQ.length, c.length);
 				}
 			}
@@ -494,10 +504,12 @@ window.SparkIn = function() {
 SparkFn.css = function(css) {
 	// Set up any variables
 	var element = null,
-		browser = Spark.client().browser;
+		browser = Spark.client().browser,
+		e = null,
+		c = null;
 	
 	// Loop through all of the elements
-	for(var e in this.elements) {
+	for(e in this.elements) {
 		// Make sure that it is an element
 		if(this.elements.hasOwnProperty(e)) {
 			// Grab the current element
@@ -506,24 +518,26 @@ SparkFn.css = function(css) {
 			// Check if they provided a css object
 			if(css !== undefined) {
 				// Loop through all css values assigning them
-				for(var c in css) {
-					// If the selector contains dashes then convert it to the JavaScript version
-					if(c.indexOf('-') !== -1) {
-						element.style[c.replace(/-([a-z])/gi, function(s, g1) { return g1.toUpperCase() })] = css[c];
-					}
-					else {
-						element.style[c] = css[c];
-					}
-					
-					// If opacity is being set we need to set all the other values for cross browser opacity
-					if(c == 'opacity') {
-						if(browser == 'Explorer') {
-							element.style.filter = 'alpha(opacity=' + (css[c] * 100) + ')';
-							element.style.zoom = '1';
+				for(c in css) {
+					if(css.hasOwnProperty(c)) {
+						// If the selector contains dashes then convert it to the JavaScript version
+						if(c.indexOf('-') !== -1) {
+							element.style[c.replace(/-([a-z])/gi, function(s, g1) { return g1.toUpperCase(); })] = css[c];
+						}
+						else {
+							element.style[c] = css[c];
 						}
 						
-						element.style.MozOpacity = css[c];
-						element.style.KhtmlOpacity = css[c];
+						// If opacity is being set we need to set all the other values for cross browser opacity
+						if(c === 'opacity') {
+							if(browser === 'Explorer') {
+								element.style.filter = 'alpha(opacity=' + (css[c] * 100) + ')';
+								element.style.zoom = '1';
+							}
+							
+							element.style.MozOpacity = css[c];
+							element.style.KhtmlOpacity = css[c];
+						}
 					}
 				}
 			}
@@ -1133,28 +1147,29 @@ SparkFn.css = function(css) {
 };SparkFn.classes = function(method, name) {
 	// Set up any variables
 	var element = null,
-		search = null;
+		search = null,
+		e = null;
 	
 	// Loop through all of the elements
-	for(var e in this.elements) {
+	for(e in this.elements) {
 		// Make sure that it is an element
 		if(this.elements.hasOwnProperty(e)) {
 			// Grab the current element
 			element = this.elements[e];
 		
 			// Check what method we need to execute
-			if(method == 'has') {
+			if(method === 'has') {
 				// Return true if the element has the class and vice versa
-				return new RegExp('\\b' + name + '\\b').test(element.className)
+				return new RegExp('\\b' + name + '\\b').test(element.className);
 			}
-			else if(method == 'add') {
+			else if(method === 'add') {
 				// Check if it does not already has that class
 				if(!this.classes('has', name)) {
 					// Append the class name with or without a space
 					element.className += (element.className) ? ' ' + name : name;
 				}
 			}
-			else if(method == 'remove') {
+			else if(method === 'remove') {
 				// Work out if we need to remove the class with or without a space in front of it
 				search = (element.className.match(' ' + name)) ? ' ' + name : name;
 				

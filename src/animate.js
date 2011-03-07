@@ -246,14 +246,14 @@ SparkFn.animate = function(properties, timeframe, easing, callback) {
 				}
 				
 				// Fix for IE stuff
-				if(element.style[p] == 'auto' && p == 'height') element.style[p] = element.offsetHeight;
-				else if(element.style[p] == 'auto' && p == 'width') element.style[p] = element.offsetWidth;
+				if(element.style[p] === 'auto' && p === 'height') element.style[p] = element.offsetHeight;
+				else if(element.style[p] === 'auto' && p === 'width') element.style[p] = element.offsetWidth;
 				
 				// Get the original
-				original = (p == 'opacity') ? parseFloat(element.style[p]) : parseInt(element.style[p]);
+				original = (p === 'opacity') ? parseFloat(element.style[p]) : parseInt(element.style[p]);
 				
 				// Work out the difference
-				difference = ((p == 'opacity') ? parseFloat(properties[p]) : parseInt(properties[p])) - original;
+				difference = ((p === 'opacity') ? parseFloat(properties[p]) : parseInt(properties[p])) - original;
 				
 				// Work out how many frames
 				frames = timeframe / (1000 / fps);
@@ -262,7 +262,7 @@ SparkFn.animate = function(properties, timeframe, easing, callback) {
 				unit = (isNaN(properties[p])) ? properties[p].replace(/[0-9]/g, '') : 'px';
 				
 				// Make sure we do not have a unit when setting opacity
-				if(p == 'opacity') {
+				if(p === 'opacity') {
 					unit = '';
 				}
 				

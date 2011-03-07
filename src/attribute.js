@@ -1,9 +1,11 @@
 SparkFn.attribute = function(attribute) {
 	// Set up any variables
-	var element = null;
+	var element = null,
+		e = null,
+		a = null;
 	
 	// Loop through all of the elements
-	for(var e in this.elements) {
+	for(e in this.elements) {
 		// Make sure that it is an element
 		if(this.elements.hasOwnProperty(e)) {
 			// Grab the current element
@@ -12,7 +14,7 @@ SparkFn.attribute = function(attribute) {
 			// Check if they provided an attribute object
 			if(typeof attribute !== 'undefined') {
 				// Loop through all attributes assigning them
-				for(var a in attribute) {
+				for(a in attribute) {
 					element[a] = attribute[a];
 				}
 			}

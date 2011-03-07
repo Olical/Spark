@@ -5,7 +5,7 @@ SparkFn.element = function(method, tag, attributes, styles, callback) {
 		e = null;
 	
 	// Check if we need to remove the element
-	if(method == 'remove') {
+	if(method === 'remove') {
 		// Loop through all elements
 		for(e in this.elements) {
 			// Make sure that it is an element
@@ -37,15 +37,15 @@ SparkFn.element = function(method, tag, attributes, styles, callback) {
 			// Make sure that it is an element
 			if(this.elements.hasOwnProperty(e)) {
 				// Perform the right action
-				if(method == 'prepend') {
+				if(method === 'prepend') {
 					// Prepend the element
 					insertedElements.push(this.elements[e].parentNode.insertBefore(construct.cloneNode(true), this.elements[e]));
 				}
-				else if(method == 'append') {
+				else if(method === 'append') {
 					// Append the element
 					insertedElements.push(this.elements[e].parentNode.insertBefore(construct.cloneNode(true), this.elements[e].nextSibling));
 				}
-				else if(method == 'insert') {
+				else if(method === 'insert') {
 					// Insert the element
 					insertedElements.push(this.elements[e].appendChild(construct.cloneNode(true)));
 				}

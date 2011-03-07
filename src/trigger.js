@@ -1,10 +1,11 @@
 SparkFn.trigger = function(type) {
 	// Set up any variables
 	var element = null,
-		trigger = null;
+		trigger = null,
+		e = null;
 	
 	// Loop through all elements
-	for(var e in this.elements) {
+	for(e in this.elements) {
 		// Make sure that it is a property
 		if(this.elements.hasOwnProperty(e)) {
 			// Grab the element

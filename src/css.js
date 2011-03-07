@@ -16,23 +16,25 @@ SparkFn.css = function(css) {
 			if(css !== undefined) {
 				// Loop through all css values assigning them
 				for(c in css) {
-					// If the selector contains dashes then convert it to the JavaScript version
-					if(c.indexOf('-') !== -1) {
-						element.style[c.replace(/-([a-z])/gi, function(s, g1) { return g1.toUpperCase(); })] = css[c];
-					}
-					else {
-						element.style[c] = css[c];
-					}
-					
-					// If opacity is being set we need to set all the other values for cross browser opacity
-					if(c === 'opacity') {
-						if(browser === 'Explorer') {
-							element.style.filter = 'alpha(opacity=' + (css[c] * 100) + ')';
-							element.style.zoom = '1';
+					if(css.hasOwnProperty(c)) {
+						// If the selector contains dashes then convert it to the JavaScript version
+						if(c.indexOf('-') !== -1) {
+							element.style[c.replace(/-([a-z])/gi, function(s, g1) { return g1.toUpperCase(); })] = css[c];
+						}
+						else {
+							element.style[c] = css[c];
 						}
 						
-						element.style.MozOpacity = css[c];
-						element.style.KhtmlOpacity = css[c];
+						// If opacity is being set we need to set all the other values for cross browser opacity
+						if(c === 'opacity') {
+							if(browser === 'Explorer') {
+								element.style.filter = 'alpha(opacity=' + (css[c] * 100) + ')';
+								element.style.zoom = '1';
+							}
+							
+							element.style.MozOpacity = css[c];
+							element.style.KhtmlOpacity = css[c];
+						}
 					}
 				}
 			}

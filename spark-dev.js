@@ -84,10 +84,11 @@ window.SparkIn = function() {
 	}
 };SparkFn.html = function(content, append) {
 	// Set up any variables
-	var element = null;
+	var element = null,
+		e = null;
 	
 	// Loop through all of the elements
-	for(var e in this.elements) {
+	for(e in this.elements) {
 		// Make sure that it is an element
 		if(this.elements.hasOwnProperty(e)) {
 			// Grab the current element
@@ -113,17 +114,18 @@ window.SparkIn = function() {
 	return this;
 };SparkFn.text = function(content, append) {
 	// Set up any variables
-	var element = null;
+	var element = null,
+		e = null;
 	
 	// Loop through all of the elements
-	for(var e in this.elements) {
+	for(e in this.elements) {
 		// Make sure that it is an element
 		if(this.elements.hasOwnProperty(e)) {
 			// Grab the current element
 			element = this.elements[e];
 			
 			// Return content of the selected element if there is no content and check for Firefox
-			if(content === undefined) {
+			if(typeof content === 'undefined') {
 				if(document.all) {
 					return element.innerText;
 				}
@@ -163,19 +165,19 @@ window.SparkIn = function() {
 		offsetY = null;
 	
 	// Fix the page mouse location for IE
-	if(browser == 'Explorer') {
+	if(browser === 'Explorer') {
 		e.pageX = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
 		e.pageY = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
 	}
 	
 	// If its IE we need to copy srcElement over to target
-	if(e.target === undefined) {
+	if(typeof e.target === 'undefined') {
 		e.target = e.srcElement;
 	}
 	
 	// Fix the offsetX/Y in Firefox
 	obj = e.target;
-	if(obj.offsetParent && browser == 'Firefox') {
+	if(obj.offsetParent && browser === 'Firefox') {
 		offsetX = offsetY = 0;
 		
 		do {
@@ -203,8 +205,7 @@ window.SparkIn = function() {
 		Spark('head').element('add', 'script', {
 			type: 'text/javascript',
 			id: 'contentloadtag',
-			defer: 'defer',
-			src: 'javascript:void(0)'
+			defer: 'defer'
 		});
 		
 		// Grab the element
@@ -213,7 +214,7 @@ window.SparkIn = function() {
 		// Add a listener for onReadyStateChange
 		contentloadtag.onreadystatechange = function() {
 			// If it is complete
-			if(this.readyState == 'complete') {
+			if(this.readyState === 'complete') {
 				// Set the flag to true
 				alreadyRunflag = true;
 				
@@ -238,10 +239,11 @@ window.SparkIn = function() {
 	// Set up any variables
 	var element = null,
 		runCallback = null,
-		previousReference = null;
+		previousReference = null,
+		e = null;
 	
 	// Loop through all of the elements
-	for(var e in this.elements) {
+	for(e in this.elements) {
 		// Make sure that it is an element
 		if(this.elements.hasOwnProperty(e)) {
 			// Grab the current element
@@ -565,7 +567,7 @@ SparkFn.css = function(css) {
 		storage[uid] || (storage[uid] = {});
 		
 		// Check if a value has been passed
-		if(typeof value != 'undefined') {
+		if(typeof value !== 'undefined') {
 			// Set the value
 			storage[uid][key] = value;
 		}
@@ -576,10 +578,11 @@ SparkFn.css = function(css) {
 	};
 })();SparkFn.each = function(callback) {
 	// Set up any variables
-	var element = null;
+	var element = null,
+		e = null;
 	
 	// Loop through all of the elements
-	for(var e in this.elements) {
+	for(e in this.elements) {
 		// Make sure that it is an element
 		if(this.elements.hasOwnProperty(e)) {
 			// Grab the current element
@@ -594,10 +597,10 @@ SparkFn.css = function(css) {
 	return this;
 };SparkFn.json = function(method, data) {
 	// Decode or encode depending on the method string
-	if(method == 'encode') {
+	if(method === 'encode') {
 		return JSON.stringify(data);
 	}
-	else if(method == 'decode') {
+	else if(method === 'decode') {
 		return JSON.parse(data);
 	}
 };SparkFn.noConflict = function() {
@@ -629,10 +632,12 @@ SparkFn.css = function(css) {
 };SparkFn.stop = function() {
 	// Set up any variables
 	var element = null,
-		animations = null;
+		animations = null,
+		e = null,
+		a = null;
 	
 	// Loop through all of the elements
-	for(var e in this.elements) {
+	for(e in this.elements) {
 		// Make sure that it is an element
 		if(this.elements.hasOwnProperty(e)) {
 			// Grab the current element
@@ -647,8 +652,10 @@ SparkFn.css = function(css) {
 			animations = this.data(element, 'Spark.animations').split(',');
 			
 			// Loop through them all, canceling them all
-			for(var a in animations) {
-				clearTimeout(animations[a]);
+			for(a in animations) {
+				if(animations.hasOwnProperty(a)) {
+					clearTimeout(animations[a]);
+				}
 			}
 		}
 	}
@@ -658,11 +665,12 @@ SparkFn.css = function(css) {
 };SparkFn.transition = function(method, timeframe, easing, callback) {
 	// Set up any variables
 	var element = null,
-		original = null;
+		original = null,
+		e = null;
 	
 	// Check if we have a callback, if not set it to and empty function
 	if(callback === undefined) {
-		callback = new Function();
+		callback = function() {};
 	}
 	
 	// Check if the timeframe is set, if not default it to 800ms
@@ -681,14 +689,14 @@ SparkFn.css = function(css) {
 	}
 	
 	// Loop through all of the elements
-	for(var e in this.elements) {
+	for(e in this.elements) {
 		// Make sure that it is an element
 		if(this.elements.hasOwnProperty(e)) {
 			// Grab the current element
 			element = this.elements[e];
 			
 			// Work out what method we need to do
-			if(method == 'slidedown') {
+			if(method === 'slidedown') {
 				// Set overflow to hidden
 				Spark(element).css({overflow: 'hidden', display: 'block'});
 				
@@ -701,7 +709,7 @@ SparkFn.css = function(css) {
 				// Slide height to original
 				Spark(element).animate({height: original}, timeframe, easing, callback);
 			}
-			else if(method == 'slideup') {	
+			else if(method === 'slideup') {	
 				// Get original height
 				original = Spark(element).attribute().offsetHeight;
 				
@@ -717,14 +725,14 @@ SparkFn.css = function(css) {
 					callback();
 				});
 			}
-			else if(method == 'fadein') {
+			else if(method === 'fadein') {
 				// Display it
 				Spark(element).css({display: 'block', opacity: 0});
 				
 				// Fade opacity to 100
 				Spark(element).animate({opacity: 1}, timeframe, easing, callback);
 			}
-			else if(method == 'fadeout') {
+			else if(method === 'fadeout') {
 				// Fade opacity to 0
 				Spark(element).animate({opacity: 0}, timeframe, easing, function() {
 					// Set opacity to 100
@@ -734,7 +742,7 @@ SparkFn.css = function(css) {
 					callback();
 				});
 			}
-			else if(method == 'sneakin') {
+			else if(method === 'sneakin') {
 				// Set overflow to hidden
 				Spark(element).css({overflow: 'hidden', display: 'block', opacity: 0});
 				
@@ -747,7 +755,7 @@ SparkFn.css = function(css) {
 				// Slide height to original
 				Spark(element).animate({height: original, opacity: 1}, timeframe, easing, callback);
 			}
-			else if(method == 'sneakout') {
+			else if(method === 'sneakout') {
 				// Get original height
 				original = Spark(element).attribute().offsetHeight;
 				
@@ -1182,10 +1190,15 @@ SparkFn.css = function(css) {
 	// Return the Spark object
 	return this;
 };SparkFn.element = function(method, tag, attributes, styles, callback) {
+	// Initialise any variables
+	var construct = null,
+		insertedElements = null,
+		e = null;
+	
 	// Check if we need to remove the element
-	if(method == 'remove') {
+	if(method === 'remove') {
 		// Loop through all elements
-		for(var e in this.elements) {
+		for(e in this.elements) {
 			// Make sure that it is an element
 			if(this.elements.hasOwnProperty(e)) {
 				// Remove the element
@@ -1194,9 +1207,9 @@ SparkFn.css = function(css) {
 		}
 	}
 	else {
-		// Create the new element and any other required variables
-		var construct = document.createElement(tag),
-			insertedElements = new Array();
+		// Create the new element and create the new array
+		construct = document.createElement(tag);
+		insertedElements = [];
 		
 		// Make sure attributes is set
 		if(attributes) {
@@ -1211,19 +1224,19 @@ SparkFn.css = function(css) {
 		}
 		
 		// Loop through all elements
-		for(var e in this.elements) {
+		for(e in this.elements) {
 			// Make sure that it is an element
 			if(this.elements.hasOwnProperty(e)) {
 				// Perform the right action
-				if(method == 'prepend') {
+				if(method === 'prepend') {
 					// Prepend the element
 					insertedElements.push(this.elements[e].parentNode.insertBefore(construct.cloneNode(true), this.elements[e]));
 				}
-				else if(method == 'append') {
+				else if(method === 'append') {
 					// Append the element
 					insertedElements.push(this.elements[e].parentNode.insertBefore(construct.cloneNode(true), this.elements[e].nextSibling));
 				}
-				else if(method == 'insert') {
+				else if(method === 'insert') {
 					// Insert the element
 					insertedElements.push(this.elements[e].appendChild(construct.cloneNode(true)));
 				}
@@ -1242,10 +1255,11 @@ SparkFn.css = function(css) {
 };SparkFn.trigger = function(type) {
 	// Set up any variables
 	var element = null,
-		trigger = null;
+		trigger = null,
+		e = null;
 	
 	// Loop through all elements
-	for(var e in this.elements) {
+	for(e in this.elements) {
 		// Make sure that it is a property
 		if(this.elements.hasOwnProperty(e)) {
 			// Grab the element

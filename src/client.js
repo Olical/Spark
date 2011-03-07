@@ -1,4 +1,7 @@
 SparkFn.client = function() {
+	// Initialise any variables
+	var i = null;
+	
 	var BrowserDetect = {
 		init: function () {
 			this.browser = this.searchString(this.dataBrowser) || "An unknown browser";
@@ -8,7 +11,7 @@ SparkFn.client = function() {
 			this.os = this.searchString(this.dataOS) || "an unknown OS";
 		},
 		searchString: function (data) {
-			for (var i = 0, l = data.length; i < l; i++)	{
+			for(i = 0, l = data.length; i < l; i++) {
 				var dataString = data[i].string,
 				dataProp = data[i].prop;
 				this.versionSearchString = data[i].versionSearch || data[i].identity;

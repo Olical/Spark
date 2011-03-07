@@ -274,7 +274,7 @@ SparkFn.animate = function(properties, timeframe, easing, callback) {
 				this.data(element, 'Spark.animations', 'START');
 				
 				// Set up the toSet variable
-				toSet = new Object();
+				toSet = {};
 				
 				// Loop through each frame
 				for(i = 0; i <= frames; i++) {

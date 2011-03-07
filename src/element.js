@@ -18,7 +18,7 @@ SparkFn.element = function(method, tag, attributes, styles, callback) {
 	else {
 		// Create the new element and create the new array
 		construct = document.createElement(tag);
-		insertedElements = new Array();
+		insertedElements = [];
 		
 		// Make sure attributes is set
 		if(attributes) {

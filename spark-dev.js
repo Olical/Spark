@@ -1,5 +1,5 @@
 /*!
- * Spark JavaScript library v2.3.6
+ * Spark JavaScript library v2.3.7
  * http://sparkjs.co.uk/
  * 
  * Copyright 2011, Oliver Caldwell
@@ -20,15 +20,20 @@ window.SparkFn = {};
 
 // Create the initialise function
 window.SparkIn = function() {
+	// Initialise any variables
+	var s = null,
+		i = null;
+	
 	// Create the Spark object
 	window.$ = window.Spark = function(selector, context) {
-		// Create the result object
-		var result = {};
+		// Initialise any variables
+		var result = {},
+			f = null;
 		
 		// Check if a selector has been passed
 		if(typeof selector !== 'undefined') {
 			// If so check if Sizzle needs to be run
-			if(typeof selector == 'string') {
+			if(typeof selector === 'string') {
 				// Run sizzle with or without a context
 				result = (context) ? SparkSe(selector, context) : SparkSe(selector);
 			}
@@ -36,7 +41,7 @@ window.SparkIn = function() {
 				// If it is an element
 				if(typeof HTMLElement === 'object' ?
 					selector instanceof HTMLElement :
-			    	typeof selector === 'object' && selector.nodeType === 1 && typeof selector.nodeName == 'string') {
+					typeof selector === 'object' && selector.nodeType === 1 && typeof selector.nodeName === 'string') {
 					// Place it within the result object
 					result = {0: selector};
 				}
@@ -51,8 +56,10 @@ window.SparkIn = function() {
 		var built = {};
 		
 		// Add the functions to the built object
-		for(var f in SparkFn) {
-			built[f] = SparkFn[f];
+		for(f in SparkFn) {
+			if(SparkFn.hasOwnProperty(f)) {
+				built[f] = SparkFn[f];
+			}
 		}
 		
 		// Add the results to the built object
@@ -68,10 +75,12 @@ window.SparkIn = function() {
 		window.SparkBk = window.$;
 	}
 	
-	var S = Spark();
+	s = Spark();
 	// Take out the need for brackets
-	for(var i in S) {
-		$[i] = Spark[i] = S[i];
+	for(i in s) {
+		if(s.hasOwnProperty(i)) {
+			$[i] = Spark[i] = s[i];
+		}
 	}
 };SparkFn.html = function(content, append) {
 	// Set up any variables
@@ -983,23 +992,23 @@ SparkFn.css = function(css) {
 	return this;
 };SparkFn.ajax = function(method, file, data, callback) {
 	// Set up the request, allow for cross browser.
-	var xmlhttp = (typeof XMLHttpRequest == 'undefined') ? 
+	var xmlhttp = (typeof XMLHttpRequest === 'undefined') ? 
 		new ActiveXObject('Microsoft.XMLHTTP') :
-		new XMLHttpRequest;
+		new XMLHttpRequest();
 	
 	// Convert to upper case.
 	method = method.toUpperCase();
 	
 	// If the method is get then append the data to the file string
-	if(method == 'GET' && data) {
+	if(method === 'GET' && data) {
 		file += '?' + data;
 	}
 	
 	// Run the call back if it was a success and the callback is set
 	if(callback) {
 		xmlhttp.onreadystatechange = function() {
-			if(xmlhttp.readyState == 4) {
-				if(xmlhttp.status == 200) {
+			if(xmlhttp.readyState === 4) {
+				if(xmlhttp.status === 200) {
 					callback(xmlhttp.responseText);
 				}
 				else {
@@ -1014,7 +1023,7 @@ SparkFn.css = function(css) {
 	xmlhttp.open(method, file, (callback) ? true : false);
 	
 	// If the method is post then send the headers and the data
-	if(method == 'POST') {
+	if(method === 'POST') {
 		// Set the headers
 		xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 		
@@ -1028,7 +1037,7 @@ SparkFn.css = function(css) {
 	
 	// If there is no callback
 	if(!callback) {
-		if(xmlhttp.status == 200) {
+		if(xmlhttp.status === 200) {
 			// Just return the content because it was a syncronous request
 			return xmlhttp.responseText;
 		}

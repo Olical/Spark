@@ -51,8 +51,10 @@ window.SparkIn = function() {
 		var built = {};
 		
 		// Add the functions to the built object
-		for(var f in SparkFn) {
-			built[f] = SparkFn[f];
+		for(f in SparkFn) {
+			if(SparkFn.hasOwnProperty(f)) {
+				built[f] = SparkFn[f];
+			}
 		}
 		
 		// Add the results to the built object

@@ -15,7 +15,9 @@ SparkFn.attribute = function(attribute) {
 			if(typeof attribute !== 'undefined') {
 				// Loop through all attributes assigning them
 				for(a in attribute) {
-					element[a] = attribute[a];
+					if(attribute.hasOwnProperty(a)) {
+						element[a] = attribute[a];
+					}
 				}
 			}
 			else {

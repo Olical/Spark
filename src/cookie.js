@@ -16,12 +16,12 @@ SparkFn.cookie = function(name, content, duration) {
 				c = ca[i];
 
 				// Cut of the whitespace
-				while(c.charAt(0) == ' ') {
+				while(c.charAt(0) === ' ') {
 					c = c.substring(1, c.length);
 				}
 			
 				// If the cookie has the right name, return its contents
-				if(c.indexOf(nameEQ) == 0) {
+				if(c.indexOf(nameEQ) === 0) {
 					return c.substring(nameEQ.length, c.length);
 				}
 			}

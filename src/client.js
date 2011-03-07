@@ -36,7 +36,7 @@ SparkFn.client = function() {
 				subString: "Chrome",
 				identity: "Chrome"
 			},
-			{ 	string: navigator.userAgent,
+			{	string: navigator.userAgent,
 				subString: "OmniWeb",
 				versionSearch: "OmniWeb/",
 				identity: "OmniWeb"
@@ -88,7 +88,7 @@ SparkFn.client = function() {
 				identity: "Mozilla",
 				versionSearch: "rv"
 			},
-			{ 		// for older Netscapes (4-)
+			{	// for older Netscapes (4-)
 				string: navigator.userAgent,
 				subString: "Mozilla",
 				identity: "Netscape",

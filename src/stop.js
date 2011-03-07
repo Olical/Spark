@@ -22,7 +22,9 @@ SparkFn.stop = function() {
 			
 			// Loop through them all, canceling them all
 			for(a in animations) {
-				clearTimeout(animations[a]);
+				if(animations.hasOwnProperty(a)) {
+					clearTimeout(animations[a]);
+				}
 			}
 		}
 	}

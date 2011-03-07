@@ -1,10 +1,12 @@
 SparkFn.css = function(css) {
 	// Set up any variables
 	var element = null,
-		browser = Spark.client().browser;
+		browser = Spark.client().browser,
+		e = null,
+		c = null;
 	
 	// Loop through all of the elements
-	for(var e in this.elements) {
+	for(e in this.elements) {
 		// Make sure that it is an element
 		if(this.elements.hasOwnProperty(e)) {
 			// Grab the current element
@@ -13,7 +15,7 @@ SparkFn.css = function(css) {
 			// Check if they provided a css object
 			if(css !== undefined) {
 				// Loop through all css values assigning them
-				for(var c in css) {
+				for(c in css) {
 					// If the selector contains dashes then convert it to the JavaScript version
 					if(c.indexOf('-') !== -1) {
 						element.style[c.replace(/-([a-z])/gi, function(s, g1) { return g1.toUpperCase() })] = css[c];

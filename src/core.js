@@ -78,6 +78,8 @@ window.SparkIn = function() {
 	s = Spark();
 	// Take out the need for brackets
 	for(i in s) {
-		$[i] = Spark[i] = s[i];
+		if(s.hasOwnProperty(i)) {
+			$[i] = Spark[i] = s[i];
+		}
 	}
 };

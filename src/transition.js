@@ -1,7 +1,8 @@
 SparkFn.transition = function(method, timeframe, easing, callback) {
 	// Set up any variables
 	var element = null,
-		original = null;
+		original = null,
+		e = null;
 	
 	// Check if we have a callback, if not set it to and empty function
 	if(callback === undefined) {
@@ -24,7 +25,7 @@ SparkFn.transition = function(method, timeframe, easing, callback) {
 	}
 	
 	// Loop through all of the elements
-	for(var e in this.elements) {
+	for(e in this.elements) {
 		// Make sure that it is an element
 		if(this.elements.hasOwnProperty(e)) {
 			// Grab the current element

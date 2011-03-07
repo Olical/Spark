@@ -12,18 +12,18 @@ SparkFn.classes = function(method, name) {
 			element = this.elements[e];
 		
 			// Check what method we need to execute
-			if(method == 'has') {
+			if(method === 'has') {
 				// Return true if the element has the class and vice versa
 				return new RegExp('\\b' + name + '\\b').test(element.className)
 			}
-			else if(method == 'add') {
+			else if(method === 'add') {
 				// Check if it does not already has that class
 				if(!this.classes('has', name)) {
 					// Append the class name with or without a space
 					element.className += (element.className) ? ' ' + name : name;
 				}
 			}
-			else if(method == 'remove') {
+			else if(method === 'remove') {
 				// Work out if we need to remove the class with or without a space in front of it
 				search = (element.className.match(' ' + name)) ? ' ' + name : name;
 				

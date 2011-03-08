@@ -38,6 +38,6 @@ SparkFn.cookie = function(name, content, duration) {
 		date.setTime(date.getTime() + ((duration !== undefined) ? duration : 2628000000));
 		
 		// Set the cookie
-		document.cookie = name + '=' + content + '; expires=' + date.toGMTString() + '; path=/';
+		document.cookie = name + '=' + escape(content) + '; expires=' + date.toGMTString() + '; path=/';
 	}
 };

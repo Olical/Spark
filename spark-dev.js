@@ -500,10 +500,9 @@ window.SparkIn = function() {
 		date.setTime(date.getTime() + ((duration !== undefined) ? duration : 2628000000));
 		
 		// Set the cookie
-		document.cookie = name + '=' + content + '; expires=' + date.toGMTString() + '; path=/';
+		document.cookie = name + '=' + escape(content) + '; expires=' + date.toGMTString() + '; path=';
 	}
-};
-SparkFn.css = function(css) {
+};SparkFn.css = function(css) {
 	// Set up any variables
 	var element = null,
 		browser = Spark.client().browser,

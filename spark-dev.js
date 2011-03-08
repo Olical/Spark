@@ -510,7 +510,6 @@ window.SparkIn = function() {
 		
 		// Set the cookie
 		document.cookie = name + '=' + escape(content) + expires + '; path=/';
-		console.log(name + '=' + escape(content) + expires + '; path=/');
 	}
 };SparkFn.css = function(css) {
 	// Set up any variables

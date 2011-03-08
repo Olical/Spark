@@ -48,6 +48,5 @@ SparkFn.cookie = function(name, content, duration) {
 		
 		// Set the cookie
 		document.cookie = name + '=' + escape(content) + expires + '; path=/';
-		console.log(name + '=' + escape(content) + expires + '; path=/');
 	}
 };

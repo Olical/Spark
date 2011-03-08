@@ -7,7 +7,7 @@ SparkFn.cookie = function(name, content, duration) {
 		i = null;
 	
 	// Return the cookies content if content is undefined
-	if(content === undefined) {
+	if(typeof content === 'undefined') {
 		// Loop through all of the cookies looking for ours
 		for(i in ca) {
 			// Make sure it is actually a cookie segment

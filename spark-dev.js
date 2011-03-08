@@ -466,10 +466,11 @@ window.SparkIn = function() {
 		ca = document.cookie.split(';'),
 		date = null,
 		c = null,
-		i = null;
+		i = null,
+		expires = null;
 	
 	// Return the cookies content if content is undefined
-	if(content === undefined) {
+	if(typeof content === 'undefined') {
 		// Loop through all of the cookies looking for ours
 		for(i in ca) {
 			// Make sure it is actually a cookie segment
@@ -496,11 +497,19 @@ window.SparkIn = function() {
 		// Get the current time
 		date = new Date();
 		
-		// Push the time on by either a month or the user defined duration
-		date.setTime(date.getTime() + ((duration !== undefined) ? duration : 2628000000));
+		// Check for a passed duration
+		if(typeof duration !== 'undefined') {
+			// Add on the duration
+			date.setTime(date.getTime() + duration);
+			expires = '; expires=' + date.toGMTString();
+		}
+		else {
+			// Otherwise set the expires to nothing
+			expires = '';
+		}
 		
 		// Set the cookie
-		document.cookie = name + '=' + escape(content) + '; expires=' + date.toGMTString() + '; path=';
+		document.cookie = name + '=' + escape(content) + expires + '; path=/';
 	}
 };SparkFn.css = function(css) {
 	// Set up any variables

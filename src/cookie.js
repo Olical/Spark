@@ -4,7 +4,8 @@ SparkFn.cookie = function(name, content, duration) {
 		ca = document.cookie.split(';'),
 		date = null,
 		c = null,
-		i = null;
+		i = null,
+		expires = null;
 	
 	// Return the cookies content if content is undefined
 	if(typeof content === 'undefined') {
@@ -34,10 +35,18 @@ SparkFn.cookie = function(name, content, duration) {
 		// Get the current time
 		date = new Date();
 		
-		// Push the time on by either a month or the user defined duration
-		date.setTime(date.getTime() + ((typeof duration !== 'undefined') ? duration : ""));
+		// Check for a passed duration
+		if(typeof duration !== 'undefined') {
+			// Add on the duration
+			date.setTime(date.getTime() + duration);
+			expires = '; expires=' + date.toGMTString();
+		}
+		else {
+			// Otherwise set the expires to nothing
+			expires = '';
+		}
 		
 		// Set the cookie
-		document.cookie = name + '=' + escape(content) + '; expires=' + date.toGMTString() + '; path=/';
+		document.cookie = name + '=' + escape(content) + expires + '; path=/';
 	}
 };

@@ -35,7 +35,7 @@ SparkFn.cookie = function(name, content, duration) {
 		date = new Date();
 		
 		// Push the time on by either a month or the user defined duration
-		date.setTime(date.getTime() + ((duration !== undefined) ? duration : 2628000000));
+		date.setTime(date.getTime() + ((typeof duration !== 'undefined') ? duration : ""));
 		
 		// Set the cookie
 		document.cookie = name + '=' + escape(content) + '; expires=' + date.toGMTString() + '; path=/';

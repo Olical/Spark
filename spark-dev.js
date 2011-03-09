@@ -877,6 +877,7 @@ window.SparkIn = function() {
 			return c/2 * (Math.sqrt(1 - (t-=2)*t) + 1) + b;
 		},
 		inElastic: function (t, b, c, d, a, p) {
+			var s = null;
 			if(t === 0) {
 				return b;
 			} 
@@ -1096,7 +1097,7 @@ window.SparkIn = function() {
 	
 	// Set callback timer
 	if(callback) {
-		setTimeout(callback, timeframe);
+		setTimeout(callback, timeframe + this.offset);
 	}
 	
 	// Set up the offset for chaining

@@ -88,6 +88,7 @@ SparkFn.animate = function(properties, timeframe, easing, callback) {
 			return c/2 * (Math.sqrt(1 - (t-=2)*t) + 1) + b;
 		},
 		inElastic: function (t, b, c, d, a, p) {
+			var s = null;
 			if(t === 0) {
 				return b;
 			} 

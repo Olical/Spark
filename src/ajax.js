@@ -13,7 +13,7 @@ SparkFn.ajax = function(method, file, data, callback) {
 	}
 	
 	// Run the call back if it was a success and the callback is set
-	if(callback) {
+	if(typeof callback === 'function') {
 		xmlhttp.onreadystatechange = function() {
 			if(xmlhttp.readyState === 4) {
 				if(xmlhttp.status === 200) {

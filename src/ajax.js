@@ -8,7 +8,7 @@ SparkFn.ajax = function(method, file, data, callback) {
 	method = method.toUpperCase();
 	
 	// If the method is get then append the data to the file string
-	if(method === 'GET' && data) {
+	if(method === 'GET' && typeof data === 'string') {
 		file += '?' + data;
 	}
 	
@@ -44,7 +44,7 @@ SparkFn.ajax = function(method, file, data, callback) {
 	}
 	
 	// If there is no callback
-	if(!callback) {
+	if(typeof callback === 'undefined') {
 		if(xmlhttp.status === 200) {
 			// Just return the content because it was a syncronous request
 			return xmlhttp.responseText;

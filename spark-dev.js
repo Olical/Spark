@@ -1033,7 +1033,7 @@ window.SparkIn = function() {
 		e = null,
 		p = null,
 		i = null,
-		prop = null;
+		po = null;
 	
 	// Loop through all the elements
 	for(e in this.elements) {
@@ -1047,28 +1047,31 @@ window.SparkIn = function() {
 				if(properties.hasOwnProperty(p)) {
 					// If the selector contains dashes then convert it to the JavaScript version
 					if(p.indexOf('-') !== -1) {
-						prop = p.replace(/-([a-z])/gi, function(s, g1) { return g1.toUpperCase(); });
+						// Convert it and copy it to the new location in the object
+						po = p;
+						p = p.replace(/-([a-z])/gi, function(s, g1) { return g1.toUpperCase(); });
+						properties[p] = properties[po];
 					}
 					
 					// Make sure the style is set
-					if(element.style[prop] === undefined || element.style[prop] === '') {
-						computed = Spark(element).computed()[prop];
-						element.style[prop] = (computed) ? computed : 1;
+					if(element.style[p] === undefined || element.style[p] === '') {
+						computed = Spark(element).computed()[p];
+						element.style[p] = (computed) ? computed : 1;
 					}
 					
 					// Fix for IE stuff
-					if(element.style[prop] === 'auto' && prop === 'height') {
-						element.style[prop] = element.offsetHeight;
+					if(element.style[p] === 'auto' && p === 'height') {
+						element.style[p] = element.offsetHeight;
 					}
-					else if(element.style[prop] === 'auto' && prop === 'width') {
-						element.style[prop] = element.offsetWidth;
+					else if(element.style[p] === 'auto' && p === 'width') {
+						element.style[p] = element.offsetWidth;
 					}
 					
 					// Get the original
-					original = (prop === 'opacity') ? parseFloat(element.style[prop]) : parseInt(element.style[prop], 10);
+					original = (p === 'opacity') ? parseFloat(element.style[p]) : parseInt(element.style[p], 10);
 					
 					// Work out the difference
-					difference = ((prop === 'opacity') ? parseFloat(properties[p]) : parseInt(properties[p], 10)) - original;
+					difference = ((p === 'opacity') ? parseFloat(properties[p]) : parseInt(properties[p], 10)) - original;
 					
 					// Work out how many frames
 					frames = timeframe / (1000 / fps);
@@ -1092,21 +1095,21 @@ window.SparkIn = function() {
 						// Work out the calculated value
 						calculated = easingMethods[easing](i, original, difference, frames) + unit;
 					
-						this.data(element, 'Spark.animations', this.data(element, 'Spark.animations') + ',' + setTimeout((function(exti, extelement, extp, extcalculated, extprop) {
+						this.data(element, 'Spark.animations', this.data(element, 'Spark.animations') + ',' + setTimeout((function(exti, extelement, extp, extcalculated) {
 							return function() {
-								toSet[extprop] = extcalculated;
+								toSet[extp] = extcalculated;
 								Spark(extelement).css(toSet);
 							};
-						})(i, element, p, calculated, prop), i * (1000 / fps) + this.offset, element, p, calculated, prop));
+						})(i, element, p, calculated), i * (1000 / fps) + this.offset, element, p, calculated));
 					}
 					
 					// Stop the floating point problem
-					this.data(element, 'Spark.animations', this.data(element, 'Spark.animations') + ',' + setTimeout((function(extelement, extp, extproperties, extunit, extprop) {
+					this.data(element, 'Spark.animations', this.data(element, 'Spark.animations') + ',' + setTimeout((function(extelement, extp, extproperties, extunit) {
 						return function() {
-							toSet[extprop] = properties[extp];
+							toSet[extp] = properties[extp];
 							Spark(extelement).css(toSet);
 						};
-					})(element, p, properties, unit, prop), timeframe + this.offset, element, p, properties, unit, prop));
+					})(element, p, properties, unit), timeframe + this.offset, element, p, properties, unit));
 					
 					// Finish the saving of the data
 					this.data(element, 'Spark.animations', this.data(element, 'Spark.animations').replace('START,', ''));

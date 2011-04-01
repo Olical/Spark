@@ -27,7 +27,7 @@ SparkFn.toggle = function(method, timeframe, easing, callback) {
 	}
 	
 	// Initiate the offset as 0 if there is none
-	if(!this.offset) {
+	if(typeof this.offset === 'undefined') {
 		this.offset = 0;
 	}
 	

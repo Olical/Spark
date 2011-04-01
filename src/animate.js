@@ -241,6 +241,11 @@ SparkFn.animate = function(properties, timeframe, easing, callback) {
 			// Loop through all of the properties
 			for(p in properties) {
 				if(properties.hasOwnProperty(p)) {
+					// If the selector contains dashes then convert it to the JavaScript version
+					if(p.indexOf('-') !== -1) {
+						p = p.replace(/-([a-z])/gi, function(s, g1) { return g1.toUpperCase(); });
+					}
+					
 					// Make sure the style is set
 					if(element.style[p] === undefined || element.style[p] === '') {
 						computed = Spark(element).computed()[p];

@@ -5,17 +5,17 @@ SparkFn.transition = function(method, timeframe, easing, callback) {
 		e = null;
 	
 	// Check if we have a callback, if not set it to and empty function
-	if(callback === undefined) {
+	if(typeof callback === 'undefined') {
 		callback = function() {};
 	}
 	
 	// Check if the timeframe is set, if not default it to 800ms
-	if(timeframe === undefined) {
+	if(typeof timeframe === 'undefined') {
 		timeframe = 600;
 	}
 	
 	// Check if the easing is set, if not default it to false
-	if(easing === undefined) {
+	if(typeof easing === 'undefined') {
 		var easing = false;
 	}
 	

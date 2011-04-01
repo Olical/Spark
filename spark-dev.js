@@ -692,7 +692,7 @@ window.SparkIn = function() {
 	}
 	
 	// Initiate the offset as 0 if there is none
-	if(!this.offset) {
+	if(typeof this.offset === 'undefined') {
 		this.offset = 0;
 	}
 	
@@ -1044,6 +1044,11 @@ window.SparkIn = function() {
 			// Loop through all of the properties
 			for(p in properties) {
 				if(properties.hasOwnProperty(p)) {
+					// If the selector contains dashes then convert it to the JavaScript version
+					if(p.indexOf('-') !== -1) {
+						p = p.replace(/-([a-z])/gi, function(s, g1) { return g1.toUpperCase(); });
+					}
+					
 					// Make sure the style is set
 					if(element.style[p] === undefined || element.style[p] === '') {
 						computed = Spark(element).computed()[p];
@@ -1110,7 +1115,7 @@ window.SparkIn = function() {
 	}
 	
 	// Set callback timer
-	if(callback) {
+	if(typeof callback === 'function') {
 		setTimeout(callback, timeframe + this.offset);
 	}
 	
@@ -1129,12 +1134,12 @@ window.SparkIn = function() {
 	method = method.toUpperCase();
 	
 	// If the method is get then append the data to the file string
-	if(method === 'GET' && data) {
+	if(method === 'GET' && typeof data === 'string') {
 		file += '?' + data;
 	}
 	
 	// Run the call back if it was a success and the callback is set
-	if(callback) {
+	if(typeof callback === 'function') {
 		xmlhttp.onreadystatechange = function() {
 			if(xmlhttp.readyState === 4) {
 				if(xmlhttp.status === 200) {
@@ -1165,7 +1170,7 @@ window.SparkIn = function() {
 	}
 	
 	// If there is no callback
-	if(!callback) {
+	if(typeof callback === 'undefined') {
 		if(xmlhttp.status === 200) {
 			// Just return the content because it was a syncronous request
 			return xmlhttp.responseText;
@@ -1334,7 +1339,7 @@ window.SparkIn = function() {
 	}
 	
 	// Initiate the offset as 0 if there is none
-	if(!this.offset) {
+	if(typeof this.offset === 'undefined') {
 		this.offset = 0;
 	}
 	

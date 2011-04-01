@@ -107,6 +107,20 @@ SparkFn.transition = function(method, timeframe, easing, callback) {
 					callback();
 				});
 			}
+			else if(method === 'show') {
+				// Show the element
+				Spark(element).css({display: 'block'});
+				
+				// Run the callback
+				callback();
+			}
+			else if(method === 'hide') {
+				// Hide the element
+				Spark(element).css({display: 'none'});
+				
+				// Run the callback
+				callback();
+			}
 		}
 	}
 	

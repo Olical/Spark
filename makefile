@@ -48,4 +48,4 @@ spark-dev.js: ${files}
 
 # Compress spark-dev.js into spark.js
 spark.js: spark-dev.js
-	java -jar yuicompressor.jar -o $@ $^
+	java -jar compiler.jar --js $^ --js_output_file $@

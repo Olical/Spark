@@ -715,7 +715,7 @@ window.SparkIn = function() {
 				Spark(element).css({height: 0});
 				
 				// Slide height to original
-				Spark(element).animate({height: original}, timeframe, easing, callback);
+				Spark(element).animate({height: original}, timeframe, easing);
 			}
 			else if(method === 'slideup') {	
 				// Get original height
@@ -728,9 +728,6 @@ window.SparkIn = function() {
 				Spark(element).animate({height: 0}, timeframe, easing, function() {
 					// Set height to original
 					Spark(element).css({height: original + 'px', display: 'none'});
-					
-					// Run the callback
-					callback();
 				});
 			}
 			else if(method === 'fadein') {
@@ -738,16 +735,13 @@ window.SparkIn = function() {
 				Spark(element).css({display: 'block', opacity: 0});
 				
 				// Fade opacity to 100
-				Spark(element).animate({opacity: 1}, timeframe, easing, callback);
+				Spark(element).animate({opacity: 1}, timeframe, easing);
 			}
 			else if(method === 'fadeout') {
 				// Fade opacity to 0
 				Spark(element).animate({opacity: 0}, timeframe, easing, function() {
 					// Set opacity to 100
 					Spark(element).css({opacity: 1, display: 'none'});
-					
-					// Run the callback
-					callback();
 				});
 			}
 			else if(method === 'sneakin') {
@@ -761,7 +755,7 @@ window.SparkIn = function() {
 				Spark(element).css({height: 0});
 				
 				// Slide height to original
-				Spark(element).animate({height: original, opacity: 1}, timeframe, easing, callback);
+				Spark(element).animate({height: original, opacity: 1}, timeframe, easing);
 			}
 			else if(method === 'sneakout') {
 				// Get original height
@@ -774,26 +768,27 @@ window.SparkIn = function() {
 				Spark(element).animate({height: 0, opacity: 0}, timeframe, easing, function() {
 					// Set height to original
 					Spark(element).css({height: original + 'px', display: 'none'});
-					
-					// Run the callback
-					callback();
 				});
 			}
 			else if(method === 'show') {
 				// Show the element
 				Spark(element).css({display: 'block'});
-				
-				// Run the callback
-				callback();
 			}
 			else if(method === 'hide') {
 				// Hide the element
 				Spark(element).css({display: 'none'});
-				
-				// Run the callback
-				callback();
 			}
 		}
+	}
+	
+	// Check how the callback needs to be run
+	if(method === 'show' || method === 'hide') {
+		// Run the callback
+		callback();
+	}
+	else {
+		// Set the callback to be run
+		setTimeout(callback, timeframe);
 	}
 	
 	// Set up the offset for chaining
@@ -1367,13 +1362,23 @@ window.SparkIn = function() {
 			// Check if the method is visibility
 			if(method === 'visibility') {
 				// Toggle transition with either show or hide
-				Spark(element).transition(((element.style.display === 'none') ? 'show' : 'hide'), timeframe, easing, callback);
+				Spark(element).transition(((element.style.display === 'none') ? 'show' : 'hide'), timeframe, easing);
 			}
 			else {
 				// Toggle transition with the calculated method
-				Spark(element).transition(method + ((element.style.display === 'none') ? show : hide), timeframe, easing, callback);
+				Spark(element).transition(method + ((element.style.display === 'none') ? show : hide), timeframe, easing);
 			}
 		}
+	}
+	
+	// Check how the callback needs to be run
+	if(method === 'visibility') {
+		// Run the callback
+		callback();
+	}
+	else {
+		// Set the callback to be run
+		setTimeout(callback, timeframe);
 	}
 	
 	// Set up the offset for chaining

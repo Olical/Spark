@@ -1,4 +1,5 @@
 /*!
+ * @preserve
  * Spark JavaScript library v2.3.8
  * http://sparkjs.co.uk/
  * 

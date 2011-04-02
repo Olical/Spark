@@ -1,6 +1,5 @@
-/*!
- * @preserve
- * Spark JavaScript library v2.3.8
+/**
+ * @preserve Spark JavaScript library v2.3.8
  * http://sparkjs.co.uk/
  * 
  * Copyright 2011, Oliver Caldwell

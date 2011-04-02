@@ -1,3 +1,19 @@
+/*
+ Spark JavaScript library v2.3.8
+ http://sparkjs.co.uk/
+
+ Copyright 2011, Oliver Caldwell
+ Dual licensed under the MIT or GPL Version 2 licenses.
+ https://github.com/Wolfy87/Spark
+
+ Includes sizzle.js
+ http://sizzlejs.com/
+ Copyright 2011, The Dojo Foundation
+ Released under the MIT, BSD, and GPL Licenses.
+
+ Includes json2.js
+ http://www.json.org/json2.js
+*/
 window.SparkFn={};
 window.SparkIn=function(){var a=null,e=null;window.$=window.Spark=function(a,e){var d={},g=null;typeof a!=="undefined"&&(d=typeof a==="string"?e?SparkSe(a,e):SparkSe(a):(typeof HTMLElement==="object"?a instanceof HTMLElement:typeof a==="object"&&a.nodeType===1&&typeof a.nodeName==="string")?{0:a}:a);var o={};for(g in SparkFn)SparkFn.hasOwnProperty(g)&&(o[g]=SparkFn[g]);o.elements=d;return o};if(typeof window.SparkBk==="undefined")window.SparkBk=window.$;a=Spark();for(e in a)a.hasOwnProperty(e)&&($[e]=
 Spark[e]=a[e])};SparkFn.html=function(a,e){var b=null,f=null;for(f in this.elements)if(this.elements.hasOwnProperty(f))if(b=this.elements[f],typeof a==="undefined")return b.innerHTML;else e?b.innerHTML+=a:b.innerHTML=a;return this};

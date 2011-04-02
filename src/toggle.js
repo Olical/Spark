@@ -51,14 +51,20 @@ SparkFn.toggle = function(method, timeframe, easing, callback) {
 			// Check if the method is visibility
 			if(method === 'visibility') {
 				// Toggle transition with either show or hide
-				Spark(element).transition(((element.style.display === 'none') ? 'show' : 'hide'), timeframe, easing, callback);
+				Spark(element).transition(((element.style.display === 'none') ? 'show' : 'hide'), timeframe, easing);
+				
+				// Set the timeframe to 0
+				timeframe = 0;
 			}
 			else {
 				// Toggle transition with the calculated method
-				Spark(element).transition(method + ((element.style.display === 'none') ? show : hide), timeframe, easing, callback);
+				Spark(element).transition(method + ((element.style.display === 'none') ? show : hide), timeframe, easing);
 			}
 		}
 	}
+	
+	// Set the callback to be run
+	setTimeout(callback, timeframe);
 	
 	// Set up the offset for chaining
 	this.offset += timeframe;

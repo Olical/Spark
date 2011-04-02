@@ -1,4 +1,8 @@
-**Spark - A lightweight yet powerful JavaScript library.**
+## Outdated
+
+This repository is for version 1.X.X and 2.X.X.
+
+The newer version, 3.X.X, can be found in [this repository](https://github.com/SparkJS/Spark).
 
 ## About
 Spark is my attitude towards coding summed up in one lovely script. I love to reinvent the wheel, but better. So what I did was take something that already exists (a JavaScript library), and make it easier to learn and use. It is easier to learn because I have tried to make all of the functions as multi-use as possible.

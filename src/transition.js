@@ -109,6 +109,16 @@ SparkFn.transition = function(method, timeframe, easing, callback) {
 		}
 	}
 	
+	// Check how the callback needs to be run
+	if(method === 'show' || method === 'hide') {
+		// Run the callback
+		callback();
+	}
+	else {
+		// Set the callback to be run
+		setTimeout(callback, timeframe);
+	}
+	
 	// Set up the offset for chaining
 	this.offset += timeframe;
 	

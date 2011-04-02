@@ -43,7 +43,7 @@ SparkFn.transition = function(method, timeframe, easing, callback) {
 				Spark(element).css({height: 0});
 				
 				// Slide height to original
-				Spark(element).animate({height: original}, timeframe, easing, callback);
+				Spark(element).animate({height: original}, timeframe, easing);
 			}
 			else if(method === 'slideup') {	
 				// Get original height
@@ -56,9 +56,6 @@ SparkFn.transition = function(method, timeframe, easing, callback) {
 				Spark(element).animate({height: 0}, timeframe, easing, function() {
 					// Set height to original
 					Spark(element).css({height: original + 'px', display: 'none'});
-					
-					// Run the callback
-					callback();
 				});
 			}
 			else if(method === 'fadein') {
@@ -66,16 +63,13 @@ SparkFn.transition = function(method, timeframe, easing, callback) {
 				Spark(element).css({display: 'block', opacity: 0});
 				
 				// Fade opacity to 100
-				Spark(element).animate({opacity: 1}, timeframe, easing, callback);
+				Spark(element).animate({opacity: 1}, timeframe, easing);
 			}
 			else if(method === 'fadeout') {
 				// Fade opacity to 0
 				Spark(element).animate({opacity: 0}, timeframe, easing, function() {
 					// Set opacity to 100
 					Spark(element).css({opacity: 1, display: 'none'});
-					
-					// Run the callback
-					callback();
 				});
 			}
 			else if(method === 'sneakin') {
@@ -89,7 +83,7 @@ SparkFn.transition = function(method, timeframe, easing, callback) {
 				Spark(element).css({height: 0});
 				
 				// Slide height to original
-				Spark(element).animate({height: original, opacity: 1}, timeframe, easing, callback);
+				Spark(element).animate({height: original, opacity: 1}, timeframe, easing);
 			}
 			else if(method === 'sneakout') {
 				// Get original height
@@ -102,24 +96,15 @@ SparkFn.transition = function(method, timeframe, easing, callback) {
 				Spark(element).animate({height: 0, opacity: 0}, timeframe, easing, function() {
 					// Set height to original
 					Spark(element).css({height: original + 'px', display: 'none'});
-					
-					// Run the callback
-					callback();
 				});
 			}
 			else if(method === 'show') {
 				// Show the element
 				Spark(element).css({display: 'block'});
-				
-				// Run the callback
-				callback();
 			}
 			else if(method === 'hide') {
 				// Hide the element
 				Spark(element).css({display: 'none'});
-				
-				// Run the callback
-				callback();
 			}
 		}
 	}

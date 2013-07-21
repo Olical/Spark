@@ -1,8 +1,8 @@
-## Outdated
+## This project is dead!
 
-This repository is for version 1.X.X and 2.X.X.
+I haven't worked on this at all for a very long time, my skills have come a long way since then though. You might want to have a look at my other projects or my [blog](http://oli.me.uk/).
 
-The newer version, 3.X.X, can be found in [this repository](https://github.com/SparkJS/Spark).
+You may still learn something from the source though, so feel free to pick it apart. I would not advise using this for anything serious though. At all.
 
 ## About
 Spark is my attitude towards coding summed up in one lovely script. I love to reinvent the wheel, but better. So what I did was take something that already exists (a JavaScript library), and make it easier to learn and use. It is easier to learn because I have tried to make all of the functions as multi-use as possible.
